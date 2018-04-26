@@ -10,7 +10,7 @@ options :: Options
 
 ``` purescript
 newtype AccessKey
-  = AccessKey { "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: NullOrUndefined (DateType') }
+  = AccessKey { "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about an AWS access key.</p> <p> This data type is used as a response element in the <a>CreateAccessKey</a> and <a>ListAccessKeys</a> actions. </p> <note> <p>The <code>SecretAccessKey</code> value is returned only in response to <a>CreateAccessKey</a>. You can get a secret access key only when you first create an access key; you cannot recover the secret access key later. If you lose a secret access key, you must create a new access key.</p> </note>
@@ -35,7 +35,7 @@ Constructs AccessKey from required parameters
 #### `newAccessKey'`
 
 ``` purescript
-newAccessKey' :: AccessKeyIdType' -> AccessKeySecretType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: NullOrUndefined (DateType') } -> { "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: NullOrUndefined (DateType') }) -> AccessKey
+newAccessKey' :: AccessKeyIdType' -> AccessKeySecretType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: Maybe (DateType') } -> { "UserName" :: UserNameType', "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType', "SecretAccessKey" :: AccessKeySecretType', "CreateDate" :: Maybe (DateType') }) -> AccessKey
 ```
 
 Constructs AccessKey's fields from required parameters
@@ -78,7 +78,7 @@ Constructs AccessKeyLastUsed's fields from required parameters
 
 ``` purescript
 newtype AccessKeyMetadata
-  = AccessKeyMetadata { "UserName" :: NullOrUndefined (UserNameType'), "AccessKeyId" :: NullOrUndefined (AccessKeyIdType'), "Status" :: NullOrUndefined (StatusType'), "CreateDate" :: NullOrUndefined (DateType') }
+  = AccessKeyMetadata { "UserName" :: Maybe (UserNameType'), "AccessKeyId" :: Maybe (AccessKeyIdType'), "Status" :: Maybe (StatusType'), "CreateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about an AWS access key, without its secret key.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> action.</p>
@@ -103,7 +103,7 @@ Constructs AccessKeyMetadata from required parameters
 #### `newAccessKeyMetadata'`
 
 ``` purescript
-newAccessKeyMetadata' :: ({ "UserName" :: NullOrUndefined (UserNameType'), "AccessKeyId" :: NullOrUndefined (AccessKeyIdType'), "Status" :: NullOrUndefined (StatusType'), "CreateDate" :: NullOrUndefined (DateType') } -> { "UserName" :: NullOrUndefined (UserNameType'), "AccessKeyId" :: NullOrUndefined (AccessKeyIdType'), "Status" :: NullOrUndefined (StatusType'), "CreateDate" :: NullOrUndefined (DateType') }) -> AccessKeyMetadata
+newAccessKeyMetadata' :: ({ "UserName" :: Maybe (UserNameType'), "AccessKeyId" :: Maybe (AccessKeyIdType'), "Status" :: Maybe (StatusType'), "CreateDate" :: Maybe (DateType') } -> { "UserName" :: Maybe (UserNameType'), "AccessKeyId" :: Maybe (AccessKeyIdType'), "Status" :: Maybe (StatusType'), "CreateDate" :: Maybe (DateType') }) -> AccessKeyMetadata
 ```
 
 Constructs AccessKeyMetadata's fields from required parameters
@@ -352,7 +352,7 @@ Constructs AttachUserPolicyRequest's fields from required parameters
 
 ``` purescript
 newtype AttachedPolicy
-  = AttachedPolicy { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyArn" :: NullOrUndefined (ArnType') }
+  = AttachedPolicy { "PolicyName" :: Maybe (PolicyNameType'), "PolicyArn" :: Maybe (ArnType') }
 ```
 
 <p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, <a>ListAttachedUserPolicies</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -377,7 +377,7 @@ Constructs AttachedPolicy from required parameters
 #### `newAttachedPolicy'`
 
 ``` purescript
-newAttachedPolicy' :: ({ "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyArn" :: NullOrUndefined (ArnType') } -> { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyArn" :: NullOrUndefined (ArnType') }) -> AttachedPolicy
+newAttachedPolicy' :: ({ "PolicyName" :: Maybe (PolicyNameType'), "PolicyArn" :: Maybe (ArnType') } -> { "PolicyName" :: Maybe (PolicyNameType'), "PolicyArn" :: Maybe (ArnType') }) -> AttachedPolicy
 ```
 
 Constructs AttachedPolicy's fields from required parameters
@@ -450,7 +450,7 @@ Encode ColumnNumber
 
 ``` purescript
 newtype ContextEntry
-  = ContextEntry { "ContextKeyName" :: NullOrUndefined (ContextKeyNameType), "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType), "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum) }
+  = ContextEntry { "ContextKeyName" :: Maybe (ContextKeyNameType), "ContextKeyValues" :: Maybe (ContextKeyValueListType), "ContextKeyType" :: Maybe (ContextKeyTypeEnum) }
 ```
 
 <p>Contains information about a condition context key. It includes the name of the key and specifies the value (or values, if the context key supports multiple values) to use in the simulation. This information is used when evaluating the <code>Condition</code> elements of the input policies.</p> <p>This data type is used as an input parameter to <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulateCustomPolicy</a> </code>.</p>
@@ -475,7 +475,7 @@ Constructs ContextEntry from required parameters
 #### `newContextEntry'`
 
 ``` purescript
-newContextEntry' :: ({ "ContextKeyName" :: NullOrUndefined (ContextKeyNameType), "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType), "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum) } -> { "ContextKeyName" :: NullOrUndefined (ContextKeyNameType), "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType), "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum) }) -> ContextEntry
+newContextEntry' :: ({ "ContextKeyName" :: Maybe (ContextKeyNameType), "ContextKeyValues" :: Maybe (ContextKeyValueListType), "ContextKeyType" :: Maybe (ContextKeyTypeEnum) } -> { "ContextKeyName" :: Maybe (ContextKeyNameType), "ContextKeyValues" :: Maybe (ContextKeyValueListType), "ContextKeyType" :: Maybe (ContextKeyTypeEnum) }) -> ContextEntry
 ```
 
 Constructs ContextEntry's fields from required parameters
@@ -580,7 +580,7 @@ Encode ContextKeyValueType
 
 ``` purescript
 newtype CreateAccessKeyRequest
-  = CreateAccessKeyRequest { "UserName" :: NullOrUndefined (ExistingUserNameType') }
+  = CreateAccessKeyRequest { "UserName" :: Maybe (ExistingUserNameType') }
 ```
 
 ##### Instances
@@ -603,7 +603,7 @@ Constructs CreateAccessKeyRequest from required parameters
 #### `newCreateAccessKeyRequest'`
 
 ``` purescript
-newCreateAccessKeyRequest' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType') } -> { "UserName" :: NullOrUndefined (ExistingUserNameType') }) -> CreateAccessKeyRequest
+newCreateAccessKeyRequest' :: ({ "UserName" :: Maybe (ExistingUserNameType') } -> { "UserName" :: Maybe (ExistingUserNameType') }) -> CreateAccessKeyRequest
 ```
 
 Constructs CreateAccessKeyRequest's fields from required parameters
@@ -678,7 +678,7 @@ Constructs CreateAccountAliasRequest's fields from required parameters
 
 ``` purescript
 newtype CreateGroupRequest
-  = CreateGroupRequest { "Path" :: NullOrUndefined (PathType'), "GroupName" :: GroupNameType' }
+  = CreateGroupRequest { "Path" :: Maybe (PathType'), "GroupName" :: GroupNameType' }
 ```
 
 ##### Instances
@@ -701,7 +701,7 @@ Constructs CreateGroupRequest from required parameters
 #### `newCreateGroupRequest'`
 
 ``` purescript
-newCreateGroupRequest' :: GroupNameType' -> ({ "Path" :: NullOrUndefined (PathType'), "GroupName" :: GroupNameType' } -> { "Path" :: NullOrUndefined (PathType'), "GroupName" :: GroupNameType' }) -> CreateGroupRequest
+newCreateGroupRequest' :: GroupNameType' -> ({ "Path" :: Maybe (PathType'), "GroupName" :: GroupNameType' } -> { "Path" :: Maybe (PathType'), "GroupName" :: GroupNameType' }) -> CreateGroupRequest
 ```
 
 Constructs CreateGroupRequest's fields from required parameters
@@ -744,7 +744,7 @@ Constructs CreateGroupResponse's fields from required parameters
 
 ``` purescript
 newtype CreateInstanceProfileRequest
-  = CreateInstanceProfileRequest { "InstanceProfileName" :: InstanceProfileNameType', "Path" :: NullOrUndefined (PathType') }
+  = CreateInstanceProfileRequest { "InstanceProfileName" :: InstanceProfileNameType', "Path" :: Maybe (PathType') }
 ```
 
 ##### Instances
@@ -767,7 +767,7 @@ Constructs CreateInstanceProfileRequest from required parameters
 #### `newCreateInstanceProfileRequest'`
 
 ``` purescript
-newCreateInstanceProfileRequest' :: InstanceProfileNameType' -> ({ "InstanceProfileName" :: InstanceProfileNameType', "Path" :: NullOrUndefined (PathType') } -> { "InstanceProfileName" :: InstanceProfileNameType', "Path" :: NullOrUndefined (PathType') }) -> CreateInstanceProfileRequest
+newCreateInstanceProfileRequest' :: InstanceProfileNameType' -> ({ "InstanceProfileName" :: InstanceProfileNameType', "Path" :: Maybe (PathType') } -> { "InstanceProfileName" :: InstanceProfileNameType', "Path" :: Maybe (PathType') }) -> CreateInstanceProfileRequest
 ```
 
 Constructs CreateInstanceProfileRequest's fields from required parameters
@@ -810,7 +810,7 @@ Constructs CreateInstanceProfileResponse's fields from required parameters
 
 ``` purescript
 newtype CreateLoginProfileRequest
-  = CreateLoginProfileRequest { "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') }
+  = CreateLoginProfileRequest { "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: Maybe (BooleanType') }
 ```
 
 ##### Instances
@@ -833,7 +833,7 @@ Constructs CreateLoginProfileRequest from required parameters
 #### `newCreateLoginProfileRequest'`
 
 ``` purescript
-newCreateLoginProfileRequest' :: PasswordType' -> UserNameType' -> ({ "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') } -> { "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') }) -> CreateLoginProfileRequest
+newCreateLoginProfileRequest' :: PasswordType' -> UserNameType' -> ({ "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: Maybe (BooleanType') } -> { "UserName" :: UserNameType', "Password" :: PasswordType', "PasswordResetRequired" :: Maybe (BooleanType') }) -> CreateLoginProfileRequest
 ```
 
 Constructs CreateLoginProfileRequest's fields from required parameters
@@ -876,7 +876,7 @@ Constructs CreateLoginProfileResponse's fields from required parameters
 
 ``` purescript
 newtype CreateOpenIDConnectProviderRequest
-  = CreateOpenIDConnectProviderRequest { "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' }
+  = CreateOpenIDConnectProviderRequest { "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' }
 ```
 
 ##### Instances
@@ -899,7 +899,7 @@ Constructs CreateOpenIDConnectProviderRequest from required parameters
 #### `newCreateOpenIDConnectProviderRequest'`
 
 ``` purescript
-newCreateOpenIDConnectProviderRequest' :: ThumbprintListType' -> OpenIDConnectProviderUrlType -> ({ "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' } -> { "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' }) -> CreateOpenIDConnectProviderRequest
+newCreateOpenIDConnectProviderRequest' :: ThumbprintListType' -> OpenIDConnectProviderUrlType -> ({ "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' } -> { "Url" :: OpenIDConnectProviderUrlType, "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: ThumbprintListType' }) -> CreateOpenIDConnectProviderRequest
 ```
 
 Constructs CreateOpenIDConnectProviderRequest's fields from required parameters
@@ -908,7 +908,7 @@ Constructs CreateOpenIDConnectProviderRequest's fields from required parameters
 
 ``` purescript
 newtype CreateOpenIDConnectProviderResponse
-  = CreateOpenIDConnectProviderResponse { "OpenIDConnectProviderArn" :: NullOrUndefined (ArnType') }
+  = CreateOpenIDConnectProviderResponse { "OpenIDConnectProviderArn" :: Maybe (ArnType') }
 ```
 
 <p>Contains the response to a successful <a>CreateOpenIDConnectProvider</a> request. </p>
@@ -933,7 +933,7 @@ Constructs CreateOpenIDConnectProviderResponse from required parameters
 #### `newCreateOpenIDConnectProviderResponse'`
 
 ``` purescript
-newCreateOpenIDConnectProviderResponse' :: ({ "OpenIDConnectProviderArn" :: NullOrUndefined (ArnType') } -> { "OpenIDConnectProviderArn" :: NullOrUndefined (ArnType') }) -> CreateOpenIDConnectProviderResponse
+newCreateOpenIDConnectProviderResponse' :: ({ "OpenIDConnectProviderArn" :: Maybe (ArnType') } -> { "OpenIDConnectProviderArn" :: Maybe (ArnType') }) -> CreateOpenIDConnectProviderResponse
 ```
 
 Constructs CreateOpenIDConnectProviderResponse's fields from required parameters
@@ -942,7 +942,7 @@ Constructs CreateOpenIDConnectProviderResponse's fields from required parameters
 
 ``` purescript
 newtype CreatePolicyRequest
-  = CreatePolicyRequest { "PolicyName" :: PolicyNameType', "Path" :: NullOrUndefined (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (PolicyDescriptionType') }
+  = CreatePolicyRequest { "PolicyName" :: PolicyNameType', "Path" :: Maybe (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (PolicyDescriptionType') }
 ```
 
 ##### Instances
@@ -965,7 +965,7 @@ Constructs CreatePolicyRequest from required parameters
 #### `newCreatePolicyRequest'`
 
 ``` purescript
-newCreatePolicyRequest' :: PolicyDocumentType' -> PolicyNameType' -> ({ "PolicyName" :: PolicyNameType', "Path" :: NullOrUndefined (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (PolicyDescriptionType') } -> { "PolicyName" :: PolicyNameType', "Path" :: NullOrUndefined (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (PolicyDescriptionType') }) -> CreatePolicyRequest
+newCreatePolicyRequest' :: PolicyDocumentType' -> PolicyNameType' -> ({ "PolicyName" :: PolicyNameType', "Path" :: Maybe (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (PolicyDescriptionType') } -> { "PolicyName" :: PolicyNameType', "Path" :: Maybe (PolicyPathType'), "PolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (PolicyDescriptionType') }) -> CreatePolicyRequest
 ```
 
 Constructs CreatePolicyRequest's fields from required parameters
@@ -974,7 +974,7 @@ Constructs CreatePolicyRequest's fields from required parameters
 
 ``` purescript
 newtype CreatePolicyResponse
-  = CreatePolicyResponse { "Policy" :: NullOrUndefined (Policy) }
+  = CreatePolicyResponse { "Policy" :: Maybe (Policy) }
 ```
 
 <p>Contains the response to a successful <a>CreatePolicy</a> request. </p>
@@ -999,7 +999,7 @@ Constructs CreatePolicyResponse from required parameters
 #### `newCreatePolicyResponse'`
 
 ``` purescript
-newCreatePolicyResponse' :: ({ "Policy" :: NullOrUndefined (Policy) } -> { "Policy" :: NullOrUndefined (Policy) }) -> CreatePolicyResponse
+newCreatePolicyResponse' :: ({ "Policy" :: Maybe (Policy) } -> { "Policy" :: Maybe (Policy) }) -> CreatePolicyResponse
 ```
 
 Constructs CreatePolicyResponse's fields from required parameters
@@ -1008,7 +1008,7 @@ Constructs CreatePolicyResponse's fields from required parameters
 
 ``` purescript
 newtype CreatePolicyVersionRequest
-  = CreatePolicyVersionRequest { "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: NullOrUndefined (BooleanType') }
+  = CreatePolicyVersionRequest { "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: Maybe (BooleanType') }
 ```
 
 ##### Instances
@@ -1031,7 +1031,7 @@ Constructs CreatePolicyVersionRequest from required parameters
 #### `newCreatePolicyVersionRequest'`
 
 ``` purescript
-newCreatePolicyVersionRequest' :: ArnType' -> PolicyDocumentType' -> ({ "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: NullOrUndefined (BooleanType') } -> { "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: NullOrUndefined (BooleanType') }) -> CreatePolicyVersionRequest
+newCreatePolicyVersionRequest' :: ArnType' -> PolicyDocumentType' -> ({ "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: Maybe (BooleanType') } -> { "PolicyArn" :: ArnType', "PolicyDocument" :: PolicyDocumentType', "SetAsDefault" :: Maybe (BooleanType') }) -> CreatePolicyVersionRequest
 ```
 
 Constructs CreatePolicyVersionRequest's fields from required parameters
@@ -1040,7 +1040,7 @@ Constructs CreatePolicyVersionRequest's fields from required parameters
 
 ``` purescript
 newtype CreatePolicyVersionResponse
-  = CreatePolicyVersionResponse { "PolicyVersion" :: NullOrUndefined (PolicyVersion) }
+  = CreatePolicyVersionResponse { "PolicyVersion" :: Maybe (PolicyVersion) }
 ```
 
 <p>Contains the response to a successful <a>CreatePolicyVersion</a> request. </p>
@@ -1065,7 +1065,7 @@ Constructs CreatePolicyVersionResponse from required parameters
 #### `newCreatePolicyVersionResponse'`
 
 ``` purescript
-newCreatePolicyVersionResponse' :: ({ "PolicyVersion" :: NullOrUndefined (PolicyVersion) } -> { "PolicyVersion" :: NullOrUndefined (PolicyVersion) }) -> CreatePolicyVersionResponse
+newCreatePolicyVersionResponse' :: ({ "PolicyVersion" :: Maybe (PolicyVersion) } -> { "PolicyVersion" :: Maybe (PolicyVersion) }) -> CreatePolicyVersionResponse
 ```
 
 Constructs CreatePolicyVersionResponse's fields from required parameters
@@ -1074,7 +1074,7 @@ Constructs CreatePolicyVersionResponse's fields from required parameters
 
 ``` purescript
 newtype CreateRoleRequest
-  = CreateRoleRequest { "Path" :: NullOrUndefined (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (RoleDescriptionType') }
+  = CreateRoleRequest { "Path" :: Maybe (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (RoleDescriptionType') }
 ```
 
 ##### Instances
@@ -1097,7 +1097,7 @@ Constructs CreateRoleRequest from required parameters
 #### `newCreateRoleRequest'`
 
 ``` purescript
-newCreateRoleRequest' :: PolicyDocumentType' -> RoleNameType' -> ({ "Path" :: NullOrUndefined (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (RoleDescriptionType') } -> { "Path" :: NullOrUndefined (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: NullOrUndefined (RoleDescriptionType') }) -> CreateRoleRequest
+newCreateRoleRequest' :: PolicyDocumentType' -> RoleNameType' -> ({ "Path" :: Maybe (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (RoleDescriptionType') } -> { "Path" :: Maybe (PathType'), "RoleName" :: RoleNameType', "AssumeRolePolicyDocument" :: PolicyDocumentType', "Description" :: Maybe (RoleDescriptionType') }) -> CreateRoleRequest
 ```
 
 Constructs CreateRoleRequest's fields from required parameters
@@ -1172,7 +1172,7 @@ Constructs CreateSAMLProviderRequest's fields from required parameters
 
 ``` purescript
 newtype CreateSAMLProviderResponse
-  = CreateSAMLProviderResponse { "SAMLProviderArn" :: NullOrUndefined (ArnType') }
+  = CreateSAMLProviderResponse { "SAMLProviderArn" :: Maybe (ArnType') }
 ```
 
 <p>Contains the response to a successful <a>CreateSAMLProvider</a> request. </p>
@@ -1197,7 +1197,7 @@ Constructs CreateSAMLProviderResponse from required parameters
 #### `newCreateSAMLProviderResponse'`
 
 ``` purescript
-newCreateSAMLProviderResponse' :: ({ "SAMLProviderArn" :: NullOrUndefined (ArnType') } -> { "SAMLProviderArn" :: NullOrUndefined (ArnType') }) -> CreateSAMLProviderResponse
+newCreateSAMLProviderResponse' :: ({ "SAMLProviderArn" :: Maybe (ArnType') } -> { "SAMLProviderArn" :: Maybe (ArnType') }) -> CreateSAMLProviderResponse
 ```
 
 Constructs CreateSAMLProviderResponse's fields from required parameters
@@ -1206,7 +1206,7 @@ Constructs CreateSAMLProviderResponse's fields from required parameters
 
 ``` purescript
 newtype CreateServiceLinkedRoleRequest
-  = CreateServiceLinkedRoleRequest { "AWSServiceName" :: GroupNameType', "Description" :: NullOrUndefined (RoleDescriptionType'), "CustomSuffix" :: NullOrUndefined (CustomSuffixType') }
+  = CreateServiceLinkedRoleRequest { "AWSServiceName" :: GroupNameType', "Description" :: Maybe (RoleDescriptionType'), "CustomSuffix" :: Maybe (CustomSuffixType') }
 ```
 
 ##### Instances
@@ -1229,7 +1229,7 @@ Constructs CreateServiceLinkedRoleRequest from required parameters
 #### `newCreateServiceLinkedRoleRequest'`
 
 ``` purescript
-newCreateServiceLinkedRoleRequest' :: GroupNameType' -> ({ "AWSServiceName" :: GroupNameType', "Description" :: NullOrUndefined (RoleDescriptionType'), "CustomSuffix" :: NullOrUndefined (CustomSuffixType') } -> { "AWSServiceName" :: GroupNameType', "Description" :: NullOrUndefined (RoleDescriptionType'), "CustomSuffix" :: NullOrUndefined (CustomSuffixType') }) -> CreateServiceLinkedRoleRequest
+newCreateServiceLinkedRoleRequest' :: GroupNameType' -> ({ "AWSServiceName" :: GroupNameType', "Description" :: Maybe (RoleDescriptionType'), "CustomSuffix" :: Maybe (CustomSuffixType') } -> { "AWSServiceName" :: GroupNameType', "Description" :: Maybe (RoleDescriptionType'), "CustomSuffix" :: Maybe (CustomSuffixType') }) -> CreateServiceLinkedRoleRequest
 ```
 
 Constructs CreateServiceLinkedRoleRequest's fields from required parameters
@@ -1238,7 +1238,7 @@ Constructs CreateServiceLinkedRoleRequest's fields from required parameters
 
 ``` purescript
 newtype CreateServiceLinkedRoleResponse
-  = CreateServiceLinkedRoleResponse { "Role" :: NullOrUndefined (Role) }
+  = CreateServiceLinkedRoleResponse { "Role" :: Maybe (Role) }
 ```
 
 ##### Instances
@@ -1261,7 +1261,7 @@ Constructs CreateServiceLinkedRoleResponse from required parameters
 #### `newCreateServiceLinkedRoleResponse'`
 
 ``` purescript
-newCreateServiceLinkedRoleResponse' :: ({ "Role" :: NullOrUndefined (Role) } -> { "Role" :: NullOrUndefined (Role) }) -> CreateServiceLinkedRoleResponse
+newCreateServiceLinkedRoleResponse' :: ({ "Role" :: Maybe (Role) } -> { "Role" :: Maybe (Role) }) -> CreateServiceLinkedRoleResponse
 ```
 
 Constructs CreateServiceLinkedRoleResponse's fields from required parameters
@@ -1302,7 +1302,7 @@ Constructs CreateServiceSpecificCredentialRequest's fields from required paramet
 
 ``` purescript
 newtype CreateServiceSpecificCredentialResponse
-  = CreateServiceSpecificCredentialResponse { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) }
+  = CreateServiceSpecificCredentialResponse { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) }
 ```
 
 ##### Instances
@@ -1325,7 +1325,7 @@ Constructs CreateServiceSpecificCredentialResponse from required parameters
 #### `newCreateServiceSpecificCredentialResponse'`
 
 ``` purescript
-newCreateServiceSpecificCredentialResponse' :: ({ "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } -> { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) }) -> CreateServiceSpecificCredentialResponse
+newCreateServiceSpecificCredentialResponse' :: ({ "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } -> { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) }) -> CreateServiceSpecificCredentialResponse
 ```
 
 Constructs CreateServiceSpecificCredentialResponse's fields from required parameters
@@ -1334,7 +1334,7 @@ Constructs CreateServiceSpecificCredentialResponse's fields from required parame
 
 ``` purescript
 newtype CreateUserRequest
-  = CreateUserRequest { "Path" :: NullOrUndefined (PathType'), "UserName" :: UserNameType' }
+  = CreateUserRequest { "Path" :: Maybe (PathType'), "UserName" :: UserNameType' }
 ```
 
 ##### Instances
@@ -1357,7 +1357,7 @@ Constructs CreateUserRequest from required parameters
 #### `newCreateUserRequest'`
 
 ``` purescript
-newCreateUserRequest' :: UserNameType' -> ({ "Path" :: NullOrUndefined (PathType'), "UserName" :: UserNameType' } -> { "Path" :: NullOrUndefined (PathType'), "UserName" :: UserNameType' }) -> CreateUserRequest
+newCreateUserRequest' :: UserNameType' -> ({ "Path" :: Maybe (PathType'), "UserName" :: UserNameType' } -> { "Path" :: Maybe (PathType'), "UserName" :: UserNameType' }) -> CreateUserRequest
 ```
 
 Constructs CreateUserRequest's fields from required parameters
@@ -1366,7 +1366,7 @@ Constructs CreateUserRequest's fields from required parameters
 
 ``` purescript
 newtype CreateUserResponse
-  = CreateUserResponse { "User" :: NullOrUndefined (User) }
+  = CreateUserResponse { "User" :: Maybe (User) }
 ```
 
 <p>Contains the response to a successful <a>CreateUser</a> request. </p>
@@ -1391,7 +1391,7 @@ Constructs CreateUserResponse from required parameters
 #### `newCreateUserResponse'`
 
 ``` purescript
-newCreateUserResponse' :: ({ "User" :: NullOrUndefined (User) } -> { "User" :: NullOrUndefined (User) }) -> CreateUserResponse
+newCreateUserResponse' :: ({ "User" :: Maybe (User) } -> { "User" :: Maybe (User) }) -> CreateUserResponse
 ```
 
 Constructs CreateUserResponse's fields from required parameters
@@ -1400,7 +1400,7 @@ Constructs CreateUserResponse's fields from required parameters
 
 ``` purescript
 newtype CreateVirtualMFADeviceRequest
-  = CreateVirtualMFADeviceRequest { "Path" :: NullOrUndefined (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' }
+  = CreateVirtualMFADeviceRequest { "Path" :: Maybe (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' }
 ```
 
 ##### Instances
@@ -1423,7 +1423,7 @@ Constructs CreateVirtualMFADeviceRequest from required parameters
 #### `newCreateVirtualMFADeviceRequest'`
 
 ``` purescript
-newCreateVirtualMFADeviceRequest' :: VirtualMFADeviceName' -> ({ "Path" :: NullOrUndefined (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' } -> { "Path" :: NullOrUndefined (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' }) -> CreateVirtualMFADeviceRequest
+newCreateVirtualMFADeviceRequest' :: VirtualMFADeviceName' -> ({ "Path" :: Maybe (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' } -> { "Path" :: Maybe (PathType'), "VirtualMFADeviceName" :: VirtualMFADeviceName' }) -> CreateVirtualMFADeviceRequest
 ```
 
 Constructs CreateVirtualMFADeviceRequest's fields from required parameters
@@ -1466,7 +1466,7 @@ Constructs CreateVirtualMFADeviceResponse's fields from required parameters
 
 ``` purescript
 newtype CredentialReportExpiredException
-  = CredentialReportExpiredException { message :: NullOrUndefined (CredentialReportExpiredExceptionMessage') }
+  = CredentialReportExpiredException { message :: Maybe (CredentialReportExpiredExceptionMessage') }
 ```
 
 <p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>
@@ -1491,7 +1491,7 @@ Constructs CredentialReportExpiredException from required parameters
 #### `newCredentialReportExpiredException'`
 
 ``` purescript
-newCredentialReportExpiredException' :: ({ message :: NullOrUndefined (CredentialReportExpiredExceptionMessage') } -> { message :: NullOrUndefined (CredentialReportExpiredExceptionMessage') }) -> CredentialReportExpiredException
+newCredentialReportExpiredException' :: ({ message :: Maybe (CredentialReportExpiredExceptionMessage') } -> { message :: Maybe (CredentialReportExpiredExceptionMessage') }) -> CredentialReportExpiredException
 ```
 
 Constructs CredentialReportExpiredException's fields from required parameters
@@ -1500,7 +1500,7 @@ Constructs CredentialReportExpiredException's fields from required parameters
 
 ``` purescript
 newtype CredentialReportNotPresentException
-  = CredentialReportNotPresentException { message :: NullOrUndefined (CredentialReportNotPresentExceptionMessage') }
+  = CredentialReportNotPresentException { message :: Maybe (CredentialReportNotPresentExceptionMessage') }
 ```
 
 <p>The request was rejected because the credential report does not exist. To generate a credential report, use <a>GenerateCredentialReport</a>.</p>
@@ -1525,7 +1525,7 @@ Constructs CredentialReportNotPresentException from required parameters
 #### `newCredentialReportNotPresentException'`
 
 ``` purescript
-newCredentialReportNotPresentException' :: ({ message :: NullOrUndefined (CredentialReportNotPresentExceptionMessage') } -> { message :: NullOrUndefined (CredentialReportNotPresentExceptionMessage') }) -> CredentialReportNotPresentException
+newCredentialReportNotPresentException' :: ({ message :: Maybe (CredentialReportNotPresentExceptionMessage') } -> { message :: Maybe (CredentialReportNotPresentExceptionMessage') }) -> CredentialReportNotPresentException
 ```
 
 Constructs CredentialReportNotPresentException's fields from required parameters
@@ -1534,7 +1534,7 @@ Constructs CredentialReportNotPresentException's fields from required parameters
 
 ``` purescript
 newtype CredentialReportNotReadyException
-  = CredentialReportNotReadyException { message :: NullOrUndefined (CredentialReportNotReadyExceptionMessage') }
+  = CredentialReportNotReadyException { message :: Maybe (CredentialReportNotReadyExceptionMessage') }
 ```
 
 <p>The request was rejected because the credential report is still being generated.</p>
@@ -1559,7 +1559,7 @@ Constructs CredentialReportNotReadyException from required parameters
 #### `newCredentialReportNotReadyException'`
 
 ``` purescript
-newCredentialReportNotReadyException' :: ({ message :: NullOrUndefined (CredentialReportNotReadyExceptionMessage') } -> { message :: NullOrUndefined (CredentialReportNotReadyExceptionMessage') }) -> CredentialReportNotReadyException
+newCredentialReportNotReadyException' :: ({ message :: Maybe (CredentialReportNotReadyExceptionMessage') } -> { message :: Maybe (CredentialReportNotReadyExceptionMessage') }) -> CredentialReportNotReadyException
 ```
 
 Constructs CredentialReportNotReadyException's fields from required parameters
@@ -1600,7 +1600,7 @@ Constructs DeactivateMFADeviceRequest's fields from required parameters
 
 ``` purescript
 newtype DeleteAccessKeyRequest
-  = DeleteAccessKeyRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' }
+  = DeleteAccessKeyRequest { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' }
 ```
 
 ##### Instances
@@ -1623,7 +1623,7 @@ Constructs DeleteAccessKeyRequest from required parameters
 #### `newDeleteAccessKeyRequest'`
 
 ``` purescript
-newDeleteAccessKeyRequest' :: AccessKeyIdType' -> ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' }) -> DeleteAccessKeyRequest
+newDeleteAccessKeyRequest' :: AccessKeyIdType' -> ({ "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' } -> { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType' }) -> DeleteAccessKeyRequest
 ```
 
 Constructs DeleteAccessKeyRequest's fields from required parameters
@@ -1664,7 +1664,7 @@ Constructs DeleteAccountAliasRequest's fields from required parameters
 
 ``` purescript
 newtype DeleteConflictException
-  = DeleteConflictException { message :: NullOrUndefined (DeleteConflictMessage') }
+  = DeleteConflictException { message :: Maybe (DeleteConflictMessage') }
 ```
 
 <p>The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.</p>
@@ -1689,7 +1689,7 @@ Constructs DeleteConflictException from required parameters
 #### `newDeleteConflictException'`
 
 ``` purescript
-newDeleteConflictException' :: ({ message :: NullOrUndefined (DeleteConflictMessage') } -> { message :: NullOrUndefined (DeleteConflictMessage') }) -> DeleteConflictException
+newDeleteConflictException' :: ({ message :: Maybe (DeleteConflictMessage') } -> { message :: Maybe (DeleteConflictMessage') }) -> DeleteConflictException
 ```
 
 Constructs DeleteConflictException's fields from required parameters
@@ -2146,7 +2146,7 @@ Constructs DeleteServiceLinkedRoleResponse's fields from required parameters
 
 ``` purescript
 newtype DeleteServiceSpecificCredentialRequest
-  = DeleteServiceSpecificCredentialRequest { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }
+  = DeleteServiceSpecificCredentialRequest { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }
 ```
 
 ##### Instances
@@ -2169,7 +2169,7 @@ Constructs DeleteServiceSpecificCredentialRequest from required parameters
 #### `newDeleteServiceSpecificCredentialRequest'`
 
 ``` purescript
-newDeleteServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ({ "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' } -> { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }) -> DeleteServiceSpecificCredentialRequest
+newDeleteServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ({ "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' } -> { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }) -> DeleteServiceSpecificCredentialRequest
 ```
 
 Constructs DeleteServiceSpecificCredentialRequest's fields from required parameters
@@ -2178,7 +2178,7 @@ Constructs DeleteServiceSpecificCredentialRequest's fields from required paramet
 
 ``` purescript
 newtype DeleteSigningCertificateRequest
-  = DeleteSigningCertificateRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType' }
+  = DeleteSigningCertificateRequest { "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType' }
 ```
 
 ##### Instances
@@ -2201,7 +2201,7 @@ Constructs DeleteSigningCertificateRequest from required parameters
 #### `newDeleteSigningCertificateRequest'`
 
 ``` purescript
-newDeleteSigningCertificateRequest' :: CertificateIdType' -> ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType' } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType' }) -> DeleteSigningCertificateRequest
+newDeleteSigningCertificateRequest' :: CertificateIdType' -> ({ "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType' } -> { "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType' }) -> DeleteSigningCertificateRequest
 ```
 
 Constructs DeleteSigningCertificateRequest's fields from required parameters
@@ -2306,7 +2306,7 @@ Constructs DeleteVirtualMFADeviceRequest's fields from required parameters
 
 ``` purescript
 newtype DeletionTaskFailureReasonType
-  = DeletionTaskFailureReasonType { "Reason" :: NullOrUndefined (ReasonType), "RoleUsageList" :: NullOrUndefined (RoleUsageListType) }
+  = DeletionTaskFailureReasonType { "Reason" :: Maybe (ReasonType), "RoleUsageList" :: Maybe (RoleUsageListType) }
 ```
 
 <p>The reason that the service-linked role deletion failed.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
@@ -2331,7 +2331,7 @@ Constructs DeletionTaskFailureReasonType from required parameters
 #### `newDeletionTaskFailureReasonType'`
 
 ``` purescript
-newDeletionTaskFailureReasonType' :: ({ "Reason" :: NullOrUndefined (ReasonType), "RoleUsageList" :: NullOrUndefined (RoleUsageListType) } -> { "Reason" :: NullOrUndefined (ReasonType), "RoleUsageList" :: NullOrUndefined (RoleUsageListType) }) -> DeletionTaskFailureReasonType
+newDeletionTaskFailureReasonType' :: ({ "Reason" :: Maybe (ReasonType), "RoleUsageList" :: Maybe (RoleUsageListType) } -> { "Reason" :: Maybe (ReasonType), "RoleUsageList" :: Maybe (RoleUsageListType) }) -> DeletionTaskFailureReasonType
 ```
 
 Constructs DeletionTaskFailureReasonType's fields from required parameters
@@ -2468,7 +2468,7 @@ Constructs DetachUserPolicyRequest's fields from required parameters
 
 ``` purescript
 newtype DuplicateCertificateException
-  = DuplicateCertificateException { message :: NullOrUndefined (DuplicateCertificateMessage') }
+  = DuplicateCertificateException { message :: Maybe (DuplicateCertificateMessage') }
 ```
 
 <p>The request was rejected because the same certificate is associated with an IAM user in the account.</p>
@@ -2493,7 +2493,7 @@ Constructs DuplicateCertificateException from required parameters
 #### `newDuplicateCertificateException'`
 
 ``` purescript
-newDuplicateCertificateException' :: ({ message :: NullOrUndefined (DuplicateCertificateMessage') } -> { message :: NullOrUndefined (DuplicateCertificateMessage') }) -> DuplicateCertificateException
+newDuplicateCertificateException' :: ({ message :: Maybe (DuplicateCertificateMessage') } -> { message :: Maybe (DuplicateCertificateMessage') }) -> DuplicateCertificateException
 ```
 
 Constructs DuplicateCertificateException's fields from required parameters
@@ -2502,7 +2502,7 @@ Constructs DuplicateCertificateException's fields from required parameters
 
 ``` purescript
 newtype DuplicateSSHPublicKeyException
-  = DuplicateSSHPublicKeyException { message :: NullOrUndefined (DuplicateSSHPublicKeyMessage') }
+  = DuplicateSSHPublicKeyException { message :: Maybe (DuplicateSSHPublicKeyMessage') }
 ```
 
 <p>The request was rejected because the SSH public key is already associated with the specified IAM user.</p>
@@ -2527,7 +2527,7 @@ Constructs DuplicateSSHPublicKeyException from required parameters
 #### `newDuplicateSSHPublicKeyException'`
 
 ``` purescript
-newDuplicateSSHPublicKeyException' :: ({ message :: NullOrUndefined (DuplicateSSHPublicKeyMessage') } -> { message :: NullOrUndefined (DuplicateSSHPublicKeyMessage') }) -> DuplicateSSHPublicKeyException
+newDuplicateSSHPublicKeyException' :: ({ message :: Maybe (DuplicateSSHPublicKeyMessage') } -> { message :: Maybe (DuplicateSSHPublicKeyMessage') }) -> DuplicateSSHPublicKeyException
 ```
 
 Constructs DuplicateSSHPublicKeyException's fields from required parameters
@@ -2568,7 +2568,7 @@ Constructs EnableMFADeviceRequest's fields from required parameters
 
 ``` purescript
 newtype EntityAlreadyExistsException
-  = EntityAlreadyExistsException { message :: NullOrUndefined (EntityAlreadyExistsMessage') }
+  = EntityAlreadyExistsException { message :: Maybe (EntityAlreadyExistsMessage') }
 ```
 
 <p>The request was rejected because it attempted to create a resource that already exists.</p>
@@ -2593,7 +2593,7 @@ Constructs EntityAlreadyExistsException from required parameters
 #### `newEntityAlreadyExistsException'`
 
 ``` purescript
-newEntityAlreadyExistsException' :: ({ message :: NullOrUndefined (EntityAlreadyExistsMessage') } -> { message :: NullOrUndefined (EntityAlreadyExistsMessage') }) -> EntityAlreadyExistsException
+newEntityAlreadyExistsException' :: ({ message :: Maybe (EntityAlreadyExistsMessage') } -> { message :: Maybe (EntityAlreadyExistsMessage') }) -> EntityAlreadyExistsException
 ```
 
 Constructs EntityAlreadyExistsException's fields from required parameters
@@ -2602,7 +2602,7 @@ Constructs EntityAlreadyExistsException's fields from required parameters
 
 ``` purescript
 newtype EntityTemporarilyUnmodifiableException
-  = EntityTemporarilyUnmodifiableException { message :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage') }
+  = EntityTemporarilyUnmodifiableException { message :: Maybe (EntityTemporarilyUnmodifiableMessage') }
 ```
 
 <p>The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity.</p>
@@ -2627,7 +2627,7 @@ Constructs EntityTemporarilyUnmodifiableException from required parameters
 #### `newEntityTemporarilyUnmodifiableException'`
 
 ``` purescript
-newEntityTemporarilyUnmodifiableException' :: ({ message :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage') } -> { message :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage') }) -> EntityTemporarilyUnmodifiableException
+newEntityTemporarilyUnmodifiableException' :: ({ message :: Maybe (EntityTemporarilyUnmodifiableMessage') } -> { message :: Maybe (EntityTemporarilyUnmodifiableMessage') }) -> EntityTemporarilyUnmodifiableException
 ```
 
 Constructs EntityTemporarilyUnmodifiableException's fields from required parameters
@@ -2684,7 +2684,7 @@ Encode EvalDecisionSourceType
 
 ``` purescript
 newtype EvaluationResult
-  = EvaluationResult { "EvalActionName" :: ActionNameType, "EvalResourceName" :: NullOrUndefined (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType), "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType) }
+  = EvaluationResult { "EvalActionName" :: ActionNameType, "EvalResourceName" :: Maybe (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType), "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType) }
 ```
 
 <p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulatePrincipalPolicy</a> </code>.</p>
@@ -2709,7 +2709,7 @@ Constructs EvaluationResult from required parameters
 #### `newEvaluationResult'`
 
 ``` purescript
-newEvaluationResult' :: ActionNameType -> PolicyEvaluationDecisionType -> ({ "EvalActionName" :: ActionNameType, "EvalResourceName" :: NullOrUndefined (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType), "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType) } -> { "EvalActionName" :: ActionNameType, "EvalResourceName" :: NullOrUndefined (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType), "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType) }) -> EvaluationResult
+newEvaluationResult' :: ActionNameType -> PolicyEvaluationDecisionType -> ({ "EvalActionName" :: ActionNameType, "EvalResourceName" :: Maybe (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType), "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType) } -> { "EvalActionName" :: ActionNameType, "EvalResourceName" :: Maybe (ResourceNameType), "EvalDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType), "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType) }) -> EvaluationResult
 ```
 
 Constructs EvaluationResult's fields from required parameters
@@ -2734,7 +2734,7 @@ Encode EvaluationResultsListType
 
 ``` purescript
 newtype GenerateCredentialReportResponse
-  = GenerateCredentialReportResponse { "State" :: NullOrUndefined (ReportStateType), "Description" :: NullOrUndefined (ReportStateDescriptionType) }
+  = GenerateCredentialReportResponse { "State" :: Maybe (ReportStateType), "Description" :: Maybe (ReportStateDescriptionType) }
 ```
 
 <p>Contains the response to a successful <a>GenerateCredentialReport</a> request. </p>
@@ -2759,7 +2759,7 @@ Constructs GenerateCredentialReportResponse from required parameters
 #### `newGenerateCredentialReportResponse'`
 
 ``` purescript
-newGenerateCredentialReportResponse' :: ({ "State" :: NullOrUndefined (ReportStateType), "Description" :: NullOrUndefined (ReportStateDescriptionType) } -> { "State" :: NullOrUndefined (ReportStateType), "Description" :: NullOrUndefined (ReportStateDescriptionType) }) -> GenerateCredentialReportResponse
+newGenerateCredentialReportResponse' :: ({ "State" :: Maybe (ReportStateType), "Description" :: Maybe (ReportStateDescriptionType) } -> { "State" :: Maybe (ReportStateType), "Description" :: Maybe (ReportStateDescriptionType) }) -> GenerateCredentialReportResponse
 ```
 
 Constructs GenerateCredentialReportResponse's fields from required parameters
@@ -2800,7 +2800,7 @@ Constructs GetAccessKeyLastUsedRequest's fields from required parameters
 
 ``` purescript
 newtype GetAccessKeyLastUsedResponse
-  = GetAccessKeyLastUsedResponse { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed) }
+  = GetAccessKeyLastUsedResponse { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed) }
 ```
 
 <p>Contains the response to a successful <a>GetAccessKeyLastUsed</a> request. It is also returned as a member of the <a>AccessKeyMetaData</a> structure returned by the <a>ListAccessKeys</a> action.</p>
@@ -2825,7 +2825,7 @@ Constructs GetAccessKeyLastUsedResponse from required parameters
 #### `newGetAccessKeyLastUsedResponse'`
 
 ``` purescript
-newGetAccessKeyLastUsedResponse' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed) } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed) }) -> GetAccessKeyLastUsedResponse
+newGetAccessKeyLastUsedResponse' :: ({ "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed) } -> { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed) }) -> GetAccessKeyLastUsedResponse
 ```
 
 Constructs GetAccessKeyLastUsedResponse's fields from required parameters
@@ -2834,7 +2834,7 @@ Constructs GetAccessKeyLastUsedResponse's fields from required parameters
 
 ``` purescript
 newtype GetAccountAuthorizationDetailsRequest
-  = GetAccountAuthorizationDetailsRequest { "Filter" :: NullOrUndefined (EntityListType'), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = GetAccountAuthorizationDetailsRequest { "Filter" :: Maybe (EntityListType'), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 ##### Instances
@@ -2857,7 +2857,7 @@ Constructs GetAccountAuthorizationDetailsRequest from required parameters
 #### `newGetAccountAuthorizationDetailsRequest'`
 
 ``` purescript
-newGetAccountAuthorizationDetailsRequest' :: ({ "Filter" :: NullOrUndefined (EntityListType'), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Filter" :: NullOrUndefined (EntityListType'), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }) -> GetAccountAuthorizationDetailsRequest
+newGetAccountAuthorizationDetailsRequest' :: ({ "Filter" :: Maybe (EntityListType'), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') } -> { "Filter" :: Maybe (EntityListType'), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }) -> GetAccountAuthorizationDetailsRequest
 ```
 
 Constructs GetAccountAuthorizationDetailsRequest's fields from required parameters
@@ -2866,7 +2866,7 @@ Constructs GetAccountAuthorizationDetailsRequest's fields from required paramete
 
 ``` purescript
 newtype GetAccountAuthorizationDetailsResponse
-  = GetAccountAuthorizationDetailsResponse { "UserDetailList" :: NullOrUndefined (UserDetailListType'), "GroupDetailList" :: NullOrUndefined (GroupDetailListType'), "RoleDetailList" :: NullOrUndefined (RoleDetailListType'), "Policies" :: NullOrUndefined (ManagedPolicyDetailListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = GetAccountAuthorizationDetailsResponse { "UserDetailList" :: Maybe (UserDetailListType'), "GroupDetailList" :: Maybe (GroupDetailListType'), "RoleDetailList" :: Maybe (RoleDetailListType'), "Policies" :: Maybe (ManagedPolicyDetailListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>GetAccountAuthorizationDetails</a> request. </p>
@@ -2891,7 +2891,7 @@ Constructs GetAccountAuthorizationDetailsResponse from required parameters
 #### `newGetAccountAuthorizationDetailsResponse'`
 
 ``` purescript
-newGetAccountAuthorizationDetailsResponse' :: ({ "UserDetailList" :: NullOrUndefined (UserDetailListType'), "GroupDetailList" :: NullOrUndefined (GroupDetailListType'), "RoleDetailList" :: NullOrUndefined (RoleDetailListType'), "Policies" :: NullOrUndefined (ManagedPolicyDetailListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "UserDetailList" :: NullOrUndefined (UserDetailListType'), "GroupDetailList" :: NullOrUndefined (GroupDetailListType'), "RoleDetailList" :: NullOrUndefined (RoleDetailListType'), "Policies" :: NullOrUndefined (ManagedPolicyDetailListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> GetAccountAuthorizationDetailsResponse
+newGetAccountAuthorizationDetailsResponse' :: ({ "UserDetailList" :: Maybe (UserDetailListType'), "GroupDetailList" :: Maybe (GroupDetailListType'), "RoleDetailList" :: Maybe (RoleDetailListType'), "Policies" :: Maybe (ManagedPolicyDetailListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "UserDetailList" :: Maybe (UserDetailListType'), "GroupDetailList" :: Maybe (GroupDetailListType'), "RoleDetailList" :: Maybe (RoleDetailListType'), "Policies" :: Maybe (ManagedPolicyDetailListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> GetAccountAuthorizationDetailsResponse
 ```
 
 Constructs GetAccountAuthorizationDetailsResponse's fields from required parameters
@@ -2934,7 +2934,7 @@ Constructs GetAccountPasswordPolicyResponse's fields from required parameters
 
 ``` purescript
 newtype GetAccountSummaryResponse
-  = GetAccountSummaryResponse { "SummaryMap" :: NullOrUndefined (SummaryMapType') }
+  = GetAccountSummaryResponse { "SummaryMap" :: Maybe (SummaryMapType') }
 ```
 
 <p>Contains the response to a successful <a>GetAccountSummary</a> request. </p>
@@ -2959,7 +2959,7 @@ Constructs GetAccountSummaryResponse from required parameters
 #### `newGetAccountSummaryResponse'`
 
 ``` purescript
-newGetAccountSummaryResponse' :: ({ "SummaryMap" :: NullOrUndefined (SummaryMapType') } -> { "SummaryMap" :: NullOrUndefined (SummaryMapType') }) -> GetAccountSummaryResponse
+newGetAccountSummaryResponse' :: ({ "SummaryMap" :: Maybe (SummaryMapType') } -> { "SummaryMap" :: Maybe (SummaryMapType') }) -> GetAccountSummaryResponse
 ```
 
 Constructs GetAccountSummaryResponse's fields from required parameters
@@ -3000,7 +3000,7 @@ Constructs GetContextKeysForCustomPolicyRequest's fields from required parameter
 
 ``` purescript
 newtype GetContextKeysForPolicyResponse
-  = GetContextKeysForPolicyResponse { "ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType) }
+  = GetContextKeysForPolicyResponse { "ContextKeyNames" :: Maybe (ContextKeyNamesResultListType) }
 ```
 
 <p>Contains the response to a successful <a>GetContextKeysForPrincipalPolicy</a> or <a>GetContextKeysForCustomPolicy</a> request. </p>
@@ -3025,7 +3025,7 @@ Constructs GetContextKeysForPolicyResponse from required parameters
 #### `newGetContextKeysForPolicyResponse'`
 
 ``` purescript
-newGetContextKeysForPolicyResponse' :: ({ "ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType) } -> { "ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType) }) -> GetContextKeysForPolicyResponse
+newGetContextKeysForPolicyResponse' :: ({ "ContextKeyNames" :: Maybe (ContextKeyNamesResultListType) } -> { "ContextKeyNames" :: Maybe (ContextKeyNamesResultListType) }) -> GetContextKeysForPolicyResponse
 ```
 
 Constructs GetContextKeysForPolicyResponse's fields from required parameters
@@ -3034,7 +3034,7 @@ Constructs GetContextKeysForPolicyResponse's fields from required parameters
 
 ``` purescript
 newtype GetContextKeysForPrincipalPolicyRequest
-  = GetContextKeysForPrincipalPolicyRequest { "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) }
+  = GetContextKeysForPrincipalPolicyRequest { "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType) }
 ```
 
 ##### Instances
@@ -3057,7 +3057,7 @@ Constructs GetContextKeysForPrincipalPolicyRequest from required parameters
 #### `newGetContextKeysForPrincipalPolicyRequest'`
 
 ``` purescript
-newGetContextKeysForPrincipalPolicyRequest' :: ArnType' -> ({ "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) } -> { "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) }) -> GetContextKeysForPrincipalPolicyRequest
+newGetContextKeysForPrincipalPolicyRequest' :: ArnType' -> ({ "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType) } -> { "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType) }) -> GetContextKeysForPrincipalPolicyRequest
 ```
 
 Constructs GetContextKeysForPrincipalPolicyRequest's fields from required parameters
@@ -3066,7 +3066,7 @@ Constructs GetContextKeysForPrincipalPolicyRequest's fields from required parame
 
 ``` purescript
 newtype GetCredentialReportResponse
-  = GetCredentialReportResponse { "Content" :: NullOrUndefined (ReportContentType), "ReportFormat" :: NullOrUndefined (ReportFormatType), "GeneratedTime" :: NullOrUndefined (DateType') }
+  = GetCredentialReportResponse { "Content" :: Maybe (ReportContentType), "ReportFormat" :: Maybe (ReportFormatType), "GeneratedTime" :: Maybe (DateType') }
 ```
 
 <p>Contains the response to a successful <a>GetCredentialReport</a> request. </p>
@@ -3091,7 +3091,7 @@ Constructs GetCredentialReportResponse from required parameters
 #### `newGetCredentialReportResponse'`
 
 ``` purescript
-newGetCredentialReportResponse' :: ({ "Content" :: NullOrUndefined (ReportContentType), "ReportFormat" :: NullOrUndefined (ReportFormatType), "GeneratedTime" :: NullOrUndefined (DateType') } -> { "Content" :: NullOrUndefined (ReportContentType), "ReportFormat" :: NullOrUndefined (ReportFormatType), "GeneratedTime" :: NullOrUndefined (DateType') }) -> GetCredentialReportResponse
+newGetCredentialReportResponse' :: ({ "Content" :: Maybe (ReportContentType), "ReportFormat" :: Maybe (ReportFormatType), "GeneratedTime" :: Maybe (DateType') } -> { "Content" :: Maybe (ReportContentType), "ReportFormat" :: Maybe (ReportFormatType), "GeneratedTime" :: Maybe (DateType') }) -> GetCredentialReportResponse
 ```
 
 Constructs GetCredentialReportResponse's fields from required parameters
@@ -3166,7 +3166,7 @@ Constructs GetGroupPolicyResponse's fields from required parameters
 
 ``` purescript
 newtype GetGroupRequest
-  = GetGroupRequest { "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = GetGroupRequest { "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -3189,7 +3189,7 @@ Constructs GetGroupRequest from required parameters
 #### `newGetGroupRequest'`
 
 ``` purescript
-newGetGroupRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> GetGroupRequest
+newGetGroupRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> GetGroupRequest
 ```
 
 Constructs GetGroupRequest's fields from required parameters
@@ -3198,7 +3198,7 @@ Constructs GetGroupRequest's fields from required parameters
 
 ``` purescript
 newtype GetGroupResponse
-  = GetGroupResponse { "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = GetGroupResponse { "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>GetGroup</a> request. </p>
@@ -3223,7 +3223,7 @@ Constructs GetGroupResponse from required parameters
 #### `newGetGroupResponse'`
 
 ``` purescript
-newGetGroupResponse' :: Group -> UserListType' -> ({ "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> GetGroupResponse
+newGetGroupResponse' :: Group -> UserListType' -> ({ "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Group" :: Group, "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> GetGroupResponse
 ```
 
 Constructs GetGroupResponse's fields from required parameters
@@ -3396,7 +3396,7 @@ Constructs GetOpenIDConnectProviderRequest's fields from required parameters
 
 ``` purescript
 newtype GetOpenIDConnectProviderResponse
-  = GetOpenIDConnectProviderResponse { "Url" :: NullOrUndefined (OpenIDConnectProviderUrlType), "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: NullOrUndefined (ThumbprintListType'), "CreateDate" :: NullOrUndefined (DateType') }
+  = GetOpenIDConnectProviderResponse { "Url" :: Maybe (OpenIDConnectProviderUrlType), "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: Maybe (ThumbprintListType'), "CreateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains the response to a successful <a>GetOpenIDConnectProvider</a> request. </p>
@@ -3421,7 +3421,7 @@ Constructs GetOpenIDConnectProviderResponse from required parameters
 #### `newGetOpenIDConnectProviderResponse'`
 
 ``` purescript
-newGetOpenIDConnectProviderResponse' :: ({ "Url" :: NullOrUndefined (OpenIDConnectProviderUrlType), "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: NullOrUndefined (ThumbprintListType'), "CreateDate" :: NullOrUndefined (DateType') } -> { "Url" :: NullOrUndefined (OpenIDConnectProviderUrlType), "ClientIDList" :: NullOrUndefined (ClientIDListType'), "ThumbprintList" :: NullOrUndefined (ThumbprintListType'), "CreateDate" :: NullOrUndefined (DateType') }) -> GetOpenIDConnectProviderResponse
+newGetOpenIDConnectProviderResponse' :: ({ "Url" :: Maybe (OpenIDConnectProviderUrlType), "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: Maybe (ThumbprintListType'), "CreateDate" :: Maybe (DateType') } -> { "Url" :: Maybe (OpenIDConnectProviderUrlType), "ClientIDList" :: Maybe (ClientIDListType'), "ThumbprintList" :: Maybe (ThumbprintListType'), "CreateDate" :: Maybe (DateType') }) -> GetOpenIDConnectProviderResponse
 ```
 
 Constructs GetOpenIDConnectProviderResponse's fields from required parameters
@@ -3462,7 +3462,7 @@ Constructs GetPolicyRequest's fields from required parameters
 
 ``` purescript
 newtype GetPolicyResponse
-  = GetPolicyResponse { "Policy" :: NullOrUndefined (Policy) }
+  = GetPolicyResponse { "Policy" :: Maybe (Policy) }
 ```
 
 <p>Contains the response to a successful <a>GetPolicy</a> request. </p>
@@ -3487,7 +3487,7 @@ Constructs GetPolicyResponse from required parameters
 #### `newGetPolicyResponse'`
 
 ``` purescript
-newGetPolicyResponse' :: ({ "Policy" :: NullOrUndefined (Policy) } -> { "Policy" :: NullOrUndefined (Policy) }) -> GetPolicyResponse
+newGetPolicyResponse' :: ({ "Policy" :: Maybe (Policy) } -> { "Policy" :: Maybe (Policy) }) -> GetPolicyResponse
 ```
 
 Constructs GetPolicyResponse's fields from required parameters
@@ -3528,7 +3528,7 @@ Constructs GetPolicyVersionRequest's fields from required parameters
 
 ``` purescript
 newtype GetPolicyVersionResponse
-  = GetPolicyVersionResponse { "PolicyVersion" :: NullOrUndefined (PolicyVersion) }
+  = GetPolicyVersionResponse { "PolicyVersion" :: Maybe (PolicyVersion) }
 ```
 
 <p>Contains the response to a successful <a>GetPolicyVersion</a> request. </p>
@@ -3553,7 +3553,7 @@ Constructs GetPolicyVersionResponse from required parameters
 #### `newGetPolicyVersionResponse'`
 
 ``` purescript
-newGetPolicyVersionResponse' :: ({ "PolicyVersion" :: NullOrUndefined (PolicyVersion) } -> { "PolicyVersion" :: NullOrUndefined (PolicyVersion) }) -> GetPolicyVersionResponse
+newGetPolicyVersionResponse' :: ({ "PolicyVersion" :: Maybe (PolicyVersion) } -> { "PolicyVersion" :: Maybe (PolicyVersion) }) -> GetPolicyVersionResponse
 ```
 
 Constructs GetPolicyVersionResponse's fields from required parameters
@@ -3726,7 +3726,7 @@ Constructs GetSAMLProviderRequest's fields from required parameters
 
 ``` purescript
 newtype GetSAMLProviderResponse
-  = GetSAMLProviderResponse { "SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType), "CreateDate" :: NullOrUndefined (DateType'), "ValidUntil" :: NullOrUndefined (DateType') }
+  = GetSAMLProviderResponse { "SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType), "CreateDate" :: Maybe (DateType'), "ValidUntil" :: Maybe (DateType') }
 ```
 
 <p>Contains the response to a successful <a>GetSAMLProvider</a> request. </p>
@@ -3751,7 +3751,7 @@ Constructs GetSAMLProviderResponse from required parameters
 #### `newGetSAMLProviderResponse'`
 
 ``` purescript
-newGetSAMLProviderResponse' :: ({ "SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType), "CreateDate" :: NullOrUndefined (DateType'), "ValidUntil" :: NullOrUndefined (DateType') } -> { "SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType), "CreateDate" :: NullOrUndefined (DateType'), "ValidUntil" :: NullOrUndefined (DateType') }) -> GetSAMLProviderResponse
+newGetSAMLProviderResponse' :: ({ "SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType), "CreateDate" :: Maybe (DateType'), "ValidUntil" :: Maybe (DateType') } -> { "SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType), "CreateDate" :: Maybe (DateType'), "ValidUntil" :: Maybe (DateType') }) -> GetSAMLProviderResponse
 ```
 
 Constructs GetSAMLProviderResponse's fields from required parameters
@@ -3792,7 +3792,7 @@ Constructs GetSSHPublicKeyRequest's fields from required parameters
 
 ``` purescript
 newtype GetSSHPublicKeyResponse
-  = GetSSHPublicKeyResponse { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) }
+  = GetSSHPublicKeyResponse { "SSHPublicKey" :: Maybe (SSHPublicKey) }
 ```
 
 <p>Contains the response to a successful <a>GetSSHPublicKey</a> request.</p>
@@ -3817,7 +3817,7 @@ Constructs GetSSHPublicKeyResponse from required parameters
 #### `newGetSSHPublicKeyResponse'`
 
 ``` purescript
-newGetSSHPublicKeyResponse' :: ({ "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } -> { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) }) -> GetSSHPublicKeyResponse
+newGetSSHPublicKeyResponse' :: ({ "SSHPublicKey" :: Maybe (SSHPublicKey) } -> { "SSHPublicKey" :: Maybe (SSHPublicKey) }) -> GetSSHPublicKeyResponse
 ```
 
 Constructs GetSSHPublicKeyResponse's fields from required parameters
@@ -3924,7 +3924,7 @@ Constructs GetServiceLinkedRoleDeletionStatusRequest's fields from required para
 
 ``` purescript
 newtype GetServiceLinkedRoleDeletionStatusResponse
-  = GetServiceLinkedRoleDeletionStatusResponse { "Status" :: DeletionTaskStatusType, "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType) }
+  = GetServiceLinkedRoleDeletionStatusResponse { "Status" :: DeletionTaskStatusType, "Reason" :: Maybe (DeletionTaskFailureReasonType) }
 ```
 
 ##### Instances
@@ -3947,7 +3947,7 @@ Constructs GetServiceLinkedRoleDeletionStatusResponse from required parameters
 #### `newGetServiceLinkedRoleDeletionStatusResponse'`
 
 ``` purescript
-newGetServiceLinkedRoleDeletionStatusResponse' :: DeletionTaskStatusType -> ({ "Status" :: DeletionTaskStatusType, "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType) } -> { "Status" :: DeletionTaskStatusType, "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType) }) -> GetServiceLinkedRoleDeletionStatusResponse
+newGetServiceLinkedRoleDeletionStatusResponse' :: DeletionTaskStatusType -> ({ "Status" :: DeletionTaskStatusType, "Reason" :: Maybe (DeletionTaskFailureReasonType) } -> { "Status" :: DeletionTaskStatusType, "Reason" :: Maybe (DeletionTaskFailureReasonType) }) -> GetServiceLinkedRoleDeletionStatusResponse
 ```
 
 Constructs GetServiceLinkedRoleDeletionStatusResponse's fields from required parameters
@@ -4022,7 +4022,7 @@ Constructs GetUserPolicyResponse's fields from required parameters
 
 ``` purescript
 newtype GetUserRequest
-  = GetUserRequest { "UserName" :: NullOrUndefined (ExistingUserNameType') }
+  = GetUserRequest { "UserName" :: Maybe (ExistingUserNameType') }
 ```
 
 ##### Instances
@@ -4045,7 +4045,7 @@ Constructs GetUserRequest from required parameters
 #### `newGetUserRequest'`
 
 ``` purescript
-newGetUserRequest' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType') } -> { "UserName" :: NullOrUndefined (ExistingUserNameType') }) -> GetUserRequest
+newGetUserRequest' :: ({ "UserName" :: Maybe (ExistingUserNameType') } -> { "UserName" :: Maybe (ExistingUserNameType') }) -> GetUserRequest
 ```
 
 Constructs GetUserRequest's fields from required parameters
@@ -4122,7 +4122,7 @@ Constructs Group's fields from required parameters
 
 ``` purescript
 newtype GroupDetail
-  = GroupDetail { "Path" :: NullOrUndefined (PathType'), "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }
+  = GroupDetail { "Path" :: Maybe (PathType'), "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "GroupPolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }
 ```
 
 <p>Contains information about an IAM group, including all of the group's policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
@@ -4147,7 +4147,7 @@ Constructs GroupDetail from required parameters
 #### `newGroupDetail'`
 
 ``` purescript
-newGroupDetail' :: ({ "Path" :: NullOrUndefined (PathType'), "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> { "Path" :: NullOrUndefined (PathType'), "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }) -> GroupDetail
+newGroupDetail' :: ({ "Path" :: Maybe (PathType'), "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "GroupPolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> { "Path" :: Maybe (PathType'), "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "GroupPolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }) -> GroupDetail
 ```
 
 Constructs GroupDetail's fields from required parameters
@@ -4190,7 +4190,7 @@ Constructs InstanceProfile's fields from required parameters
 
 ``` purescript
 newtype InvalidAuthenticationCodeException
-  = InvalidAuthenticationCodeException { message :: NullOrUndefined (InvalidAuthenticationCodeMessage') }
+  = InvalidAuthenticationCodeException { message :: Maybe (InvalidAuthenticationCodeMessage') }
 ```
 
 <p>The request was rejected because the authentication code was not recognized. The error message describes the specific error.</p>
@@ -4215,7 +4215,7 @@ Constructs InvalidAuthenticationCodeException from required parameters
 #### `newInvalidAuthenticationCodeException'`
 
 ``` purescript
-newInvalidAuthenticationCodeException' :: ({ message :: NullOrUndefined (InvalidAuthenticationCodeMessage') } -> { message :: NullOrUndefined (InvalidAuthenticationCodeMessage') }) -> InvalidAuthenticationCodeException
+newInvalidAuthenticationCodeException' :: ({ message :: Maybe (InvalidAuthenticationCodeMessage') } -> { message :: Maybe (InvalidAuthenticationCodeMessage') }) -> InvalidAuthenticationCodeException
 ```
 
 Constructs InvalidAuthenticationCodeException's fields from required parameters
@@ -4224,7 +4224,7 @@ Constructs InvalidAuthenticationCodeException's fields from required parameters
 
 ``` purescript
 newtype InvalidCertificateException
-  = InvalidCertificateException { message :: NullOrUndefined (InvalidCertificateMessage') }
+  = InvalidCertificateException { message :: Maybe (InvalidCertificateMessage') }
 ```
 
 <p>The request was rejected because the certificate is invalid.</p>
@@ -4249,7 +4249,7 @@ Constructs InvalidCertificateException from required parameters
 #### `newInvalidCertificateException'`
 
 ``` purescript
-newInvalidCertificateException' :: ({ message :: NullOrUndefined (InvalidCertificateMessage') } -> { message :: NullOrUndefined (InvalidCertificateMessage') }) -> InvalidCertificateException
+newInvalidCertificateException' :: ({ message :: Maybe (InvalidCertificateMessage') } -> { message :: Maybe (InvalidCertificateMessage') }) -> InvalidCertificateException
 ```
 
 Constructs InvalidCertificateException's fields from required parameters
@@ -4258,7 +4258,7 @@ Constructs InvalidCertificateException's fields from required parameters
 
 ``` purescript
 newtype InvalidInputException
-  = InvalidInputException { message :: NullOrUndefined (InvalidInputMessage') }
+  = InvalidInputException { message :: Maybe (InvalidInputMessage') }
 ```
 
 <p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>
@@ -4283,7 +4283,7 @@ Constructs InvalidInputException from required parameters
 #### `newInvalidInputException'`
 
 ``` purescript
-newInvalidInputException' :: ({ message :: NullOrUndefined (InvalidInputMessage') } -> { message :: NullOrUndefined (InvalidInputMessage') }) -> InvalidInputException
+newInvalidInputException' :: ({ message :: Maybe (InvalidInputMessage') } -> { message :: Maybe (InvalidInputMessage') }) -> InvalidInputException
 ```
 
 Constructs InvalidInputException's fields from required parameters
@@ -4292,7 +4292,7 @@ Constructs InvalidInputException's fields from required parameters
 
 ``` purescript
 newtype InvalidPublicKeyException
-  = InvalidPublicKeyException { message :: NullOrUndefined (InvalidPublicKeyMessage') }
+  = InvalidPublicKeyException { message :: Maybe (InvalidPublicKeyMessage') }
 ```
 
 <p>The request was rejected because the public key is malformed or otherwise invalid.</p>
@@ -4317,7 +4317,7 @@ Constructs InvalidPublicKeyException from required parameters
 #### `newInvalidPublicKeyException'`
 
 ``` purescript
-newInvalidPublicKeyException' :: ({ message :: NullOrUndefined (InvalidPublicKeyMessage') } -> { message :: NullOrUndefined (InvalidPublicKeyMessage') }) -> InvalidPublicKeyException
+newInvalidPublicKeyException' :: ({ message :: Maybe (InvalidPublicKeyMessage') } -> { message :: Maybe (InvalidPublicKeyMessage') }) -> InvalidPublicKeyException
 ```
 
 Constructs InvalidPublicKeyException's fields from required parameters
@@ -4326,7 +4326,7 @@ Constructs InvalidPublicKeyException's fields from required parameters
 
 ``` purescript
 newtype InvalidUserTypeException
-  = InvalidUserTypeException { message :: NullOrUndefined (InvalidUserTypeMessage') }
+  = InvalidUserTypeException { message :: Maybe (InvalidUserTypeMessage') }
 ```
 
 <p>The request was rejected because the type of user for the transaction was incorrect.</p>
@@ -4351,7 +4351,7 @@ Constructs InvalidUserTypeException from required parameters
 #### `newInvalidUserTypeException'`
 
 ``` purescript
-newInvalidUserTypeException' :: ({ message :: NullOrUndefined (InvalidUserTypeMessage') } -> { message :: NullOrUndefined (InvalidUserTypeMessage') }) -> InvalidUserTypeException
+newInvalidUserTypeException' :: ({ message :: Maybe (InvalidUserTypeMessage') } -> { message :: Maybe (InvalidUserTypeMessage') }) -> InvalidUserTypeException
 ```
 
 Constructs InvalidUserTypeException's fields from required parameters
@@ -4360,7 +4360,7 @@ Constructs InvalidUserTypeException's fields from required parameters
 
 ``` purescript
 newtype KeyPairMismatchException
-  = KeyPairMismatchException { message :: NullOrUndefined (KeyPairMismatchMessage') }
+  = KeyPairMismatchException { message :: Maybe (KeyPairMismatchMessage') }
 ```
 
 <p>The request was rejected because the public key certificate and the private key do not match.</p>
@@ -4385,7 +4385,7 @@ Constructs KeyPairMismatchException from required parameters
 #### `newKeyPairMismatchException'`
 
 ``` purescript
-newKeyPairMismatchException' :: ({ message :: NullOrUndefined (KeyPairMismatchMessage') } -> { message :: NullOrUndefined (KeyPairMismatchMessage') }) -> KeyPairMismatchException
+newKeyPairMismatchException' :: ({ message :: Maybe (KeyPairMismatchMessage') } -> { message :: Maybe (KeyPairMismatchMessage') }) -> KeyPairMismatchException
 ```
 
 Constructs KeyPairMismatchException's fields from required parameters
@@ -4394,7 +4394,7 @@ Constructs KeyPairMismatchException's fields from required parameters
 
 ``` purescript
 newtype LimitExceededException
-  = LimitExceededException { message :: NullOrUndefined (LimitExceededMessage') }
+  = LimitExceededException { message :: Maybe (LimitExceededMessage') }
 ```
 
 <p>The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.</p>
@@ -4419,7 +4419,7 @@ Constructs LimitExceededException from required parameters
 #### `newLimitExceededException'`
 
 ``` purescript
-newLimitExceededException' :: ({ message :: NullOrUndefined (LimitExceededMessage') } -> { message :: NullOrUndefined (LimitExceededMessage') }) -> LimitExceededException
+newLimitExceededException' :: ({ message :: Maybe (LimitExceededMessage') } -> { message :: Maybe (LimitExceededMessage') }) -> LimitExceededException
 ```
 
 Constructs LimitExceededException's fields from required parameters
@@ -4444,7 +4444,7 @@ Encode LineNumber
 
 ``` purescript
 newtype ListAccessKeysRequest
-  = ListAccessKeysRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListAccessKeysRequest { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4467,7 +4467,7 @@ Constructs ListAccessKeysRequest from required parameters
 #### `newListAccessKeysRequest'`
 
 ``` purescript
-newListAccessKeysRequest' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListAccessKeysRequest
+newListAccessKeysRequest' :: ({ "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListAccessKeysRequest
 ```
 
 Constructs ListAccessKeysRequest's fields from required parameters
@@ -4476,7 +4476,7 @@ Constructs ListAccessKeysRequest's fields from required parameters
 
 ``` purescript
 newtype ListAccessKeysResponse
-  = ListAccessKeysResponse { "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListAccessKeysResponse { "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListAccessKeys</a> request. </p>
@@ -4501,7 +4501,7 @@ Constructs ListAccessKeysResponse from required parameters
 #### `newListAccessKeysResponse'`
 
 ``` purescript
-newListAccessKeysResponse' :: AccessKeyMetadataListType' -> ({ "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListAccessKeysResponse
+newListAccessKeysResponse' :: AccessKeyMetadataListType' -> ({ "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "AccessKeyMetadata" :: AccessKeyMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListAccessKeysResponse
 ```
 
 Constructs ListAccessKeysResponse's fields from required parameters
@@ -4510,7 +4510,7 @@ Constructs ListAccessKeysResponse's fields from required parameters
 
 ``` purescript
 newtype ListAccountAliasesRequest
-  = ListAccountAliasesRequest { "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListAccountAliasesRequest { "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4533,7 +4533,7 @@ Constructs ListAccountAliasesRequest from required parameters
 #### `newListAccountAliasesRequest'`
 
 ``` purescript
-newListAccountAliasesRequest' :: ({ "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListAccountAliasesRequest
+newListAccountAliasesRequest' :: ({ "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListAccountAliasesRequest
 ```
 
 Constructs ListAccountAliasesRequest's fields from required parameters
@@ -4542,7 +4542,7 @@ Constructs ListAccountAliasesRequest's fields from required parameters
 
 ``` purescript
 newtype ListAccountAliasesResponse
-  = ListAccountAliasesResponse { "AccountAliases" :: AccountAliasListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListAccountAliasesResponse { "AccountAliases" :: AccountAliasListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListAccountAliases</a> request. </p>
@@ -4567,7 +4567,7 @@ Constructs ListAccountAliasesResponse from required parameters
 #### `newListAccountAliasesResponse'`
 
 ``` purescript
-newListAccountAliasesResponse' :: AccountAliasListType' -> ({ "AccountAliases" :: AccountAliasListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "AccountAliases" :: AccountAliasListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListAccountAliasesResponse
+newListAccountAliasesResponse' :: AccountAliasListType' -> ({ "AccountAliases" :: AccountAliasListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "AccountAliases" :: AccountAliasListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListAccountAliasesResponse
 ```
 
 Constructs ListAccountAliasesResponse's fields from required parameters
@@ -4576,7 +4576,7 @@ Constructs ListAccountAliasesResponse's fields from required parameters
 
 ``` purescript
 newtype ListAttachedGroupPoliciesRequest
-  = ListAttachedGroupPoliciesRequest { "GroupName" :: GroupNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListAttachedGroupPoliciesRequest { "GroupName" :: GroupNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4599,7 +4599,7 @@ Constructs ListAttachedGroupPoliciesRequest from required parameters
 #### `newListAttachedGroupPoliciesRequest'`
 
 ``` purescript
-newListAttachedGroupPoliciesRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "GroupName" :: GroupNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListAttachedGroupPoliciesRequest
+newListAttachedGroupPoliciesRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "GroupName" :: GroupNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListAttachedGroupPoliciesRequest
 ```
 
 Constructs ListAttachedGroupPoliciesRequest's fields from required parameters
@@ -4608,7 +4608,7 @@ Constructs ListAttachedGroupPoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListAttachedGroupPoliciesResponse
-  = ListAttachedGroupPoliciesResponse { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListAttachedGroupPoliciesResponse { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListAttachedGroupPolicies</a> request. </p>
@@ -4633,7 +4633,7 @@ Constructs ListAttachedGroupPoliciesResponse from required parameters
 #### `newListAttachedGroupPoliciesResponse'`
 
 ``` purescript
-newListAttachedGroupPoliciesResponse' :: ({ "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListAttachedGroupPoliciesResponse
+newListAttachedGroupPoliciesResponse' :: ({ "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListAttachedGroupPoliciesResponse
 ```
 
 Constructs ListAttachedGroupPoliciesResponse's fields from required parameters
@@ -4642,7 +4642,7 @@ Constructs ListAttachedGroupPoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListAttachedRolePoliciesRequest
-  = ListAttachedRolePoliciesRequest { "RoleName" :: RoleNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListAttachedRolePoliciesRequest { "RoleName" :: RoleNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4665,7 +4665,7 @@ Constructs ListAttachedRolePoliciesRequest from required parameters
 #### `newListAttachedRolePoliciesRequest'`
 
 ``` purescript
-newListAttachedRolePoliciesRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "RoleName" :: RoleNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListAttachedRolePoliciesRequest
+newListAttachedRolePoliciesRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "RoleName" :: RoleNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListAttachedRolePoliciesRequest
 ```
 
 Constructs ListAttachedRolePoliciesRequest's fields from required parameters
@@ -4674,7 +4674,7 @@ Constructs ListAttachedRolePoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListAttachedRolePoliciesResponse
-  = ListAttachedRolePoliciesResponse { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListAttachedRolePoliciesResponse { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListAttachedRolePolicies</a> request. </p>
@@ -4699,7 +4699,7 @@ Constructs ListAttachedRolePoliciesResponse from required parameters
 #### `newListAttachedRolePoliciesResponse'`
 
 ``` purescript
-newListAttachedRolePoliciesResponse' :: ({ "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListAttachedRolePoliciesResponse
+newListAttachedRolePoliciesResponse' :: ({ "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListAttachedRolePoliciesResponse
 ```
 
 Constructs ListAttachedRolePoliciesResponse's fields from required parameters
@@ -4708,7 +4708,7 @@ Constructs ListAttachedRolePoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListAttachedUserPoliciesRequest
-  = ListAttachedUserPoliciesRequest { "UserName" :: UserNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListAttachedUserPoliciesRequest { "UserName" :: UserNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4731,7 +4731,7 @@ Constructs ListAttachedUserPoliciesRequest from required parameters
 #### `newListAttachedUserPoliciesRequest'`
 
 ``` purescript
-newListAttachedUserPoliciesRequest' :: UserNameType' -> ({ "UserName" :: UserNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: UserNameType', "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListAttachedUserPoliciesRequest
+newListAttachedUserPoliciesRequest' :: UserNameType' -> ({ "UserName" :: UserNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: UserNameType', "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListAttachedUserPoliciesRequest
 ```
 
 Constructs ListAttachedUserPoliciesRequest's fields from required parameters
@@ -4740,7 +4740,7 @@ Constructs ListAttachedUserPoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListAttachedUserPoliciesResponse
-  = ListAttachedUserPoliciesResponse { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListAttachedUserPoliciesResponse { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListAttachedUserPolicies</a> request. </p>
@@ -4765,7 +4765,7 @@ Constructs ListAttachedUserPoliciesResponse from required parameters
 #### `newListAttachedUserPoliciesResponse'`
 
 ``` purescript
-newListAttachedUserPoliciesResponse' :: ({ "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListAttachedUserPoliciesResponse
+newListAttachedUserPoliciesResponse' :: ({ "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "AttachedPolicies" :: Maybe (AttachedPoliciesListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListAttachedUserPoliciesResponse
 ```
 
 Constructs ListAttachedUserPoliciesResponse's fields from required parameters
@@ -4774,7 +4774,7 @@ Constructs ListAttachedUserPoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListEntitiesForPolicyRequest
-  = ListEntitiesForPolicyRequest { "PolicyArn" :: ArnType', "EntityFilter" :: NullOrUndefined (EntityType), "PathPrefix" :: NullOrUndefined (PathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListEntitiesForPolicyRequest { "PolicyArn" :: ArnType', "EntityFilter" :: Maybe (EntityType), "PathPrefix" :: Maybe (PathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4797,7 +4797,7 @@ Constructs ListEntitiesForPolicyRequest from required parameters
 #### `newListEntitiesForPolicyRequest'`
 
 ``` purescript
-newListEntitiesForPolicyRequest' :: ArnType' -> ({ "PolicyArn" :: ArnType', "EntityFilter" :: NullOrUndefined (EntityType), "PathPrefix" :: NullOrUndefined (PathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PolicyArn" :: ArnType', "EntityFilter" :: NullOrUndefined (EntityType), "PathPrefix" :: NullOrUndefined (PathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListEntitiesForPolicyRequest
+newListEntitiesForPolicyRequest' :: ArnType' -> ({ "PolicyArn" :: ArnType', "EntityFilter" :: Maybe (EntityType), "PathPrefix" :: Maybe (PathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PolicyArn" :: ArnType', "EntityFilter" :: Maybe (EntityType), "PathPrefix" :: Maybe (PathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListEntitiesForPolicyRequest
 ```
 
 Constructs ListEntitiesForPolicyRequest's fields from required parameters
@@ -4806,7 +4806,7 @@ Constructs ListEntitiesForPolicyRequest's fields from required parameters
 
 ``` purescript
 newtype ListEntitiesForPolicyResponse
-  = ListEntitiesForPolicyResponse { "PolicyGroups" :: NullOrUndefined (PolicyGroupListType), "PolicyUsers" :: NullOrUndefined (PolicyUserListType), "PolicyRoles" :: NullOrUndefined (PolicyRoleListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListEntitiesForPolicyResponse { "PolicyGroups" :: Maybe (PolicyGroupListType), "PolicyUsers" :: Maybe (PolicyUserListType), "PolicyRoles" :: Maybe (PolicyRoleListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListEntitiesForPolicy</a> request. </p>
@@ -4831,7 +4831,7 @@ Constructs ListEntitiesForPolicyResponse from required parameters
 #### `newListEntitiesForPolicyResponse'`
 
 ``` purescript
-newListEntitiesForPolicyResponse' :: ({ "PolicyGroups" :: NullOrUndefined (PolicyGroupListType), "PolicyUsers" :: NullOrUndefined (PolicyUserListType), "PolicyRoles" :: NullOrUndefined (PolicyRoleListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicyGroups" :: NullOrUndefined (PolicyGroupListType), "PolicyUsers" :: NullOrUndefined (PolicyUserListType), "PolicyRoles" :: NullOrUndefined (PolicyRoleListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListEntitiesForPolicyResponse
+newListEntitiesForPolicyResponse' :: ({ "PolicyGroups" :: Maybe (PolicyGroupListType), "PolicyUsers" :: Maybe (PolicyUserListType), "PolicyRoles" :: Maybe (PolicyRoleListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "PolicyGroups" :: Maybe (PolicyGroupListType), "PolicyUsers" :: Maybe (PolicyUserListType), "PolicyRoles" :: Maybe (PolicyRoleListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListEntitiesForPolicyResponse
 ```
 
 Constructs ListEntitiesForPolicyResponse's fields from required parameters
@@ -4840,7 +4840,7 @@ Constructs ListEntitiesForPolicyResponse's fields from required parameters
 
 ``` purescript
 newtype ListGroupPoliciesRequest
-  = ListGroupPoliciesRequest { "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListGroupPoliciesRequest { "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4863,7 +4863,7 @@ Constructs ListGroupPoliciesRequest from required parameters
 #### `newListGroupPoliciesRequest'`
 
 ``` purescript
-newListGroupPoliciesRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "GroupName" :: GroupNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListGroupPoliciesRequest
+newListGroupPoliciesRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "GroupName" :: GroupNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListGroupPoliciesRequest
 ```
 
 Constructs ListGroupPoliciesRequest's fields from required parameters
@@ -4872,7 +4872,7 @@ Constructs ListGroupPoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListGroupPoliciesResponse
-  = ListGroupPoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListGroupPoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListGroupPolicies</a> request. </p>
@@ -4897,7 +4897,7 @@ Constructs ListGroupPoliciesResponse from required parameters
 #### `newListGroupPoliciesResponse'`
 
 ``` purescript
-newListGroupPoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListGroupPoliciesResponse
+newListGroupPoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListGroupPoliciesResponse
 ```
 
 Constructs ListGroupPoliciesResponse's fields from required parameters
@@ -4906,7 +4906,7 @@ Constructs ListGroupPoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListGroupsForUserRequest
-  = ListGroupsForUserRequest { "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListGroupsForUserRequest { "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4929,7 +4929,7 @@ Constructs ListGroupsForUserRequest from required parameters
 #### `newListGroupsForUserRequest'`
 
 ``` purescript
-newListGroupsForUserRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListGroupsForUserRequest
+newListGroupsForUserRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListGroupsForUserRequest
 ```
 
 Constructs ListGroupsForUserRequest's fields from required parameters
@@ -4938,7 +4938,7 @@ Constructs ListGroupsForUserRequest's fields from required parameters
 
 ``` purescript
 newtype ListGroupsForUserResponse
-  = ListGroupsForUserResponse { "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListGroupsForUserResponse { "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListGroupsForUser</a> request. </p>
@@ -4963,7 +4963,7 @@ Constructs ListGroupsForUserResponse from required parameters
 #### `newListGroupsForUserResponse'`
 
 ``` purescript
-newListGroupsForUserResponse' :: GroupListType' -> ({ "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListGroupsForUserResponse
+newListGroupsForUserResponse' :: GroupListType' -> ({ "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListGroupsForUserResponse
 ```
 
 Constructs ListGroupsForUserResponse's fields from required parameters
@@ -4972,7 +4972,7 @@ Constructs ListGroupsForUserResponse's fields from required parameters
 
 ``` purescript
 newtype ListGroupsRequest
-  = ListGroupsRequest { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListGroupsRequest { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -4995,7 +4995,7 @@ Constructs ListGroupsRequest from required parameters
 #### `newListGroupsRequest'`
 
 ``` purescript
-newListGroupsRequest' :: ({ "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListGroupsRequest
+newListGroupsRequest' :: ({ "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListGroupsRequest
 ```
 
 Constructs ListGroupsRequest's fields from required parameters
@@ -5004,7 +5004,7 @@ Constructs ListGroupsRequest's fields from required parameters
 
 ``` purescript
 newtype ListGroupsResponse
-  = ListGroupsResponse { "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListGroupsResponse { "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListGroups</a> request. </p>
@@ -5029,7 +5029,7 @@ Constructs ListGroupsResponse from required parameters
 #### `newListGroupsResponse'`
 
 ``` purescript
-newListGroupsResponse' :: GroupListType' -> ({ "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Groups" :: GroupListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListGroupsResponse
+newListGroupsResponse' :: GroupListType' -> ({ "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Groups" :: GroupListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListGroupsResponse
 ```
 
 Constructs ListGroupsResponse's fields from required parameters
@@ -5038,7 +5038,7 @@ Constructs ListGroupsResponse's fields from required parameters
 
 ``` purescript
 newtype ListInstanceProfilesForRoleRequest
-  = ListInstanceProfilesForRoleRequest { "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListInstanceProfilesForRoleRequest { "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5061,7 +5061,7 @@ Constructs ListInstanceProfilesForRoleRequest from required parameters
 #### `newListInstanceProfilesForRoleRequest'`
 
 ``` purescript
-newListInstanceProfilesForRoleRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListInstanceProfilesForRoleRequest
+newListInstanceProfilesForRoleRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListInstanceProfilesForRoleRequest
 ```
 
 Constructs ListInstanceProfilesForRoleRequest's fields from required parameters
@@ -5070,7 +5070,7 @@ Constructs ListInstanceProfilesForRoleRequest's fields from required parameters
 
 ``` purescript
 newtype ListInstanceProfilesForRoleResponse
-  = ListInstanceProfilesForRoleResponse { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListInstanceProfilesForRoleResponse { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListInstanceProfilesForRole</a> request. </p>
@@ -5095,7 +5095,7 @@ Constructs ListInstanceProfilesForRoleResponse from required parameters
 #### `newListInstanceProfilesForRoleResponse'`
 
 ``` purescript
-newListInstanceProfilesForRoleResponse' :: InstanceProfileListType' -> ({ "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListInstanceProfilesForRoleResponse
+newListInstanceProfilesForRoleResponse' :: InstanceProfileListType' -> ({ "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListInstanceProfilesForRoleResponse
 ```
 
 Constructs ListInstanceProfilesForRoleResponse's fields from required parameters
@@ -5104,7 +5104,7 @@ Constructs ListInstanceProfilesForRoleResponse's fields from required parameters
 
 ``` purescript
 newtype ListInstanceProfilesRequest
-  = ListInstanceProfilesRequest { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListInstanceProfilesRequest { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5127,7 +5127,7 @@ Constructs ListInstanceProfilesRequest from required parameters
 #### `newListInstanceProfilesRequest'`
 
 ``` purescript
-newListInstanceProfilesRequest' :: ({ "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListInstanceProfilesRequest
+newListInstanceProfilesRequest' :: ({ "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListInstanceProfilesRequest
 ```
 
 Constructs ListInstanceProfilesRequest's fields from required parameters
@@ -5136,7 +5136,7 @@ Constructs ListInstanceProfilesRequest's fields from required parameters
 
 ``` purescript
 newtype ListInstanceProfilesResponse
-  = ListInstanceProfilesResponse { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListInstanceProfilesResponse { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListInstanceProfiles</a> request. </p>
@@ -5161,7 +5161,7 @@ Constructs ListInstanceProfilesResponse from required parameters
 #### `newListInstanceProfilesResponse'`
 
 ``` purescript
-newListInstanceProfilesResponse' :: InstanceProfileListType' -> ({ "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListInstanceProfilesResponse
+newListInstanceProfilesResponse' :: InstanceProfileListType' -> ({ "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "InstanceProfiles" :: InstanceProfileListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListInstanceProfilesResponse
 ```
 
 Constructs ListInstanceProfilesResponse's fields from required parameters
@@ -5170,7 +5170,7 @@ Constructs ListInstanceProfilesResponse's fields from required parameters
 
 ``` purescript
 newtype ListMFADevicesRequest
-  = ListMFADevicesRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListMFADevicesRequest { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5193,7 +5193,7 @@ Constructs ListMFADevicesRequest from required parameters
 #### `newListMFADevicesRequest'`
 
 ``` purescript
-newListMFADevicesRequest' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListMFADevicesRequest
+newListMFADevicesRequest' :: ({ "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListMFADevicesRequest
 ```
 
 Constructs ListMFADevicesRequest's fields from required parameters
@@ -5202,7 +5202,7 @@ Constructs ListMFADevicesRequest's fields from required parameters
 
 ``` purescript
 newtype ListMFADevicesResponse
-  = ListMFADevicesResponse { "MFADevices" :: MfaDeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListMFADevicesResponse { "MFADevices" :: MfaDeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListMFADevices</a> request. </p>
@@ -5227,7 +5227,7 @@ Constructs ListMFADevicesResponse from required parameters
 #### `newListMFADevicesResponse'`
 
 ``` purescript
-newListMFADevicesResponse' :: MfaDeviceListType' -> ({ "MFADevices" :: MfaDeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "MFADevices" :: MfaDeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListMFADevicesResponse
+newListMFADevicesResponse' :: MfaDeviceListType' -> ({ "MFADevices" :: MfaDeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "MFADevices" :: MfaDeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListMFADevicesResponse
 ```
 
 Constructs ListMFADevicesResponse's fields from required parameters
@@ -5252,7 +5252,7 @@ Encode ListOpenIDConnectProvidersRequest
 
 ``` purescript
 newtype ListOpenIDConnectProvidersResponse
-  = ListOpenIDConnectProvidersResponse { "OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType) }
+  = ListOpenIDConnectProvidersResponse { "OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType) }
 ```
 
 <p>Contains the response to a successful <a>ListOpenIDConnectProviders</a> request. </p>
@@ -5277,7 +5277,7 @@ Constructs ListOpenIDConnectProvidersResponse from required parameters
 #### `newListOpenIDConnectProvidersResponse'`
 
 ``` purescript
-newListOpenIDConnectProvidersResponse' :: ({ "OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType) } -> { "OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType) }) -> ListOpenIDConnectProvidersResponse
+newListOpenIDConnectProvidersResponse' :: ({ "OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType) } -> { "OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType) }) -> ListOpenIDConnectProvidersResponse
 ```
 
 Constructs ListOpenIDConnectProvidersResponse's fields from required parameters
@@ -5286,7 +5286,7 @@ Constructs ListOpenIDConnectProvidersResponse's fields from required parameters
 
 ``` purescript
 newtype ListPoliciesRequest
-  = ListPoliciesRequest { "Scope" :: NullOrUndefined (PolicyScopeType'), "OnlyAttached" :: NullOrUndefined (BooleanType'), "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListPoliciesRequest { "Scope" :: Maybe (PolicyScopeType'), "OnlyAttached" :: Maybe (BooleanType'), "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5309,7 +5309,7 @@ Constructs ListPoliciesRequest from required parameters
 #### `newListPoliciesRequest'`
 
 ``` purescript
-newListPoliciesRequest' :: ({ "Scope" :: NullOrUndefined (PolicyScopeType'), "OnlyAttached" :: NullOrUndefined (BooleanType'), "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "Scope" :: NullOrUndefined (PolicyScopeType'), "OnlyAttached" :: NullOrUndefined (BooleanType'), "PathPrefix" :: NullOrUndefined (PolicyPathType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListPoliciesRequest
+newListPoliciesRequest' :: ({ "Scope" :: Maybe (PolicyScopeType'), "OnlyAttached" :: Maybe (BooleanType'), "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "Scope" :: Maybe (PolicyScopeType'), "OnlyAttached" :: Maybe (BooleanType'), "PathPrefix" :: Maybe (PolicyPathType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListPoliciesRequest
 ```
 
 Constructs ListPoliciesRequest's fields from required parameters
@@ -5318,7 +5318,7 @@ Constructs ListPoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListPoliciesResponse
-  = ListPoliciesResponse { "Policies" :: NullOrUndefined (PolicyListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListPoliciesResponse { "Policies" :: Maybe (PolicyListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListPolicies</a> request. </p>
@@ -5343,7 +5343,7 @@ Constructs ListPoliciesResponse from required parameters
 #### `newListPoliciesResponse'`
 
 ``` purescript
-newListPoliciesResponse' :: ({ "Policies" :: NullOrUndefined (PolicyListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Policies" :: NullOrUndefined (PolicyListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListPoliciesResponse
+newListPoliciesResponse' :: ({ "Policies" :: Maybe (PolicyListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Policies" :: Maybe (PolicyListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListPoliciesResponse
 ```
 
 Constructs ListPoliciesResponse's fields from required parameters
@@ -5352,7 +5352,7 @@ Constructs ListPoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListPolicyVersionsRequest
-  = ListPolicyVersionsRequest { "PolicyArn" :: ArnType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListPolicyVersionsRequest { "PolicyArn" :: ArnType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5375,7 +5375,7 @@ Constructs ListPolicyVersionsRequest from required parameters
 #### `newListPolicyVersionsRequest'`
 
 ``` purescript
-newListPolicyVersionsRequest' :: ArnType' -> ({ "PolicyArn" :: ArnType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PolicyArn" :: ArnType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListPolicyVersionsRequest
+newListPolicyVersionsRequest' :: ArnType' -> ({ "PolicyArn" :: ArnType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PolicyArn" :: ArnType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListPolicyVersionsRequest
 ```
 
 Constructs ListPolicyVersionsRequest's fields from required parameters
@@ -5384,7 +5384,7 @@ Constructs ListPolicyVersionsRequest's fields from required parameters
 
 ``` purescript
 newtype ListPolicyVersionsResponse
-  = ListPolicyVersionsResponse { "Versions" :: NullOrUndefined (PolicyDocumentVersionListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListPolicyVersionsResponse { "Versions" :: Maybe (PolicyDocumentVersionListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListPolicyVersions</a> request. </p>
@@ -5409,7 +5409,7 @@ Constructs ListPolicyVersionsResponse from required parameters
 #### `newListPolicyVersionsResponse'`
 
 ``` purescript
-newListPolicyVersionsResponse' :: ({ "Versions" :: NullOrUndefined (PolicyDocumentVersionListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Versions" :: NullOrUndefined (PolicyDocumentVersionListType'), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListPolicyVersionsResponse
+newListPolicyVersionsResponse' :: ({ "Versions" :: Maybe (PolicyDocumentVersionListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Versions" :: Maybe (PolicyDocumentVersionListType'), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListPolicyVersionsResponse
 ```
 
 Constructs ListPolicyVersionsResponse's fields from required parameters
@@ -5418,7 +5418,7 @@ Constructs ListPolicyVersionsResponse's fields from required parameters
 
 ``` purescript
 newtype ListRolePoliciesRequest
-  = ListRolePoliciesRequest { "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListRolePoliciesRequest { "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5441,7 +5441,7 @@ Constructs ListRolePoliciesRequest from required parameters
 #### `newListRolePoliciesRequest'`
 
 ``` purescript
-newListRolePoliciesRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "RoleName" :: RoleNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListRolePoliciesRequest
+newListRolePoliciesRequest' :: RoleNameType' -> ({ "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "RoleName" :: RoleNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListRolePoliciesRequest
 ```
 
 Constructs ListRolePoliciesRequest's fields from required parameters
@@ -5450,7 +5450,7 @@ Constructs ListRolePoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListRolePoliciesResponse
-  = ListRolePoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListRolePoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListRolePolicies</a> request. </p>
@@ -5475,7 +5475,7 @@ Constructs ListRolePoliciesResponse from required parameters
 #### `newListRolePoliciesResponse'`
 
 ``` purescript
-newListRolePoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListRolePoliciesResponse
+newListRolePoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListRolePoliciesResponse
 ```
 
 Constructs ListRolePoliciesResponse's fields from required parameters
@@ -5484,7 +5484,7 @@ Constructs ListRolePoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListRolesRequest
-  = ListRolesRequest { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListRolesRequest { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5507,7 +5507,7 @@ Constructs ListRolesRequest from required parameters
 #### `newListRolesRequest'`
 
 ``` purescript
-newListRolesRequest' :: ({ "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListRolesRequest
+newListRolesRequest' :: ({ "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListRolesRequest
 ```
 
 Constructs ListRolesRequest's fields from required parameters
@@ -5516,7 +5516,7 @@ Constructs ListRolesRequest's fields from required parameters
 
 ``` purescript
 newtype ListRolesResponse
-  = ListRolesResponse { "Roles" :: RoleListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListRolesResponse { "Roles" :: RoleListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListRoles</a> request. </p>
@@ -5541,7 +5541,7 @@ Constructs ListRolesResponse from required parameters
 #### `newListRolesResponse'`
 
 ``` purescript
-newListRolesResponse' :: RoleListType' -> ({ "Roles" :: RoleListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Roles" :: RoleListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListRolesResponse
+newListRolesResponse' :: RoleListType' -> ({ "Roles" :: RoleListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Roles" :: RoleListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListRolesResponse
 ```
 
 Constructs ListRolesResponse's fields from required parameters
@@ -5566,7 +5566,7 @@ Encode ListSAMLProvidersRequest
 
 ``` purescript
 newtype ListSAMLProvidersResponse
-  = ListSAMLProvidersResponse { "SAMLProviderList" :: NullOrUndefined (SAMLProviderListType) }
+  = ListSAMLProvidersResponse { "SAMLProviderList" :: Maybe (SAMLProviderListType) }
 ```
 
 <p>Contains the response to a successful <a>ListSAMLProviders</a> request. </p>
@@ -5591,7 +5591,7 @@ Constructs ListSAMLProvidersResponse from required parameters
 #### `newListSAMLProvidersResponse'`
 
 ``` purescript
-newListSAMLProvidersResponse' :: ({ "SAMLProviderList" :: NullOrUndefined (SAMLProviderListType) } -> { "SAMLProviderList" :: NullOrUndefined (SAMLProviderListType) }) -> ListSAMLProvidersResponse
+newListSAMLProvidersResponse' :: ({ "SAMLProviderList" :: Maybe (SAMLProviderListType) } -> { "SAMLProviderList" :: Maybe (SAMLProviderListType) }) -> ListSAMLProvidersResponse
 ```
 
 Constructs ListSAMLProvidersResponse's fields from required parameters
@@ -5600,7 +5600,7 @@ Constructs ListSAMLProvidersResponse's fields from required parameters
 
 ``` purescript
 newtype ListSSHPublicKeysRequest
-  = ListSSHPublicKeysRequest { "UserName" :: NullOrUndefined (UserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListSSHPublicKeysRequest { "UserName" :: Maybe (UserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5623,7 +5623,7 @@ Constructs ListSSHPublicKeysRequest from required parameters
 #### `newListSSHPublicKeysRequest'`
 
 ``` purescript
-newListSSHPublicKeysRequest' :: ({ "UserName" :: NullOrUndefined (UserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: NullOrUndefined (UserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListSSHPublicKeysRequest
+newListSSHPublicKeysRequest' :: ({ "UserName" :: Maybe (UserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: Maybe (UserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListSSHPublicKeysRequest
 ```
 
 Constructs ListSSHPublicKeysRequest's fields from required parameters
@@ -5632,7 +5632,7 @@ Constructs ListSSHPublicKeysRequest's fields from required parameters
 
 ``` purescript
 newtype ListSSHPublicKeysResponse
-  = ListSSHPublicKeysResponse { "SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListSSHPublicKeysResponse { "SSHPublicKeys" :: Maybe (SSHPublicKeyListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListSSHPublicKeys</a> request.</p>
@@ -5657,7 +5657,7 @@ Constructs ListSSHPublicKeysResponse from required parameters
 #### `newListSSHPublicKeysResponse'`
 
 ``` purescript
-newListSSHPublicKeysResponse' :: ({ "SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListSSHPublicKeysResponse
+newListSSHPublicKeysResponse' :: ({ "SSHPublicKeys" :: Maybe (SSHPublicKeyListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "SSHPublicKeys" :: Maybe (SSHPublicKeyListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListSSHPublicKeysResponse
 ```
 
 Constructs ListSSHPublicKeysResponse's fields from required parameters
@@ -5666,7 +5666,7 @@ Constructs ListSSHPublicKeysResponse's fields from required parameters
 
 ``` purescript
 newtype ListServerCertificatesRequest
-  = ListServerCertificatesRequest { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListServerCertificatesRequest { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5689,7 +5689,7 @@ Constructs ListServerCertificatesRequest from required parameters
 #### `newListServerCertificatesRequest'`
 
 ``` purescript
-newListServerCertificatesRequest' :: ({ "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListServerCertificatesRequest
+newListServerCertificatesRequest' :: ({ "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListServerCertificatesRequest
 ```
 
 Constructs ListServerCertificatesRequest's fields from required parameters
@@ -5698,7 +5698,7 @@ Constructs ListServerCertificatesRequest's fields from required parameters
 
 ``` purescript
 newtype ListServerCertificatesResponse
-  = ListServerCertificatesResponse { "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListServerCertificatesResponse { "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListServerCertificates</a> request. </p>
@@ -5723,7 +5723,7 @@ Constructs ListServerCertificatesResponse from required parameters
 #### `newListServerCertificatesResponse'`
 
 ``` purescript
-newListServerCertificatesResponse' :: ServerCertificateMetadataListType' -> ({ "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListServerCertificatesResponse
+newListServerCertificatesResponse' :: ServerCertificateMetadataListType' -> ({ "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "ServerCertificateMetadataList" :: ServerCertificateMetadataListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListServerCertificatesResponse
 ```
 
 Constructs ListServerCertificatesResponse's fields from required parameters
@@ -5732,7 +5732,7 @@ Constructs ListServerCertificatesResponse's fields from required parameters
 
 ``` purescript
 newtype ListServiceSpecificCredentialsRequest
-  = ListServiceSpecificCredentialsRequest { "UserName" :: NullOrUndefined (UserNameType'), "ServiceName" :: NullOrUndefined (ServiceName') }
+  = ListServiceSpecificCredentialsRequest { "UserName" :: Maybe (UserNameType'), "ServiceName" :: Maybe (ServiceName') }
 ```
 
 ##### Instances
@@ -5755,7 +5755,7 @@ Constructs ListServiceSpecificCredentialsRequest from required parameters
 #### `newListServiceSpecificCredentialsRequest'`
 
 ``` purescript
-newListServiceSpecificCredentialsRequest' :: ({ "UserName" :: NullOrUndefined (UserNameType'), "ServiceName" :: NullOrUndefined (ServiceName') } -> { "UserName" :: NullOrUndefined (UserNameType'), "ServiceName" :: NullOrUndefined (ServiceName') }) -> ListServiceSpecificCredentialsRequest
+newListServiceSpecificCredentialsRequest' :: ({ "UserName" :: Maybe (UserNameType'), "ServiceName" :: Maybe (ServiceName') } -> { "UserName" :: Maybe (UserNameType'), "ServiceName" :: Maybe (ServiceName') }) -> ListServiceSpecificCredentialsRequest
 ```
 
 Constructs ListServiceSpecificCredentialsRequest's fields from required parameters
@@ -5764,7 +5764,7 @@ Constructs ListServiceSpecificCredentialsRequest's fields from required paramete
 
 ``` purescript
 newtype ListServiceSpecificCredentialsResponse
-  = ListServiceSpecificCredentialsResponse { "ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType) }
+  = ListServiceSpecificCredentialsResponse { "ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType) }
 ```
 
 ##### Instances
@@ -5787,7 +5787,7 @@ Constructs ListServiceSpecificCredentialsResponse from required parameters
 #### `newListServiceSpecificCredentialsResponse'`
 
 ``` purescript
-newListServiceSpecificCredentialsResponse' :: ({ "ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType) } -> { "ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType) }) -> ListServiceSpecificCredentialsResponse
+newListServiceSpecificCredentialsResponse' :: ({ "ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType) } -> { "ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType) }) -> ListServiceSpecificCredentialsResponse
 ```
 
 Constructs ListServiceSpecificCredentialsResponse's fields from required parameters
@@ -5796,7 +5796,7 @@ Constructs ListServiceSpecificCredentialsResponse's fields from required paramet
 
 ``` purescript
 newtype ListSigningCertificatesRequest
-  = ListSigningCertificatesRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListSigningCertificatesRequest { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5819,7 +5819,7 @@ Constructs ListSigningCertificatesRequest from required parameters
 #### `newListSigningCertificatesRequest'`
 
 ``` purescript
-newListSigningCertificatesRequest' :: ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListSigningCertificatesRequest
+newListSigningCertificatesRequest' :: ({ "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: Maybe (ExistingUserNameType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListSigningCertificatesRequest
 ```
 
 Constructs ListSigningCertificatesRequest's fields from required parameters
@@ -5828,7 +5828,7 @@ Constructs ListSigningCertificatesRequest's fields from required parameters
 
 ``` purescript
 newtype ListSigningCertificatesResponse
-  = ListSigningCertificatesResponse { "Certificates" :: CertificateListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListSigningCertificatesResponse { "Certificates" :: CertificateListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListSigningCertificates</a> request. </p>
@@ -5853,7 +5853,7 @@ Constructs ListSigningCertificatesResponse from required parameters
 #### `newListSigningCertificatesResponse'`
 
 ``` purescript
-newListSigningCertificatesResponse' :: CertificateListType' -> ({ "Certificates" :: CertificateListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Certificates" :: CertificateListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListSigningCertificatesResponse
+newListSigningCertificatesResponse' :: CertificateListType' -> ({ "Certificates" :: CertificateListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Certificates" :: CertificateListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListSigningCertificatesResponse
 ```
 
 Constructs ListSigningCertificatesResponse's fields from required parameters
@@ -5862,7 +5862,7 @@ Constructs ListSigningCertificatesResponse's fields from required parameters
 
 ``` purescript
 newtype ListUserPoliciesRequest
-  = ListUserPoliciesRequest { "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListUserPoliciesRequest { "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5885,7 +5885,7 @@ Constructs ListUserPoliciesRequest from required parameters
 #### `newListUserPoliciesRequest'`
 
 ``` purescript
-newListUserPoliciesRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "UserName" :: ExistingUserNameType', "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListUserPoliciesRequest
+newListUserPoliciesRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "UserName" :: ExistingUserNameType', "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListUserPoliciesRequest
 ```
 
 Constructs ListUserPoliciesRequest's fields from required parameters
@@ -5894,7 +5894,7 @@ Constructs ListUserPoliciesRequest's fields from required parameters
 
 ``` purescript
 newtype ListUserPoliciesResponse
-  = ListUserPoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListUserPoliciesResponse { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListUserPolicies</a> request. </p>
@@ -5919,7 +5919,7 @@ Constructs ListUserPoliciesResponse from required parameters
 #### `newListUserPoliciesResponse'`
 
 ``` purescript
-newListUserPoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListUserPoliciesResponse
+newListUserPoliciesResponse' :: PolicyNameListType' -> ({ "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "PolicyNames" :: PolicyNameListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListUserPoliciesResponse
 ```
 
 Constructs ListUserPoliciesResponse's fields from required parameters
@@ -5928,7 +5928,7 @@ Constructs ListUserPoliciesResponse's fields from required parameters
 
 ``` purescript
 newtype ListUsersRequest
-  = ListUsersRequest { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListUsersRequest { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -5951,7 +5951,7 @@ Constructs ListUsersRequest from required parameters
 #### `newListUsersRequest'`
 
 ``` purescript
-newListUsersRequest' :: ({ "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "PathPrefix" :: NullOrUndefined (PathPrefixType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListUsersRequest
+newListUsersRequest' :: ({ "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "PathPrefix" :: Maybe (PathPrefixType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListUsersRequest
 ```
 
 Constructs ListUsersRequest's fields from required parameters
@@ -5960,7 +5960,7 @@ Constructs ListUsersRequest's fields from required parameters
 
 ``` purescript
 newtype ListUsersResponse
-  = ListUsersResponse { "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListUsersResponse { "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListUsers</a> request. </p>
@@ -5985,7 +5985,7 @@ Constructs ListUsersResponse from required parameters
 #### `newListUsersResponse'`
 
 ``` purescript
-newListUsersResponse' :: UserListType' -> ({ "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "Users" :: UserListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListUsersResponse
+newListUsersResponse' :: UserListType' -> ({ "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "Users" :: UserListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListUsersResponse
 ```
 
 Constructs ListUsersResponse's fields from required parameters
@@ -5994,7 +5994,7 @@ Constructs ListUsersResponse's fields from required parameters
 
 ``` purescript
 newtype ListVirtualMFADevicesRequest
-  = ListVirtualMFADevicesRequest { "AssignmentStatus" :: NullOrUndefined (AssignmentStatusType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }
+  = ListVirtualMFADevicesRequest { "AssignmentStatus" :: Maybe (AssignmentStatusType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }
 ```
 
 ##### Instances
@@ -6017,7 +6017,7 @@ Constructs ListVirtualMFADevicesRequest from required parameters
 #### `newListVirtualMFADevicesRequest'`
 
 ``` purescript
-newListVirtualMFADevicesRequest' :: ({ "AssignmentStatus" :: NullOrUndefined (AssignmentStatusType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') } -> { "AssignmentStatus" :: NullOrUndefined (AssignmentStatusType'), "Marker" :: NullOrUndefined (MarkerType'), "MaxItems" :: NullOrUndefined (MaxItemsType') }) -> ListVirtualMFADevicesRequest
+newListVirtualMFADevicesRequest' :: ({ "AssignmentStatus" :: Maybe (AssignmentStatusType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') } -> { "AssignmentStatus" :: Maybe (AssignmentStatusType'), "Marker" :: Maybe (MarkerType'), "MaxItems" :: Maybe (MaxItemsType') }) -> ListVirtualMFADevicesRequest
 ```
 
 Constructs ListVirtualMFADevicesRequest's fields from required parameters
@@ -6026,7 +6026,7 @@ Constructs ListVirtualMFADevicesRequest's fields from required parameters
 
 ``` purescript
 newtype ListVirtualMFADevicesResponse
-  = ListVirtualMFADevicesResponse { "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = ListVirtualMFADevicesResponse { "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>ListVirtualMFADevices</a> request. </p>
@@ -6051,7 +6051,7 @@ Constructs ListVirtualMFADevicesResponse from required parameters
 #### `newListVirtualMFADevicesResponse'`
 
 ``` purescript
-newListVirtualMFADevicesResponse' :: VirtualMFADeviceListType' -> ({ "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> ListVirtualMFADevicesResponse
+newListVirtualMFADevicesResponse' :: VirtualMFADeviceListType' -> ({ "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "VirtualMFADevices" :: VirtualMFADeviceListType', "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> ListVirtualMFADevicesResponse
 ```
 
 Constructs ListVirtualMFADevicesResponse's fields from required parameters
@@ -6060,7 +6060,7 @@ Constructs ListVirtualMFADevicesResponse's fields from required parameters
 
 ``` purescript
 newtype LoginProfile
-  = LoginProfile { "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') }
+  = LoginProfile { "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: Maybe (BooleanType') }
 ```
 
 <p>Contains the user name and password create date for a user.</p> <p> This data type is used as a response element in the <a>CreateLoginProfile</a> and <a>GetLoginProfile</a> actions. </p>
@@ -6085,7 +6085,7 @@ Constructs LoginProfile from required parameters
 #### `newLoginProfile'`
 
 ``` purescript
-newLoginProfile' :: DateType' -> UserNameType' -> ({ "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') } -> { "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: NullOrUndefined (BooleanType') }) -> LoginProfile
+newLoginProfile' :: DateType' -> UserNameType' -> ({ "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: Maybe (BooleanType') } -> { "UserName" :: UserNameType', "CreateDate" :: DateType', "PasswordResetRequired" :: Maybe (BooleanType') }) -> LoginProfile
 ```
 
 Constructs LoginProfile's fields from required parameters
@@ -6128,7 +6128,7 @@ Constructs MFADevice's fields from required parameters
 
 ``` purescript
 newtype MalformedCertificateException
-  = MalformedCertificateException { message :: NullOrUndefined (MalformedCertificateMessage') }
+  = MalformedCertificateException { message :: Maybe (MalformedCertificateMessage') }
 ```
 
 <p>The request was rejected because the certificate was malformed or expired. The error message describes the specific error.</p>
@@ -6153,7 +6153,7 @@ Constructs MalformedCertificateException from required parameters
 #### `newMalformedCertificateException'`
 
 ``` purescript
-newMalformedCertificateException' :: ({ message :: NullOrUndefined (MalformedCertificateMessage') } -> { message :: NullOrUndefined (MalformedCertificateMessage') }) -> MalformedCertificateException
+newMalformedCertificateException' :: ({ message :: Maybe (MalformedCertificateMessage') } -> { message :: Maybe (MalformedCertificateMessage') }) -> MalformedCertificateException
 ```
 
 Constructs MalformedCertificateException's fields from required parameters
@@ -6162,7 +6162,7 @@ Constructs MalformedCertificateException's fields from required parameters
 
 ``` purescript
 newtype MalformedPolicyDocumentException
-  = MalformedPolicyDocumentException { message :: NullOrUndefined (MalformedPolicyDocumentMessage') }
+  = MalformedPolicyDocumentException { message :: Maybe (MalformedPolicyDocumentMessage') }
 ```
 
 <p>The request was rejected because the policy document was malformed. The error message describes the specific error.</p>
@@ -6187,7 +6187,7 @@ Constructs MalformedPolicyDocumentException from required parameters
 #### `newMalformedPolicyDocumentException'`
 
 ``` purescript
-newMalformedPolicyDocumentException' :: ({ message :: NullOrUndefined (MalformedPolicyDocumentMessage') } -> { message :: NullOrUndefined (MalformedPolicyDocumentMessage') }) -> MalformedPolicyDocumentException
+newMalformedPolicyDocumentException' :: ({ message :: Maybe (MalformedPolicyDocumentMessage') } -> { message :: Maybe (MalformedPolicyDocumentMessage') }) -> MalformedPolicyDocumentException
 ```
 
 Constructs MalformedPolicyDocumentException's fields from required parameters
@@ -6196,7 +6196,7 @@ Constructs MalformedPolicyDocumentException's fields from required parameters
 
 ``` purescript
 newtype ManagedPolicyDetail
-  = ManagedPolicyDetail { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType'), "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType') }
+  = ManagedPolicyDetail { "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType'), "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType') }
 ```
 
 <p>Contains information about a managed policy, including the policy's ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p> <p>For more information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6221,7 +6221,7 @@ Constructs ManagedPolicyDetail from required parameters
 #### `newManagedPolicyDetail'`
 
 ``` purescript
-newManagedPolicyDetail' :: ({ "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType'), "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType') } -> { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType'), "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType') }) -> ManagedPolicyDetail
+newManagedPolicyDetail' :: ({ "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType'), "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType') } -> { "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType'), "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType') }) -> ManagedPolicyDetail
 ```
 
 Constructs ManagedPolicyDetail's fields from required parameters
@@ -6246,7 +6246,7 @@ Encode ManagedPolicyDetailListType
 
 ``` purescript
 newtype NoSuchEntityException
-  = NoSuchEntityException { message :: NullOrUndefined (NoSuchEntityMessage') }
+  = NoSuchEntityException { message :: Maybe (NoSuchEntityMessage') }
 ```
 
 <p>The request was rejected because it referenced an entity that does not exist. The error message describes the entity.</p>
@@ -6271,7 +6271,7 @@ Constructs NoSuchEntityException from required parameters
 #### `newNoSuchEntityException'`
 
 ``` purescript
-newNoSuchEntityException' :: ({ message :: NullOrUndefined (NoSuchEntityMessage') } -> { message :: NullOrUndefined (NoSuchEntityMessage') }) -> NoSuchEntityException
+newNoSuchEntityException' :: ({ message :: Maybe (NoSuchEntityMessage') } -> { message :: Maybe (NoSuchEntityMessage') }) -> NoSuchEntityException
 ```
 
 Constructs NoSuchEntityException's fields from required parameters
@@ -6280,7 +6280,7 @@ Constructs NoSuchEntityException's fields from required parameters
 
 ``` purescript
 newtype OpenIDConnectProviderListEntry
-  = OpenIDConnectProviderListEntry { "Arn" :: NullOrUndefined (ArnType') }
+  = OpenIDConnectProviderListEntry { "Arn" :: Maybe (ArnType') }
 ```
 
 <p>Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.</p>
@@ -6305,7 +6305,7 @@ Constructs OpenIDConnectProviderListEntry from required parameters
 #### `newOpenIDConnectProviderListEntry'`
 
 ``` purescript
-newOpenIDConnectProviderListEntry' :: ({ "Arn" :: NullOrUndefined (ArnType') } -> { "Arn" :: NullOrUndefined (ArnType') }) -> OpenIDConnectProviderListEntry
+newOpenIDConnectProviderListEntry' :: ({ "Arn" :: Maybe (ArnType') } -> { "Arn" :: Maybe (ArnType') }) -> OpenIDConnectProviderListEntry
 ```
 
 Constructs OpenIDConnectProviderListEntry's fields from required parameters
@@ -6350,7 +6350,7 @@ Encode OpenIDConnectProviderUrlType
 
 ``` purescript
 newtype OrganizationsDecisionDetail
-  = OrganizationsDecisionDetail { "AllowedByOrganizations" :: NullOrUndefined (BooleanType') }
+  = OrganizationsDecisionDetail { "AllowedByOrganizations" :: Maybe (BooleanType') }
 ```
 
 <p>Contains information about AWS Organizations's affect on a policy simulation.</p>
@@ -6375,7 +6375,7 @@ Constructs OrganizationsDecisionDetail from required parameters
 #### `newOrganizationsDecisionDetail'`
 
 ``` purescript
-newOrganizationsDecisionDetail' :: ({ "AllowedByOrganizations" :: NullOrUndefined (BooleanType') } -> { "AllowedByOrganizations" :: NullOrUndefined (BooleanType') }) -> OrganizationsDecisionDetail
+newOrganizationsDecisionDetail' :: ({ "AllowedByOrganizations" :: Maybe (BooleanType') } -> { "AllowedByOrganizations" :: Maybe (BooleanType') }) -> OrganizationsDecisionDetail
 ```
 
 Constructs OrganizationsDecisionDetail's fields from required parameters
@@ -6384,7 +6384,7 @@ Constructs OrganizationsDecisionDetail's fields from required parameters
 
 ``` purescript
 newtype PasswordPolicy
-  = PasswordPolicy { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "ExpirePasswords" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') }
+  = PasswordPolicy { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "ExpirePasswords" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') }
 ```
 
 <p>Contains information about the account password policy.</p> <p> This data type is used as a response element in the <a>GetAccountPasswordPolicy</a> action. </p>
@@ -6409,7 +6409,7 @@ Constructs PasswordPolicy from required parameters
 #### `newPasswordPolicy'`
 
 ``` purescript
-newPasswordPolicy' :: ({ "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "ExpirePasswords" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') } -> { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "ExpirePasswords" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') }) -> PasswordPolicy
+newPasswordPolicy' :: ({ "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "ExpirePasswords" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') } -> { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "ExpirePasswords" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') }) -> PasswordPolicy
 ```
 
 Constructs PasswordPolicy's fields from required parameters
@@ -6418,7 +6418,7 @@ Constructs PasswordPolicy's fields from required parameters
 
 ``` purescript
 newtype PasswordPolicyViolationException
-  = PasswordPolicyViolationException { message :: NullOrUndefined (PasswordPolicyViolationMessage') }
+  = PasswordPolicyViolationException { message :: Maybe (PasswordPolicyViolationMessage') }
 ```
 
 <p>The request was rejected because the provided password did not meet the requirements imposed by the account password policy.</p>
@@ -6443,7 +6443,7 @@ Constructs PasswordPolicyViolationException from required parameters
 #### `newPasswordPolicyViolationException'`
 
 ``` purescript
-newPasswordPolicyViolationException' :: ({ message :: NullOrUndefined (PasswordPolicyViolationMessage') } -> { message :: NullOrUndefined (PasswordPolicyViolationMessage') }) -> PasswordPolicyViolationException
+newPasswordPolicyViolationException' :: ({ message :: Maybe (PasswordPolicyViolationMessage') } -> { message :: Maybe (PasswordPolicyViolationMessage') }) -> PasswordPolicyViolationException
 ```
 
 Constructs PasswordPolicyViolationException's fields from required parameters
@@ -6452,7 +6452,7 @@ Constructs PasswordPolicyViolationException's fields from required parameters
 
 ``` purescript
 newtype Policy
-  = Policy { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType') }
+  = Policy { "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicy</a>, <a>GetPolicy</a>, and <a>ListPolicies</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6477,7 +6477,7 @@ Constructs Policy from required parameters
 #### `newPolicy'`
 
 ``` purescript
-newPolicy' :: ({ "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType') } -> { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "Path" :: NullOrUndefined (PolicyPathType'), "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType'), "AttachmentCount" :: NullOrUndefined (AttachmentCountType'), "IsAttachable" :: NullOrUndefined (BooleanType'), "Description" :: NullOrUndefined (PolicyDescriptionType'), "CreateDate" :: NullOrUndefined (DateType'), "UpdateDate" :: NullOrUndefined (DateType') }) -> Policy
+newPolicy' :: ({ "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType') } -> { "PolicyName" :: Maybe (PolicyNameType'), "PolicyId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "Path" :: Maybe (PolicyPathType'), "DefaultVersionId" :: Maybe (PolicyVersionIdType'), "AttachmentCount" :: Maybe (AttachmentCountType'), "IsAttachable" :: Maybe (BooleanType'), "Description" :: Maybe (PolicyDescriptionType'), "CreateDate" :: Maybe (DateType'), "UpdateDate" :: Maybe (DateType') }) -> Policy
 ```
 
 Constructs Policy's fields from required parameters
@@ -6486,7 +6486,7 @@ Constructs Policy's fields from required parameters
 
 ``` purescript
 newtype PolicyDetail
-  = PolicyDetail { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyDocument" :: NullOrUndefined (PolicyDocumentType') }
+  = PolicyDetail { "PolicyName" :: Maybe (PolicyNameType'), "PolicyDocument" :: Maybe (PolicyDocumentType') }
 ```
 
 <p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
@@ -6511,7 +6511,7 @@ Constructs PolicyDetail from required parameters
 #### `newPolicyDetail'`
 
 ``` purescript
-newPolicyDetail' :: ({ "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyDocument" :: NullOrUndefined (PolicyDocumentType') } -> { "PolicyName" :: NullOrUndefined (PolicyNameType'), "PolicyDocument" :: NullOrUndefined (PolicyDocumentType') }) -> PolicyDetail
+newPolicyDetail' :: ({ "PolicyName" :: Maybe (PolicyNameType'), "PolicyDocument" :: Maybe (PolicyDocumentType') } -> { "PolicyName" :: Maybe (PolicyNameType'), "PolicyDocument" :: Maybe (PolicyDocumentType') }) -> PolicyDetail
 ```
 
 Constructs PolicyDetail's fields from required parameters
@@ -6536,7 +6536,7 @@ Encode PolicyEvaluationDecisionType
 
 ``` purescript
 newtype PolicyEvaluationException
-  = PolicyEvaluationException { message :: NullOrUndefined (PolicyEvaluationErrorMessage') }
+  = PolicyEvaluationException { message :: Maybe (PolicyEvaluationErrorMessage') }
 ```
 
 <p>The request failed because a provided policy could not be successfully evaluated. An additional detailed message indicates the source of the failure.</p>
@@ -6561,7 +6561,7 @@ Constructs PolicyEvaluationException from required parameters
 #### `newPolicyEvaluationException'`
 
 ``` purescript
-newPolicyEvaluationException' :: ({ message :: NullOrUndefined (PolicyEvaluationErrorMessage') } -> { message :: NullOrUndefined (PolicyEvaluationErrorMessage') }) -> PolicyEvaluationException
+newPolicyEvaluationException' :: ({ message :: Maybe (PolicyEvaluationErrorMessage') } -> { message :: Maybe (PolicyEvaluationErrorMessage') }) -> PolicyEvaluationException
 ```
 
 Constructs PolicyEvaluationException's fields from required parameters
@@ -6570,7 +6570,7 @@ Constructs PolicyEvaluationException's fields from required parameters
 
 ``` purescript
 newtype PolicyGroup
-  = PolicyGroup { "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType') }
+  = PolicyGroup { "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType') }
 ```
 
 <p>Contains information about a group that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6595,7 +6595,7 @@ Constructs PolicyGroup from required parameters
 #### `newPolicyGroup'`
 
 ``` purescript
-newPolicyGroup' :: ({ "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType') } -> { "GroupName" :: NullOrUndefined (GroupNameType'), "GroupId" :: NullOrUndefined (IdType') }) -> PolicyGroup
+newPolicyGroup' :: ({ "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType') } -> { "GroupName" :: Maybe (GroupNameType'), "GroupId" :: Maybe (IdType') }) -> PolicyGroup
 ```
 
 Constructs PolicyGroup's fields from required parameters
@@ -6636,7 +6636,7 @@ Encode PolicyIdentifierType
 
 ``` purescript
 newtype PolicyNotAttachableException
-  = PolicyNotAttachableException { message :: NullOrUndefined (PolicyNotAttachableMessage') }
+  = PolicyNotAttachableException { message :: Maybe (PolicyNotAttachableMessage') }
 ```
 
 <p>The request failed because AWS service role policies can only be attached to the service-linked role for that service.</p>
@@ -6661,7 +6661,7 @@ Constructs PolicyNotAttachableException from required parameters
 #### `newPolicyNotAttachableException'`
 
 ``` purescript
-newPolicyNotAttachableException' :: ({ message :: NullOrUndefined (PolicyNotAttachableMessage') } -> { message :: NullOrUndefined (PolicyNotAttachableMessage') }) -> PolicyNotAttachableException
+newPolicyNotAttachableException' :: ({ message :: Maybe (PolicyNotAttachableMessage') } -> { message :: Maybe (PolicyNotAttachableMessage') }) -> PolicyNotAttachableException
 ```
 
 Constructs PolicyNotAttachableException's fields from required parameters
@@ -6670,7 +6670,7 @@ Constructs PolicyNotAttachableException's fields from required parameters
 
 ``` purescript
 newtype PolicyRole
-  = PolicyRole { "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType') }
+  = PolicyRole { "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType') }
 ```
 
 <p>Contains information about a role that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6695,7 +6695,7 @@ Constructs PolicyRole from required parameters
 #### `newPolicyRole'`
 
 ``` purescript
-newPolicyRole' :: ({ "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType') } -> { "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType') }) -> PolicyRole
+newPolicyRole' :: ({ "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType') } -> { "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType') }) -> PolicyRole
 ```
 
 Constructs PolicyRole's fields from required parameters
@@ -6736,7 +6736,7 @@ Encode PolicySourceType
 
 ``` purescript
 newtype PolicyUser
-  = PolicyUser { "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType') }
+  = PolicyUser { "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType') }
 ```
 
 <p>Contains information about a user that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6761,7 +6761,7 @@ Constructs PolicyUser from required parameters
 #### `newPolicyUser'`
 
 ``` purescript
-newPolicyUser' :: ({ "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType') } -> { "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType') }) -> PolicyUser
+newPolicyUser' :: ({ "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType') } -> { "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType') }) -> PolicyUser
 ```
 
 Constructs PolicyUser's fields from required parameters
@@ -6786,7 +6786,7 @@ Encode PolicyUserListType
 
 ``` purescript
 newtype PolicyVersion
-  = PolicyVersion { "Document" :: NullOrUndefined (PolicyDocumentType'), "VersionId" :: NullOrUndefined (PolicyVersionIdType'), "IsDefaultVersion" :: NullOrUndefined (BooleanType'), "CreateDate" :: NullOrUndefined (DateType') }
+  = PolicyVersion { "Document" :: Maybe (PolicyDocumentType'), "VersionId" :: Maybe (PolicyVersionIdType'), "IsDefaultVersion" :: Maybe (BooleanType'), "CreateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
@@ -6811,7 +6811,7 @@ Constructs PolicyVersion from required parameters
 #### `newPolicyVersion'`
 
 ``` purescript
-newPolicyVersion' :: ({ "Document" :: NullOrUndefined (PolicyDocumentType'), "VersionId" :: NullOrUndefined (PolicyVersionIdType'), "IsDefaultVersion" :: NullOrUndefined (BooleanType'), "CreateDate" :: NullOrUndefined (DateType') } -> { "Document" :: NullOrUndefined (PolicyDocumentType'), "VersionId" :: NullOrUndefined (PolicyVersionIdType'), "IsDefaultVersion" :: NullOrUndefined (BooleanType'), "CreateDate" :: NullOrUndefined (DateType') }) -> PolicyVersion
+newPolicyVersion' :: ({ "Document" :: Maybe (PolicyDocumentType'), "VersionId" :: Maybe (PolicyVersionIdType'), "IsDefaultVersion" :: Maybe (BooleanType'), "CreateDate" :: Maybe (DateType') } -> { "Document" :: Maybe (PolicyDocumentType'), "VersionId" :: Maybe (PolicyVersionIdType'), "IsDefaultVersion" :: Maybe (BooleanType'), "CreateDate" :: Maybe (DateType') }) -> PolicyVersion
 ```
 
 Constructs PolicyVersion's fields from required parameters
@@ -6820,7 +6820,7 @@ Constructs PolicyVersion's fields from required parameters
 
 ``` purescript
 newtype Position
-  = Position { "Line" :: NullOrUndefined (LineNumber), "Column" :: NullOrUndefined (ColumnNumber) }
+  = Position { "Line" :: Maybe (LineNumber), "Column" :: Maybe (ColumnNumber) }
 ```
 
 <p>Contains the row and column of a location of a <code>Statement</code> element in a policy document.</p> <p>This data type is used as a member of the <code> <a>Statement</a> </code> type.</p>
@@ -6845,7 +6845,7 @@ Constructs Position from required parameters
 #### `newPosition'`
 
 ``` purescript
-newPosition' :: ({ "Line" :: NullOrUndefined (LineNumber), "Column" :: NullOrUndefined (ColumnNumber) } -> { "Line" :: NullOrUndefined (LineNumber), "Column" :: NullOrUndefined (ColumnNumber) }) -> Position
+newPosition' :: ({ "Line" :: Maybe (LineNumber), "Column" :: Maybe (ColumnNumber) } -> { "Line" :: Maybe (LineNumber), "Column" :: Maybe (ColumnNumber) }) -> Position
 ```
 
 Constructs Position's fields from required parameters
@@ -7142,7 +7142,7 @@ Encode ReportStateType
 
 ``` purescript
 newtype ResetServiceSpecificCredentialRequest
-  = ResetServiceSpecificCredentialRequest { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }
+  = ResetServiceSpecificCredentialRequest { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }
 ```
 
 ##### Instances
@@ -7165,7 +7165,7 @@ Constructs ResetServiceSpecificCredentialRequest from required parameters
 #### `newResetServiceSpecificCredentialRequest'`
 
 ``` purescript
-newResetServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ({ "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' } -> { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }) -> ResetServiceSpecificCredentialRequest
+newResetServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ({ "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' } -> { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId' }) -> ResetServiceSpecificCredentialRequest
 ```
 
 Constructs ResetServiceSpecificCredentialRequest's fields from required parameters
@@ -7174,7 +7174,7 @@ Constructs ResetServiceSpecificCredentialRequest's fields from required paramete
 
 ``` purescript
 newtype ResetServiceSpecificCredentialResponse
-  = ResetServiceSpecificCredentialResponse { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) }
+  = ResetServiceSpecificCredentialResponse { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) }
 ```
 
 ##### Instances
@@ -7197,7 +7197,7 @@ Constructs ResetServiceSpecificCredentialResponse from required parameters
 #### `newResetServiceSpecificCredentialResponse'`
 
 ``` purescript
-newResetServiceSpecificCredentialResponse' :: ({ "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } -> { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) }) -> ResetServiceSpecificCredentialResponse
+newResetServiceSpecificCredentialResponse' :: ({ "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } -> { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) }) -> ResetServiceSpecificCredentialResponse
 ```
 
 Constructs ResetServiceSpecificCredentialResponse's fields from required parameters
@@ -7254,7 +7254,7 @@ Encode ResourceNameType
 
 ``` purescript
 newtype ResourceSpecificResult
-  = ResourceSpecificResult { "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) }
+  = ResourceSpecificResult { "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) }
 ```
 
 <p>Contains the result of the simulation of a single API action call on a single resource.</p> <p>This data type is used by a member of the <a>EvaluationResult</a> data type.</p>
@@ -7279,7 +7279,7 @@ Constructs ResourceSpecificResult from required parameters
 #### `newResourceSpecificResult'`
 
 ``` purescript
-newResourceSpecificResult' :: PolicyEvaluationDecisionType -> ResourceNameType -> ({ "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) } -> { "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: NullOrUndefined (StatementListType), "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType), "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) }) -> ResourceSpecificResult
+newResourceSpecificResult' :: PolicyEvaluationDecisionType -> ResourceNameType -> ({ "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) } -> { "EvalResourceName" :: ResourceNameType, "EvalResourceDecision" :: PolicyEvaluationDecisionType, "MatchedStatements" :: Maybe (StatementListType), "MissingContextValues" :: Maybe (ContextKeyNamesResultListType), "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) }) -> ResourceSpecificResult
 ```
 
 Constructs ResourceSpecificResult's fields from required parameters
@@ -7336,7 +7336,7 @@ Constructs ResyncMFADeviceRequest's fields from required parameters
 
 ``` purescript
 newtype Role
-  = Role { "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "Description" :: NullOrUndefined (RoleDescriptionType') }
+  = Role { "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "Description" :: Maybe (RoleDescriptionType') }
 ```
 
 <p>Contains information about an IAM role. This structure is returned as a response element in several APIs that interact with roles.</p>
@@ -7361,7 +7361,7 @@ Constructs Role from required parameters
 #### `newRole'`
 
 ``` purescript
-newRole' :: ArnType' -> DateType' -> PathType' -> IdType' -> RoleNameType' -> ({ "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "Description" :: NullOrUndefined (RoleDescriptionType') } -> { "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "Description" :: NullOrUndefined (RoleDescriptionType') }) -> Role
+newRole' :: ArnType' -> DateType' -> PathType' -> IdType' -> RoleNameType' -> ({ "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "Description" :: Maybe (RoleDescriptionType') } -> { "Path" :: PathType', "RoleName" :: RoleNameType', "RoleId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "Description" :: Maybe (RoleDescriptionType') }) -> Role
 ```
 
 Constructs Role's fields from required parameters
@@ -7370,7 +7370,7 @@ Constructs Role's fields from required parameters
 
 ``` purescript
 newtype RoleDetail
-  = RoleDetail { "Path" :: NullOrUndefined (PathType'), "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType'), "RolePolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }
+  = RoleDetail { "Path" :: Maybe (PathType'), "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "InstanceProfileList" :: Maybe (InstanceProfileListType'), "RolePolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }
 ```
 
 <p>Contains information about an IAM role, including all of the role's policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
@@ -7395,7 +7395,7 @@ Constructs RoleDetail from required parameters
 #### `newRoleDetail'`
 
 ``` purescript
-newRoleDetail' :: ({ "Path" :: NullOrUndefined (PathType'), "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType'), "RolePolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> { "Path" :: NullOrUndefined (PathType'), "RoleName" :: NullOrUndefined (RoleNameType'), "RoleId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType'), "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType'), "RolePolicyList" :: NullOrUndefined (PolicyDetailListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }) -> RoleDetail
+newRoleDetail' :: ({ "Path" :: Maybe (PathType'), "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "InstanceProfileList" :: Maybe (InstanceProfileListType'), "RolePolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> { "Path" :: Maybe (PathType'), "RoleName" :: Maybe (RoleNameType'), "RoleId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType'), "InstanceProfileList" :: Maybe (InstanceProfileListType'), "RolePolicyList" :: Maybe (PolicyDetailListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }) -> RoleDetail
 ```
 
 Constructs RoleDetail's fields from required parameters
@@ -7420,7 +7420,7 @@ Encode RoleUsageListType
 
 ``` purescript
 newtype RoleUsageType
-  = RoleUsageType { "Region" :: NullOrUndefined (RegionNameType), "Resources" :: NullOrUndefined (ArnListType) }
+  = RoleUsageType { "Region" :: Maybe (RegionNameType), "Resources" :: Maybe (ArnListType) }
 ```
 
 <p>An object that contains details about how a service-linked role is used.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
@@ -7445,7 +7445,7 @@ Constructs RoleUsageType from required parameters
 #### `newRoleUsageType'`
 
 ``` purescript
-newRoleUsageType' :: ({ "Region" :: NullOrUndefined (RegionNameType), "Resources" :: NullOrUndefined (ArnListType) } -> { "Region" :: NullOrUndefined (RegionNameType), "Resources" :: NullOrUndefined (ArnListType) }) -> RoleUsageType
+newRoleUsageType' :: ({ "Region" :: Maybe (RegionNameType), "Resources" :: Maybe (ArnListType) } -> { "Region" :: Maybe (RegionNameType), "Resources" :: Maybe (ArnListType) }) -> RoleUsageType
 ```
 
 Constructs RoleUsageType's fields from required parameters
@@ -7470,7 +7470,7 @@ Encode SAMLMetadataDocumentType
 
 ``` purescript
 newtype SAMLProviderListEntry
-  = SAMLProviderListEntry { "Arn" :: NullOrUndefined (ArnType'), "ValidUntil" :: NullOrUndefined (DateType'), "CreateDate" :: NullOrUndefined (DateType') }
+  = SAMLProviderListEntry { "Arn" :: Maybe (ArnType'), "ValidUntil" :: Maybe (DateType'), "CreateDate" :: Maybe (DateType') }
 ```
 
 <p>Contains the list of SAML providers for this account.</p>
@@ -7495,7 +7495,7 @@ Constructs SAMLProviderListEntry from required parameters
 #### `newSAMLProviderListEntry'`
 
 ``` purescript
-newSAMLProviderListEntry' :: ({ "Arn" :: NullOrUndefined (ArnType'), "ValidUntil" :: NullOrUndefined (DateType'), "CreateDate" :: NullOrUndefined (DateType') } -> { "Arn" :: NullOrUndefined (ArnType'), "ValidUntil" :: NullOrUndefined (DateType'), "CreateDate" :: NullOrUndefined (DateType') }) -> SAMLProviderListEntry
+newSAMLProviderListEntry' :: ({ "Arn" :: Maybe (ArnType'), "ValidUntil" :: Maybe (DateType'), "CreateDate" :: Maybe (DateType') } -> { "Arn" :: Maybe (ArnType'), "ValidUntil" :: Maybe (DateType'), "CreateDate" :: Maybe (DateType') }) -> SAMLProviderListEntry
 ```
 
 Constructs SAMLProviderListEntry's fields from required parameters
@@ -7536,7 +7536,7 @@ Encode SAMLProviderNameType
 
 ``` purescript
 newtype SSHPublicKey
-  = SSHPublicKey { "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') }
+  = SSHPublicKey { "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about an SSH public key.</p> <p>This data type is used as a response element in the <a>GetSSHPublicKey</a> and <a>UploadSSHPublicKey</a> actions. </p>
@@ -7561,7 +7561,7 @@ Constructs SSHPublicKey from required parameters
 #### `newSSHPublicKey'`
 
 ``` purescript
-newSSHPublicKey' :: PublicKeyFingerprintType' -> PublicKeyMaterialType' -> PublicKeyIdType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') } -> { "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') }) -> SSHPublicKey
+newSSHPublicKey' :: PublicKeyFingerprintType' -> PublicKeyMaterialType' -> PublicKeyIdType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') } -> { "UserName" :: UserNameType', "SSHPublicKeyId" :: PublicKeyIdType', "Fingerprint" :: PublicKeyFingerprintType', "SSHPublicKeyBody" :: PublicKeyMaterialType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') }) -> SSHPublicKey
 ```
 
 Constructs SSHPublicKey's fields from required parameters
@@ -7620,7 +7620,7 @@ Constructs SSHPublicKeyMetadata's fields from required parameters
 
 ``` purescript
 newtype ServerCertificate
-  = ServerCertificate { "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') }
+  = ServerCertificate { "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: Maybe (CertificateChainType') }
 ```
 
 <p>Contains information about a server certificate.</p> <p> This data type is used as a response element in the <a>GetServerCertificate</a> action. </p>
@@ -7645,7 +7645,7 @@ Constructs ServerCertificate from required parameters
 #### `newServerCertificate'`
 
 ``` purescript
-newServerCertificate' :: CertificateBodyType' -> ServerCertificateMetadata -> ({ "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') } -> { "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') }) -> ServerCertificate
+newServerCertificate' :: CertificateBodyType' -> ServerCertificateMetadata -> ({ "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: Maybe (CertificateChainType') } -> { "ServerCertificateMetadata" :: ServerCertificateMetadata, "CertificateBody" :: CertificateBodyType', "CertificateChain" :: Maybe (CertificateChainType') }) -> ServerCertificate
 ```
 
 Constructs ServerCertificate's fields from required parameters
@@ -7654,7 +7654,7 @@ Constructs ServerCertificate's fields from required parameters
 
 ``` purescript
 newtype ServerCertificateMetadata
-  = ServerCertificateMetadata { "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: NullOrUndefined (DateType'), "Expiration" :: NullOrUndefined (DateType') }
+  = ServerCertificateMetadata { "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: Maybe (DateType'), "Expiration" :: Maybe (DateType') }
 ```
 
 <p>Contains information about a server certificate without its certificate body, certificate chain, and private key.</p> <p> This data type is used as a response element in the <a>UploadServerCertificate</a> and <a>ListServerCertificates</a> actions. </p>
@@ -7679,7 +7679,7 @@ Constructs ServerCertificateMetadata from required parameters
 #### `newServerCertificateMetadata'`
 
 ``` purescript
-newServerCertificateMetadata' :: ArnType' -> PathType' -> IdType' -> ServerCertificateNameType' -> ({ "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: NullOrUndefined (DateType'), "Expiration" :: NullOrUndefined (DateType') } -> { "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: NullOrUndefined (DateType'), "Expiration" :: NullOrUndefined (DateType') }) -> ServerCertificateMetadata
+newServerCertificateMetadata' :: ArnType' -> PathType' -> IdType' -> ServerCertificateNameType' -> ({ "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: Maybe (DateType'), "Expiration" :: Maybe (DateType') } -> { "Path" :: PathType', "ServerCertificateName" :: ServerCertificateNameType', "ServerCertificateId" :: IdType', "Arn" :: ArnType', "UploadDate" :: Maybe (DateType'), "Expiration" :: Maybe (DateType') }) -> ServerCertificateMetadata
 ```
 
 Constructs ServerCertificateMetadata's fields from required parameters
@@ -7688,7 +7688,7 @@ Constructs ServerCertificateMetadata's fields from required parameters
 
 ``` purescript
 newtype ServiceFailureException
-  = ServiceFailureException { message :: NullOrUndefined (ServiceFailureExceptionMessage') }
+  = ServiceFailureException { message :: Maybe (ServiceFailureExceptionMessage') }
 ```
 
 <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -7713,7 +7713,7 @@ Constructs ServiceFailureException from required parameters
 #### `newServiceFailureException'`
 
 ``` purescript
-newServiceFailureException' :: ({ message :: NullOrUndefined (ServiceFailureExceptionMessage') } -> { message :: NullOrUndefined (ServiceFailureExceptionMessage') }) -> ServiceFailureException
+newServiceFailureException' :: ({ message :: Maybe (ServiceFailureExceptionMessage') } -> { message :: Maybe (ServiceFailureExceptionMessage') }) -> ServiceFailureException
 ```
 
 Constructs ServiceFailureException's fields from required parameters
@@ -7722,7 +7722,7 @@ Constructs ServiceFailureException's fields from required parameters
 
 ``` purescript
 newtype ServiceNotSupportedException
-  = ServiceNotSupportedException { message :: NullOrUndefined (ServiceNotSupportedMessage') }
+  = ServiceNotSupportedException { message :: Maybe (ServiceNotSupportedMessage') }
 ```
 
 <p>The specified service does not support service-specific credentials.</p>
@@ -7747,7 +7747,7 @@ Constructs ServiceNotSupportedException from required parameters
 #### `newServiceNotSupportedException'`
 
 ``` purescript
-newServiceNotSupportedException' :: ({ message :: NullOrUndefined (ServiceNotSupportedMessage') } -> { message :: NullOrUndefined (ServiceNotSupportedMessage') }) -> ServiceNotSupportedException
+newServiceNotSupportedException' :: ({ message :: Maybe (ServiceNotSupportedMessage') } -> { message :: Maybe (ServiceNotSupportedMessage') }) -> ServiceNotSupportedException
 ```
 
 Constructs ServiceNotSupportedException's fields from required parameters
@@ -7872,7 +7872,7 @@ Constructs SetDefaultPolicyVersionRequest's fields from required parameters
 
 ``` purescript
 newtype SigningCertificate
-  = SigningCertificate { "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') }
+  = SigningCertificate { "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about an X.509 signing certificate.</p> <p>This data type is used as a response element in the <a>UploadSigningCertificate</a> and <a>ListSigningCertificates</a> actions. </p>
@@ -7897,7 +7897,7 @@ Constructs SigningCertificate from required parameters
 #### `newSigningCertificate'`
 
 ``` purescript
-newSigningCertificate' :: CertificateBodyType' -> CertificateIdType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') } -> { "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: NullOrUndefined (DateType') }) -> SigningCertificate
+newSigningCertificate' :: CertificateBodyType' -> CertificateIdType' -> StatusType' -> UserNameType' -> ({ "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') } -> { "UserName" :: UserNameType', "CertificateId" :: CertificateIdType', "CertificateBody" :: CertificateBodyType', "Status" :: StatusType', "UploadDate" :: Maybe (DateType') }) -> SigningCertificate
 ```
 
 Constructs SigningCertificate's fields from required parameters
@@ -7906,7 +7906,7 @@ Constructs SigningCertificate's fields from required parameters
 
 ``` purescript
 newtype SimulateCustomPolicyRequest
-  = SimulateCustomPolicyRequest { "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = SimulateCustomPolicyRequest { "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 ##### Instances
@@ -7929,7 +7929,7 @@ Constructs SimulateCustomPolicyRequest from required parameters
 #### `newSimulateCustomPolicyRequest'`
 
 ``` purescript
-newSimulateCustomPolicyRequest' :: ActionNameListType -> SimulationPolicyListType -> ({ "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }) -> SimulateCustomPolicyRequest
+newSimulateCustomPolicyRequest' :: ActionNameListType -> SimulationPolicyListType -> ({ "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') } -> { "PolicyInputList" :: SimulationPolicyListType, "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }) -> SimulateCustomPolicyRequest
 ```
 
 Constructs SimulateCustomPolicyRequest's fields from required parameters
@@ -7938,7 +7938,7 @@ Constructs SimulateCustomPolicyRequest's fields from required parameters
 
 ``` purescript
 newtype SimulatePolicyResponse
-  = SimulatePolicyResponse { "EvaluationResults" :: NullOrUndefined (EvaluationResultsListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = SimulatePolicyResponse { "EvaluationResults" :: Maybe (EvaluationResultsListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 <p>Contains the response to a successful <a>SimulatePrincipalPolicy</a> or <a>SimulateCustomPolicy</a> request.</p>
@@ -7963,7 +7963,7 @@ Constructs SimulatePolicyResponse from required parameters
 #### `newSimulatePolicyResponse'`
 
 ``` purescript
-newSimulatePolicyResponse' :: ({ "EvaluationResults" :: NullOrUndefined (EvaluationResultsListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "EvaluationResults" :: NullOrUndefined (EvaluationResultsListType), "IsTruncated" :: NullOrUndefined (BooleanType'), "Marker" :: NullOrUndefined (MarkerType') }) -> SimulatePolicyResponse
+newSimulatePolicyResponse' :: ({ "EvaluationResults" :: Maybe (EvaluationResultsListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') } -> { "EvaluationResults" :: Maybe (EvaluationResultsListType), "IsTruncated" :: Maybe (BooleanType'), "Marker" :: Maybe (MarkerType') }) -> SimulatePolicyResponse
 ```
 
 Constructs SimulatePolicyResponse's fields from required parameters
@@ -7972,7 +7972,7 @@ Constructs SimulatePolicyResponse's fields from required parameters
 
 ``` purescript
 newtype SimulatePrincipalPolicyRequest
-  = SimulatePrincipalPolicyRequest { "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }
+  = SimulatePrincipalPolicyRequest { "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }
 ```
 
 ##### Instances
@@ -7995,7 +7995,7 @@ Constructs SimulatePrincipalPolicyRequest from required parameters
 #### `newSimulatePrincipalPolicyRequest'`
 
 ``` purescript
-newSimulatePrincipalPolicyRequest' :: ActionNameListType -> ArnType' -> ({ "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') } -> { "PolicySourceArn" :: ArnType', "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: NullOrUndefined (ResourceNameListType), "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType'), "ResourceOwner" :: NullOrUndefined (ResourceNameType), "CallerArn" :: NullOrUndefined (ResourceNameType), "ContextEntries" :: NullOrUndefined (ContextEntryListType), "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType), "MaxItems" :: NullOrUndefined (MaxItemsType'), "Marker" :: NullOrUndefined (MarkerType') }) -> SimulatePrincipalPolicyRequest
+newSimulatePrincipalPolicyRequest' :: ActionNameListType -> ArnType' -> ({ "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') } -> { "PolicySourceArn" :: ArnType', "PolicyInputList" :: Maybe (SimulationPolicyListType), "ActionNames" :: ActionNameListType, "ResourceArns" :: Maybe (ResourceNameListType), "ResourcePolicy" :: Maybe (PolicyDocumentType'), "ResourceOwner" :: Maybe (ResourceNameType), "CallerArn" :: Maybe (ResourceNameType), "ContextEntries" :: Maybe (ContextEntryListType), "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType), "MaxItems" :: Maybe (MaxItemsType'), "Marker" :: Maybe (MarkerType') }) -> SimulatePrincipalPolicyRequest
 ```
 
 Constructs SimulatePrincipalPolicyRequest's fields from required parameters
@@ -8020,7 +8020,7 @@ Encode SimulationPolicyListType
 
 ``` purescript
 newtype Statement
-  = Statement { "SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType), "SourcePolicyType" :: NullOrUndefined (PolicySourceType), "StartPosition" :: NullOrUndefined (Position), "EndPosition" :: NullOrUndefined (Position) }
+  = Statement { "SourcePolicyId" :: Maybe (PolicyIdentifierType), "SourcePolicyType" :: Maybe (PolicySourceType), "StartPosition" :: Maybe (Position), "EndPosition" :: Maybe (Position) }
 ```
 
 <p>Contains a reference to a <code>Statement</code> element in a policy document that determines the result of the simulation.</p> <p>This data type is used by the <code>MatchedStatements</code> member of the <code> <a>EvaluationResult</a> </code> type.</p>
@@ -8045,7 +8045,7 @@ Constructs Statement from required parameters
 #### `newStatement'`
 
 ``` purescript
-newStatement' :: ({ "SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType), "SourcePolicyType" :: NullOrUndefined (PolicySourceType), "StartPosition" :: NullOrUndefined (Position), "EndPosition" :: NullOrUndefined (Position) } -> { "SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType), "SourcePolicyType" :: NullOrUndefined (PolicySourceType), "StartPosition" :: NullOrUndefined (Position), "EndPosition" :: NullOrUndefined (Position) }) -> Statement
+newStatement' :: ({ "SourcePolicyId" :: Maybe (PolicyIdentifierType), "SourcePolicyType" :: Maybe (PolicySourceType), "StartPosition" :: Maybe (Position), "EndPosition" :: Maybe (Position) } -> { "SourcePolicyId" :: Maybe (PolicyIdentifierType), "SourcePolicyType" :: Maybe (PolicySourceType), "StartPosition" :: Maybe (Position), "EndPosition" :: Maybe (Position) }) -> Statement
 ```
 
 Constructs Statement's fields from required parameters
@@ -8070,7 +8070,7 @@ Encode StatementListType
 
 ``` purescript
 newtype UnmodifiableEntityException
-  = UnmodifiableEntityException { message :: NullOrUndefined (UnmodifiableEntityMessage') }
+  = UnmodifiableEntityException { message :: Maybe (UnmodifiableEntityMessage') }
 ```
 
 <p>The request was rejected because only the service that depends on the service-linked role can modify or delete the role on your behalf. The error message includes the name of the service that depends on this service-linked role. You must request the change through that service.</p>
@@ -8095,7 +8095,7 @@ Constructs UnmodifiableEntityException from required parameters
 #### `newUnmodifiableEntityException'`
 
 ``` purescript
-newUnmodifiableEntityException' :: ({ message :: NullOrUndefined (UnmodifiableEntityMessage') } -> { message :: NullOrUndefined (UnmodifiableEntityMessage') }) -> UnmodifiableEntityException
+newUnmodifiableEntityException' :: ({ message :: Maybe (UnmodifiableEntityMessage') } -> { message :: Maybe (UnmodifiableEntityMessage') }) -> UnmodifiableEntityException
 ```
 
 Constructs UnmodifiableEntityException's fields from required parameters
@@ -8104,7 +8104,7 @@ Constructs UnmodifiableEntityException's fields from required parameters
 
 ``` purescript
 newtype UnrecognizedPublicKeyEncodingException
-  = UnrecognizedPublicKeyEncodingException { message :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage') }
+  = UnrecognizedPublicKeyEncodingException { message :: Maybe (UnrecognizedPublicKeyEncodingMessage') }
 ```
 
 <p>The request was rejected because the public key encoding format is unsupported or unrecognized.</p>
@@ -8129,7 +8129,7 @@ Constructs UnrecognizedPublicKeyEncodingException from required parameters
 #### `newUnrecognizedPublicKeyEncodingException'`
 
 ``` purescript
-newUnrecognizedPublicKeyEncodingException' :: ({ message :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage') } -> { message :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage') }) -> UnrecognizedPublicKeyEncodingException
+newUnrecognizedPublicKeyEncodingException' :: ({ message :: Maybe (UnrecognizedPublicKeyEncodingMessage') } -> { message :: Maybe (UnrecognizedPublicKeyEncodingMessage') }) -> UnrecognizedPublicKeyEncodingException
 ```
 
 Constructs UnrecognizedPublicKeyEncodingException's fields from required parameters
@@ -8138,7 +8138,7 @@ Constructs UnrecognizedPublicKeyEncodingException's fields from required paramet
 
 ``` purescript
 newtype UpdateAccessKeyRequest
-  = UpdateAccessKeyRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' }
+  = UpdateAccessKeyRequest { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' }
 ```
 
 ##### Instances
@@ -8161,7 +8161,7 @@ Constructs UpdateAccessKeyRequest from required parameters
 #### `newUpdateAccessKeyRequest'`
 
 ``` purescript
-newUpdateAccessKeyRequest' :: AccessKeyIdType' -> StatusType' -> ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' }) -> UpdateAccessKeyRequest
+newUpdateAccessKeyRequest' :: AccessKeyIdType' -> StatusType' -> ({ "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' } -> { "UserName" :: Maybe (ExistingUserNameType'), "AccessKeyId" :: AccessKeyIdType', "Status" :: StatusType' }) -> UpdateAccessKeyRequest
 ```
 
 Constructs UpdateAccessKeyRequest's fields from required parameters
@@ -8170,7 +8170,7 @@ Constructs UpdateAccessKeyRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateAccountPasswordPolicyRequest
-  = UpdateAccountPasswordPolicyRequest { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') }
+  = UpdateAccountPasswordPolicyRequest { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') }
 ```
 
 ##### Instances
@@ -8193,7 +8193,7 @@ Constructs UpdateAccountPasswordPolicyRequest from required parameters
 #### `newUpdateAccountPasswordPolicyRequest'`
 
 ``` purescript
-newUpdateAccountPasswordPolicyRequest' :: ({ "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') } -> { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType'), "RequireSymbols" :: NullOrUndefined (BooleanType'), "RequireNumbers" :: NullOrUndefined (BooleanType'), "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType'), "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType'), "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType'), "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType'), "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType'), "HardExpiry" :: NullOrUndefined (BooleanObjectType') }) -> UpdateAccountPasswordPolicyRequest
+newUpdateAccountPasswordPolicyRequest' :: ({ "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') } -> { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType'), "RequireSymbols" :: Maybe (BooleanType'), "RequireNumbers" :: Maybe (BooleanType'), "RequireUppercaseCharacters" :: Maybe (BooleanType'), "RequireLowercaseCharacters" :: Maybe (BooleanType'), "AllowUsersToChangePassword" :: Maybe (BooleanType'), "MaxPasswordAge" :: Maybe (MaxPasswordAgeType'), "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType'), "HardExpiry" :: Maybe (BooleanObjectType') }) -> UpdateAccountPasswordPolicyRequest
 ```
 
 Constructs UpdateAccountPasswordPolicyRequest's fields from required parameters
@@ -8234,7 +8234,7 @@ Constructs UpdateAssumeRolePolicyRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateGroupRequest
-  = UpdateGroupRequest { "GroupName" :: GroupNameType', "NewPath" :: NullOrUndefined (PathType'), "NewGroupName" :: NullOrUndefined (GroupNameType') }
+  = UpdateGroupRequest { "GroupName" :: GroupNameType', "NewPath" :: Maybe (PathType'), "NewGroupName" :: Maybe (GroupNameType') }
 ```
 
 ##### Instances
@@ -8257,7 +8257,7 @@ Constructs UpdateGroupRequest from required parameters
 #### `newUpdateGroupRequest'`
 
 ``` purescript
-newUpdateGroupRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "NewPath" :: NullOrUndefined (PathType'), "NewGroupName" :: NullOrUndefined (GroupNameType') } -> { "GroupName" :: GroupNameType', "NewPath" :: NullOrUndefined (PathType'), "NewGroupName" :: NullOrUndefined (GroupNameType') }) -> UpdateGroupRequest
+newUpdateGroupRequest' :: GroupNameType' -> ({ "GroupName" :: GroupNameType', "NewPath" :: Maybe (PathType'), "NewGroupName" :: Maybe (GroupNameType') } -> { "GroupName" :: GroupNameType', "NewPath" :: Maybe (PathType'), "NewGroupName" :: Maybe (GroupNameType') }) -> UpdateGroupRequest
 ```
 
 Constructs UpdateGroupRequest's fields from required parameters
@@ -8266,7 +8266,7 @@ Constructs UpdateGroupRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateLoginProfileRequest
-  = UpdateLoginProfileRequest { "UserName" :: UserNameType', "Password" :: NullOrUndefined (PasswordType'), "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType') }
+  = UpdateLoginProfileRequest { "UserName" :: UserNameType', "Password" :: Maybe (PasswordType'), "PasswordResetRequired" :: Maybe (BooleanObjectType') }
 ```
 
 ##### Instances
@@ -8289,7 +8289,7 @@ Constructs UpdateLoginProfileRequest from required parameters
 #### `newUpdateLoginProfileRequest'`
 
 ``` purescript
-newUpdateLoginProfileRequest' :: UserNameType' -> ({ "UserName" :: UserNameType', "Password" :: NullOrUndefined (PasswordType'), "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType') } -> { "UserName" :: UserNameType', "Password" :: NullOrUndefined (PasswordType'), "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType') }) -> UpdateLoginProfileRequest
+newUpdateLoginProfileRequest' :: UserNameType' -> ({ "UserName" :: UserNameType', "Password" :: Maybe (PasswordType'), "PasswordResetRequired" :: Maybe (BooleanObjectType') } -> { "UserName" :: UserNameType', "Password" :: Maybe (PasswordType'), "PasswordResetRequired" :: Maybe (BooleanObjectType') }) -> UpdateLoginProfileRequest
 ```
 
 Constructs UpdateLoginProfileRequest's fields from required parameters
@@ -8362,7 +8362,7 @@ Constructs UpdateRoleDescriptionRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateRoleDescriptionResponse
-  = UpdateRoleDescriptionResponse { "Role" :: NullOrUndefined (Role) }
+  = UpdateRoleDescriptionResponse { "Role" :: Maybe (Role) }
 ```
 
 ##### Instances
@@ -8385,7 +8385,7 @@ Constructs UpdateRoleDescriptionResponse from required parameters
 #### `newUpdateRoleDescriptionResponse'`
 
 ``` purescript
-newUpdateRoleDescriptionResponse' :: ({ "Role" :: NullOrUndefined (Role) } -> { "Role" :: NullOrUndefined (Role) }) -> UpdateRoleDescriptionResponse
+newUpdateRoleDescriptionResponse' :: ({ "Role" :: Maybe (Role) } -> { "Role" :: Maybe (Role) }) -> UpdateRoleDescriptionResponse
 ```
 
 Constructs UpdateRoleDescriptionResponse's fields from required parameters
@@ -8426,7 +8426,7 @@ Constructs UpdateSAMLProviderRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateSAMLProviderResponse
-  = UpdateSAMLProviderResponse { "SAMLProviderArn" :: NullOrUndefined (ArnType') }
+  = UpdateSAMLProviderResponse { "SAMLProviderArn" :: Maybe (ArnType') }
 ```
 
 <p>Contains the response to a successful <a>UpdateSAMLProvider</a> request. </p>
@@ -8451,7 +8451,7 @@ Constructs UpdateSAMLProviderResponse from required parameters
 #### `newUpdateSAMLProviderResponse'`
 
 ``` purescript
-newUpdateSAMLProviderResponse' :: ({ "SAMLProviderArn" :: NullOrUndefined (ArnType') } -> { "SAMLProviderArn" :: NullOrUndefined (ArnType') }) -> UpdateSAMLProviderResponse
+newUpdateSAMLProviderResponse' :: ({ "SAMLProviderArn" :: Maybe (ArnType') } -> { "SAMLProviderArn" :: Maybe (ArnType') }) -> UpdateSAMLProviderResponse
 ```
 
 Constructs UpdateSAMLProviderResponse's fields from required parameters
@@ -8492,7 +8492,7 @@ Constructs UpdateSSHPublicKeyRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateServerCertificateRequest
-  = UpdateServerCertificateRequest { "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: NullOrUndefined (PathType'), "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType') }
+  = UpdateServerCertificateRequest { "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: Maybe (PathType'), "NewServerCertificateName" :: Maybe (ServerCertificateNameType') }
 ```
 
 ##### Instances
@@ -8515,7 +8515,7 @@ Constructs UpdateServerCertificateRequest from required parameters
 #### `newUpdateServerCertificateRequest'`
 
 ``` purescript
-newUpdateServerCertificateRequest' :: ServerCertificateNameType' -> ({ "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: NullOrUndefined (PathType'), "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType') } -> { "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: NullOrUndefined (PathType'), "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType') }) -> UpdateServerCertificateRequest
+newUpdateServerCertificateRequest' :: ServerCertificateNameType' -> ({ "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: Maybe (PathType'), "NewServerCertificateName" :: Maybe (ServerCertificateNameType') } -> { "ServerCertificateName" :: ServerCertificateNameType', "NewPath" :: Maybe (PathType'), "NewServerCertificateName" :: Maybe (ServerCertificateNameType') }) -> UpdateServerCertificateRequest
 ```
 
 Constructs UpdateServerCertificateRequest's fields from required parameters
@@ -8524,7 +8524,7 @@ Constructs UpdateServerCertificateRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateServiceSpecificCredentialRequest
-  = UpdateServiceSpecificCredentialRequest { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' }
+  = UpdateServiceSpecificCredentialRequest { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' }
 ```
 
 ##### Instances
@@ -8547,7 +8547,7 @@ Constructs UpdateServiceSpecificCredentialRequest from required parameters
 #### `newUpdateServiceSpecificCredentialRequest'`
 
 ``` purescript
-newUpdateServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> StatusType' -> ({ "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' } -> { "UserName" :: NullOrUndefined (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' }) -> UpdateServiceSpecificCredentialRequest
+newUpdateServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> StatusType' -> ({ "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' } -> { "UserName" :: Maybe (UserNameType'), "ServiceSpecificCredentialId" :: ServiceSpecificCredentialId', "Status" :: StatusType' }) -> UpdateServiceSpecificCredentialRequest
 ```
 
 Constructs UpdateServiceSpecificCredentialRequest's fields from required parameters
@@ -8556,7 +8556,7 @@ Constructs UpdateServiceSpecificCredentialRequest's fields from required paramet
 
 ``` purescript
 newtype UpdateSigningCertificateRequest
-  = UpdateSigningCertificateRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' }
+  = UpdateSigningCertificateRequest { "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' }
 ```
 
 ##### Instances
@@ -8579,7 +8579,7 @@ Constructs UpdateSigningCertificateRequest from required parameters
 #### `newUpdateSigningCertificateRequest'`
 
 ``` purescript
-newUpdateSigningCertificateRequest' :: CertificateIdType' -> StatusType' -> ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' }) -> UpdateSigningCertificateRequest
+newUpdateSigningCertificateRequest' :: CertificateIdType' -> StatusType' -> ({ "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' } -> { "UserName" :: Maybe (ExistingUserNameType'), "CertificateId" :: CertificateIdType', "Status" :: StatusType' }) -> UpdateSigningCertificateRequest
 ```
 
 Constructs UpdateSigningCertificateRequest's fields from required parameters
@@ -8588,7 +8588,7 @@ Constructs UpdateSigningCertificateRequest's fields from required parameters
 
 ``` purescript
 newtype UpdateUserRequest
-  = UpdateUserRequest { "UserName" :: ExistingUserNameType', "NewPath" :: NullOrUndefined (PathType'), "NewUserName" :: NullOrUndefined (UserNameType') }
+  = UpdateUserRequest { "UserName" :: ExistingUserNameType', "NewPath" :: Maybe (PathType'), "NewUserName" :: Maybe (UserNameType') }
 ```
 
 ##### Instances
@@ -8611,7 +8611,7 @@ Constructs UpdateUserRequest from required parameters
 #### `newUpdateUserRequest'`
 
 ``` purescript
-newUpdateUserRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "NewPath" :: NullOrUndefined (PathType'), "NewUserName" :: NullOrUndefined (UserNameType') } -> { "UserName" :: ExistingUserNameType', "NewPath" :: NullOrUndefined (PathType'), "NewUserName" :: NullOrUndefined (UserNameType') }) -> UpdateUserRequest
+newUpdateUserRequest' :: ExistingUserNameType' -> ({ "UserName" :: ExistingUserNameType', "NewPath" :: Maybe (PathType'), "NewUserName" :: Maybe (UserNameType') } -> { "UserName" :: ExistingUserNameType', "NewPath" :: Maybe (PathType'), "NewUserName" :: Maybe (UserNameType') }) -> UpdateUserRequest
 ```
 
 Constructs UpdateUserRequest's fields from required parameters
@@ -8652,7 +8652,7 @@ Constructs UploadSSHPublicKeyRequest's fields from required parameters
 
 ``` purescript
 newtype UploadSSHPublicKeyResponse
-  = UploadSSHPublicKeyResponse { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) }
+  = UploadSSHPublicKeyResponse { "SSHPublicKey" :: Maybe (SSHPublicKey) }
 ```
 
 <p>Contains the response to a successful <a>UploadSSHPublicKey</a> request.</p>
@@ -8677,7 +8677,7 @@ Constructs UploadSSHPublicKeyResponse from required parameters
 #### `newUploadSSHPublicKeyResponse'`
 
 ``` purescript
-newUploadSSHPublicKeyResponse' :: ({ "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } -> { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) }) -> UploadSSHPublicKeyResponse
+newUploadSSHPublicKeyResponse' :: ({ "SSHPublicKey" :: Maybe (SSHPublicKey) } -> { "SSHPublicKey" :: Maybe (SSHPublicKey) }) -> UploadSSHPublicKeyResponse
 ```
 
 Constructs UploadSSHPublicKeyResponse's fields from required parameters
@@ -8686,7 +8686,7 @@ Constructs UploadSSHPublicKeyResponse's fields from required parameters
 
 ``` purescript
 newtype UploadServerCertificateRequest
-  = UploadServerCertificateRequest { "Path" :: NullOrUndefined (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') }
+  = UploadServerCertificateRequest { "Path" :: Maybe (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: Maybe (CertificateChainType') }
 ```
 
 ##### Instances
@@ -8709,7 +8709,7 @@ Constructs UploadServerCertificateRequest from required parameters
 #### `newUploadServerCertificateRequest'`
 
 ``` purescript
-newUploadServerCertificateRequest' :: CertificateBodyType' -> PrivateKeyType' -> ServerCertificateNameType' -> ({ "Path" :: NullOrUndefined (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') } -> { "Path" :: NullOrUndefined (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: NullOrUndefined (CertificateChainType') }) -> UploadServerCertificateRequest
+newUploadServerCertificateRequest' :: CertificateBodyType' -> PrivateKeyType' -> ServerCertificateNameType' -> ({ "Path" :: Maybe (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: Maybe (CertificateChainType') } -> { "Path" :: Maybe (PathType'), "ServerCertificateName" :: ServerCertificateNameType', "CertificateBody" :: CertificateBodyType', "PrivateKey" :: PrivateKeyType', "CertificateChain" :: Maybe (CertificateChainType') }) -> UploadServerCertificateRequest
 ```
 
 Constructs UploadServerCertificateRequest's fields from required parameters
@@ -8718,7 +8718,7 @@ Constructs UploadServerCertificateRequest's fields from required parameters
 
 ``` purescript
 newtype UploadServerCertificateResponse
-  = UploadServerCertificateResponse { "ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata) }
+  = UploadServerCertificateResponse { "ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata) }
 ```
 
 <p>Contains the response to a successful <a>UploadServerCertificate</a> request. </p>
@@ -8743,7 +8743,7 @@ Constructs UploadServerCertificateResponse from required parameters
 #### `newUploadServerCertificateResponse'`
 
 ``` purescript
-newUploadServerCertificateResponse' :: ({ "ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata) } -> { "ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata) }) -> UploadServerCertificateResponse
+newUploadServerCertificateResponse' :: ({ "ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata) } -> { "ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata) }) -> UploadServerCertificateResponse
 ```
 
 Constructs UploadServerCertificateResponse's fields from required parameters
@@ -8752,7 +8752,7 @@ Constructs UploadServerCertificateResponse's fields from required parameters
 
 ``` purescript
 newtype UploadSigningCertificateRequest
-  = UploadSigningCertificateRequest { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' }
+  = UploadSigningCertificateRequest { "UserName" :: Maybe (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' }
 ```
 
 ##### Instances
@@ -8775,7 +8775,7 @@ Constructs UploadSigningCertificateRequest from required parameters
 #### `newUploadSigningCertificateRequest'`
 
 ``` purescript
-newUploadSigningCertificateRequest' :: CertificateBodyType' -> ({ "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' } -> { "UserName" :: NullOrUndefined (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' }) -> UploadSigningCertificateRequest
+newUploadSigningCertificateRequest' :: CertificateBodyType' -> ({ "UserName" :: Maybe (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' } -> { "UserName" :: Maybe (ExistingUserNameType'), "CertificateBody" :: CertificateBodyType' }) -> UploadSigningCertificateRequest
 ```
 
 Constructs UploadSigningCertificateRequest's fields from required parameters
@@ -8818,7 +8818,7 @@ Constructs UploadSigningCertificateResponse's fields from required parameters
 
 ``` purescript
 newtype User
-  = User { "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: NullOrUndefined (DateType') }
+  = User { "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: Maybe (DateType') }
 ```
 
 <p>Contains information about an IAM user entity.</p> <p>This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateUser</a> </p> </li> <li> <p> <a>GetUser</a> </p> </li> <li> <p> <a>ListUsers</a> </p> </li> </ul>
@@ -8843,7 +8843,7 @@ Constructs User from required parameters
 #### `newUser'`
 
 ``` purescript
-newUser' :: ArnType' -> DateType' -> PathType' -> IdType' -> UserNameType' -> ({ "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: NullOrUndefined (DateType') } -> { "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: NullOrUndefined (DateType') }) -> User
+newUser' :: ArnType' -> DateType' -> PathType' -> IdType' -> UserNameType' -> ({ "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: Maybe (DateType') } -> { "Path" :: PathType', "UserName" :: UserNameType', "UserId" :: IdType', "Arn" :: ArnType', "CreateDate" :: DateType', "PasswordLastUsed" :: Maybe (DateType') }) -> User
 ```
 
 Constructs User's fields from required parameters
@@ -8852,7 +8852,7 @@ Constructs User's fields from required parameters
 
 ``` purescript
 newtype UserDetail
-  = UserDetail { "Path" :: NullOrUndefined (PathType'), "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "UserPolicyList" :: NullOrUndefined (PolicyDetailListType'), "GroupList" :: NullOrUndefined (GroupNameListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }
+  = UserDetail { "Path" :: Maybe (PathType'), "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "UserPolicyList" :: Maybe (PolicyDetailListType'), "GroupList" :: Maybe (GroupNameListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }
 ```
 
 <p>Contains information about an IAM user, including all the user's policies and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
@@ -8877,7 +8877,7 @@ Constructs UserDetail from required parameters
 #### `newUserDetail'`
 
 ``` purescript
-newUserDetail' :: ({ "Path" :: NullOrUndefined (PathType'), "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "UserPolicyList" :: NullOrUndefined (PolicyDetailListType'), "GroupList" :: NullOrUndefined (GroupNameListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> { "Path" :: NullOrUndefined (PathType'), "UserName" :: NullOrUndefined (UserNameType'), "UserId" :: NullOrUndefined (IdType'), "Arn" :: NullOrUndefined (ArnType'), "CreateDate" :: NullOrUndefined (DateType'), "UserPolicyList" :: NullOrUndefined (PolicyDetailListType'), "GroupList" :: NullOrUndefined (GroupNameListType'), "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') }) -> UserDetail
+newUserDetail' :: ({ "Path" :: Maybe (PathType'), "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "UserPolicyList" :: Maybe (PolicyDetailListType'), "GroupList" :: Maybe (GroupNameListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> { "Path" :: Maybe (PathType'), "UserName" :: Maybe (UserNameType'), "UserId" :: Maybe (IdType'), "Arn" :: Maybe (ArnType'), "CreateDate" :: Maybe (DateType'), "UserPolicyList" :: Maybe (PolicyDetailListType'), "GroupList" :: Maybe (GroupNameListType'), "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') }) -> UserDetail
 ```
 
 Constructs UserDetail's fields from required parameters
@@ -8886,7 +8886,7 @@ Constructs UserDetail's fields from required parameters
 
 ``` purescript
 newtype VirtualMFADevice
-  = VirtualMFADevice { "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: NullOrUndefined (BootstrapDatum), "QRCodePNG" :: NullOrUndefined (BootstrapDatum), "User" :: NullOrUndefined (User), "EnableDate" :: NullOrUndefined (DateType') }
+  = VirtualMFADevice { "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: Maybe (BootstrapDatum), "QRCodePNG" :: Maybe (BootstrapDatum), "User" :: Maybe (User), "EnableDate" :: Maybe (DateType') }
 ```
 
 <p>Contains information about a virtual MFA device.</p>
@@ -8911,7 +8911,7 @@ Constructs VirtualMFADevice from required parameters
 #### `newVirtualMFADevice'`
 
 ``` purescript
-newVirtualMFADevice' :: SerialNumberType' -> ({ "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: NullOrUndefined (BootstrapDatum), "QRCodePNG" :: NullOrUndefined (BootstrapDatum), "User" :: NullOrUndefined (User), "EnableDate" :: NullOrUndefined (DateType') } -> { "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: NullOrUndefined (BootstrapDatum), "QRCodePNG" :: NullOrUndefined (BootstrapDatum), "User" :: NullOrUndefined (User), "EnableDate" :: NullOrUndefined (DateType') }) -> VirtualMFADevice
+newVirtualMFADevice' :: SerialNumberType' -> ({ "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: Maybe (BootstrapDatum), "QRCodePNG" :: Maybe (BootstrapDatum), "User" :: Maybe (User), "EnableDate" :: Maybe (DateType') } -> { "SerialNumber" :: SerialNumberType', "Base32StringSeed" :: Maybe (BootstrapDatum), "QRCodePNG" :: Maybe (BootstrapDatum), "User" :: Maybe (User), "EnableDate" :: Maybe (DateType') }) -> VirtualMFADevice
 ```
 
 Constructs VirtualMFADevice's fields from required parameters

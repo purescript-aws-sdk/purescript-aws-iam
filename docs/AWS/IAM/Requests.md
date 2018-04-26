@@ -3,7 +3,7 @@
 #### `addClientIDToOpenIDConnectProvider`
 
 ``` purescript
-addClientIDToOpenIDConnectProvider :: forall eff. Service -> AddClientIDToOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+addClientIDToOpenIDConnectProvider :: forall eff. Service -> AddClientIDToOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds a new client ID (also known as audience) to the list of client IDs already registered for the specified IAM OpenID Connect (OIDC) provider resource.</p> <p>This action is idempotent; it does not fail or return an error if you add an existing client ID to the provider.</p>
@@ -11,7 +11,7 @@ addClientIDToOpenIDConnectProvider :: forall eff. Service -> AddClientIDToOpenID
 #### `addRoleToInstanceProfile`
 
 ``` purescript
-addRoleToInstanceProfile :: forall eff. Service -> AddRoleToInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+addRoleToInstanceProfile :: forall eff. Service -> AddRoleToInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role, and this limit cannot be increased.</p> <note> <p>The caller of this API must be granted the <code>PassRole</code> permission on the IAM role by a permission policy.</p> </note> <p>For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>. For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
@@ -19,7 +19,7 @@ addRoleToInstanceProfile :: forall eff. Service -> AddRoleToInstanceProfileReque
 #### `addUserToGroup`
 
 ``` purescript
-addUserToGroup :: forall eff. Service -> AddUserToGroupRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+addUserToGroup :: forall eff. Service -> AddUserToGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds the specified user to the specified group.</p>
@@ -27,7 +27,7 @@ addUserToGroup :: forall eff. Service -> AddUserToGroupRequest -> Aff (exception
 #### `attachGroupPolicy`
 
 ``` purescript
-attachGroupPolicy :: forall eff. Service -> AttachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+attachGroupPolicy :: forall eff. Service -> AttachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Attaches the specified managed policy to the specified IAM group.</p> <p>You use this API to attach a managed policy to a group. To embed an inline policy in a group, use <a>PutGroupPolicy</a>.</p> <p>For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -35,7 +35,7 @@ attachGroupPolicy :: forall eff. Service -> AttachGroupPolicyRequest -> Aff (exc
 #### `attachRolePolicy`
 
 ``` purescript
-attachRolePolicy :: forall eff. Service -> AttachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+attachRolePolicy :: forall eff. Service -> AttachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Attaches the specified managed policy to the specified IAM role. When you attach a managed policy to a role, the managed policy becomes part of the role's permission (access) policy.</p> <note> <p>You cannot use a managed policy as the role's trust policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>.</p> </note> <p>Use this API to attach a <i>managed</i> policy to a role. To embed an inline policy in a role, use <a>PutRolePolicy</a>. For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -43,7 +43,7 @@ attachRolePolicy :: forall eff. Service -> AttachRolePolicyRequest -> Aff (excep
 #### `attachUserPolicy`
 
 ``` purescript
-attachUserPolicy :: forall eff. Service -> AttachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+attachUserPolicy :: forall eff. Service -> AttachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Attaches the specified managed policy to the specified user.</p> <p>You use this API to attach a <i>managed</i> policy to a user. To embed an inline policy in a user, use <a>PutUserPolicy</a>.</p> <p>For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -51,7 +51,7 @@ attachUserPolicy :: forall eff. Service -> AttachUserPolicyRequest -> Aff (excep
 #### `changePassword`
 
 ``` purescript
-changePassword :: forall eff. Service -> ChangePasswordRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+changePassword :: forall eff. Service -> ChangePasswordRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Changes the password of the IAM user who is calling this action. The root account password is not affected by this action.</p> <p>To change the password for a different user, see <a>UpdateLoginProfile</a>. For more information about modifying passwords, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html">Managing Passwords</a> in the <i>IAM User Guide</i>.</p>
@@ -67,7 +67,7 @@ createAccessKey :: forall eff. Service -> CreateAccessKeyRequest -> Aff (excepti
 #### `createAccountAlias`
 
 ``` purescript
-createAccountAlias :: forall eff. Service -> CreateAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+createAccountAlias :: forall eff. Service -> CreateAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Creates an alias for your AWS account. For information about using an AWS account alias, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>.</p>
@@ -171,7 +171,7 @@ createVirtualMFADevice :: forall eff. Service -> CreateVirtualMFADeviceRequest -
 #### `deactivateMFADevice`
 
 ``` purescript
-deactivateMFADevice :: forall eff. Service -> DeactivateMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deactivateMFADevice :: forall eff. Service -> DeactivateMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deactivates the specified MFA device and removes it from association with the user name for which it was originally enabled.</p> <p>For more information about creating and working with virtual MFA devices, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Using a Virtual MFA Device</a> in the <i>IAM User Guide</i>.</p>
@@ -179,7 +179,7 @@ deactivateMFADevice :: forall eff. Service -> DeactivateMFADeviceRequest -> Aff 
 #### `deleteAccessKey`
 
 ``` purescript
-deleteAccessKey :: forall eff. Service -> DeleteAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteAccessKey :: forall eff. Service -> DeleteAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the access key pair associated with the specified IAM user.</p> <p>If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p>
@@ -187,7 +187,7 @@ deleteAccessKey :: forall eff. Service -> DeleteAccessKeyRequest -> Aff (excepti
 #### `deleteAccountAlias`
 
 ``` purescript
-deleteAccountAlias :: forall eff. Service -> DeleteAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteAccountAlias :: forall eff. Service -> DeleteAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p> Deletes the specified AWS account alias. For information about using an AWS account alias, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>.</p>
@@ -195,7 +195,7 @@ deleteAccountAlias :: forall eff. Service -> DeleteAccountAliasRequest -> Aff (e
 #### `deleteAccountPasswordPolicy`
 
 ``` purescript
-deleteAccountPasswordPolicy :: forall eff. Service -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteAccountPasswordPolicy :: forall eff. Service -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the password policy for the AWS account. There are no parameters.</p>
@@ -203,7 +203,7 @@ deleteAccountPasswordPolicy :: forall eff. Service -> Aff (exception :: EXCEPTIO
 #### `deleteGroup`
 
 ``` purescript
-deleteGroup :: forall eff. Service -> DeleteGroupRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteGroup :: forall eff. Service -> DeleteGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified IAM group. The group must not contain any users or have any attached policies.</p>
@@ -211,7 +211,7 @@ deleteGroup :: forall eff. Service -> DeleteGroupRequest -> Aff (exception :: EX
 #### `deleteGroupPolicy`
 
 ``` purescript
-deleteGroupPolicy :: forall eff. Service -> DeleteGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteGroupPolicy :: forall eff. Service -> DeleteGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified inline policy that is embedded in the specified IAM group.</p> <p>A group can also have managed policies attached to it. To detach a managed policy from a group, use <a>DetachGroupPolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -219,7 +219,7 @@ deleteGroupPolicy :: forall eff. Service -> DeleteGroupPolicyRequest -> Aff (exc
 #### `deleteInstanceProfile`
 
 ``` purescript
-deleteInstanceProfile :: forall eff. Service -> DeleteInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteInstanceProfile :: forall eff. Service -> DeleteInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified instance profile. The instance profile must not have an associated role.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the instance profile you are about to delete. Deleting a role or instance profile that is associated with a running instance will break any applications running on the instance.</p> </important> <p>For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
@@ -227,7 +227,7 @@ deleteInstanceProfile :: forall eff. Service -> DeleteInstanceProfileRequest -> 
 #### `deleteLoginProfile`
 
 ``` purescript
-deleteLoginProfile :: forall eff. Service -> DeleteLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteLoginProfile :: forall eff. Service -> DeleteLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the password for the specified IAM user, which terminates the user's ability to access AWS services through the AWS Management Console.</p> <important> <p> Deleting a user's password does not prevent a user from accessing AWS through the command line interface or the API. To prevent all user access you must also either make any access keys inactive or delete them. For more information about making keys inactive or deleting them, see <a>UpdateAccessKey</a> and <a>DeleteAccessKey</a>. </p> </important>
@@ -235,7 +235,7 @@ deleteLoginProfile :: forall eff. Service -> DeleteLoginProfileRequest -> Aff (e
 #### `deleteOpenIDConnectProvider`
 
 ``` purescript
-deleteOpenIDConnectProvider :: forall eff. Service -> DeleteOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteOpenIDConnectProvider :: forall eff. Service -> DeleteOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes an OpenID Connect identity provider (IdP) resource object in IAM.</p> <p>Deleting an IAM OIDC provider resource does not update any roles that reference the provider as a principal in their trust policies. Any attempt to assume a role that references a deleted provider fails.</p> <p>This action is idempotent; it does not fail or return an error if you call the action for a provider that does not exist.</p>
@@ -243,7 +243,7 @@ deleteOpenIDConnectProvider :: forall eff. Service -> DeleteOpenIDConnectProvide
 #### `deletePolicy`
 
 ``` purescript
-deletePolicy :: forall eff. Service -> DeletePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deletePolicy :: forall eff. Service -> DeletePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified managed policy.</p> <p>Before you can delete a managed policy, you must first detach the policy from all users, groups, and roles that it is attached to, and you must delete all of the policy's versions. The following steps describe the process for deleting a managed policy:</p> <ul> <li> <p>Detach the policy from all users, groups, and roles that the policy is attached to, using the <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a> APIs. To list all the users, groups, and roles that a policy is attached to, use <a>ListEntitiesForPolicy</a>.</p> </li> <li> <p>Delete all versions of the policy using <a>DeletePolicyVersion</a>. To list the policy's versions, use <a>ListPolicyVersions</a>. You cannot use <a>DeletePolicyVersion</a> to delete the version that is marked as the default version. You delete the policy's default version in the next step of the process.</p> </li> <li> <p>Delete the policy (this automatically deletes the policy's default version) using this API.</p> </li> </ul> <p>For information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -251,7 +251,7 @@ deletePolicy :: forall eff. Service -> DeletePolicyRequest -> Aff (exception :: 
 #### `deletePolicyVersion`
 
 ``` purescript
-deletePolicyVersion :: forall eff. Service -> DeletePolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deletePolicyVersion :: forall eff. Service -> DeletePolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified version from the specified managed policy.</p> <p>You cannot delete the default version from a policy using this API. To delete the default version from a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use <a>ListPolicyVersions</a>.</p> <p>For information about versions for managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -259,7 +259,7 @@ deletePolicyVersion :: forall eff. Service -> DeletePolicyVersionRequest -> Aff 
 #### `deleteRole`
 
 ``` purescript
-deleteRole :: forall eff. Service -> DeleteRoleRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteRole :: forall eff. Service -> DeleteRoleRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified role. The role must not have any policies attached. For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the role you are about to delete. Deleting a role or instance profile that is associated with a running instance will break any applications running on the instance.</p> </important>
@@ -267,7 +267,7 @@ deleteRole :: forall eff. Service -> DeleteRoleRequest -> Aff (exception :: EXCE
 #### `deleteRolePolicy`
 
 ``` purescript
-deleteRolePolicy :: forall eff. Service -> DeleteRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteRolePolicy :: forall eff. Service -> DeleteRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified inline policy that is embedded in the specified IAM role.</p> <p>A role can also have managed policies attached to it. To detach a managed policy from a role, use <a>DetachRolePolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -275,7 +275,7 @@ deleteRolePolicy :: forall eff. Service -> DeleteRolePolicyRequest -> Aff (excep
 #### `deleteSAMLProvider`
 
 ``` purescript
-deleteSAMLProvider :: forall eff. Service -> DeleteSAMLProviderRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteSAMLProvider :: forall eff. Service -> DeleteSAMLProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes a SAML provider resource in IAM.</p> <p>Deleting the provider resource from IAM does not update any roles that reference the SAML provider resource's ARN as a principal in their trust policies. Any attempt to assume a role that references a non-existent provider resource ARN fails.</p> <note> <p> This operation requires <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p> </note>
@@ -283,7 +283,7 @@ deleteSAMLProvider :: forall eff. Service -> DeleteSAMLProviderRequest -> Aff (e
 #### `deleteSSHPublicKey`
 
 ``` purescript
-deleteSSHPublicKey :: forall eff. Service -> DeleteSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteSSHPublicKey :: forall eff. Service -> DeleteSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified SSH public key.</p> <p>The SSH public key deleted by this action is used only for authenticating the associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
@@ -291,7 +291,7 @@ deleteSSHPublicKey :: forall eff. Service -> DeleteSSHPublicKeyRequest -> Aff (e
 #### `deleteServerCertificate`
 
 ``` purescript
-deleteServerCertificate :: forall eff. Service -> DeleteServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteServerCertificate :: forall eff. Service -> DeleteServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified server certificate.</p> <p>For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with Server Certificates</a> in the <i>IAM User Guide</i>.</p> <important> <p> If you are using a server certificate with Elastic Load Balancing, deleting the certificate could have implications for your application. If Elastic Load Balancing doesn't detect the deletion of bound certificates, it may continue to use the certificates. This could cause Elastic Load Balancing to stop accepting traffic. We recommend that you remove the reference to the certificate from Elastic Load Balancing before using this command to delete the certificate. For more information, go to <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html">DeleteLoadBalancerListeners</a> in the <i>Elastic Load Balancing API Reference</i>.</p> </important>
@@ -307,7 +307,7 @@ deleteServiceLinkedRole :: forall eff. Service -> DeleteServiceLinkedRoleRequest
 #### `deleteServiceSpecificCredential`
 
 ``` purescript
-deleteServiceSpecificCredential :: forall eff. Service -> DeleteServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteServiceSpecificCredential :: forall eff. Service -> DeleteServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified service-specific credential.</p>
@@ -315,7 +315,7 @@ deleteServiceSpecificCredential :: forall eff. Service -> DeleteServiceSpecificC
 #### `deleteSigningCertificate`
 
 ``` purescript
-deleteSigningCertificate :: forall eff. Service -> DeleteSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteSigningCertificate :: forall eff. Service -> DeleteSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes a signing certificate associated with the specified IAM user.</p> <p>If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated IAM users.</p>
@@ -323,7 +323,7 @@ deleteSigningCertificate :: forall eff. Service -> DeleteSigningCertificateReque
 #### `deleteUser`
 
 ``` purescript
-deleteUser :: forall eff. Service -> DeleteUserRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteUser :: forall eff. Service -> DeleteUserRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified IAM user. The user must not belong to any groups or have any access keys, signing certificates, or attached policies.</p>
@@ -331,7 +331,7 @@ deleteUser :: forall eff. Service -> DeleteUserRequest -> Aff (exception :: EXCE
 #### `deleteUserPolicy`
 
 ``` purescript
-deleteUserPolicy :: forall eff. Service -> DeleteUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteUserPolicy :: forall eff. Service -> DeleteUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes the specified inline policy that is embedded in the specified IAM user.</p> <p>A user can also have managed policies attached to it. To detach a managed policy from a user, use <a>DetachUserPolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -339,7 +339,7 @@ deleteUserPolicy :: forall eff. Service -> DeleteUserPolicyRequest -> Aff (excep
 #### `deleteVirtualMFADevice`
 
 ``` purescript
-deleteVirtualMFADevice :: forall eff. Service -> DeleteVirtualMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+deleteVirtualMFADevice :: forall eff. Service -> DeleteVirtualMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Deletes a virtual MFA device.</p> <note> <p> You must deactivate a user's virtual MFA device before you can delete it. For information about deactivating MFA devices, see <a>DeactivateMFADevice</a>. </p> </note>
@@ -347,7 +347,7 @@ deleteVirtualMFADevice :: forall eff. Service -> DeleteVirtualMFADeviceRequest -
 #### `detachGroupPolicy`
 
 ``` purescript
-detachGroupPolicy :: forall eff. Service -> DetachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+detachGroupPolicy :: forall eff. Service -> DetachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified managed policy from the specified IAM group.</p> <p>A group can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteGroupPolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -355,7 +355,7 @@ detachGroupPolicy :: forall eff. Service -> DetachGroupPolicyRequest -> Aff (exc
 #### `detachRolePolicy`
 
 ``` purescript
-detachRolePolicy :: forall eff. Service -> DetachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+detachRolePolicy :: forall eff. Service -> DetachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified managed policy from the specified role.</p> <p>A role can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteRolePolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -363,7 +363,7 @@ detachRolePolicy :: forall eff. Service -> DetachRolePolicyRequest -> Aff (excep
 #### `detachUserPolicy`
 
 ``` purescript
-detachUserPolicy :: forall eff. Service -> DetachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+detachUserPolicy :: forall eff. Service -> DetachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified managed policy from the specified user.</p> <p>A user can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteUserPolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -371,7 +371,7 @@ detachUserPolicy :: forall eff. Service -> DetachUserPolicyRequest -> Aff (excep
 #### `enableMFADevice`
 
 ``` purescript
-enableMFADevice :: forall eff. Service -> EnableMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+enableMFADevice :: forall eff. Service -> EnableMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Enables the specified MFA device and associates it with the specified IAM user. When enabled, the MFA device is required for every subsequent login by the IAM user associated with the device.</p>
@@ -763,7 +763,7 @@ listVirtualMFADevices :: forall eff. Service -> ListVirtualMFADevicesRequest -> 
 #### `putGroupPolicy`
 
 ``` purescript
-putGroupPolicy :: forall eff. Service -> PutGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+putGroupPolicy :: forall eff. Service -> PutGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds or updates an inline policy document that is embedded in the specified IAM group.</p> <p>A user can also have managed policies attached to it. To attach a managed policy to a group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed in a group, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutGroupPolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
@@ -771,7 +771,7 @@ putGroupPolicy :: forall eff. Service -> PutGroupPolicyRequest -> Aff (exception
 #### `putRolePolicy`
 
 ``` purescript
-putRolePolicy :: forall eff. Service -> PutRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+putRolePolicy :: forall eff. Service -> PutRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds or updates an inline policy document that is embedded in the specified IAM role.</p> <p>When you embed an inline policy in a role, the inline policy is used as part of the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. For more information about IAM roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using Roles to Delegate Permissions and Federate Identities</a>.</p> <p>A role can also have a managed policy attached to it. To attach a managed policy to a role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed with a role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutRolePolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
@@ -779,7 +779,7 @@ putRolePolicy :: forall eff. Service -> PutRolePolicyRequest -> Aff (exception :
 #### `putUserPolicy`
 
 ``` purescript
-putUserPolicy :: forall eff. Service -> PutUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+putUserPolicy :: forall eff. Service -> PutUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Adds or updates an inline policy document that is embedded in the specified IAM user.</p> <p>An IAM user can also have a managed policy attached to it. To attach a managed policy to a user, use <a>AttachUserPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed in a user, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutUserPolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
@@ -787,7 +787,7 @@ putUserPolicy :: forall eff. Service -> PutUserPolicyRequest -> Aff (exception :
 #### `removeClientIDFromOpenIDConnectProvider`
 
 ``` purescript
-removeClientIDFromOpenIDConnectProvider :: forall eff. Service -> RemoveClientIDFromOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+removeClientIDFromOpenIDConnectProvider :: forall eff. Service -> RemoveClientIDFromOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified client ID (also known as audience) from the list of client IDs registered for the specified IAM OpenID Connect (OIDC) provider resource object.</p> <p>This action is idempotent; it does not fail or return an error if you try to remove a client ID that does not exist.</p>
@@ -795,7 +795,7 @@ removeClientIDFromOpenIDConnectProvider :: forall eff. Service -> RemoveClientID
 #### `removeRoleFromInstanceProfile`
 
 ``` purescript
-removeRoleFromInstanceProfile :: forall eff. Service -> RemoveRoleFromInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+removeRoleFromInstanceProfile :: forall eff. Service -> RemoveRoleFromInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified IAM role from the specified EC2 instance profile.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the role you are about to remove from the instance profile. Removing a role from an instance profile that is associated with a running instance might break any applications running on the instance.</p> </important> <p> For more information about IAM roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>. For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
@@ -803,7 +803,7 @@ removeRoleFromInstanceProfile :: forall eff. Service -> RemoveRoleFromInstancePr
 #### `removeUserFromGroup`
 
 ``` purescript
-removeUserFromGroup :: forall eff. Service -> RemoveUserFromGroupRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+removeUserFromGroup :: forall eff. Service -> RemoveUserFromGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Removes the specified user from the specified group.</p>
@@ -819,7 +819,7 @@ resetServiceSpecificCredential :: forall eff. Service -> ResetServiceSpecificCre
 #### `resyncMFADevice`
 
 ``` purescript
-resyncMFADevice :: forall eff. Service -> ResyncMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+resyncMFADevice :: forall eff. Service -> ResyncMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Synchronizes the specified MFA device with its IAM resource object on the AWS servers.</p> <p>For more information about creating and working with virtual MFA devices, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Using a Virtual MFA Device</a> in the <i>IAM User Guide</i>.</p>
@@ -827,7 +827,7 @@ resyncMFADevice :: forall eff. Service -> ResyncMFADeviceRequest -> Aff (excepti
 #### `setDefaultPolicyVersion`
 
 ``` purescript
-setDefaultPolicyVersion :: forall eff. Service -> SetDefaultPolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+setDefaultPolicyVersion :: forall eff. Service -> SetDefaultPolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Sets the specified version of the specified policy as the policy's default (operative) version.</p> <p>This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API.</p> <p>For information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -851,7 +851,7 @@ simulatePrincipalPolicy :: forall eff. Service -> SimulatePrincipalPolicyRequest
 #### `updateAccessKey`
 
 ``` purescript
-updateAccessKey :: forall eff. Service -> UpdateAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateAccessKey :: forall eff. Service -> UpdateAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow.</p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p> <p>For information about rotating keys, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html">Managing Keys and Certificates</a> in the <i>IAM User Guide</i>.</p>
@@ -859,7 +859,7 @@ updateAccessKey :: forall eff. Service -> UpdateAccessKeyRequest -> Aff (excepti
 #### `updateAccountPasswordPolicy`
 
 ``` purescript
-updateAccountPasswordPolicy :: forall eff. Service -> UpdateAccountPasswordPolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateAccountPasswordPolicy :: forall eff. Service -> UpdateAccountPasswordPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Updates the password policy settings for the AWS account.</p> <note> <p>This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the <b>Request Parameters</b> section for each parameter's default value.</p> </note> <p> For more information about using a password policy, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">Managing an IAM Password Policy</a> in the <i>IAM User Guide</i>.</p>
@@ -867,7 +867,7 @@ updateAccountPasswordPolicy :: forall eff. Service -> UpdateAccountPasswordPolic
 #### `updateAssumeRolePolicy`
 
 ``` purescript
-updateAssumeRolePolicy :: forall eff. Service -> UpdateAssumeRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateAssumeRolePolicy :: forall eff. Service -> UpdateAssumeRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Updates the policy that grants an IAM entity permission to assume a role. This is typically referred to as the "role trust policy". For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using Roles to Delegate Permissions and Federate Identities</a>.</p>
@@ -875,7 +875,7 @@ updateAssumeRolePolicy :: forall eff. Service -> UpdateAssumeRolePolicyRequest -
 #### `updateGroup`
 
 ``` purescript
-updateGroup :: forall eff. Service -> UpdateGroupRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateGroup :: forall eff. Service -> UpdateGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Updates the name and/or the path of the specified IAM group.</p> <important> <p> You should understand the implications of changing a group's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html">Renaming Users and Groups</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p>To change an IAM group name the requester must have appropriate permissions on both the source object and the target object. For example, to change "Managers" to "MGRs", the entity making the request must have permission on both "Managers" and "MGRs", or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html">Permissions and Policies</a>. </p> </note>
@@ -883,7 +883,7 @@ updateGroup :: forall eff. Service -> UpdateGroupRequest -> Aff (exception :: EX
 #### `updateLoginProfile`
 
 ``` purescript
-updateLoginProfile :: forall eff. Service -> UpdateLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateLoginProfile :: forall eff. Service -> UpdateLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Changes the password for the specified IAM user.</p> <p>IAM users can change their own passwords by calling <a>ChangePassword</a>. For more information about modifying passwords, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html">Managing Passwords</a> in the <i>IAM User Guide</i>.</p>
@@ -891,7 +891,7 @@ updateLoginProfile :: forall eff. Service -> UpdateLoginProfileRequest -> Aff (e
 #### `updateOpenIDConnectProviderThumbprint`
 
 ``` purescript
-updateOpenIDConnectProviderThumbprint :: forall eff. Service -> UpdateOpenIDConnectProviderThumbprintRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateOpenIDConnectProviderThumbprint :: forall eff. Service -> UpdateOpenIDConnectProviderThumbprintRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Replaces the existing list of server certificate thumbprints associated with an OpenID Connect (OIDC) provider resource object with a new list of thumbprints.</p> <p>The list that you pass with this action completely replaces the existing list of thumbprints. (The lists are not merged.)</p> <p>Typically, you need to update a thumbprint only when the identity provider's certificate changes, which occurs rarely. However, if the provider's certificate <i>does</i> change, any attempt to assume an IAM role that specifies the OIDC provider as a principal fails until the certificate thumbprint is updated.</p> <note> <p>Because trust for the OIDC provider is ultimately derived from the provider's certificate and is validated by the thumbprint, it is a best practice to limit access to the <code>UpdateOpenIDConnectProviderThumbprint</code> action to highly-privileged users.</p> </note>
@@ -915,7 +915,7 @@ updateSAMLProvider :: forall eff. Service -> UpdateSAMLProviderRequest -> Aff (e
 #### `updateSSHPublicKey`
 
 ``` purescript
-updateSSHPublicKey :: forall eff. Service -> UpdateSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateSSHPublicKey :: forall eff. Service -> UpdateSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Sets the status of an IAM user's SSH public key to active or inactive. SSH public keys that are inactive cannot be used for authentication. This action can be used to disable a user's SSH public key as part of a key rotation work flow.</p> <p>The SSH public key affected by this action is used only for authenticating the associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
@@ -923,7 +923,7 @@ updateSSHPublicKey :: forall eff. Service -> UpdateSSHPublicKeyRequest -> Aff (e
 #### `updateServerCertificate`
 
 ``` purescript
-updateServerCertificate :: forall eff. Service -> UpdateServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateServerCertificate :: forall eff. Service -> UpdateServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Updates the name and/or the path of the specified server certificate stored in IAM.</p> <p>For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with Server Certificates</a> in the <i>IAM User Guide</i>.</p> <important> <p>You should understand the implications of changing a server certificate's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts">Renaming a Server Certificate</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p>To change a server certificate name the requester must have appropriate permissions on both the source object and the target object. For example, to change the name from "ProductionCert" to "ProdCert", the entity making the request must have permission on "ProductionCert" and "ProdCert", or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the <i>IAM User Guide</i>.</p> </note>
@@ -931,7 +931,7 @@ updateServerCertificate :: forall eff. Service -> UpdateServerCertificateRequest
 #### `updateServiceSpecificCredential`
 
 ``` purescript
-updateServiceSpecificCredential :: forall eff. Service -> UpdateServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateServiceSpecificCredential :: forall eff. Service -> UpdateServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Sets the status of a service-specific credential to <code>Active</code> or <code>Inactive</code>. Service-specific credentials that are inactive cannot be used for authentication to the service. This action can be used to disable a user’s service-specific credential as part of a credential rotation work flow.</p>
@@ -939,7 +939,7 @@ updateServiceSpecificCredential :: forall eff. Service -> UpdateServiceSpecificC
 #### `updateSigningCertificate`
 
 ``` purescript
-updateSigningCertificate :: forall eff. Service -> UpdateSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateSigningCertificate :: forall eff. Service -> UpdateSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Changes the status of the specified user signing certificate from active to disabled, or vice versa. This action can be used to disable an IAM user's signing certificate as part of a certificate rotation work flow.</p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p>
@@ -947,7 +947,7 @@ updateSigningCertificate :: forall eff. Service -> UpdateSigningCertificateReque
 #### `updateUser`
 
 ``` purescript
-updateUser :: forall eff. Service -> UpdateUserRequest -> Aff (exception :: EXCEPTION | eff) NoOutput
+updateUser :: forall eff. Service -> UpdateUserRequest -> Aff (exception :: EXCEPTION | eff) Unit
 ```
 
 <p>Updates the name and/or the path of the specified IAM user.</p> <important> <p> You should understand the implications of changing an IAM user's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming">Renaming an IAM User</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html">Renaming an IAM Group</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html">Permissions and Policies</a>. </p> </note>

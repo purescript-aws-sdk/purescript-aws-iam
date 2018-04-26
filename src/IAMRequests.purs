@@ -13,43 +13,43 @@ import AWS.IAM.Types as IAMTypes
 
 
 -- | <p>Adds a new client ID (also known as audience) to the list of client IDs already registered for the specified IAM OpenID Connect (OIDC) provider resource.</p> <p>This action is idempotent; it does not fail or return an error if you add an existing client ID to the provider.</p>
-addClientIDToOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.AddClientIDToOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+addClientIDToOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.AddClientIDToOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 addClientIDToOpenIDConnectProvider (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "addClientIDToOpenIDConnectProvider"
 
 
 -- | <p>Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role, and this limit cannot be increased.</p> <note> <p>The caller of this API must be granted the <code>PassRole</code> permission on the IAM role by a permission policy.</p> </note> <p>For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>. For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
-addRoleToInstanceProfile :: forall eff. IAM.Service -> IAMTypes.AddRoleToInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+addRoleToInstanceProfile :: forall eff. IAM.Service -> IAMTypes.AddRoleToInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 addRoleToInstanceProfile (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "addRoleToInstanceProfile"
 
 
 -- | <p>Adds the specified user to the specified group.</p>
-addUserToGroup :: forall eff. IAM.Service -> IAMTypes.AddUserToGroupRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+addUserToGroup :: forall eff. IAM.Service -> IAMTypes.AddUserToGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 addUserToGroup (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "addUserToGroup"
 
 
 -- | <p>Attaches the specified managed policy to the specified IAM group.</p> <p>You use this API to attach a managed policy to a group. To embed an inline policy in a group, use <a>PutGroupPolicy</a>.</p> <p>For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-attachGroupPolicy :: forall eff. IAM.Service -> IAMTypes.AttachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+attachGroupPolicy :: forall eff. IAM.Service -> IAMTypes.AttachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 attachGroupPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "attachGroupPolicy"
 
 
 -- | <p>Attaches the specified managed policy to the specified IAM role. When you attach a managed policy to a role, the managed policy becomes part of the role's permission (access) policy.</p> <note> <p>You cannot use a managed policy as the role's trust policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>.</p> </note> <p>Use this API to attach a <i>managed</i> policy to a role. To embed an inline policy in a role, use <a>PutRolePolicy</a>. For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-attachRolePolicy :: forall eff. IAM.Service -> IAMTypes.AttachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+attachRolePolicy :: forall eff. IAM.Service -> IAMTypes.AttachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 attachRolePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "attachRolePolicy"
 
 
 -- | <p>Attaches the specified managed policy to the specified user.</p> <p>You use this API to attach a <i>managed</i> policy to a user. To embed an inline policy in a user, use <a>PutUserPolicy</a>.</p> <p>For more information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-attachUserPolicy :: forall eff. IAM.Service -> IAMTypes.AttachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+attachUserPolicy :: forall eff. IAM.Service -> IAMTypes.AttachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 attachUserPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "attachUserPolicy"
 
 
 -- | <p>Changes the password of the IAM user who is calling this action. The root account password is not affected by this action.</p> <p>To change the password for a different user, see <a>UpdateLoginProfile</a>. For more information about modifying passwords, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html">Managing Passwords</a> in the <i>IAM User Guide</i>.</p>
-changePassword :: forall eff. IAM.Service -> IAMTypes.ChangePasswordRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+changePassword :: forall eff. IAM.Service -> IAMTypes.ChangePasswordRequest -> Aff (exception :: EXCEPTION | eff) Unit
 changePassword (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "changePassword"
 
@@ -61,7 +61,7 @@ createAccessKey (IAM.Service serviceImpl) = AWS.request serviceImpl method  wher
 
 
 -- | <p>Creates an alias for your AWS account. For information about using an AWS account alias, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>.</p>
-createAccountAlias :: forall eff. IAM.Service -> IAMTypes.CreateAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+createAccountAlias :: forall eff. IAM.Service -> IAMTypes.CreateAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Unit
 createAccountAlias (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "createAccountAlias"
 
@@ -139,97 +139,97 @@ createVirtualMFADevice (IAM.Service serviceImpl) = AWS.request serviceImpl metho
 
 
 -- | <p>Deactivates the specified MFA device and removes it from association with the user name for which it was originally enabled.</p> <p>For more information about creating and working with virtual MFA devices, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Using a Virtual MFA Device</a> in the <i>IAM User Guide</i>.</p>
-deactivateMFADevice :: forall eff. IAM.Service -> IAMTypes.DeactivateMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deactivateMFADevice :: forall eff. IAM.Service -> IAMTypes.DeactivateMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deactivateMFADevice (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deactivateMFADevice"
 
 
 -- | <p>Deletes the access key pair associated with the specified IAM user.</p> <p>If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p>
-deleteAccessKey :: forall eff. IAM.Service -> IAMTypes.DeleteAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteAccessKey :: forall eff. IAM.Service -> IAMTypes.DeleteAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteAccessKey (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteAccessKey"
 
 
 -- | <p> Deletes the specified AWS account alias. For information about using an AWS account alias, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an Alias for Your AWS Account ID</a> in the <i>IAM User Guide</i>.</p>
-deleteAccountAlias :: forall eff. IAM.Service -> IAMTypes.DeleteAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteAccountAlias :: forall eff. IAM.Service -> IAMTypes.DeleteAccountAliasRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteAccountAlias (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteAccountAlias"
 
 
 -- | <p>Deletes the password policy for the AWS account. There are no parameters.</p>
-deleteAccountPasswordPolicy :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) Types.NoOutput
-deleteAccountPasswordPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method (Types.NoInput unit) where
+deleteAccountPasswordPolicy :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) Unit
+deleteAccountPasswordPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method unit where
     method = AWS.MethodName "deleteAccountPasswordPolicy"
 
 
 -- | <p>Deletes the specified IAM group. The group must not contain any users or have any attached policies.</p>
-deleteGroup :: forall eff. IAM.Service -> IAMTypes.DeleteGroupRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteGroup :: forall eff. IAM.Service -> IAMTypes.DeleteGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteGroup (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteGroup"
 
 
 -- | <p>Deletes the specified inline policy that is embedded in the specified IAM group.</p> <p>A group can also have managed policies attached to it. To detach a managed policy from a group, use <a>DetachGroupPolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-deleteGroupPolicy :: forall eff. IAM.Service -> IAMTypes.DeleteGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteGroupPolicy :: forall eff. IAM.Service -> IAMTypes.DeleteGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteGroupPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteGroupPolicy"
 
 
 -- | <p>Deletes the specified instance profile. The instance profile must not have an associated role.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the instance profile you are about to delete. Deleting a role or instance profile that is associated with a running instance will break any applications running on the instance.</p> </important> <p>For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
-deleteInstanceProfile :: forall eff. IAM.Service -> IAMTypes.DeleteInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteInstanceProfile :: forall eff. IAM.Service -> IAMTypes.DeleteInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteInstanceProfile (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteInstanceProfile"
 
 
 -- | <p>Deletes the password for the specified IAM user, which terminates the user's ability to access AWS services through the AWS Management Console.</p> <important> <p> Deleting a user's password does not prevent a user from accessing AWS through the command line interface or the API. To prevent all user access you must also either make any access keys inactive or delete them. For more information about making keys inactive or deleting them, see <a>UpdateAccessKey</a> and <a>DeleteAccessKey</a>. </p> </important>
-deleteLoginProfile :: forall eff. IAM.Service -> IAMTypes.DeleteLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteLoginProfile :: forall eff. IAM.Service -> IAMTypes.DeleteLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteLoginProfile (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteLoginProfile"
 
 
 -- | <p>Deletes an OpenID Connect identity provider (IdP) resource object in IAM.</p> <p>Deleting an IAM OIDC provider resource does not update any roles that reference the provider as a principal in their trust policies. Any attempt to assume a role that references a deleted provider fails.</p> <p>This action is idempotent; it does not fail or return an error if you call the action for a provider that does not exist.</p>
-deleteOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.DeleteOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.DeleteOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteOpenIDConnectProvider (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteOpenIDConnectProvider"
 
 
 -- | <p>Deletes the specified managed policy.</p> <p>Before you can delete a managed policy, you must first detach the policy from all users, groups, and roles that it is attached to, and you must delete all of the policy's versions. The following steps describe the process for deleting a managed policy:</p> <ul> <li> <p>Detach the policy from all users, groups, and roles that the policy is attached to, using the <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a> APIs. To list all the users, groups, and roles that a policy is attached to, use <a>ListEntitiesForPolicy</a>.</p> </li> <li> <p>Delete all versions of the policy using <a>DeletePolicyVersion</a>. To list the policy's versions, use <a>ListPolicyVersions</a>. You cannot use <a>DeletePolicyVersion</a> to delete the version that is marked as the default version. You delete the policy's default version in the next step of the process.</p> </li> <li> <p>Delete the policy (this automatically deletes the policy's default version) using this API.</p> </li> </ul> <p>For information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-deletePolicy :: forall eff. IAM.Service -> IAMTypes.DeletePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deletePolicy :: forall eff. IAM.Service -> IAMTypes.DeletePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deletePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deletePolicy"
 
 
 -- | <p>Deletes the specified version from the specified managed policy.</p> <p>You cannot delete the default version from a policy using this API. To delete the default version from a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use <a>ListPolicyVersions</a>.</p> <p>For information about versions for managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the <i>IAM User Guide</i>.</p>
-deletePolicyVersion :: forall eff. IAM.Service -> IAMTypes.DeletePolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deletePolicyVersion :: forall eff. IAM.Service -> IAMTypes.DeletePolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deletePolicyVersion (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deletePolicyVersion"
 
 
 -- | <p>Deletes the specified role. The role must not have any policies attached. For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the role you are about to delete. Deleting a role or instance profile that is associated with a running instance will break any applications running on the instance.</p> </important>
-deleteRole :: forall eff. IAM.Service -> IAMTypes.DeleteRoleRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteRole :: forall eff. IAM.Service -> IAMTypes.DeleteRoleRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteRole (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteRole"
 
 
 -- | <p>Deletes the specified inline policy that is embedded in the specified IAM role.</p> <p>A role can also have managed policies attached to it. To detach a managed policy from a role, use <a>DetachRolePolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-deleteRolePolicy :: forall eff. IAM.Service -> IAMTypes.DeleteRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteRolePolicy :: forall eff. IAM.Service -> IAMTypes.DeleteRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteRolePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteRolePolicy"
 
 
 -- | <p>Deletes a SAML provider resource in IAM.</p> <p>Deleting the provider resource from IAM does not update any roles that reference the SAML provider resource's ARN as a principal in their trust policies. Any attempt to assume a role that references a non-existent provider resource ARN fails.</p> <note> <p> This operation requires <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p> </note>
-deleteSAMLProvider :: forall eff. IAM.Service -> IAMTypes.DeleteSAMLProviderRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteSAMLProvider :: forall eff. IAM.Service -> IAMTypes.DeleteSAMLProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteSAMLProvider (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteSAMLProvider"
 
 
 -- | <p>Deletes the specified SSH public key.</p> <p>The SSH public key deleted by this action is used only for authenticating the associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
-deleteSSHPublicKey :: forall eff. IAM.Service -> IAMTypes.DeleteSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteSSHPublicKey :: forall eff. IAM.Service -> IAMTypes.DeleteSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteSSHPublicKey (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteSSHPublicKey"
 
 
 -- | <p>Deletes the specified server certificate.</p> <p>For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with Server Certificates</a> in the <i>IAM User Guide</i>.</p> <important> <p> If you are using a server certificate with Elastic Load Balancing, deleting the certificate could have implications for your application. If Elastic Load Balancing doesn't detect the deletion of bound certificates, it may continue to use the certificates. This could cause Elastic Load Balancing to stop accepting traffic. We recommend that you remove the reference to the certificate from Elastic Load Balancing before using this command to delete the certificate. For more information, go to <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html">DeleteLoadBalancerListeners</a> in the <i>Elastic Load Balancing API Reference</i>.</p> </important>
-deleteServerCertificate :: forall eff. IAM.Service -> IAMTypes.DeleteServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteServerCertificate :: forall eff. IAM.Service -> IAMTypes.DeleteServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteServerCertificate (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteServerCertificate"
 
@@ -241,62 +241,62 @@ deleteServiceLinkedRole (IAM.Service serviceImpl) = AWS.request serviceImpl meth
 
 
 -- | <p>Deletes the specified service-specific credential.</p>
-deleteServiceSpecificCredential :: forall eff. IAM.Service -> IAMTypes.DeleteServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteServiceSpecificCredential :: forall eff. IAM.Service -> IAMTypes.DeleteServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteServiceSpecificCredential (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteServiceSpecificCredential"
 
 
 -- | <p>Deletes a signing certificate associated with the specified IAM user.</p> <p>If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated IAM users.</p>
-deleteSigningCertificate :: forall eff. IAM.Service -> IAMTypes.DeleteSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteSigningCertificate :: forall eff. IAM.Service -> IAMTypes.DeleteSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteSigningCertificate (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteSigningCertificate"
 
 
 -- | <p>Deletes the specified IAM user. The user must not belong to any groups or have any access keys, signing certificates, or attached policies.</p>
-deleteUser :: forall eff. IAM.Service -> IAMTypes.DeleteUserRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteUser :: forall eff. IAM.Service -> IAMTypes.DeleteUserRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteUser (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteUser"
 
 
 -- | <p>Deletes the specified inline policy that is embedded in the specified IAM user.</p> <p>A user can also have managed policies attached to it. To detach a managed policy from a user, use <a>DetachUserPolicy</a>. For more information about policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-deleteUserPolicy :: forall eff. IAM.Service -> IAMTypes.DeleteUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteUserPolicy :: forall eff. IAM.Service -> IAMTypes.DeleteUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteUserPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteUserPolicy"
 
 
 -- | <p>Deletes a virtual MFA device.</p> <note> <p> You must deactivate a user's virtual MFA device before you can delete it. For information about deactivating MFA devices, see <a>DeactivateMFADevice</a>. </p> </note>
-deleteVirtualMFADevice :: forall eff. IAM.Service -> IAMTypes.DeleteVirtualMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+deleteVirtualMFADevice :: forall eff. IAM.Service -> IAMTypes.DeleteVirtualMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 deleteVirtualMFADevice (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "deleteVirtualMFADevice"
 
 
 -- | <p>Removes the specified managed policy from the specified IAM group.</p> <p>A group can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteGroupPolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-detachGroupPolicy :: forall eff. IAM.Service -> IAMTypes.DetachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+detachGroupPolicy :: forall eff. IAM.Service -> IAMTypes.DetachGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 detachGroupPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "detachGroupPolicy"
 
 
 -- | <p>Removes the specified managed policy from the specified role.</p> <p>A role can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteRolePolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-detachRolePolicy :: forall eff. IAM.Service -> IAMTypes.DetachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+detachRolePolicy :: forall eff. IAM.Service -> IAMTypes.DetachRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 detachRolePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "detachRolePolicy"
 
 
 -- | <p>Removes the specified managed policy from the specified user.</p> <p>A user can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteUserPolicy</a> API. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-detachUserPolicy :: forall eff. IAM.Service -> IAMTypes.DetachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+detachUserPolicy :: forall eff. IAM.Service -> IAMTypes.DetachUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 detachUserPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "detachUserPolicy"
 
 
 -- | <p>Enables the specified MFA device and associates it with the specified IAM user. When enabled, the MFA device is required for every subsequent login by the IAM user associated with the device.</p>
-enableMFADevice :: forall eff. IAM.Service -> IAMTypes.EnableMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+enableMFADevice :: forall eff. IAM.Service -> IAMTypes.EnableMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 enableMFADevice (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "enableMFADevice"
 
 
 -- | <p> Generates a credential report for the AWS account. For more information about the credential report, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>
 generateCredentialReport :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) IAMTypes.GenerateCredentialReportResponse
-generateCredentialReport (IAM.Service serviceImpl) = AWS.request serviceImpl method (Types.NoInput unit) where
+generateCredentialReport (IAM.Service serviceImpl) = AWS.request serviceImpl method unit where
     method = AWS.MethodName "generateCredentialReport"
 
 
@@ -314,13 +314,13 @@ getAccountAuthorizationDetails (IAM.Service serviceImpl) = AWS.request serviceIm
 
 -- | <p>Retrieves the password policy for the AWS account. For more information about using a password policy, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">Managing an IAM Password Policy</a>.</p>
 getAccountPasswordPolicy :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) IAMTypes.GetAccountPasswordPolicyResponse
-getAccountPasswordPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method (Types.NoInput unit) where
+getAccountPasswordPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method unit where
     method = AWS.MethodName "getAccountPasswordPolicy"
 
 
 -- | <p>Retrieves information about IAM entity usage and IAM quotas in the AWS account.</p> <p> For information about limitations on IAM entities, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p>
 getAccountSummary :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) IAMTypes.GetAccountSummaryResponse
-getAccountSummary (IAM.Service serviceImpl) = AWS.request serviceImpl method (Types.NoInput unit) where
+getAccountSummary (IAM.Service serviceImpl) = AWS.request serviceImpl method unit where
     method = AWS.MethodName "getAccountSummary"
 
 
@@ -338,7 +338,7 @@ getContextKeysForPrincipalPolicy (IAM.Service serviceImpl) = AWS.request service
 
 -- | <p> Retrieves a credential report for the AWS account. For more information about the credential report, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>
 getCredentialReport :: forall eff. IAM.Service ->  Aff (exception :: EXCEPTION | eff) IAMTypes.GetCredentialReportResponse
-getCredentialReport (IAM.Service serviceImpl) = AWS.request serviceImpl method (Types.NoInput unit) where
+getCredentialReport (IAM.Service serviceImpl) = AWS.request serviceImpl method unit where
     method = AWS.MethodName "getCredentialReport"
 
 
@@ -583,37 +583,37 @@ listVirtualMFADevices (IAM.Service serviceImpl) = AWS.request serviceImpl method
 
 
 -- | <p>Adds or updates an inline policy document that is embedded in the specified IAM group.</p> <p>A user can also have managed policies attached to it. To attach a managed policy to a group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed in a group, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutGroupPolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
-putGroupPolicy :: forall eff. IAM.Service -> IAMTypes.PutGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+putGroupPolicy :: forall eff. IAM.Service -> IAMTypes.PutGroupPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 putGroupPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "putGroupPolicy"
 
 
 -- | <p>Adds or updates an inline policy document that is embedded in the specified IAM role.</p> <p>When you embed an inline policy in a role, the inline policy is used as part of the role's access (permissions) policy. The role's trust policy is created at the same time as the role, using <a>CreateRole</a>. You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>. For more information about IAM roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using Roles to Delegate Permissions and Federate Identities</a>.</p> <p>A role can also have a managed policy attached to it. To attach a managed policy to a role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed with a role, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutRolePolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
-putRolePolicy :: forall eff. IAM.Service -> IAMTypes.PutRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+putRolePolicy :: forall eff. IAM.Service -> IAMTypes.PutRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 putRolePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "putRolePolicy"
 
 
 -- | <p>Adds or updates an inline policy document that is embedded in the specified IAM user.</p> <p>An IAM user can also have a managed policy attached to it. To attach a managed policy to a user, use <a>AttachUserPolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p> <p>For information about limits on the number of inline policies that you can embed in a user, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the <i>IAM User Guide</i>.</p> <note> <p>Because policy documents can be large, you should use POST rather than GET when calling <code>PutUserPolicy</code>. For general information about using the Query API with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the <i>IAM User Guide</i>.</p> </note>
-putUserPolicy :: forall eff. IAM.Service -> IAMTypes.PutUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+putUserPolicy :: forall eff. IAM.Service -> IAMTypes.PutUserPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 putUserPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "putUserPolicy"
 
 
 -- | <p>Removes the specified client ID (also known as audience) from the list of client IDs registered for the specified IAM OpenID Connect (OIDC) provider resource object.</p> <p>This action is idempotent; it does not fail or return an error if you try to remove a client ID that does not exist.</p>
-removeClientIDFromOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.RemoveClientIDFromOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+removeClientIDFromOpenIDConnectProvider :: forall eff. IAM.Service -> IAMTypes.RemoveClientIDFromOpenIDConnectProviderRequest -> Aff (exception :: EXCEPTION | eff) Unit
 removeClientIDFromOpenIDConnectProvider (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "removeClientIDFromOpenIDConnectProvider"
 
 
 -- | <p>Removes the specified IAM role from the specified EC2 instance profile.</p> <important> <p>Make sure you do not have any Amazon EC2 instances running with the role you are about to remove from the instance profile. Removing a role from an instance profile that is associated with a running instance might break any applications running on the instance.</p> </important> <p> For more information about IAM roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with Roles</a>. For more information about instance profiles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
-removeRoleFromInstanceProfile :: forall eff. IAM.Service -> IAMTypes.RemoveRoleFromInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+removeRoleFromInstanceProfile :: forall eff. IAM.Service -> IAMTypes.RemoveRoleFromInstanceProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 removeRoleFromInstanceProfile (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "removeRoleFromInstanceProfile"
 
 
 -- | <p>Removes the specified user from the specified group.</p>
-removeUserFromGroup :: forall eff. IAM.Service -> IAMTypes.RemoveUserFromGroupRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+removeUserFromGroup :: forall eff. IAM.Service -> IAMTypes.RemoveUserFromGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 removeUserFromGroup (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "removeUserFromGroup"
 
@@ -625,13 +625,13 @@ resetServiceSpecificCredential (IAM.Service serviceImpl) = AWS.request serviceIm
 
 
 -- | <p>Synchronizes the specified MFA device with its IAM resource object on the AWS servers.</p> <p>For more information about creating and working with virtual MFA devices, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Using a Virtual MFA Device</a> in the <i>IAM User Guide</i>.</p>
-resyncMFADevice :: forall eff. IAM.Service -> IAMTypes.ResyncMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+resyncMFADevice :: forall eff. IAM.Service -> IAMTypes.ResyncMFADeviceRequest -> Aff (exception :: EXCEPTION | eff) Unit
 resyncMFADevice (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "resyncMFADevice"
 
 
 -- | <p>Sets the specified version of the specified policy as the policy's default (operative) version.</p> <p>This action affects all users, groups, and roles that the policy is attached to. To list the users, groups, and roles that the policy is attached to, use the <a>ListEntitiesForPolicy</a> API.</p> <p>For information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>
-setDefaultPolicyVersion :: forall eff. IAM.Service -> IAMTypes.SetDefaultPolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+setDefaultPolicyVersion :: forall eff. IAM.Service -> IAMTypes.SetDefaultPolicyVersionRequest -> Aff (exception :: EXCEPTION | eff) Unit
 setDefaultPolicyVersion (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "setDefaultPolicyVersion"
 
@@ -649,37 +649,37 @@ simulatePrincipalPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl meth
 
 
 -- | <p>Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a key rotation work flow.</p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p> <p>For information about rotating keys, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html">Managing Keys and Certificates</a> in the <i>IAM User Guide</i>.</p>
-updateAccessKey :: forall eff. IAM.Service -> IAMTypes.UpdateAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateAccessKey :: forall eff. IAM.Service -> IAMTypes.UpdateAccessKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateAccessKey (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateAccessKey"
 
 
 -- | <p>Updates the password policy settings for the AWS account.</p> <note> <p>This action does not support partial updates. No parameters are required, but if you do not specify a parameter, that parameter's value reverts to its default value. See the <b>Request Parameters</b> section for each parameter's default value.</p> </note> <p> For more information about using a password policy, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">Managing an IAM Password Policy</a> in the <i>IAM User Guide</i>.</p>
-updateAccountPasswordPolicy :: forall eff. IAM.Service -> IAMTypes.UpdateAccountPasswordPolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateAccountPasswordPolicy :: forall eff. IAM.Service -> IAMTypes.UpdateAccountPasswordPolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateAccountPasswordPolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateAccountPasswordPolicy"
 
 
 -- | <p>Updates the policy that grants an IAM entity permission to assume a role. This is typically referred to as the "role trust policy". For more information about roles, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using Roles to Delegate Permissions and Federate Identities</a>.</p>
-updateAssumeRolePolicy :: forall eff. IAM.Service -> IAMTypes.UpdateAssumeRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateAssumeRolePolicy :: forall eff. IAM.Service -> IAMTypes.UpdateAssumeRolePolicyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateAssumeRolePolicy (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateAssumeRolePolicy"
 
 
 -- | <p>Updates the name and/or the path of the specified IAM group.</p> <important> <p> You should understand the implications of changing a group's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html">Renaming Users and Groups</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p>To change an IAM group name the requester must have appropriate permissions on both the source object and the target object. For example, to change "Managers" to "MGRs", the entity making the request must have permission on both "Managers" and "MGRs", or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html">Permissions and Policies</a>. </p> </note>
-updateGroup :: forall eff. IAM.Service -> IAMTypes.UpdateGroupRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateGroup :: forall eff. IAM.Service -> IAMTypes.UpdateGroupRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateGroup (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateGroup"
 
 
 -- | <p>Changes the password for the specified IAM user.</p> <p>IAM users can change their own passwords by calling <a>ChangePassword</a>. For more information about modifying passwords, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html">Managing Passwords</a> in the <i>IAM User Guide</i>.</p>
-updateLoginProfile :: forall eff. IAM.Service -> IAMTypes.UpdateLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateLoginProfile :: forall eff. IAM.Service -> IAMTypes.UpdateLoginProfileRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateLoginProfile (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateLoginProfile"
 
 
 -- | <p>Replaces the existing list of server certificate thumbprints associated with an OpenID Connect (OIDC) provider resource object with a new list of thumbprints.</p> <p>The list that you pass with this action completely replaces the existing list of thumbprints. (The lists are not merged.)</p> <p>Typically, you need to update a thumbprint only when the identity provider's certificate changes, which occurs rarely. However, if the provider's certificate <i>does</i> change, any attempt to assume an IAM role that specifies the OIDC provider as a principal fails until the certificate thumbprint is updated.</p> <note> <p>Because trust for the OIDC provider is ultimately derived from the provider's certificate and is validated by the thumbprint, it is a best practice to limit access to the <code>UpdateOpenIDConnectProviderThumbprint</code> action to highly-privileged users.</p> </note>
-updateOpenIDConnectProviderThumbprint :: forall eff. IAM.Service -> IAMTypes.UpdateOpenIDConnectProviderThumbprintRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateOpenIDConnectProviderThumbprint :: forall eff. IAM.Service -> IAMTypes.UpdateOpenIDConnectProviderThumbprintRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateOpenIDConnectProviderThumbprint (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateOpenIDConnectProviderThumbprint"
 
@@ -697,31 +697,31 @@ updateSAMLProvider (IAM.Service serviceImpl) = AWS.request serviceImpl method  w
 
 
 -- | <p>Sets the status of an IAM user's SSH public key to active or inactive. SSH public keys that are inactive cannot be used for authentication. This action can be used to disable a user's SSH public key as part of a key rotation work flow.</p> <p>The SSH public key affected by this action is used only for authenticating the associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
-updateSSHPublicKey :: forall eff. IAM.Service -> IAMTypes.UpdateSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateSSHPublicKey :: forall eff. IAM.Service -> IAMTypes.UpdateSSHPublicKeyRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateSSHPublicKey (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateSSHPublicKey"
 
 
 -- | <p>Updates the name and/or the path of the specified server certificate stored in IAM.</p> <p>For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with Server Certificates</a> in the <i>IAM User Guide</i>.</p> <important> <p>You should understand the implications of changing a server certificate's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts">Renaming a Server Certificate</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p>To change a server certificate name the requester must have appropriate permissions on both the source object and the target object. For example, to change the name from "ProductionCert" to "ProdCert", the entity making the request must have permission on "ProductionCert" and "ProdCert", or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the <i>IAM User Guide</i>.</p> </note>
-updateServerCertificate :: forall eff. IAM.Service -> IAMTypes.UpdateServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateServerCertificate :: forall eff. IAM.Service -> IAMTypes.UpdateServerCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateServerCertificate (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateServerCertificate"
 
 
 -- | <p>Sets the status of a service-specific credential to <code>Active</code> or <code>Inactive</code>. Service-specific credentials that are inactive cannot be used for authentication to the service. This action can be used to disable a user’s service-specific credential as part of a credential rotation work flow.</p>
-updateServiceSpecificCredential :: forall eff. IAM.Service -> IAMTypes.UpdateServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateServiceSpecificCredential :: forall eff. IAM.Service -> IAMTypes.UpdateServiceSpecificCredentialRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateServiceSpecificCredential (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateServiceSpecificCredential"
 
 
 -- | <p>Changes the status of the specified user signing certificate from active to disabled, or vice versa. This action can be used to disable an IAM user's signing certificate as part of a certificate rotation work flow.</p> <p>If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS access key ID used to sign the request. Because this action works for access keys under the AWS account, you can use this action to manage root credentials even if the AWS account has no associated users.</p>
-updateSigningCertificate :: forall eff. IAM.Service -> IAMTypes.UpdateSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateSigningCertificate :: forall eff. IAM.Service -> IAMTypes.UpdateSigningCertificateRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateSigningCertificate (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateSigningCertificate"
 
 
 -- | <p>Updates the name and/or the path of the specified IAM user.</p> <important> <p> You should understand the implications of changing an IAM user's path or name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming">Renaming an IAM User</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html">Renaming an IAM Group</a> in the <i>IAM User Guide</i>.</p> </important> <note> <p> To change a user name the requester must have appropriate permissions on both the source object and the target object. For example, to change Bob to Robert, the entity making the request must have permission on Bob and Robert, or must have permission on all (*). For more information about permissions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html">Permissions and Policies</a>. </p> </note>
-updateUser :: forall eff. IAM.Service -> IAMTypes.UpdateUserRequest -> Aff (exception :: EXCEPTION | eff) Types.NoOutput
+updateUser :: forall eff. IAM.Service -> IAMTypes.UpdateUserRequest -> Aff (exception :: EXCEPTION | eff) Unit
 updateUser (IAM.Service serviceImpl) = AWS.request serviceImpl method  where
     method = AWS.MethodName "updateUser"
 

@@ -5,7 +5,6 @@ import Prelude
 import Data.Foreign.Class (class Decode, class Encode)
 import Data.Foreign.Generic (defaultOptions, genericDecode, genericEncode)
 import Data.Foreign.Generic.Types (Options)
-import Data.Foreign.NullOrUndefined (NullOrUndefined(..))
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.Maybe (Maybe(..))
@@ -24,7 +23,7 @@ newtype AccessKey = AccessKey
   , "AccessKeyId" :: (AccessKeyIdType')
   , "Status" :: (StatusType')
   , "SecretAccessKey" :: (AccessKeySecretType')
-  , "CreateDate" :: NullOrUndefined (DateType')
+  , "CreateDate" :: Maybe (DateType')
   }
 derive instance newtypeAccessKey :: Newtype AccessKey _
 derive instance repGenericAccessKey :: Generic AccessKey _
@@ -34,12 +33,12 @@ instance encodeAccessKey :: Encode AccessKey where encode = genericEncode option
 
 -- | Constructs AccessKey from required parameters
 newAccessKey :: AccessKeyIdType' -> AccessKeySecretType' -> StatusType' -> UserNameType' -> AccessKey
-newAccessKey _AccessKeyId _SecretAccessKey _Status _UserName = AccessKey { "AccessKeyId": _AccessKeyId, "SecretAccessKey": _SecretAccessKey, "Status": _Status, "UserName": _UserName, "CreateDate": (NullOrUndefined Nothing) }
+newAccessKey _AccessKeyId _SecretAccessKey _Status _UserName = AccessKey { "AccessKeyId": _AccessKeyId, "SecretAccessKey": _SecretAccessKey, "Status": _Status, "UserName": _UserName, "CreateDate": Nothing }
 
 -- | Constructs AccessKey's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newAccessKey' :: AccessKeyIdType' -> AccessKeySecretType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') , "SecretAccessKey" :: (AccessKeySecretType') , "CreateDate" :: NullOrUndefined (DateType') } -> {"UserName" :: (UserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') , "SecretAccessKey" :: (AccessKeySecretType') , "CreateDate" :: NullOrUndefined (DateType') } ) -> AccessKey
-newAccessKey' _AccessKeyId _SecretAccessKey _Status _UserName customize = (AccessKey <<< customize) { "AccessKeyId": _AccessKeyId, "SecretAccessKey": _SecretAccessKey, "Status": _Status, "UserName": _UserName, "CreateDate": (NullOrUndefined Nothing) }
+newAccessKey' :: AccessKeyIdType' -> AccessKeySecretType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') , "SecretAccessKey" :: (AccessKeySecretType') , "CreateDate" :: Maybe (DateType') } -> {"UserName" :: (UserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') , "SecretAccessKey" :: (AccessKeySecretType') , "CreateDate" :: Maybe (DateType') } ) -> AccessKey
+newAccessKey' _AccessKeyId _SecretAccessKey _Status _UserName customize = (AccessKey <<< customize) { "AccessKeyId": _AccessKeyId, "SecretAccessKey": _SecretAccessKey, "Status": _Status, "UserName": _UserName, "CreateDate": Nothing }
 
 
 
@@ -68,10 +67,10 @@ newAccessKeyLastUsed' _LastUsedDate _Region _ServiceName customize = (AccessKeyL
 
 -- | <p>Contains information about an AWS access key, without its secret key.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> action.</p>
 newtype AccessKeyMetadata = AccessKeyMetadata 
-  { "UserName" :: NullOrUndefined (UserNameType')
-  , "AccessKeyId" :: NullOrUndefined (AccessKeyIdType')
-  , "Status" :: NullOrUndefined (StatusType')
-  , "CreateDate" :: NullOrUndefined (DateType')
+  { "UserName" :: Maybe (UserNameType')
+  , "AccessKeyId" :: Maybe (AccessKeyIdType')
+  , "Status" :: Maybe (StatusType')
+  , "CreateDate" :: Maybe (DateType')
   }
 derive instance newtypeAccessKeyMetadata :: Newtype AccessKeyMetadata _
 derive instance repGenericAccessKeyMetadata :: Generic AccessKeyMetadata _
@@ -81,12 +80,12 @@ instance encodeAccessKeyMetadata :: Encode AccessKeyMetadata where encode = gene
 
 -- | Constructs AccessKeyMetadata from required parameters
 newAccessKeyMetadata :: AccessKeyMetadata
-newAccessKeyMetadata  = AccessKeyMetadata { "AccessKeyId": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "Status": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newAccessKeyMetadata  = AccessKeyMetadata { "AccessKeyId": Nothing, "CreateDate": Nothing, "Status": Nothing, "UserName": Nothing }
 
 -- | Constructs AccessKeyMetadata's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newAccessKeyMetadata' :: ( { "UserName" :: NullOrUndefined (UserNameType') , "AccessKeyId" :: NullOrUndefined (AccessKeyIdType') , "Status" :: NullOrUndefined (StatusType') , "CreateDate" :: NullOrUndefined (DateType') } -> {"UserName" :: NullOrUndefined (UserNameType') , "AccessKeyId" :: NullOrUndefined (AccessKeyIdType') , "Status" :: NullOrUndefined (StatusType') , "CreateDate" :: NullOrUndefined (DateType') } ) -> AccessKeyMetadata
-newAccessKeyMetadata'  customize = (AccessKeyMetadata <<< customize) { "AccessKeyId": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "Status": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newAccessKeyMetadata' :: ( { "UserName" :: Maybe (UserNameType') , "AccessKeyId" :: Maybe (AccessKeyIdType') , "Status" :: Maybe (StatusType') , "CreateDate" :: Maybe (DateType') } -> {"UserName" :: Maybe (UserNameType') , "AccessKeyId" :: Maybe (AccessKeyIdType') , "Status" :: Maybe (StatusType') , "CreateDate" :: Maybe (DateType') } ) -> AccessKeyMetadata
+newAccessKeyMetadata'  customize = (AccessKeyMetadata <<< customize) { "AccessKeyId": Nothing, "CreateDate": Nothing, "Status": Nothing, "UserName": Nothing }
 
 
 
@@ -245,8 +244,8 @@ newAttachUserPolicyRequest' _PolicyArn _UserName customize = (AttachUserPolicyRe
 
 -- | <p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, <a>ListAttachedUserPolicies</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype AttachedPolicy = AttachedPolicy 
-  { "PolicyName" :: NullOrUndefined (PolicyNameType')
-  , "PolicyArn" :: NullOrUndefined (ArnType')
+  { "PolicyName" :: Maybe (PolicyNameType')
+  , "PolicyArn" :: Maybe (ArnType')
   }
 derive instance newtypeAttachedPolicy :: Newtype AttachedPolicy _
 derive instance repGenericAttachedPolicy :: Generic AttachedPolicy _
@@ -256,12 +255,12 @@ instance encodeAttachedPolicy :: Encode AttachedPolicy where encode = genericEnc
 
 -- | Constructs AttachedPolicy from required parameters
 newAttachedPolicy :: AttachedPolicy
-newAttachedPolicy  = AttachedPolicy { "PolicyArn": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing) }
+newAttachedPolicy  = AttachedPolicy { "PolicyArn": Nothing, "PolicyName": Nothing }
 
 -- | Constructs AttachedPolicy's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newAttachedPolicy' :: ( { "PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyArn" :: NullOrUndefined (ArnType') } -> {"PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyArn" :: NullOrUndefined (ArnType') } ) -> AttachedPolicy
-newAttachedPolicy'  customize = (AttachedPolicy <<< customize) { "PolicyArn": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing) }
+newAttachedPolicy' :: ( { "PolicyName" :: Maybe (PolicyNameType') , "PolicyArn" :: Maybe (ArnType') } -> {"PolicyName" :: Maybe (PolicyNameType') , "PolicyArn" :: Maybe (ArnType') } ) -> AttachedPolicy
+newAttachedPolicy'  customize = (AttachedPolicy <<< customize) { "PolicyArn": Nothing, "PolicyName": Nothing }
 
 
 
@@ -306,9 +305,9 @@ instance encodeColumnNumber :: Encode ColumnNumber where encode = genericEncode 
 
 -- | <p>Contains information about a condition context key. It includes the name of the key and specifies the value (or values, if the context key supports multiple values) to use in the simulation. This information is used when evaluating the <code>Condition</code> elements of the input policies.</p> <p>This data type is used as an input parameter to <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulateCustomPolicy</a> </code>.</p>
 newtype ContextEntry = ContextEntry 
-  { "ContextKeyName" :: NullOrUndefined (ContextKeyNameType)
-  , "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType)
-  , "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum)
+  { "ContextKeyName" :: Maybe (ContextKeyNameType)
+  , "ContextKeyValues" :: Maybe (ContextKeyValueListType)
+  , "ContextKeyType" :: Maybe (ContextKeyTypeEnum)
   }
 derive instance newtypeContextEntry :: Newtype ContextEntry _
 derive instance repGenericContextEntry :: Generic ContextEntry _
@@ -318,12 +317,12 @@ instance encodeContextEntry :: Encode ContextEntry where encode = genericEncode 
 
 -- | Constructs ContextEntry from required parameters
 newContextEntry :: ContextEntry
-newContextEntry  = ContextEntry { "ContextKeyName": (NullOrUndefined Nothing), "ContextKeyType": (NullOrUndefined Nothing), "ContextKeyValues": (NullOrUndefined Nothing) }
+newContextEntry  = ContextEntry { "ContextKeyName": Nothing, "ContextKeyType": Nothing, "ContextKeyValues": Nothing }
 
 -- | Constructs ContextEntry's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newContextEntry' :: ( { "ContextKeyName" :: NullOrUndefined (ContextKeyNameType) , "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType) , "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum) } -> {"ContextKeyName" :: NullOrUndefined (ContextKeyNameType) , "ContextKeyValues" :: NullOrUndefined (ContextKeyValueListType) , "ContextKeyType" :: NullOrUndefined (ContextKeyTypeEnum) } ) -> ContextEntry
-newContextEntry'  customize = (ContextEntry <<< customize) { "ContextKeyName": (NullOrUndefined Nothing), "ContextKeyType": (NullOrUndefined Nothing), "ContextKeyValues": (NullOrUndefined Nothing) }
+newContextEntry' :: ( { "ContextKeyName" :: Maybe (ContextKeyNameType) , "ContextKeyValues" :: Maybe (ContextKeyValueListType) , "ContextKeyType" :: Maybe (ContextKeyTypeEnum) } -> {"ContextKeyName" :: Maybe (ContextKeyNameType) , "ContextKeyValues" :: Maybe (ContextKeyValueListType) , "ContextKeyType" :: Maybe (ContextKeyTypeEnum) } ) -> ContextEntry
+newContextEntry'  customize = (ContextEntry <<< customize) { "ContextKeyName": Nothing, "ContextKeyType": Nothing, "ContextKeyValues": Nothing }
 
 
 
@@ -382,7 +381,7 @@ instance encodeContextKeyValueType :: Encode ContextKeyValueType where encode = 
 
 
 newtype CreateAccessKeyRequest = CreateAccessKeyRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   }
 derive instance newtypeCreateAccessKeyRequest :: Newtype CreateAccessKeyRequest _
 derive instance repGenericCreateAccessKeyRequest :: Generic CreateAccessKeyRequest _
@@ -392,12 +391,12 @@ instance encodeCreateAccessKeyRequest :: Encode CreateAccessKeyRequest where enc
 
 -- | Constructs CreateAccessKeyRequest from required parameters
 newCreateAccessKeyRequest :: CreateAccessKeyRequest
-newCreateAccessKeyRequest  = CreateAccessKeyRequest { "UserName": (NullOrUndefined Nothing) }
+newCreateAccessKeyRequest  = CreateAccessKeyRequest { "UserName": Nothing }
 
 -- | Constructs CreateAccessKeyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateAccessKeyRequest' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') } ) -> CreateAccessKeyRequest
-newCreateAccessKeyRequest'  customize = (CreateAccessKeyRequest <<< customize) { "UserName": (NullOrUndefined Nothing) }
+newCreateAccessKeyRequest' :: ( { "UserName" :: Maybe (ExistingUserNameType') } -> {"UserName" :: Maybe (ExistingUserNameType') } ) -> CreateAccessKeyRequest
+newCreateAccessKeyRequest'  customize = (CreateAccessKeyRequest <<< customize) { "UserName": Nothing }
 
 
 
@@ -443,7 +442,7 @@ newCreateAccountAliasRequest' _AccountAlias customize = (CreateAccountAliasReque
 
 
 newtype CreateGroupRequest = CreateGroupRequest 
-  { "Path" :: NullOrUndefined (PathType')
+  { "Path" :: Maybe (PathType')
   , "GroupName" :: (GroupNameType')
   }
 derive instance newtypeCreateGroupRequest :: Newtype CreateGroupRequest _
@@ -454,12 +453,12 @@ instance encodeCreateGroupRequest :: Encode CreateGroupRequest where encode = ge
 
 -- | Constructs CreateGroupRequest from required parameters
 newCreateGroupRequest :: GroupNameType' -> CreateGroupRequest
-newCreateGroupRequest _GroupName = CreateGroupRequest { "GroupName": _GroupName, "Path": (NullOrUndefined Nothing) }
+newCreateGroupRequest _GroupName = CreateGroupRequest { "GroupName": _GroupName, "Path": Nothing }
 
 -- | Constructs CreateGroupRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateGroupRequest' :: GroupNameType' -> ( { "Path" :: NullOrUndefined (PathType') , "GroupName" :: (GroupNameType') } -> {"Path" :: NullOrUndefined (PathType') , "GroupName" :: (GroupNameType') } ) -> CreateGroupRequest
-newCreateGroupRequest' _GroupName customize = (CreateGroupRequest <<< customize) { "GroupName": _GroupName, "Path": (NullOrUndefined Nothing) }
+newCreateGroupRequest' :: GroupNameType' -> ( { "Path" :: Maybe (PathType') , "GroupName" :: (GroupNameType') } -> {"Path" :: Maybe (PathType') , "GroupName" :: (GroupNameType') } ) -> CreateGroupRequest
+newCreateGroupRequest' _GroupName customize = (CreateGroupRequest <<< customize) { "GroupName": _GroupName, "Path": Nothing }
 
 
 
@@ -486,7 +485,7 @@ newCreateGroupResponse' _Group customize = (CreateGroupResponse <<< customize) {
 
 newtype CreateInstanceProfileRequest = CreateInstanceProfileRequest 
   { "InstanceProfileName" :: (InstanceProfileNameType')
-  , "Path" :: NullOrUndefined (PathType')
+  , "Path" :: Maybe (PathType')
   }
 derive instance newtypeCreateInstanceProfileRequest :: Newtype CreateInstanceProfileRequest _
 derive instance repGenericCreateInstanceProfileRequest :: Generic CreateInstanceProfileRequest _
@@ -496,12 +495,12 @@ instance encodeCreateInstanceProfileRequest :: Encode CreateInstanceProfileReque
 
 -- | Constructs CreateInstanceProfileRequest from required parameters
 newCreateInstanceProfileRequest :: InstanceProfileNameType' -> CreateInstanceProfileRequest
-newCreateInstanceProfileRequest _InstanceProfileName = CreateInstanceProfileRequest { "InstanceProfileName": _InstanceProfileName, "Path": (NullOrUndefined Nothing) }
+newCreateInstanceProfileRequest _InstanceProfileName = CreateInstanceProfileRequest { "InstanceProfileName": _InstanceProfileName, "Path": Nothing }
 
 -- | Constructs CreateInstanceProfileRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateInstanceProfileRequest' :: InstanceProfileNameType' -> ( { "InstanceProfileName" :: (InstanceProfileNameType') , "Path" :: NullOrUndefined (PathType') } -> {"InstanceProfileName" :: (InstanceProfileNameType') , "Path" :: NullOrUndefined (PathType') } ) -> CreateInstanceProfileRequest
-newCreateInstanceProfileRequest' _InstanceProfileName customize = (CreateInstanceProfileRequest <<< customize) { "InstanceProfileName": _InstanceProfileName, "Path": (NullOrUndefined Nothing) }
+newCreateInstanceProfileRequest' :: InstanceProfileNameType' -> ( { "InstanceProfileName" :: (InstanceProfileNameType') , "Path" :: Maybe (PathType') } -> {"InstanceProfileName" :: (InstanceProfileNameType') , "Path" :: Maybe (PathType') } ) -> CreateInstanceProfileRequest
+newCreateInstanceProfileRequest' _InstanceProfileName customize = (CreateInstanceProfileRequest <<< customize) { "InstanceProfileName": _InstanceProfileName, "Path": Nothing }
 
 
 
@@ -529,7 +528,7 @@ newCreateInstanceProfileResponse' _InstanceProfile customize = (CreateInstancePr
 newtype CreateLoginProfileRequest = CreateLoginProfileRequest 
   { "UserName" :: (UserNameType')
   , "Password" :: (PasswordType')
-  , "PasswordResetRequired" :: NullOrUndefined (BooleanType')
+  , "PasswordResetRequired" :: Maybe (BooleanType')
   }
 derive instance newtypeCreateLoginProfileRequest :: Newtype CreateLoginProfileRequest _
 derive instance repGenericCreateLoginProfileRequest :: Generic CreateLoginProfileRequest _
@@ -539,12 +538,12 @@ instance encodeCreateLoginProfileRequest :: Encode CreateLoginProfileRequest whe
 
 -- | Constructs CreateLoginProfileRequest from required parameters
 newCreateLoginProfileRequest :: PasswordType' -> UserNameType' -> CreateLoginProfileRequest
-newCreateLoginProfileRequest _Password _UserName = CreateLoginProfileRequest { "Password": _Password, "UserName": _UserName, "PasswordResetRequired": (NullOrUndefined Nothing) }
+newCreateLoginProfileRequest _Password _UserName = CreateLoginProfileRequest { "Password": _Password, "UserName": _UserName, "PasswordResetRequired": Nothing }
 
 -- | Constructs CreateLoginProfileRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateLoginProfileRequest' :: PasswordType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "Password" :: (PasswordType') , "PasswordResetRequired" :: NullOrUndefined (BooleanType') } -> {"UserName" :: (UserNameType') , "Password" :: (PasswordType') , "PasswordResetRequired" :: NullOrUndefined (BooleanType') } ) -> CreateLoginProfileRequest
-newCreateLoginProfileRequest' _Password _UserName customize = (CreateLoginProfileRequest <<< customize) { "Password": _Password, "UserName": _UserName, "PasswordResetRequired": (NullOrUndefined Nothing) }
+newCreateLoginProfileRequest' :: PasswordType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "Password" :: (PasswordType') , "PasswordResetRequired" :: Maybe (BooleanType') } -> {"UserName" :: (UserNameType') , "Password" :: (PasswordType') , "PasswordResetRequired" :: Maybe (BooleanType') } ) -> CreateLoginProfileRequest
+newCreateLoginProfileRequest' _Password _UserName customize = (CreateLoginProfileRequest <<< customize) { "Password": _Password, "UserName": _UserName, "PasswordResetRequired": Nothing }
 
 
 
@@ -571,7 +570,7 @@ newCreateLoginProfileResponse' _LoginProfile customize = (CreateLoginProfileResp
 
 newtype CreateOpenIDConnectProviderRequest = CreateOpenIDConnectProviderRequest 
   { "Url" :: (OpenIDConnectProviderUrlType)
-  , "ClientIDList" :: NullOrUndefined (ClientIDListType')
+  , "ClientIDList" :: Maybe (ClientIDListType')
   , "ThumbprintList" :: (ThumbprintListType')
   }
 derive instance newtypeCreateOpenIDConnectProviderRequest :: Newtype CreateOpenIDConnectProviderRequest _
@@ -582,18 +581,18 @@ instance encodeCreateOpenIDConnectProviderRequest :: Encode CreateOpenIDConnectP
 
 -- | Constructs CreateOpenIDConnectProviderRequest from required parameters
 newCreateOpenIDConnectProviderRequest :: ThumbprintListType' -> OpenIDConnectProviderUrlType -> CreateOpenIDConnectProviderRequest
-newCreateOpenIDConnectProviderRequest _ThumbprintList _Url = CreateOpenIDConnectProviderRequest { "ThumbprintList": _ThumbprintList, "Url": _Url, "ClientIDList": (NullOrUndefined Nothing) }
+newCreateOpenIDConnectProviderRequest _ThumbprintList _Url = CreateOpenIDConnectProviderRequest { "ThumbprintList": _ThumbprintList, "Url": _Url, "ClientIDList": Nothing }
 
 -- | Constructs CreateOpenIDConnectProviderRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateOpenIDConnectProviderRequest' :: ThumbprintListType' -> OpenIDConnectProviderUrlType -> ( { "Url" :: (OpenIDConnectProviderUrlType) , "ClientIDList" :: NullOrUndefined (ClientIDListType') , "ThumbprintList" :: (ThumbprintListType') } -> {"Url" :: (OpenIDConnectProviderUrlType) , "ClientIDList" :: NullOrUndefined (ClientIDListType') , "ThumbprintList" :: (ThumbprintListType') } ) -> CreateOpenIDConnectProviderRequest
-newCreateOpenIDConnectProviderRequest' _ThumbprintList _Url customize = (CreateOpenIDConnectProviderRequest <<< customize) { "ThumbprintList": _ThumbprintList, "Url": _Url, "ClientIDList": (NullOrUndefined Nothing) }
+newCreateOpenIDConnectProviderRequest' :: ThumbprintListType' -> OpenIDConnectProviderUrlType -> ( { "Url" :: (OpenIDConnectProviderUrlType) , "ClientIDList" :: Maybe (ClientIDListType') , "ThumbprintList" :: (ThumbprintListType') } -> {"Url" :: (OpenIDConnectProviderUrlType) , "ClientIDList" :: Maybe (ClientIDListType') , "ThumbprintList" :: (ThumbprintListType') } ) -> CreateOpenIDConnectProviderRequest
+newCreateOpenIDConnectProviderRequest' _ThumbprintList _Url customize = (CreateOpenIDConnectProviderRequest <<< customize) { "ThumbprintList": _ThumbprintList, "Url": _Url, "ClientIDList": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>CreateOpenIDConnectProvider</a> request. </p>
 newtype CreateOpenIDConnectProviderResponse = CreateOpenIDConnectProviderResponse 
-  { "OpenIDConnectProviderArn" :: NullOrUndefined (ArnType')
+  { "OpenIDConnectProviderArn" :: Maybe (ArnType')
   }
 derive instance newtypeCreateOpenIDConnectProviderResponse :: Newtype CreateOpenIDConnectProviderResponse _
 derive instance repGenericCreateOpenIDConnectProviderResponse :: Generic CreateOpenIDConnectProviderResponse _
@@ -603,20 +602,20 @@ instance encodeCreateOpenIDConnectProviderResponse :: Encode CreateOpenIDConnect
 
 -- | Constructs CreateOpenIDConnectProviderResponse from required parameters
 newCreateOpenIDConnectProviderResponse :: CreateOpenIDConnectProviderResponse
-newCreateOpenIDConnectProviderResponse  = CreateOpenIDConnectProviderResponse { "OpenIDConnectProviderArn": (NullOrUndefined Nothing) }
+newCreateOpenIDConnectProviderResponse  = CreateOpenIDConnectProviderResponse { "OpenIDConnectProviderArn": Nothing }
 
 -- | Constructs CreateOpenIDConnectProviderResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateOpenIDConnectProviderResponse' :: ( { "OpenIDConnectProviderArn" :: NullOrUndefined (ArnType') } -> {"OpenIDConnectProviderArn" :: NullOrUndefined (ArnType') } ) -> CreateOpenIDConnectProviderResponse
-newCreateOpenIDConnectProviderResponse'  customize = (CreateOpenIDConnectProviderResponse <<< customize) { "OpenIDConnectProviderArn": (NullOrUndefined Nothing) }
+newCreateOpenIDConnectProviderResponse' :: ( { "OpenIDConnectProviderArn" :: Maybe (ArnType') } -> {"OpenIDConnectProviderArn" :: Maybe (ArnType') } ) -> CreateOpenIDConnectProviderResponse
+newCreateOpenIDConnectProviderResponse'  customize = (CreateOpenIDConnectProviderResponse <<< customize) { "OpenIDConnectProviderArn": Nothing }
 
 
 
 newtype CreatePolicyRequest = CreatePolicyRequest 
   { "PolicyName" :: (PolicyNameType')
-  , "Path" :: NullOrUndefined (PolicyPathType')
+  , "Path" :: Maybe (PolicyPathType')
   , "PolicyDocument" :: (PolicyDocumentType')
-  , "Description" :: NullOrUndefined (PolicyDescriptionType')
+  , "Description" :: Maybe (PolicyDescriptionType')
   }
 derive instance newtypeCreatePolicyRequest :: Newtype CreatePolicyRequest _
 derive instance repGenericCreatePolicyRequest :: Generic CreatePolicyRequest _
@@ -626,18 +625,18 @@ instance encodeCreatePolicyRequest :: Encode CreatePolicyRequest where encode = 
 
 -- | Constructs CreatePolicyRequest from required parameters
 newCreatePolicyRequest :: PolicyDocumentType' -> PolicyNameType' -> CreatePolicyRequest
-newCreatePolicyRequest _PolicyDocument _PolicyName = CreatePolicyRequest { "PolicyDocument": _PolicyDocument, "PolicyName": _PolicyName, "Description": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newCreatePolicyRequest _PolicyDocument _PolicyName = CreatePolicyRequest { "PolicyDocument": _PolicyDocument, "PolicyName": _PolicyName, "Description": Nothing, "Path": Nothing }
 
 -- | Constructs CreatePolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreatePolicyRequest' :: PolicyDocumentType' -> PolicyNameType' -> ( { "PolicyName" :: (PolicyNameType') , "Path" :: NullOrUndefined (PolicyPathType') , "PolicyDocument" :: (PolicyDocumentType') , "Description" :: NullOrUndefined (PolicyDescriptionType') } -> {"PolicyName" :: (PolicyNameType') , "Path" :: NullOrUndefined (PolicyPathType') , "PolicyDocument" :: (PolicyDocumentType') , "Description" :: NullOrUndefined (PolicyDescriptionType') } ) -> CreatePolicyRequest
-newCreatePolicyRequest' _PolicyDocument _PolicyName customize = (CreatePolicyRequest <<< customize) { "PolicyDocument": _PolicyDocument, "PolicyName": _PolicyName, "Description": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newCreatePolicyRequest' :: PolicyDocumentType' -> PolicyNameType' -> ( { "PolicyName" :: (PolicyNameType') , "Path" :: Maybe (PolicyPathType') , "PolicyDocument" :: (PolicyDocumentType') , "Description" :: Maybe (PolicyDescriptionType') } -> {"PolicyName" :: (PolicyNameType') , "Path" :: Maybe (PolicyPathType') , "PolicyDocument" :: (PolicyDocumentType') , "Description" :: Maybe (PolicyDescriptionType') } ) -> CreatePolicyRequest
+newCreatePolicyRequest' _PolicyDocument _PolicyName customize = (CreatePolicyRequest <<< customize) { "PolicyDocument": _PolicyDocument, "PolicyName": _PolicyName, "Description": Nothing, "Path": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>CreatePolicy</a> request. </p>
 newtype CreatePolicyResponse = CreatePolicyResponse 
-  { "Policy" :: NullOrUndefined (Policy)
+  { "Policy" :: Maybe (Policy)
   }
 derive instance newtypeCreatePolicyResponse :: Newtype CreatePolicyResponse _
 derive instance repGenericCreatePolicyResponse :: Generic CreatePolicyResponse _
@@ -647,19 +646,19 @@ instance encodeCreatePolicyResponse :: Encode CreatePolicyResponse where encode 
 
 -- | Constructs CreatePolicyResponse from required parameters
 newCreatePolicyResponse :: CreatePolicyResponse
-newCreatePolicyResponse  = CreatePolicyResponse { "Policy": (NullOrUndefined Nothing) }
+newCreatePolicyResponse  = CreatePolicyResponse { "Policy": Nothing }
 
 -- | Constructs CreatePolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreatePolicyResponse' :: ( { "Policy" :: NullOrUndefined (Policy) } -> {"Policy" :: NullOrUndefined (Policy) } ) -> CreatePolicyResponse
-newCreatePolicyResponse'  customize = (CreatePolicyResponse <<< customize) { "Policy": (NullOrUndefined Nothing) }
+newCreatePolicyResponse' :: ( { "Policy" :: Maybe (Policy) } -> {"Policy" :: Maybe (Policy) } ) -> CreatePolicyResponse
+newCreatePolicyResponse'  customize = (CreatePolicyResponse <<< customize) { "Policy": Nothing }
 
 
 
 newtype CreatePolicyVersionRequest = CreatePolicyVersionRequest 
   { "PolicyArn" :: (ArnType')
   , "PolicyDocument" :: (PolicyDocumentType')
-  , "SetAsDefault" :: NullOrUndefined (BooleanType')
+  , "SetAsDefault" :: Maybe (BooleanType')
   }
 derive instance newtypeCreatePolicyVersionRequest :: Newtype CreatePolicyVersionRequest _
 derive instance repGenericCreatePolicyVersionRequest :: Generic CreatePolicyVersionRequest _
@@ -669,18 +668,18 @@ instance encodeCreatePolicyVersionRequest :: Encode CreatePolicyVersionRequest w
 
 -- | Constructs CreatePolicyVersionRequest from required parameters
 newCreatePolicyVersionRequest :: ArnType' -> PolicyDocumentType' -> CreatePolicyVersionRequest
-newCreatePolicyVersionRequest _PolicyArn _PolicyDocument = CreatePolicyVersionRequest { "PolicyArn": _PolicyArn, "PolicyDocument": _PolicyDocument, "SetAsDefault": (NullOrUndefined Nothing) }
+newCreatePolicyVersionRequest _PolicyArn _PolicyDocument = CreatePolicyVersionRequest { "PolicyArn": _PolicyArn, "PolicyDocument": _PolicyDocument, "SetAsDefault": Nothing }
 
 -- | Constructs CreatePolicyVersionRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreatePolicyVersionRequest' :: ArnType' -> PolicyDocumentType' -> ( { "PolicyArn" :: (ArnType') , "PolicyDocument" :: (PolicyDocumentType') , "SetAsDefault" :: NullOrUndefined (BooleanType') } -> {"PolicyArn" :: (ArnType') , "PolicyDocument" :: (PolicyDocumentType') , "SetAsDefault" :: NullOrUndefined (BooleanType') } ) -> CreatePolicyVersionRequest
-newCreatePolicyVersionRequest' _PolicyArn _PolicyDocument customize = (CreatePolicyVersionRequest <<< customize) { "PolicyArn": _PolicyArn, "PolicyDocument": _PolicyDocument, "SetAsDefault": (NullOrUndefined Nothing) }
+newCreatePolicyVersionRequest' :: ArnType' -> PolicyDocumentType' -> ( { "PolicyArn" :: (ArnType') , "PolicyDocument" :: (PolicyDocumentType') , "SetAsDefault" :: Maybe (BooleanType') } -> {"PolicyArn" :: (ArnType') , "PolicyDocument" :: (PolicyDocumentType') , "SetAsDefault" :: Maybe (BooleanType') } ) -> CreatePolicyVersionRequest
+newCreatePolicyVersionRequest' _PolicyArn _PolicyDocument customize = (CreatePolicyVersionRequest <<< customize) { "PolicyArn": _PolicyArn, "PolicyDocument": _PolicyDocument, "SetAsDefault": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>CreatePolicyVersion</a> request. </p>
 newtype CreatePolicyVersionResponse = CreatePolicyVersionResponse 
-  { "PolicyVersion" :: NullOrUndefined (PolicyVersion)
+  { "PolicyVersion" :: Maybe (PolicyVersion)
   }
 derive instance newtypeCreatePolicyVersionResponse :: Newtype CreatePolicyVersionResponse _
 derive instance repGenericCreatePolicyVersionResponse :: Generic CreatePolicyVersionResponse _
@@ -690,20 +689,20 @@ instance encodeCreatePolicyVersionResponse :: Encode CreatePolicyVersionResponse
 
 -- | Constructs CreatePolicyVersionResponse from required parameters
 newCreatePolicyVersionResponse :: CreatePolicyVersionResponse
-newCreatePolicyVersionResponse  = CreatePolicyVersionResponse { "PolicyVersion": (NullOrUndefined Nothing) }
+newCreatePolicyVersionResponse  = CreatePolicyVersionResponse { "PolicyVersion": Nothing }
 
 -- | Constructs CreatePolicyVersionResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreatePolicyVersionResponse' :: ( { "PolicyVersion" :: NullOrUndefined (PolicyVersion) } -> {"PolicyVersion" :: NullOrUndefined (PolicyVersion) } ) -> CreatePolicyVersionResponse
-newCreatePolicyVersionResponse'  customize = (CreatePolicyVersionResponse <<< customize) { "PolicyVersion": (NullOrUndefined Nothing) }
+newCreatePolicyVersionResponse' :: ( { "PolicyVersion" :: Maybe (PolicyVersion) } -> {"PolicyVersion" :: Maybe (PolicyVersion) } ) -> CreatePolicyVersionResponse
+newCreatePolicyVersionResponse'  customize = (CreatePolicyVersionResponse <<< customize) { "PolicyVersion": Nothing }
 
 
 
 newtype CreateRoleRequest = CreateRoleRequest 
-  { "Path" :: NullOrUndefined (PathType')
+  { "Path" :: Maybe (PathType')
   , "RoleName" :: (RoleNameType')
   , "AssumeRolePolicyDocument" :: (PolicyDocumentType')
-  , "Description" :: NullOrUndefined (RoleDescriptionType')
+  , "Description" :: Maybe (RoleDescriptionType')
   }
 derive instance newtypeCreateRoleRequest :: Newtype CreateRoleRequest _
 derive instance repGenericCreateRoleRequest :: Generic CreateRoleRequest _
@@ -713,12 +712,12 @@ instance encodeCreateRoleRequest :: Encode CreateRoleRequest where encode = gene
 
 -- | Constructs CreateRoleRequest from required parameters
 newCreateRoleRequest :: PolicyDocumentType' -> RoleNameType' -> CreateRoleRequest
-newCreateRoleRequest _AssumeRolePolicyDocument _RoleName = CreateRoleRequest { "AssumeRolePolicyDocument": _AssumeRolePolicyDocument, "RoleName": _RoleName, "Description": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newCreateRoleRequest _AssumeRolePolicyDocument _RoleName = CreateRoleRequest { "AssumeRolePolicyDocument": _AssumeRolePolicyDocument, "RoleName": _RoleName, "Description": Nothing, "Path": Nothing }
 
 -- | Constructs CreateRoleRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRoleRequest' :: PolicyDocumentType' -> RoleNameType' -> ( { "Path" :: NullOrUndefined (PathType') , "RoleName" :: (RoleNameType') , "AssumeRolePolicyDocument" :: (PolicyDocumentType') , "Description" :: NullOrUndefined (RoleDescriptionType') } -> {"Path" :: NullOrUndefined (PathType') , "RoleName" :: (RoleNameType') , "AssumeRolePolicyDocument" :: (PolicyDocumentType') , "Description" :: NullOrUndefined (RoleDescriptionType') } ) -> CreateRoleRequest
-newCreateRoleRequest' _AssumeRolePolicyDocument _RoleName customize = (CreateRoleRequest <<< customize) { "AssumeRolePolicyDocument": _AssumeRolePolicyDocument, "RoleName": _RoleName, "Description": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newCreateRoleRequest' :: PolicyDocumentType' -> RoleNameType' -> ( { "Path" :: Maybe (PathType') , "RoleName" :: (RoleNameType') , "AssumeRolePolicyDocument" :: (PolicyDocumentType') , "Description" :: Maybe (RoleDescriptionType') } -> {"Path" :: Maybe (PathType') , "RoleName" :: (RoleNameType') , "AssumeRolePolicyDocument" :: (PolicyDocumentType') , "Description" :: Maybe (RoleDescriptionType') } ) -> CreateRoleRequest
+newCreateRoleRequest' _AssumeRolePolicyDocument _RoleName customize = (CreateRoleRequest <<< customize) { "AssumeRolePolicyDocument": _AssumeRolePolicyDocument, "RoleName": _RoleName, "Description": Nothing, "Path": Nothing }
 
 
 
@@ -766,7 +765,7 @@ newCreateSAMLProviderRequest' _Name _SAMLMetadataDocument customize = (CreateSAM
 
 -- | <p>Contains the response to a successful <a>CreateSAMLProvider</a> request. </p>
 newtype CreateSAMLProviderResponse = CreateSAMLProviderResponse 
-  { "SAMLProviderArn" :: NullOrUndefined (ArnType')
+  { "SAMLProviderArn" :: Maybe (ArnType')
   }
 derive instance newtypeCreateSAMLProviderResponse :: Newtype CreateSAMLProviderResponse _
 derive instance repGenericCreateSAMLProviderResponse :: Generic CreateSAMLProviderResponse _
@@ -776,19 +775,19 @@ instance encodeCreateSAMLProviderResponse :: Encode CreateSAMLProviderResponse w
 
 -- | Constructs CreateSAMLProviderResponse from required parameters
 newCreateSAMLProviderResponse :: CreateSAMLProviderResponse
-newCreateSAMLProviderResponse  = CreateSAMLProviderResponse { "SAMLProviderArn": (NullOrUndefined Nothing) }
+newCreateSAMLProviderResponse  = CreateSAMLProviderResponse { "SAMLProviderArn": Nothing }
 
 -- | Constructs CreateSAMLProviderResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateSAMLProviderResponse' :: ( { "SAMLProviderArn" :: NullOrUndefined (ArnType') } -> {"SAMLProviderArn" :: NullOrUndefined (ArnType') } ) -> CreateSAMLProviderResponse
-newCreateSAMLProviderResponse'  customize = (CreateSAMLProviderResponse <<< customize) { "SAMLProviderArn": (NullOrUndefined Nothing) }
+newCreateSAMLProviderResponse' :: ( { "SAMLProviderArn" :: Maybe (ArnType') } -> {"SAMLProviderArn" :: Maybe (ArnType') } ) -> CreateSAMLProviderResponse
+newCreateSAMLProviderResponse'  customize = (CreateSAMLProviderResponse <<< customize) { "SAMLProviderArn": Nothing }
 
 
 
 newtype CreateServiceLinkedRoleRequest = CreateServiceLinkedRoleRequest 
   { "AWSServiceName" :: (GroupNameType')
-  , "Description" :: NullOrUndefined (RoleDescriptionType')
-  , "CustomSuffix" :: NullOrUndefined (CustomSuffixType')
+  , "Description" :: Maybe (RoleDescriptionType')
+  , "CustomSuffix" :: Maybe (CustomSuffixType')
   }
 derive instance newtypeCreateServiceLinkedRoleRequest :: Newtype CreateServiceLinkedRoleRequest _
 derive instance repGenericCreateServiceLinkedRoleRequest :: Generic CreateServiceLinkedRoleRequest _
@@ -798,17 +797,17 @@ instance encodeCreateServiceLinkedRoleRequest :: Encode CreateServiceLinkedRoleR
 
 -- | Constructs CreateServiceLinkedRoleRequest from required parameters
 newCreateServiceLinkedRoleRequest :: GroupNameType' -> CreateServiceLinkedRoleRequest
-newCreateServiceLinkedRoleRequest _AWSServiceName = CreateServiceLinkedRoleRequest { "AWSServiceName": _AWSServiceName, "CustomSuffix": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing) }
+newCreateServiceLinkedRoleRequest _AWSServiceName = CreateServiceLinkedRoleRequest { "AWSServiceName": _AWSServiceName, "CustomSuffix": Nothing, "Description": Nothing }
 
 -- | Constructs CreateServiceLinkedRoleRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateServiceLinkedRoleRequest' :: GroupNameType' -> ( { "AWSServiceName" :: (GroupNameType') , "Description" :: NullOrUndefined (RoleDescriptionType') , "CustomSuffix" :: NullOrUndefined (CustomSuffixType') } -> {"AWSServiceName" :: (GroupNameType') , "Description" :: NullOrUndefined (RoleDescriptionType') , "CustomSuffix" :: NullOrUndefined (CustomSuffixType') } ) -> CreateServiceLinkedRoleRequest
-newCreateServiceLinkedRoleRequest' _AWSServiceName customize = (CreateServiceLinkedRoleRequest <<< customize) { "AWSServiceName": _AWSServiceName, "CustomSuffix": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing) }
+newCreateServiceLinkedRoleRequest' :: GroupNameType' -> ( { "AWSServiceName" :: (GroupNameType') , "Description" :: Maybe (RoleDescriptionType') , "CustomSuffix" :: Maybe (CustomSuffixType') } -> {"AWSServiceName" :: (GroupNameType') , "Description" :: Maybe (RoleDescriptionType') , "CustomSuffix" :: Maybe (CustomSuffixType') } ) -> CreateServiceLinkedRoleRequest
+newCreateServiceLinkedRoleRequest' _AWSServiceName customize = (CreateServiceLinkedRoleRequest <<< customize) { "AWSServiceName": _AWSServiceName, "CustomSuffix": Nothing, "Description": Nothing }
 
 
 
 newtype CreateServiceLinkedRoleResponse = CreateServiceLinkedRoleResponse 
-  { "Role" :: NullOrUndefined (Role)
+  { "Role" :: Maybe (Role)
   }
 derive instance newtypeCreateServiceLinkedRoleResponse :: Newtype CreateServiceLinkedRoleResponse _
 derive instance repGenericCreateServiceLinkedRoleResponse :: Generic CreateServiceLinkedRoleResponse _
@@ -818,12 +817,12 @@ instance encodeCreateServiceLinkedRoleResponse :: Encode CreateServiceLinkedRole
 
 -- | Constructs CreateServiceLinkedRoleResponse from required parameters
 newCreateServiceLinkedRoleResponse :: CreateServiceLinkedRoleResponse
-newCreateServiceLinkedRoleResponse  = CreateServiceLinkedRoleResponse { "Role": (NullOrUndefined Nothing) }
+newCreateServiceLinkedRoleResponse  = CreateServiceLinkedRoleResponse { "Role": Nothing }
 
 -- | Constructs CreateServiceLinkedRoleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateServiceLinkedRoleResponse' :: ( { "Role" :: NullOrUndefined (Role) } -> {"Role" :: NullOrUndefined (Role) } ) -> CreateServiceLinkedRoleResponse
-newCreateServiceLinkedRoleResponse'  customize = (CreateServiceLinkedRoleResponse <<< customize) { "Role": (NullOrUndefined Nothing) }
+newCreateServiceLinkedRoleResponse' :: ( { "Role" :: Maybe (Role) } -> {"Role" :: Maybe (Role) } ) -> CreateServiceLinkedRoleResponse
+newCreateServiceLinkedRoleResponse'  customize = (CreateServiceLinkedRoleResponse <<< customize) { "Role": Nothing }
 
 
 
@@ -849,7 +848,7 @@ newCreateServiceSpecificCredentialRequest' _ServiceName _UserName customize = (C
 
 
 newtype CreateServiceSpecificCredentialResponse = CreateServiceSpecificCredentialResponse 
-  { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential)
+  { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential)
   }
 derive instance newtypeCreateServiceSpecificCredentialResponse :: Newtype CreateServiceSpecificCredentialResponse _
 derive instance repGenericCreateServiceSpecificCredentialResponse :: Generic CreateServiceSpecificCredentialResponse _
@@ -859,17 +858,17 @@ instance encodeCreateServiceSpecificCredentialResponse :: Encode CreateServiceSp
 
 -- | Constructs CreateServiceSpecificCredentialResponse from required parameters
 newCreateServiceSpecificCredentialResponse :: CreateServiceSpecificCredentialResponse
-newCreateServiceSpecificCredentialResponse  = CreateServiceSpecificCredentialResponse { "ServiceSpecificCredential": (NullOrUndefined Nothing) }
+newCreateServiceSpecificCredentialResponse  = CreateServiceSpecificCredentialResponse { "ServiceSpecificCredential": Nothing }
 
 -- | Constructs CreateServiceSpecificCredentialResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateServiceSpecificCredentialResponse' :: ( { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } -> {"ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } ) -> CreateServiceSpecificCredentialResponse
-newCreateServiceSpecificCredentialResponse'  customize = (CreateServiceSpecificCredentialResponse <<< customize) { "ServiceSpecificCredential": (NullOrUndefined Nothing) }
+newCreateServiceSpecificCredentialResponse' :: ( { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } -> {"ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } ) -> CreateServiceSpecificCredentialResponse
+newCreateServiceSpecificCredentialResponse'  customize = (CreateServiceSpecificCredentialResponse <<< customize) { "ServiceSpecificCredential": Nothing }
 
 
 
 newtype CreateUserRequest = CreateUserRequest 
-  { "Path" :: NullOrUndefined (PathType')
+  { "Path" :: Maybe (PathType')
   , "UserName" :: (UserNameType')
   }
 derive instance newtypeCreateUserRequest :: Newtype CreateUserRequest _
@@ -880,18 +879,18 @@ instance encodeCreateUserRequest :: Encode CreateUserRequest where encode = gene
 
 -- | Constructs CreateUserRequest from required parameters
 newCreateUserRequest :: UserNameType' -> CreateUserRequest
-newCreateUserRequest _UserName = CreateUserRequest { "UserName": _UserName, "Path": (NullOrUndefined Nothing) }
+newCreateUserRequest _UserName = CreateUserRequest { "UserName": _UserName, "Path": Nothing }
 
 -- | Constructs CreateUserRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateUserRequest' :: UserNameType' -> ( { "Path" :: NullOrUndefined (PathType') , "UserName" :: (UserNameType') } -> {"Path" :: NullOrUndefined (PathType') , "UserName" :: (UserNameType') } ) -> CreateUserRequest
-newCreateUserRequest' _UserName customize = (CreateUserRequest <<< customize) { "UserName": _UserName, "Path": (NullOrUndefined Nothing) }
+newCreateUserRequest' :: UserNameType' -> ( { "Path" :: Maybe (PathType') , "UserName" :: (UserNameType') } -> {"Path" :: Maybe (PathType') , "UserName" :: (UserNameType') } ) -> CreateUserRequest
+newCreateUserRequest' _UserName customize = (CreateUserRequest <<< customize) { "UserName": _UserName, "Path": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>CreateUser</a> request. </p>
 newtype CreateUserResponse = CreateUserResponse 
-  { "User" :: NullOrUndefined (User)
+  { "User" :: Maybe (User)
   }
 derive instance newtypeCreateUserResponse :: Newtype CreateUserResponse _
 derive instance repGenericCreateUserResponse :: Generic CreateUserResponse _
@@ -901,17 +900,17 @@ instance encodeCreateUserResponse :: Encode CreateUserResponse where encode = ge
 
 -- | Constructs CreateUserResponse from required parameters
 newCreateUserResponse :: CreateUserResponse
-newCreateUserResponse  = CreateUserResponse { "User": (NullOrUndefined Nothing) }
+newCreateUserResponse  = CreateUserResponse { "User": Nothing }
 
 -- | Constructs CreateUserResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateUserResponse' :: ( { "User" :: NullOrUndefined (User) } -> {"User" :: NullOrUndefined (User) } ) -> CreateUserResponse
-newCreateUserResponse'  customize = (CreateUserResponse <<< customize) { "User": (NullOrUndefined Nothing) }
+newCreateUserResponse' :: ( { "User" :: Maybe (User) } -> {"User" :: Maybe (User) } ) -> CreateUserResponse
+newCreateUserResponse'  customize = (CreateUserResponse <<< customize) { "User": Nothing }
 
 
 
 newtype CreateVirtualMFADeviceRequest = CreateVirtualMFADeviceRequest 
-  { "Path" :: NullOrUndefined (PathType')
+  { "Path" :: Maybe (PathType')
   , "VirtualMFADeviceName" :: (VirtualMFADeviceName')
   }
 derive instance newtypeCreateVirtualMFADeviceRequest :: Newtype CreateVirtualMFADeviceRequest _
@@ -922,12 +921,12 @@ instance encodeCreateVirtualMFADeviceRequest :: Encode CreateVirtualMFADeviceReq
 
 -- | Constructs CreateVirtualMFADeviceRequest from required parameters
 newCreateVirtualMFADeviceRequest :: VirtualMFADeviceName' -> CreateVirtualMFADeviceRequest
-newCreateVirtualMFADeviceRequest _VirtualMFADeviceName = CreateVirtualMFADeviceRequest { "VirtualMFADeviceName": _VirtualMFADeviceName, "Path": (NullOrUndefined Nothing) }
+newCreateVirtualMFADeviceRequest _VirtualMFADeviceName = CreateVirtualMFADeviceRequest { "VirtualMFADeviceName": _VirtualMFADeviceName, "Path": Nothing }
 
 -- | Constructs CreateVirtualMFADeviceRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateVirtualMFADeviceRequest' :: VirtualMFADeviceName' -> ( { "Path" :: NullOrUndefined (PathType') , "VirtualMFADeviceName" :: (VirtualMFADeviceName') } -> {"Path" :: NullOrUndefined (PathType') , "VirtualMFADeviceName" :: (VirtualMFADeviceName') } ) -> CreateVirtualMFADeviceRequest
-newCreateVirtualMFADeviceRequest' _VirtualMFADeviceName customize = (CreateVirtualMFADeviceRequest <<< customize) { "VirtualMFADeviceName": _VirtualMFADeviceName, "Path": (NullOrUndefined Nothing) }
+newCreateVirtualMFADeviceRequest' :: VirtualMFADeviceName' -> ( { "Path" :: Maybe (PathType') , "VirtualMFADeviceName" :: (VirtualMFADeviceName') } -> {"Path" :: Maybe (PathType') , "VirtualMFADeviceName" :: (VirtualMFADeviceName') } ) -> CreateVirtualMFADeviceRequest
+newCreateVirtualMFADeviceRequest' _VirtualMFADeviceName customize = (CreateVirtualMFADeviceRequest <<< customize) { "VirtualMFADeviceName": _VirtualMFADeviceName, "Path": Nothing }
 
 
 
@@ -954,7 +953,7 @@ newCreateVirtualMFADeviceResponse' _VirtualMFADevice customize = (CreateVirtualM
 
 -- | <p>The request was rejected because the most recent credential report has expired. To generate a new credential report, use <a>GenerateCredentialReport</a>. For more information about credential report expiration, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Getting Credential Reports</a> in the <i>IAM User Guide</i>.</p>
 newtype CredentialReportExpiredException = CredentialReportExpiredException 
-  { "message" :: NullOrUndefined (CredentialReportExpiredExceptionMessage')
+  { "message" :: Maybe (CredentialReportExpiredExceptionMessage')
   }
 derive instance newtypeCredentialReportExpiredException :: Newtype CredentialReportExpiredException _
 derive instance repGenericCredentialReportExpiredException :: Generic CredentialReportExpiredException _
@@ -964,18 +963,18 @@ instance encodeCredentialReportExpiredException :: Encode CredentialReportExpire
 
 -- | Constructs CredentialReportExpiredException from required parameters
 newCredentialReportExpiredException :: CredentialReportExpiredException
-newCredentialReportExpiredException  = CredentialReportExpiredException { "message": (NullOrUndefined Nothing) }
+newCredentialReportExpiredException  = CredentialReportExpiredException { "message": Nothing }
 
 -- | Constructs CredentialReportExpiredException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCredentialReportExpiredException' :: ( { "message" :: NullOrUndefined (CredentialReportExpiredExceptionMessage') } -> {"message" :: NullOrUndefined (CredentialReportExpiredExceptionMessage') } ) -> CredentialReportExpiredException
-newCredentialReportExpiredException'  customize = (CredentialReportExpiredException <<< customize) { "message": (NullOrUndefined Nothing) }
+newCredentialReportExpiredException' :: ( { "message" :: Maybe (CredentialReportExpiredExceptionMessage') } -> {"message" :: Maybe (CredentialReportExpiredExceptionMessage') } ) -> CredentialReportExpiredException
+newCredentialReportExpiredException'  customize = (CredentialReportExpiredException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the credential report does not exist. To generate a credential report, use <a>GenerateCredentialReport</a>.</p>
 newtype CredentialReportNotPresentException = CredentialReportNotPresentException 
-  { "message" :: NullOrUndefined (CredentialReportNotPresentExceptionMessage')
+  { "message" :: Maybe (CredentialReportNotPresentExceptionMessage')
   }
 derive instance newtypeCredentialReportNotPresentException :: Newtype CredentialReportNotPresentException _
 derive instance repGenericCredentialReportNotPresentException :: Generic CredentialReportNotPresentException _
@@ -985,18 +984,18 @@ instance encodeCredentialReportNotPresentException :: Encode CredentialReportNot
 
 -- | Constructs CredentialReportNotPresentException from required parameters
 newCredentialReportNotPresentException :: CredentialReportNotPresentException
-newCredentialReportNotPresentException  = CredentialReportNotPresentException { "message": (NullOrUndefined Nothing) }
+newCredentialReportNotPresentException  = CredentialReportNotPresentException { "message": Nothing }
 
 -- | Constructs CredentialReportNotPresentException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCredentialReportNotPresentException' :: ( { "message" :: NullOrUndefined (CredentialReportNotPresentExceptionMessage') } -> {"message" :: NullOrUndefined (CredentialReportNotPresentExceptionMessage') } ) -> CredentialReportNotPresentException
-newCredentialReportNotPresentException'  customize = (CredentialReportNotPresentException <<< customize) { "message": (NullOrUndefined Nothing) }
+newCredentialReportNotPresentException' :: ( { "message" :: Maybe (CredentialReportNotPresentExceptionMessage') } -> {"message" :: Maybe (CredentialReportNotPresentExceptionMessage') } ) -> CredentialReportNotPresentException
+newCredentialReportNotPresentException'  customize = (CredentialReportNotPresentException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the credential report is still being generated.</p>
 newtype CredentialReportNotReadyException = CredentialReportNotReadyException 
-  { "message" :: NullOrUndefined (CredentialReportNotReadyExceptionMessage')
+  { "message" :: Maybe (CredentialReportNotReadyExceptionMessage')
   }
 derive instance newtypeCredentialReportNotReadyException :: Newtype CredentialReportNotReadyException _
 derive instance repGenericCredentialReportNotReadyException :: Generic CredentialReportNotReadyException _
@@ -1006,12 +1005,12 @@ instance encodeCredentialReportNotReadyException :: Encode CredentialReportNotRe
 
 -- | Constructs CredentialReportNotReadyException from required parameters
 newCredentialReportNotReadyException :: CredentialReportNotReadyException
-newCredentialReportNotReadyException  = CredentialReportNotReadyException { "message": (NullOrUndefined Nothing) }
+newCredentialReportNotReadyException  = CredentialReportNotReadyException { "message": Nothing }
 
 -- | Constructs CredentialReportNotReadyException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCredentialReportNotReadyException' :: ( { "message" :: NullOrUndefined (CredentialReportNotReadyExceptionMessage') } -> {"message" :: NullOrUndefined (CredentialReportNotReadyExceptionMessage') } ) -> CredentialReportNotReadyException
-newCredentialReportNotReadyException'  customize = (CredentialReportNotReadyException <<< customize) { "message": (NullOrUndefined Nothing) }
+newCredentialReportNotReadyException' :: ( { "message" :: Maybe (CredentialReportNotReadyExceptionMessage') } -> {"message" :: Maybe (CredentialReportNotReadyExceptionMessage') } ) -> CredentialReportNotReadyException
+newCredentialReportNotReadyException'  customize = (CredentialReportNotReadyException <<< customize) { "message": Nothing }
 
 
 
@@ -1037,7 +1036,7 @@ newDeactivateMFADeviceRequest' _SerialNumber _UserName customize = (DeactivateMF
 
 
 newtype DeleteAccessKeyRequest = DeleteAccessKeyRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   , "AccessKeyId" :: (AccessKeyIdType')
   }
 derive instance newtypeDeleteAccessKeyRequest :: Newtype DeleteAccessKeyRequest _
@@ -1048,12 +1047,12 @@ instance encodeDeleteAccessKeyRequest :: Encode DeleteAccessKeyRequest where enc
 
 -- | Constructs DeleteAccessKeyRequest from required parameters
 newDeleteAccessKeyRequest :: AccessKeyIdType' -> DeleteAccessKeyRequest
-newDeleteAccessKeyRequest _AccessKeyId = DeleteAccessKeyRequest { "AccessKeyId": _AccessKeyId, "UserName": (NullOrUndefined Nothing) }
+newDeleteAccessKeyRequest _AccessKeyId = DeleteAccessKeyRequest { "AccessKeyId": _AccessKeyId, "UserName": Nothing }
 
 -- | Constructs DeleteAccessKeyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteAccessKeyRequest' :: AccessKeyIdType' -> ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') } ) -> DeleteAccessKeyRequest
-newDeleteAccessKeyRequest' _AccessKeyId customize = (DeleteAccessKeyRequest <<< customize) { "AccessKeyId": _AccessKeyId, "UserName": (NullOrUndefined Nothing) }
+newDeleteAccessKeyRequest' :: AccessKeyIdType' -> ( { "UserName" :: Maybe (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') } ) -> DeleteAccessKeyRequest
+newDeleteAccessKeyRequest' _AccessKeyId customize = (DeleteAccessKeyRequest <<< customize) { "AccessKeyId": _AccessKeyId, "UserName": Nothing }
 
 
 
@@ -1079,7 +1078,7 @@ newDeleteAccountAliasRequest' _AccountAlias customize = (DeleteAccountAliasReque
 
 -- | <p>The request was rejected because it attempted to delete a resource that has attached subordinate entities. The error message describes these entities.</p>
 newtype DeleteConflictException = DeleteConflictException 
-  { "message" :: NullOrUndefined (DeleteConflictMessage')
+  { "message" :: Maybe (DeleteConflictMessage')
   }
 derive instance newtypeDeleteConflictException :: Newtype DeleteConflictException _
 derive instance repGenericDeleteConflictException :: Generic DeleteConflictException _
@@ -1089,12 +1088,12 @@ instance encodeDeleteConflictException :: Encode DeleteConflictException where e
 
 -- | Constructs DeleteConflictException from required parameters
 newDeleteConflictException :: DeleteConflictException
-newDeleteConflictException  = DeleteConflictException { "message": (NullOrUndefined Nothing) }
+newDeleteConflictException  = DeleteConflictException { "message": Nothing }
 
 -- | Constructs DeleteConflictException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteConflictException' :: ( { "message" :: NullOrUndefined (DeleteConflictMessage') } -> {"message" :: NullOrUndefined (DeleteConflictMessage') } ) -> DeleteConflictException
-newDeleteConflictException'  customize = (DeleteConflictException <<< customize) { "message": (NullOrUndefined Nothing) }
+newDeleteConflictException' :: ( { "message" :: Maybe (DeleteConflictMessage') } -> {"message" :: Maybe (DeleteConflictMessage') } ) -> DeleteConflictException
+newDeleteConflictException'  customize = (DeleteConflictException <<< customize) { "message": Nothing }
 
 
 
@@ -1383,7 +1382,7 @@ newDeleteServiceLinkedRoleResponse' _DeletionTaskId customize = (DeleteServiceLi
 
 
 newtype DeleteServiceSpecificCredentialRequest = DeleteServiceSpecificCredentialRequest 
-  { "UserName" :: NullOrUndefined (UserNameType')
+  { "UserName" :: Maybe (UserNameType')
   , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId')
   }
 derive instance newtypeDeleteServiceSpecificCredentialRequest :: Newtype DeleteServiceSpecificCredentialRequest _
@@ -1394,17 +1393,17 @@ instance encodeDeleteServiceSpecificCredentialRequest :: Encode DeleteServiceSpe
 
 -- | Constructs DeleteServiceSpecificCredentialRequest from required parameters
 newDeleteServiceSpecificCredentialRequest :: ServiceSpecificCredentialId' -> DeleteServiceSpecificCredentialRequest
-newDeleteServiceSpecificCredentialRequest _ServiceSpecificCredentialId = DeleteServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": (NullOrUndefined Nothing) }
+newDeleteServiceSpecificCredentialRequest _ServiceSpecificCredentialId = DeleteServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": Nothing }
 
 -- | Constructs DeleteServiceSpecificCredentialRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ( { "UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } -> {"UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } ) -> DeleteServiceSpecificCredentialRequest
-newDeleteServiceSpecificCredentialRequest' _ServiceSpecificCredentialId customize = (DeleteServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": (NullOrUndefined Nothing) }
+newDeleteServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ( { "UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } -> {"UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } ) -> DeleteServiceSpecificCredentialRequest
+newDeleteServiceSpecificCredentialRequest' _ServiceSpecificCredentialId customize = (DeleteServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": Nothing }
 
 
 
 newtype DeleteSigningCertificateRequest = DeleteSigningCertificateRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   , "CertificateId" :: (CertificateIdType')
   }
 derive instance newtypeDeleteSigningCertificateRequest :: Newtype DeleteSigningCertificateRequest _
@@ -1415,12 +1414,12 @@ instance encodeDeleteSigningCertificateRequest :: Encode DeleteSigningCertificat
 
 -- | Constructs DeleteSigningCertificateRequest from required parameters
 newDeleteSigningCertificateRequest :: CertificateIdType' -> DeleteSigningCertificateRequest
-newDeleteSigningCertificateRequest _CertificateId = DeleteSigningCertificateRequest { "CertificateId": _CertificateId, "UserName": (NullOrUndefined Nothing) }
+newDeleteSigningCertificateRequest _CertificateId = DeleteSigningCertificateRequest { "CertificateId": _CertificateId, "UserName": Nothing }
 
 -- | Constructs DeleteSigningCertificateRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteSigningCertificateRequest' :: CertificateIdType' -> ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') } ) -> DeleteSigningCertificateRequest
-newDeleteSigningCertificateRequest' _CertificateId customize = (DeleteSigningCertificateRequest <<< customize) { "CertificateId": _CertificateId, "UserName": (NullOrUndefined Nothing) }
+newDeleteSigningCertificateRequest' :: CertificateIdType' -> ( { "UserName" :: Maybe (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') } ) -> DeleteSigningCertificateRequest
+newDeleteSigningCertificateRequest' _CertificateId customize = (DeleteSigningCertificateRequest <<< customize) { "CertificateId": _CertificateId, "UserName": Nothing }
 
 
 
@@ -1487,8 +1486,8 @@ newDeleteVirtualMFADeviceRequest' _SerialNumber customize = (DeleteVirtualMFADev
 
 -- | <p>The reason that the service-linked role deletion failed.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
 newtype DeletionTaskFailureReasonType = DeletionTaskFailureReasonType 
-  { "Reason" :: NullOrUndefined (ReasonType)
-  , "RoleUsageList" :: NullOrUndefined (RoleUsageListType)
+  { "Reason" :: Maybe (ReasonType)
+  , "RoleUsageList" :: Maybe (RoleUsageListType)
   }
 derive instance newtypeDeletionTaskFailureReasonType :: Newtype DeletionTaskFailureReasonType _
 derive instance repGenericDeletionTaskFailureReasonType :: Generic DeletionTaskFailureReasonType _
@@ -1498,12 +1497,12 @@ instance encodeDeletionTaskFailureReasonType :: Encode DeletionTaskFailureReason
 
 -- | Constructs DeletionTaskFailureReasonType from required parameters
 newDeletionTaskFailureReasonType :: DeletionTaskFailureReasonType
-newDeletionTaskFailureReasonType  = DeletionTaskFailureReasonType { "Reason": (NullOrUndefined Nothing), "RoleUsageList": (NullOrUndefined Nothing) }
+newDeletionTaskFailureReasonType  = DeletionTaskFailureReasonType { "Reason": Nothing, "RoleUsageList": Nothing }
 
 -- | Constructs DeletionTaskFailureReasonType's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeletionTaskFailureReasonType' :: ( { "Reason" :: NullOrUndefined (ReasonType) , "RoleUsageList" :: NullOrUndefined (RoleUsageListType) } -> {"Reason" :: NullOrUndefined (ReasonType) , "RoleUsageList" :: NullOrUndefined (RoleUsageListType) } ) -> DeletionTaskFailureReasonType
-newDeletionTaskFailureReasonType'  customize = (DeletionTaskFailureReasonType <<< customize) { "Reason": (NullOrUndefined Nothing), "RoleUsageList": (NullOrUndefined Nothing) }
+newDeletionTaskFailureReasonType' :: ( { "Reason" :: Maybe (ReasonType) , "RoleUsageList" :: Maybe (RoleUsageListType) } -> {"Reason" :: Maybe (ReasonType) , "RoleUsageList" :: Maybe (RoleUsageListType) } ) -> DeletionTaskFailureReasonType
+newDeletionTaskFailureReasonType'  customize = (DeletionTaskFailureReasonType <<< customize) { "Reason": Nothing, "RoleUsageList": Nothing }
 
 
 
@@ -1590,7 +1589,7 @@ newDetachUserPolicyRequest' _PolicyArn _UserName customize = (DetachUserPolicyRe
 
 -- | <p>The request was rejected because the same certificate is associated with an IAM user in the account.</p>
 newtype DuplicateCertificateException = DuplicateCertificateException 
-  { "message" :: NullOrUndefined (DuplicateCertificateMessage')
+  { "message" :: Maybe (DuplicateCertificateMessage')
   }
 derive instance newtypeDuplicateCertificateException :: Newtype DuplicateCertificateException _
 derive instance repGenericDuplicateCertificateException :: Generic DuplicateCertificateException _
@@ -1600,18 +1599,18 @@ instance encodeDuplicateCertificateException :: Encode DuplicateCertificateExcep
 
 -- | Constructs DuplicateCertificateException from required parameters
 newDuplicateCertificateException :: DuplicateCertificateException
-newDuplicateCertificateException  = DuplicateCertificateException { "message": (NullOrUndefined Nothing) }
+newDuplicateCertificateException  = DuplicateCertificateException { "message": Nothing }
 
 -- | Constructs DuplicateCertificateException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDuplicateCertificateException' :: ( { "message" :: NullOrUndefined (DuplicateCertificateMessage') } -> {"message" :: NullOrUndefined (DuplicateCertificateMessage') } ) -> DuplicateCertificateException
-newDuplicateCertificateException'  customize = (DuplicateCertificateException <<< customize) { "message": (NullOrUndefined Nothing) }
+newDuplicateCertificateException' :: ( { "message" :: Maybe (DuplicateCertificateMessage') } -> {"message" :: Maybe (DuplicateCertificateMessage') } ) -> DuplicateCertificateException
+newDuplicateCertificateException'  customize = (DuplicateCertificateException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the SSH public key is already associated with the specified IAM user.</p>
 newtype DuplicateSSHPublicKeyException = DuplicateSSHPublicKeyException 
-  { "message" :: NullOrUndefined (DuplicateSSHPublicKeyMessage')
+  { "message" :: Maybe (DuplicateSSHPublicKeyMessage')
   }
 derive instance newtypeDuplicateSSHPublicKeyException :: Newtype DuplicateSSHPublicKeyException _
 derive instance repGenericDuplicateSSHPublicKeyException :: Generic DuplicateSSHPublicKeyException _
@@ -1621,12 +1620,12 @@ instance encodeDuplicateSSHPublicKeyException :: Encode DuplicateSSHPublicKeyExc
 
 -- | Constructs DuplicateSSHPublicKeyException from required parameters
 newDuplicateSSHPublicKeyException :: DuplicateSSHPublicKeyException
-newDuplicateSSHPublicKeyException  = DuplicateSSHPublicKeyException { "message": (NullOrUndefined Nothing) }
+newDuplicateSSHPublicKeyException  = DuplicateSSHPublicKeyException { "message": Nothing }
 
 -- | Constructs DuplicateSSHPublicKeyException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDuplicateSSHPublicKeyException' :: ( { "message" :: NullOrUndefined (DuplicateSSHPublicKeyMessage') } -> {"message" :: NullOrUndefined (DuplicateSSHPublicKeyMessage') } ) -> DuplicateSSHPublicKeyException
-newDuplicateSSHPublicKeyException'  customize = (DuplicateSSHPublicKeyException <<< customize) { "message": (NullOrUndefined Nothing) }
+newDuplicateSSHPublicKeyException' :: ( { "message" :: Maybe (DuplicateSSHPublicKeyMessage') } -> {"message" :: Maybe (DuplicateSSHPublicKeyMessage') } ) -> DuplicateSSHPublicKeyException
+newDuplicateSSHPublicKeyException'  customize = (DuplicateSSHPublicKeyException <<< customize) { "message": Nothing }
 
 
 
@@ -1655,7 +1654,7 @@ newEnableMFADeviceRequest' _AuthenticationCode1 _AuthenticationCode2 _SerialNumb
 
 -- | <p>The request was rejected because it attempted to create a resource that already exists.</p>
 newtype EntityAlreadyExistsException = EntityAlreadyExistsException 
-  { "message" :: NullOrUndefined (EntityAlreadyExistsMessage')
+  { "message" :: Maybe (EntityAlreadyExistsMessage')
   }
 derive instance newtypeEntityAlreadyExistsException :: Newtype EntityAlreadyExistsException _
 derive instance repGenericEntityAlreadyExistsException :: Generic EntityAlreadyExistsException _
@@ -1665,18 +1664,18 @@ instance encodeEntityAlreadyExistsException :: Encode EntityAlreadyExistsExcepti
 
 -- | Constructs EntityAlreadyExistsException from required parameters
 newEntityAlreadyExistsException :: EntityAlreadyExistsException
-newEntityAlreadyExistsException  = EntityAlreadyExistsException { "message": (NullOrUndefined Nothing) }
+newEntityAlreadyExistsException  = EntityAlreadyExistsException { "message": Nothing }
 
 -- | Constructs EntityAlreadyExistsException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newEntityAlreadyExistsException' :: ( { "message" :: NullOrUndefined (EntityAlreadyExistsMessage') } -> {"message" :: NullOrUndefined (EntityAlreadyExistsMessage') } ) -> EntityAlreadyExistsException
-newEntityAlreadyExistsException'  customize = (EntityAlreadyExistsException <<< customize) { "message": (NullOrUndefined Nothing) }
+newEntityAlreadyExistsException' :: ( { "message" :: Maybe (EntityAlreadyExistsMessage') } -> {"message" :: Maybe (EntityAlreadyExistsMessage') } ) -> EntityAlreadyExistsException
+newEntityAlreadyExistsException'  customize = (EntityAlreadyExistsException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity.</p>
 newtype EntityTemporarilyUnmodifiableException = EntityTemporarilyUnmodifiableException 
-  { "message" :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage')
+  { "message" :: Maybe (EntityTemporarilyUnmodifiableMessage')
   }
 derive instance newtypeEntityTemporarilyUnmodifiableException :: Newtype EntityTemporarilyUnmodifiableException _
 derive instance repGenericEntityTemporarilyUnmodifiableException :: Generic EntityTemporarilyUnmodifiableException _
@@ -1686,12 +1685,12 @@ instance encodeEntityTemporarilyUnmodifiableException :: Encode EntityTemporaril
 
 -- | Constructs EntityTemporarilyUnmodifiableException from required parameters
 newEntityTemporarilyUnmodifiableException :: EntityTemporarilyUnmodifiableException
-newEntityTemporarilyUnmodifiableException  = EntityTemporarilyUnmodifiableException { "message": (NullOrUndefined Nothing) }
+newEntityTemporarilyUnmodifiableException  = EntityTemporarilyUnmodifiableException { "message": Nothing }
 
 -- | Constructs EntityTemporarilyUnmodifiableException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newEntityTemporarilyUnmodifiableException' :: ( { "message" :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage') } -> {"message" :: NullOrUndefined (EntityTemporarilyUnmodifiableMessage') } ) -> EntityTemporarilyUnmodifiableException
-newEntityTemporarilyUnmodifiableException'  customize = (EntityTemporarilyUnmodifiableException <<< customize) { "message": (NullOrUndefined Nothing) }
+newEntityTemporarilyUnmodifiableException' :: ( { "message" :: Maybe (EntityTemporarilyUnmodifiableMessage') } -> {"message" :: Maybe (EntityTemporarilyUnmodifiableMessage') } ) -> EntityTemporarilyUnmodifiableException
+newEntityTemporarilyUnmodifiableException'  customize = (EntityTemporarilyUnmodifiableException <<< customize) { "message": Nothing }
 
 
 
@@ -1725,13 +1724,13 @@ instance encodeEvalDecisionSourceType :: Encode EvalDecisionSourceType where enc
 -- | <p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulatePrincipalPolicy</a> </code>.</p>
 newtype EvaluationResult = EvaluationResult 
   { "EvalActionName" :: (ActionNameType)
-  , "EvalResourceName" :: NullOrUndefined (ResourceNameType)
+  , "EvalResourceName" :: Maybe (ResourceNameType)
   , "EvalDecision" :: (PolicyEvaluationDecisionType)
-  , "MatchedStatements" :: NullOrUndefined (StatementListType)
-  , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType)
-  , "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail)
-  , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType)
-  , "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType)
+  , "MatchedStatements" :: Maybe (StatementListType)
+  , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType)
+  , "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail)
+  , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType)
+  , "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType)
   }
 derive instance newtypeEvaluationResult :: Newtype EvaluationResult _
 derive instance repGenericEvaluationResult :: Generic EvaluationResult _
@@ -1741,12 +1740,12 @@ instance encodeEvaluationResult :: Encode EvaluationResult where encode = generi
 
 -- | Constructs EvaluationResult from required parameters
 newEvaluationResult :: ActionNameType -> PolicyEvaluationDecisionType -> EvaluationResult
-newEvaluationResult _EvalActionName _EvalDecision = EvaluationResult { "EvalActionName": _EvalActionName, "EvalDecision": _EvalDecision, "EvalDecisionDetails": (NullOrUndefined Nothing), "EvalResourceName": (NullOrUndefined Nothing), "MatchedStatements": (NullOrUndefined Nothing), "MissingContextValues": (NullOrUndefined Nothing), "OrganizationsDecisionDetail": (NullOrUndefined Nothing), "ResourceSpecificResults": (NullOrUndefined Nothing) }
+newEvaluationResult _EvalActionName _EvalDecision = EvaluationResult { "EvalActionName": _EvalActionName, "EvalDecision": _EvalDecision, "EvalDecisionDetails": Nothing, "EvalResourceName": Nothing, "MatchedStatements": Nothing, "MissingContextValues": Nothing, "OrganizationsDecisionDetail": Nothing, "ResourceSpecificResults": Nothing }
 
 -- | Constructs EvaluationResult's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newEvaluationResult' :: ActionNameType -> PolicyEvaluationDecisionType -> ( { "EvalActionName" :: (ActionNameType) , "EvalResourceName" :: NullOrUndefined (ResourceNameType) , "EvalDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: NullOrUndefined (StatementListType) , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType) , "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail) , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) , "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType) } -> {"EvalActionName" :: (ActionNameType) , "EvalResourceName" :: NullOrUndefined (ResourceNameType) , "EvalDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: NullOrUndefined (StatementListType) , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType) , "OrganizationsDecisionDetail" :: NullOrUndefined (OrganizationsDecisionDetail) , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) , "ResourceSpecificResults" :: NullOrUndefined (ResourceSpecificResultListType) } ) -> EvaluationResult
-newEvaluationResult' _EvalActionName _EvalDecision customize = (EvaluationResult <<< customize) { "EvalActionName": _EvalActionName, "EvalDecision": _EvalDecision, "EvalDecisionDetails": (NullOrUndefined Nothing), "EvalResourceName": (NullOrUndefined Nothing), "MatchedStatements": (NullOrUndefined Nothing), "MissingContextValues": (NullOrUndefined Nothing), "OrganizationsDecisionDetail": (NullOrUndefined Nothing), "ResourceSpecificResults": (NullOrUndefined Nothing) }
+newEvaluationResult' :: ActionNameType -> PolicyEvaluationDecisionType -> ( { "EvalActionName" :: (ActionNameType) , "EvalResourceName" :: Maybe (ResourceNameType) , "EvalDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: Maybe (StatementListType) , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType) , "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail) , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) , "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType) } -> {"EvalActionName" :: (ActionNameType) , "EvalResourceName" :: Maybe (ResourceNameType) , "EvalDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: Maybe (StatementListType) , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType) , "OrganizationsDecisionDetail" :: Maybe (OrganizationsDecisionDetail) , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) , "ResourceSpecificResults" :: Maybe (ResourceSpecificResultListType) } ) -> EvaluationResult
+newEvaluationResult' _EvalActionName _EvalDecision customize = (EvaluationResult <<< customize) { "EvalActionName": _EvalActionName, "EvalDecision": _EvalDecision, "EvalDecisionDetails": Nothing, "EvalResourceName": Nothing, "MatchedStatements": Nothing, "MissingContextValues": Nothing, "OrganizationsDecisionDetail": Nothing, "ResourceSpecificResults": Nothing }
 
 
 
@@ -1761,8 +1760,8 @@ instance encodeEvaluationResultsListType :: Encode EvaluationResultsListType whe
 
 -- | <p>Contains the response to a successful <a>GenerateCredentialReport</a> request. </p>
 newtype GenerateCredentialReportResponse = GenerateCredentialReportResponse 
-  { "State" :: NullOrUndefined (ReportStateType)
-  , "Description" :: NullOrUndefined (ReportStateDescriptionType)
+  { "State" :: Maybe (ReportStateType)
+  , "Description" :: Maybe (ReportStateDescriptionType)
   }
 derive instance newtypeGenerateCredentialReportResponse :: Newtype GenerateCredentialReportResponse _
 derive instance repGenericGenerateCredentialReportResponse :: Generic GenerateCredentialReportResponse _
@@ -1772,12 +1771,12 @@ instance encodeGenerateCredentialReportResponse :: Encode GenerateCredentialRepo
 
 -- | Constructs GenerateCredentialReportResponse from required parameters
 newGenerateCredentialReportResponse :: GenerateCredentialReportResponse
-newGenerateCredentialReportResponse  = GenerateCredentialReportResponse { "Description": (NullOrUndefined Nothing), "State": (NullOrUndefined Nothing) }
+newGenerateCredentialReportResponse  = GenerateCredentialReportResponse { "Description": Nothing, "State": Nothing }
 
 -- | Constructs GenerateCredentialReportResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGenerateCredentialReportResponse' :: ( { "State" :: NullOrUndefined (ReportStateType) , "Description" :: NullOrUndefined (ReportStateDescriptionType) } -> {"State" :: NullOrUndefined (ReportStateType) , "Description" :: NullOrUndefined (ReportStateDescriptionType) } ) -> GenerateCredentialReportResponse
-newGenerateCredentialReportResponse'  customize = (GenerateCredentialReportResponse <<< customize) { "Description": (NullOrUndefined Nothing), "State": (NullOrUndefined Nothing) }
+newGenerateCredentialReportResponse' :: ( { "State" :: Maybe (ReportStateType) , "Description" :: Maybe (ReportStateDescriptionType) } -> {"State" :: Maybe (ReportStateType) , "Description" :: Maybe (ReportStateDescriptionType) } ) -> GenerateCredentialReportResponse
+newGenerateCredentialReportResponse'  customize = (GenerateCredentialReportResponse <<< customize) { "Description": Nothing, "State": Nothing }
 
 
 
@@ -1803,8 +1802,8 @@ newGetAccessKeyLastUsedRequest' _AccessKeyId customize = (GetAccessKeyLastUsedRe
 
 -- | <p>Contains the response to a successful <a>GetAccessKeyLastUsed</a> request. It is also returned as a member of the <a>AccessKeyMetaData</a> structure returned by the <a>ListAccessKeys</a> action.</p>
 newtype GetAccessKeyLastUsedResponse = GetAccessKeyLastUsedResponse 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
-  , "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed)
+  { "UserName" :: Maybe (ExistingUserNameType')
+  , "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed)
   }
 derive instance newtypeGetAccessKeyLastUsedResponse :: Newtype GetAccessKeyLastUsedResponse _
 derive instance repGenericGetAccessKeyLastUsedResponse :: Generic GetAccessKeyLastUsedResponse _
@@ -1814,19 +1813,19 @@ instance encodeGetAccessKeyLastUsedResponse :: Encode GetAccessKeyLastUsedRespon
 
 -- | Constructs GetAccessKeyLastUsedResponse from required parameters
 newGetAccessKeyLastUsedResponse :: GetAccessKeyLastUsedResponse
-newGetAccessKeyLastUsedResponse  = GetAccessKeyLastUsedResponse { "AccessKeyLastUsed": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newGetAccessKeyLastUsedResponse  = GetAccessKeyLastUsedResponse { "AccessKeyLastUsed": Nothing, "UserName": Nothing }
 
 -- | Constructs GetAccessKeyLastUsedResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetAccessKeyLastUsedResponse' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed) } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyLastUsed" :: NullOrUndefined (AccessKeyLastUsed) } ) -> GetAccessKeyLastUsedResponse
-newGetAccessKeyLastUsedResponse'  customize = (GetAccessKeyLastUsedResponse <<< customize) { "AccessKeyLastUsed": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newGetAccessKeyLastUsedResponse' :: ( { "UserName" :: Maybe (ExistingUserNameType') , "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed) } -> {"UserName" :: Maybe (ExistingUserNameType') , "AccessKeyLastUsed" :: Maybe (AccessKeyLastUsed) } ) -> GetAccessKeyLastUsedResponse
+newGetAccessKeyLastUsedResponse'  customize = (GetAccessKeyLastUsedResponse <<< customize) { "AccessKeyLastUsed": Nothing, "UserName": Nothing }
 
 
 
 newtype GetAccountAuthorizationDetailsRequest = GetAccountAuthorizationDetailsRequest 
-  { "Filter" :: NullOrUndefined (EntityListType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "Filter" :: Maybe (EntityListType')
+  , "MaxItems" :: Maybe (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeGetAccountAuthorizationDetailsRequest :: Newtype GetAccountAuthorizationDetailsRequest _
 derive instance repGenericGetAccountAuthorizationDetailsRequest :: Generic GetAccountAuthorizationDetailsRequest _
@@ -1836,23 +1835,23 @@ instance encodeGetAccountAuthorizationDetailsRequest :: Encode GetAccountAuthori
 
 -- | Constructs GetAccountAuthorizationDetailsRequest from required parameters
 newGetAccountAuthorizationDetailsRequest :: GetAccountAuthorizationDetailsRequest
-newGetAccountAuthorizationDetailsRequest  = GetAccountAuthorizationDetailsRequest { "Filter": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newGetAccountAuthorizationDetailsRequest  = GetAccountAuthorizationDetailsRequest { "Filter": Nothing, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs GetAccountAuthorizationDetailsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetAccountAuthorizationDetailsRequest' :: ( { "Filter" :: NullOrUndefined (EntityListType') , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Filter" :: NullOrUndefined (EntityListType') , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> GetAccountAuthorizationDetailsRequest
-newGetAccountAuthorizationDetailsRequest'  customize = (GetAccountAuthorizationDetailsRequest <<< customize) { "Filter": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newGetAccountAuthorizationDetailsRequest' :: ( { "Filter" :: Maybe (EntityListType') , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } -> {"Filter" :: Maybe (EntityListType') , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } ) -> GetAccountAuthorizationDetailsRequest
+newGetAccountAuthorizationDetailsRequest'  customize = (GetAccountAuthorizationDetailsRequest <<< customize) { "Filter": Nothing, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>GetAccountAuthorizationDetails</a> request. </p>
 newtype GetAccountAuthorizationDetailsResponse = GetAccountAuthorizationDetailsResponse 
-  { "UserDetailList" :: NullOrUndefined (UserDetailListType')
-  , "GroupDetailList" :: NullOrUndefined (GroupDetailListType')
-  , "RoleDetailList" :: NullOrUndefined (RoleDetailListType')
-  , "Policies" :: NullOrUndefined (ManagedPolicyDetailListType)
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "UserDetailList" :: Maybe (UserDetailListType')
+  , "GroupDetailList" :: Maybe (GroupDetailListType')
+  , "RoleDetailList" :: Maybe (RoleDetailListType')
+  , "Policies" :: Maybe (ManagedPolicyDetailListType)
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeGetAccountAuthorizationDetailsResponse :: Newtype GetAccountAuthorizationDetailsResponse _
 derive instance repGenericGetAccountAuthorizationDetailsResponse :: Generic GetAccountAuthorizationDetailsResponse _
@@ -1862,12 +1861,12 @@ instance encodeGetAccountAuthorizationDetailsResponse :: Encode GetAccountAuthor
 
 -- | Constructs GetAccountAuthorizationDetailsResponse from required parameters
 newGetAccountAuthorizationDetailsResponse :: GetAccountAuthorizationDetailsResponse
-newGetAccountAuthorizationDetailsResponse  = GetAccountAuthorizationDetailsResponse { "GroupDetailList": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Policies": (NullOrUndefined Nothing), "RoleDetailList": (NullOrUndefined Nothing), "UserDetailList": (NullOrUndefined Nothing) }
+newGetAccountAuthorizationDetailsResponse  = GetAccountAuthorizationDetailsResponse { "GroupDetailList": Nothing, "IsTruncated": Nothing, "Marker": Nothing, "Policies": Nothing, "RoleDetailList": Nothing, "UserDetailList": Nothing }
 
 -- | Constructs GetAccountAuthorizationDetailsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetAccountAuthorizationDetailsResponse' :: ( { "UserDetailList" :: NullOrUndefined (UserDetailListType') , "GroupDetailList" :: NullOrUndefined (GroupDetailListType') , "RoleDetailList" :: NullOrUndefined (RoleDetailListType') , "Policies" :: NullOrUndefined (ManagedPolicyDetailListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"UserDetailList" :: NullOrUndefined (UserDetailListType') , "GroupDetailList" :: NullOrUndefined (GroupDetailListType') , "RoleDetailList" :: NullOrUndefined (RoleDetailListType') , "Policies" :: NullOrUndefined (ManagedPolicyDetailListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> GetAccountAuthorizationDetailsResponse
-newGetAccountAuthorizationDetailsResponse'  customize = (GetAccountAuthorizationDetailsResponse <<< customize) { "GroupDetailList": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Policies": (NullOrUndefined Nothing), "RoleDetailList": (NullOrUndefined Nothing), "UserDetailList": (NullOrUndefined Nothing) }
+newGetAccountAuthorizationDetailsResponse' :: ( { "UserDetailList" :: Maybe (UserDetailListType') , "GroupDetailList" :: Maybe (GroupDetailListType') , "RoleDetailList" :: Maybe (RoleDetailListType') , "Policies" :: Maybe (ManagedPolicyDetailListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"UserDetailList" :: Maybe (UserDetailListType') , "GroupDetailList" :: Maybe (GroupDetailListType') , "RoleDetailList" :: Maybe (RoleDetailListType') , "Policies" :: Maybe (ManagedPolicyDetailListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> GetAccountAuthorizationDetailsResponse
+newGetAccountAuthorizationDetailsResponse'  customize = (GetAccountAuthorizationDetailsResponse <<< customize) { "GroupDetailList": Nothing, "IsTruncated": Nothing, "Marker": Nothing, "Policies": Nothing, "RoleDetailList": Nothing, "UserDetailList": Nothing }
 
 
 
@@ -1894,7 +1893,7 @@ newGetAccountPasswordPolicyResponse' _PasswordPolicy customize = (GetAccountPass
 
 -- | <p>Contains the response to a successful <a>GetAccountSummary</a> request. </p>
 newtype GetAccountSummaryResponse = GetAccountSummaryResponse 
-  { "SummaryMap" :: NullOrUndefined (SummaryMapType')
+  { "SummaryMap" :: Maybe (SummaryMapType')
   }
 derive instance newtypeGetAccountSummaryResponse :: Newtype GetAccountSummaryResponse _
 derive instance repGenericGetAccountSummaryResponse :: Generic GetAccountSummaryResponse _
@@ -1904,12 +1903,12 @@ instance encodeGetAccountSummaryResponse :: Encode GetAccountSummaryResponse whe
 
 -- | Constructs GetAccountSummaryResponse from required parameters
 newGetAccountSummaryResponse :: GetAccountSummaryResponse
-newGetAccountSummaryResponse  = GetAccountSummaryResponse { "SummaryMap": (NullOrUndefined Nothing) }
+newGetAccountSummaryResponse  = GetAccountSummaryResponse { "SummaryMap": Nothing }
 
 -- | Constructs GetAccountSummaryResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetAccountSummaryResponse' :: ( { "SummaryMap" :: NullOrUndefined (SummaryMapType') } -> {"SummaryMap" :: NullOrUndefined (SummaryMapType') } ) -> GetAccountSummaryResponse
-newGetAccountSummaryResponse'  customize = (GetAccountSummaryResponse <<< customize) { "SummaryMap": (NullOrUndefined Nothing) }
+newGetAccountSummaryResponse' :: ( { "SummaryMap" :: Maybe (SummaryMapType') } -> {"SummaryMap" :: Maybe (SummaryMapType') } ) -> GetAccountSummaryResponse
+newGetAccountSummaryResponse'  customize = (GetAccountSummaryResponse <<< customize) { "SummaryMap": Nothing }
 
 
 
@@ -1935,7 +1934,7 @@ newGetContextKeysForCustomPolicyRequest' _PolicyInputList customize = (GetContex
 
 -- | <p>Contains the response to a successful <a>GetContextKeysForPrincipalPolicy</a> or <a>GetContextKeysForCustomPolicy</a> request. </p>
 newtype GetContextKeysForPolicyResponse = GetContextKeysForPolicyResponse 
-  { "ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType)
+  { "ContextKeyNames" :: Maybe (ContextKeyNamesResultListType)
   }
 derive instance newtypeGetContextKeysForPolicyResponse :: Newtype GetContextKeysForPolicyResponse _
 derive instance repGenericGetContextKeysForPolicyResponse :: Generic GetContextKeysForPolicyResponse _
@@ -1945,18 +1944,18 @@ instance encodeGetContextKeysForPolicyResponse :: Encode GetContextKeysForPolicy
 
 -- | Constructs GetContextKeysForPolicyResponse from required parameters
 newGetContextKeysForPolicyResponse :: GetContextKeysForPolicyResponse
-newGetContextKeysForPolicyResponse  = GetContextKeysForPolicyResponse { "ContextKeyNames": (NullOrUndefined Nothing) }
+newGetContextKeysForPolicyResponse  = GetContextKeysForPolicyResponse { "ContextKeyNames": Nothing }
 
 -- | Constructs GetContextKeysForPolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetContextKeysForPolicyResponse' :: ( { "ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType) } -> {"ContextKeyNames" :: NullOrUndefined (ContextKeyNamesResultListType) } ) -> GetContextKeysForPolicyResponse
-newGetContextKeysForPolicyResponse'  customize = (GetContextKeysForPolicyResponse <<< customize) { "ContextKeyNames": (NullOrUndefined Nothing) }
+newGetContextKeysForPolicyResponse' :: ( { "ContextKeyNames" :: Maybe (ContextKeyNamesResultListType) } -> {"ContextKeyNames" :: Maybe (ContextKeyNamesResultListType) } ) -> GetContextKeysForPolicyResponse
+newGetContextKeysForPolicyResponse'  customize = (GetContextKeysForPolicyResponse <<< customize) { "ContextKeyNames": Nothing }
 
 
 
 newtype GetContextKeysForPrincipalPolicyRequest = GetContextKeysForPrincipalPolicyRequest 
   { "PolicySourceArn" :: (ArnType')
-  , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType)
+  , "PolicyInputList" :: Maybe (SimulationPolicyListType)
   }
 derive instance newtypeGetContextKeysForPrincipalPolicyRequest :: Newtype GetContextKeysForPrincipalPolicyRequest _
 derive instance repGenericGetContextKeysForPrincipalPolicyRequest :: Generic GetContextKeysForPrincipalPolicyRequest _
@@ -1966,20 +1965,20 @@ instance encodeGetContextKeysForPrincipalPolicyRequest :: Encode GetContextKeysF
 
 -- | Constructs GetContextKeysForPrincipalPolicyRequest from required parameters
 newGetContextKeysForPrincipalPolicyRequest :: ArnType' -> GetContextKeysForPrincipalPolicyRequest
-newGetContextKeysForPrincipalPolicyRequest _PolicySourceArn = GetContextKeysForPrincipalPolicyRequest { "PolicySourceArn": _PolicySourceArn, "PolicyInputList": (NullOrUndefined Nothing) }
+newGetContextKeysForPrincipalPolicyRequest _PolicySourceArn = GetContextKeysForPrincipalPolicyRequest { "PolicySourceArn": _PolicySourceArn, "PolicyInputList": Nothing }
 
 -- | Constructs GetContextKeysForPrincipalPolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetContextKeysForPrincipalPolicyRequest' :: ArnType' -> ( { "PolicySourceArn" :: (ArnType') , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) } -> {"PolicySourceArn" :: (ArnType') , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) } ) -> GetContextKeysForPrincipalPolicyRequest
-newGetContextKeysForPrincipalPolicyRequest' _PolicySourceArn customize = (GetContextKeysForPrincipalPolicyRequest <<< customize) { "PolicySourceArn": _PolicySourceArn, "PolicyInputList": (NullOrUndefined Nothing) }
+newGetContextKeysForPrincipalPolicyRequest' :: ArnType' -> ( { "PolicySourceArn" :: (ArnType') , "PolicyInputList" :: Maybe (SimulationPolicyListType) } -> {"PolicySourceArn" :: (ArnType') , "PolicyInputList" :: Maybe (SimulationPolicyListType) } ) -> GetContextKeysForPrincipalPolicyRequest
+newGetContextKeysForPrincipalPolicyRequest' _PolicySourceArn customize = (GetContextKeysForPrincipalPolicyRequest <<< customize) { "PolicySourceArn": _PolicySourceArn, "PolicyInputList": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>GetCredentialReport</a> request. </p>
 newtype GetCredentialReportResponse = GetCredentialReportResponse 
-  { "Content" :: NullOrUndefined (ReportContentType)
-  , "ReportFormat" :: NullOrUndefined (ReportFormatType)
-  , "GeneratedTime" :: NullOrUndefined (DateType')
+  { "Content" :: Maybe (ReportContentType)
+  , "ReportFormat" :: Maybe (ReportFormatType)
+  , "GeneratedTime" :: Maybe (DateType')
   }
 derive instance newtypeGetCredentialReportResponse :: Newtype GetCredentialReportResponse _
 derive instance repGenericGetCredentialReportResponse :: Generic GetCredentialReportResponse _
@@ -1989,12 +1988,12 @@ instance encodeGetCredentialReportResponse :: Encode GetCredentialReportResponse
 
 -- | Constructs GetCredentialReportResponse from required parameters
 newGetCredentialReportResponse :: GetCredentialReportResponse
-newGetCredentialReportResponse  = GetCredentialReportResponse { "Content": (NullOrUndefined Nothing), "GeneratedTime": (NullOrUndefined Nothing), "ReportFormat": (NullOrUndefined Nothing) }
+newGetCredentialReportResponse  = GetCredentialReportResponse { "Content": Nothing, "GeneratedTime": Nothing, "ReportFormat": Nothing }
 
 -- | Constructs GetCredentialReportResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetCredentialReportResponse' :: ( { "Content" :: NullOrUndefined (ReportContentType) , "ReportFormat" :: NullOrUndefined (ReportFormatType) , "GeneratedTime" :: NullOrUndefined (DateType') } -> {"Content" :: NullOrUndefined (ReportContentType) , "ReportFormat" :: NullOrUndefined (ReportFormatType) , "GeneratedTime" :: NullOrUndefined (DateType') } ) -> GetCredentialReportResponse
-newGetCredentialReportResponse'  customize = (GetCredentialReportResponse <<< customize) { "Content": (NullOrUndefined Nothing), "GeneratedTime": (NullOrUndefined Nothing), "ReportFormat": (NullOrUndefined Nothing) }
+newGetCredentialReportResponse' :: ( { "Content" :: Maybe (ReportContentType) , "ReportFormat" :: Maybe (ReportFormatType) , "GeneratedTime" :: Maybe (DateType') } -> {"Content" :: Maybe (ReportContentType) , "ReportFormat" :: Maybe (ReportFormatType) , "GeneratedTime" :: Maybe (DateType') } ) -> GetCredentialReportResponse
+newGetCredentialReportResponse'  customize = (GetCredentialReportResponse <<< customize) { "Content": Nothing, "GeneratedTime": Nothing, "ReportFormat": Nothing }
 
 
 
@@ -2044,8 +2043,8 @@ newGetGroupPolicyResponse' _GroupName _PolicyDocument _PolicyName customize = (G
 
 newtype GetGroupRequest = GetGroupRequest 
   { "GroupName" :: (GroupNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeGetGroupRequest :: Newtype GetGroupRequest _
 derive instance repGenericGetGroupRequest :: Generic GetGroupRequest _
@@ -2055,12 +2054,12 @@ instance encodeGetGroupRequest :: Encode GetGroupRequest where encode = genericE
 
 -- | Constructs GetGroupRequest from required parameters
 newGetGroupRequest :: GroupNameType' -> GetGroupRequest
-newGetGroupRequest _GroupName = GetGroupRequest { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newGetGroupRequest _GroupName = GetGroupRequest { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs GetGroupRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetGroupRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> GetGroupRequest
-newGetGroupRequest' _GroupName customize = (GetGroupRequest <<< customize) { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newGetGroupRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> GetGroupRequest
+newGetGroupRequest' _GroupName customize = (GetGroupRequest <<< customize) { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
@@ -2068,8 +2067,8 @@ newGetGroupRequest' _GroupName customize = (GetGroupRequest <<< customize) { "Gr
 newtype GetGroupResponse = GetGroupResponse 
   { "Group" :: (Group)
   , "Users" :: (UserListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeGetGroupResponse :: Newtype GetGroupResponse _
 derive instance repGenericGetGroupResponse :: Generic GetGroupResponse _
@@ -2079,12 +2078,12 @@ instance encodeGetGroupResponse :: Encode GetGroupResponse where encode = generi
 
 -- | Constructs GetGroupResponse from required parameters
 newGetGroupResponse :: Group -> UserListType' -> GetGroupResponse
-newGetGroupResponse _Group _Users = GetGroupResponse { "Group": _Group, "Users": _Users, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newGetGroupResponse _Group _Users = GetGroupResponse { "Group": _Group, "Users": _Users, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs GetGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetGroupResponse' :: Group -> UserListType' -> ( { "Group" :: (Group) , "Users" :: (UserListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Group" :: (Group) , "Users" :: (UserListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> GetGroupResponse
-newGetGroupResponse' _Group _Users customize = (GetGroupResponse <<< customize) { "Group": _Group, "Users": _Users, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newGetGroupResponse' :: Group -> UserListType' -> ( { "Group" :: (Group) , "Users" :: (UserListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Group" :: (Group) , "Users" :: (UserListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> GetGroupResponse
+newGetGroupResponse' _Group _Users customize = (GetGroupResponse <<< customize) { "Group": _Group, "Users": _Users, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
@@ -2192,10 +2191,10 @@ newGetOpenIDConnectProviderRequest' _OpenIDConnectProviderArn customize = (GetOp
 
 -- | <p>Contains the response to a successful <a>GetOpenIDConnectProvider</a> request. </p>
 newtype GetOpenIDConnectProviderResponse = GetOpenIDConnectProviderResponse 
-  { "Url" :: NullOrUndefined (OpenIDConnectProviderUrlType)
-  , "ClientIDList" :: NullOrUndefined (ClientIDListType')
-  , "ThumbprintList" :: NullOrUndefined (ThumbprintListType')
-  , "CreateDate" :: NullOrUndefined (DateType')
+  { "Url" :: Maybe (OpenIDConnectProviderUrlType)
+  , "ClientIDList" :: Maybe (ClientIDListType')
+  , "ThumbprintList" :: Maybe (ThumbprintListType')
+  , "CreateDate" :: Maybe (DateType')
   }
 derive instance newtypeGetOpenIDConnectProviderResponse :: Newtype GetOpenIDConnectProviderResponse _
 derive instance repGenericGetOpenIDConnectProviderResponse :: Generic GetOpenIDConnectProviderResponse _
@@ -2205,12 +2204,12 @@ instance encodeGetOpenIDConnectProviderResponse :: Encode GetOpenIDConnectProvid
 
 -- | Constructs GetOpenIDConnectProviderResponse from required parameters
 newGetOpenIDConnectProviderResponse :: GetOpenIDConnectProviderResponse
-newGetOpenIDConnectProviderResponse  = GetOpenIDConnectProviderResponse { "ClientIDList": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "ThumbprintList": (NullOrUndefined Nothing), "Url": (NullOrUndefined Nothing) }
+newGetOpenIDConnectProviderResponse  = GetOpenIDConnectProviderResponse { "ClientIDList": Nothing, "CreateDate": Nothing, "ThumbprintList": Nothing, "Url": Nothing }
 
 -- | Constructs GetOpenIDConnectProviderResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetOpenIDConnectProviderResponse' :: ( { "Url" :: NullOrUndefined (OpenIDConnectProviderUrlType) , "ClientIDList" :: NullOrUndefined (ClientIDListType') , "ThumbprintList" :: NullOrUndefined (ThumbprintListType') , "CreateDate" :: NullOrUndefined (DateType') } -> {"Url" :: NullOrUndefined (OpenIDConnectProviderUrlType) , "ClientIDList" :: NullOrUndefined (ClientIDListType') , "ThumbprintList" :: NullOrUndefined (ThumbprintListType') , "CreateDate" :: NullOrUndefined (DateType') } ) -> GetOpenIDConnectProviderResponse
-newGetOpenIDConnectProviderResponse'  customize = (GetOpenIDConnectProviderResponse <<< customize) { "ClientIDList": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "ThumbprintList": (NullOrUndefined Nothing), "Url": (NullOrUndefined Nothing) }
+newGetOpenIDConnectProviderResponse' :: ( { "Url" :: Maybe (OpenIDConnectProviderUrlType) , "ClientIDList" :: Maybe (ClientIDListType') , "ThumbprintList" :: Maybe (ThumbprintListType') , "CreateDate" :: Maybe (DateType') } -> {"Url" :: Maybe (OpenIDConnectProviderUrlType) , "ClientIDList" :: Maybe (ClientIDListType') , "ThumbprintList" :: Maybe (ThumbprintListType') , "CreateDate" :: Maybe (DateType') } ) -> GetOpenIDConnectProviderResponse
+newGetOpenIDConnectProviderResponse'  customize = (GetOpenIDConnectProviderResponse <<< customize) { "ClientIDList": Nothing, "CreateDate": Nothing, "ThumbprintList": Nothing, "Url": Nothing }
 
 
 
@@ -2236,7 +2235,7 @@ newGetPolicyRequest' _PolicyArn customize = (GetPolicyRequest <<< customize) { "
 
 -- | <p>Contains the response to a successful <a>GetPolicy</a> request. </p>
 newtype GetPolicyResponse = GetPolicyResponse 
-  { "Policy" :: NullOrUndefined (Policy)
+  { "Policy" :: Maybe (Policy)
   }
 derive instance newtypeGetPolicyResponse :: Newtype GetPolicyResponse _
 derive instance repGenericGetPolicyResponse :: Generic GetPolicyResponse _
@@ -2246,12 +2245,12 @@ instance encodeGetPolicyResponse :: Encode GetPolicyResponse where encode = gene
 
 -- | Constructs GetPolicyResponse from required parameters
 newGetPolicyResponse :: GetPolicyResponse
-newGetPolicyResponse  = GetPolicyResponse { "Policy": (NullOrUndefined Nothing) }
+newGetPolicyResponse  = GetPolicyResponse { "Policy": Nothing }
 
 -- | Constructs GetPolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetPolicyResponse' :: ( { "Policy" :: NullOrUndefined (Policy) } -> {"Policy" :: NullOrUndefined (Policy) } ) -> GetPolicyResponse
-newGetPolicyResponse'  customize = (GetPolicyResponse <<< customize) { "Policy": (NullOrUndefined Nothing) }
+newGetPolicyResponse' :: ( { "Policy" :: Maybe (Policy) } -> {"Policy" :: Maybe (Policy) } ) -> GetPolicyResponse
+newGetPolicyResponse'  customize = (GetPolicyResponse <<< customize) { "Policy": Nothing }
 
 
 
@@ -2278,7 +2277,7 @@ newGetPolicyVersionRequest' _PolicyArn _VersionId customize = (GetPolicyVersionR
 
 -- | <p>Contains the response to a successful <a>GetPolicyVersion</a> request. </p>
 newtype GetPolicyVersionResponse = GetPolicyVersionResponse 
-  { "PolicyVersion" :: NullOrUndefined (PolicyVersion)
+  { "PolicyVersion" :: Maybe (PolicyVersion)
   }
 derive instance newtypeGetPolicyVersionResponse :: Newtype GetPolicyVersionResponse _
 derive instance repGenericGetPolicyVersionResponse :: Generic GetPolicyVersionResponse _
@@ -2288,12 +2287,12 @@ instance encodeGetPolicyVersionResponse :: Encode GetPolicyVersionResponse where
 
 -- | Constructs GetPolicyVersionResponse from required parameters
 newGetPolicyVersionResponse :: GetPolicyVersionResponse
-newGetPolicyVersionResponse  = GetPolicyVersionResponse { "PolicyVersion": (NullOrUndefined Nothing) }
+newGetPolicyVersionResponse  = GetPolicyVersionResponse { "PolicyVersion": Nothing }
 
 -- | Constructs GetPolicyVersionResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetPolicyVersionResponse' :: ( { "PolicyVersion" :: NullOrUndefined (PolicyVersion) } -> {"PolicyVersion" :: NullOrUndefined (PolicyVersion) } ) -> GetPolicyVersionResponse
-newGetPolicyVersionResponse'  customize = (GetPolicyVersionResponse <<< customize) { "PolicyVersion": (NullOrUndefined Nothing) }
+newGetPolicyVersionResponse' :: ( { "PolicyVersion" :: Maybe (PolicyVersion) } -> {"PolicyVersion" :: Maybe (PolicyVersion) } ) -> GetPolicyVersionResponse
+newGetPolicyVersionResponse'  customize = (GetPolicyVersionResponse <<< customize) { "PolicyVersion": Nothing }
 
 
 
@@ -2404,9 +2403,9 @@ newGetSAMLProviderRequest' _SAMLProviderArn customize = (GetSAMLProviderRequest 
 
 -- | <p>Contains the response to a successful <a>GetSAMLProvider</a> request. </p>
 newtype GetSAMLProviderResponse = GetSAMLProviderResponse 
-  { "SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType)
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "ValidUntil" :: NullOrUndefined (DateType')
+  { "SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType)
+  , "CreateDate" :: Maybe (DateType')
+  , "ValidUntil" :: Maybe (DateType')
   }
 derive instance newtypeGetSAMLProviderResponse :: Newtype GetSAMLProviderResponse _
 derive instance repGenericGetSAMLProviderResponse :: Generic GetSAMLProviderResponse _
@@ -2416,12 +2415,12 @@ instance encodeGetSAMLProviderResponse :: Encode GetSAMLProviderResponse where e
 
 -- | Constructs GetSAMLProviderResponse from required parameters
 newGetSAMLProviderResponse :: GetSAMLProviderResponse
-newGetSAMLProviderResponse  = GetSAMLProviderResponse { "CreateDate": (NullOrUndefined Nothing), "SAMLMetadataDocument": (NullOrUndefined Nothing), "ValidUntil": (NullOrUndefined Nothing) }
+newGetSAMLProviderResponse  = GetSAMLProviderResponse { "CreateDate": Nothing, "SAMLMetadataDocument": Nothing, "ValidUntil": Nothing }
 
 -- | Constructs GetSAMLProviderResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetSAMLProviderResponse' :: ( { "SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType) , "CreateDate" :: NullOrUndefined (DateType') , "ValidUntil" :: NullOrUndefined (DateType') } -> {"SAMLMetadataDocument" :: NullOrUndefined (SAMLMetadataDocumentType) , "CreateDate" :: NullOrUndefined (DateType') , "ValidUntil" :: NullOrUndefined (DateType') } ) -> GetSAMLProviderResponse
-newGetSAMLProviderResponse'  customize = (GetSAMLProviderResponse <<< customize) { "CreateDate": (NullOrUndefined Nothing), "SAMLMetadataDocument": (NullOrUndefined Nothing), "ValidUntil": (NullOrUndefined Nothing) }
+newGetSAMLProviderResponse' :: ( { "SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType) , "CreateDate" :: Maybe (DateType') , "ValidUntil" :: Maybe (DateType') } -> {"SAMLMetadataDocument" :: Maybe (SAMLMetadataDocumentType) , "CreateDate" :: Maybe (DateType') , "ValidUntil" :: Maybe (DateType') } ) -> GetSAMLProviderResponse
+newGetSAMLProviderResponse'  customize = (GetSAMLProviderResponse <<< customize) { "CreateDate": Nothing, "SAMLMetadataDocument": Nothing, "ValidUntil": Nothing }
 
 
 
@@ -2449,7 +2448,7 @@ newGetSSHPublicKeyRequest' _Encoding _SSHPublicKeyId _UserName customize = (GetS
 
 -- | <p>Contains the response to a successful <a>GetSSHPublicKey</a> request.</p>
 newtype GetSSHPublicKeyResponse = GetSSHPublicKeyResponse 
-  { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey)
+  { "SSHPublicKey" :: Maybe (SSHPublicKey)
   }
 derive instance newtypeGetSSHPublicKeyResponse :: Newtype GetSSHPublicKeyResponse _
 derive instance repGenericGetSSHPublicKeyResponse :: Generic GetSSHPublicKeyResponse _
@@ -2459,12 +2458,12 @@ instance encodeGetSSHPublicKeyResponse :: Encode GetSSHPublicKeyResponse where e
 
 -- | Constructs GetSSHPublicKeyResponse from required parameters
 newGetSSHPublicKeyResponse :: GetSSHPublicKeyResponse
-newGetSSHPublicKeyResponse  = GetSSHPublicKeyResponse { "SSHPublicKey": (NullOrUndefined Nothing) }
+newGetSSHPublicKeyResponse  = GetSSHPublicKeyResponse { "SSHPublicKey": Nothing }
 
 -- | Constructs GetSSHPublicKeyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetSSHPublicKeyResponse' :: ( { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } -> {"SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } ) -> GetSSHPublicKeyResponse
-newGetSSHPublicKeyResponse'  customize = (GetSSHPublicKeyResponse <<< customize) { "SSHPublicKey": (NullOrUndefined Nothing) }
+newGetSSHPublicKeyResponse' :: ( { "SSHPublicKey" :: Maybe (SSHPublicKey) } -> {"SSHPublicKey" :: Maybe (SSHPublicKey) } ) -> GetSSHPublicKeyResponse
+newGetSSHPublicKeyResponse'  customize = (GetSSHPublicKeyResponse <<< customize) { "SSHPublicKey": Nothing }
 
 
 
@@ -2531,7 +2530,7 @@ newGetServiceLinkedRoleDeletionStatusRequest' _DeletionTaskId customize = (GetSe
 
 newtype GetServiceLinkedRoleDeletionStatusResponse = GetServiceLinkedRoleDeletionStatusResponse 
   { "Status" :: (DeletionTaskStatusType)
-  , "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType)
+  , "Reason" :: Maybe (DeletionTaskFailureReasonType)
   }
 derive instance newtypeGetServiceLinkedRoleDeletionStatusResponse :: Newtype GetServiceLinkedRoleDeletionStatusResponse _
 derive instance repGenericGetServiceLinkedRoleDeletionStatusResponse :: Generic GetServiceLinkedRoleDeletionStatusResponse _
@@ -2541,12 +2540,12 @@ instance encodeGetServiceLinkedRoleDeletionStatusResponse :: Encode GetServiceLi
 
 -- | Constructs GetServiceLinkedRoleDeletionStatusResponse from required parameters
 newGetServiceLinkedRoleDeletionStatusResponse :: DeletionTaskStatusType -> GetServiceLinkedRoleDeletionStatusResponse
-newGetServiceLinkedRoleDeletionStatusResponse _Status = GetServiceLinkedRoleDeletionStatusResponse { "Status": _Status, "Reason": (NullOrUndefined Nothing) }
+newGetServiceLinkedRoleDeletionStatusResponse _Status = GetServiceLinkedRoleDeletionStatusResponse { "Status": _Status, "Reason": Nothing }
 
 -- | Constructs GetServiceLinkedRoleDeletionStatusResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetServiceLinkedRoleDeletionStatusResponse' :: DeletionTaskStatusType -> ( { "Status" :: (DeletionTaskStatusType) , "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType) } -> {"Status" :: (DeletionTaskStatusType) , "Reason" :: NullOrUndefined (DeletionTaskFailureReasonType) } ) -> GetServiceLinkedRoleDeletionStatusResponse
-newGetServiceLinkedRoleDeletionStatusResponse' _Status customize = (GetServiceLinkedRoleDeletionStatusResponse <<< customize) { "Status": _Status, "Reason": (NullOrUndefined Nothing) }
+newGetServiceLinkedRoleDeletionStatusResponse' :: DeletionTaskStatusType -> ( { "Status" :: (DeletionTaskStatusType) , "Reason" :: Maybe (DeletionTaskFailureReasonType) } -> {"Status" :: (DeletionTaskStatusType) , "Reason" :: Maybe (DeletionTaskFailureReasonType) } ) -> GetServiceLinkedRoleDeletionStatusResponse
+newGetServiceLinkedRoleDeletionStatusResponse' _Status customize = (GetServiceLinkedRoleDeletionStatusResponse <<< customize) { "Status": _Status, "Reason": Nothing }
 
 
 
@@ -2595,7 +2594,7 @@ newGetUserPolicyResponse' _PolicyDocument _PolicyName _UserName customize = (Get
 
 
 newtype GetUserRequest = GetUserRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   }
 derive instance newtypeGetUserRequest :: Newtype GetUserRequest _
 derive instance repGenericGetUserRequest :: Generic GetUserRequest _
@@ -2605,12 +2604,12 @@ instance encodeGetUserRequest :: Encode GetUserRequest where encode = genericEnc
 
 -- | Constructs GetUserRequest from required parameters
 newGetUserRequest :: GetUserRequest
-newGetUserRequest  = GetUserRequest { "UserName": (NullOrUndefined Nothing) }
+newGetUserRequest  = GetUserRequest { "UserName": Nothing }
 
 -- | Constructs GetUserRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetUserRequest' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') } ) -> GetUserRequest
-newGetUserRequest'  customize = (GetUserRequest <<< customize) { "UserName": (NullOrUndefined Nothing) }
+newGetUserRequest' :: ( { "UserName" :: Maybe (ExistingUserNameType') } -> {"UserName" :: Maybe (ExistingUserNameType') } ) -> GetUserRequest
+newGetUserRequest'  customize = (GetUserRequest <<< customize) { "UserName": Nothing }
 
 
 
@@ -2662,13 +2661,13 @@ newGroup' _Arn _CreateDate _GroupId _GroupName _Path customize = (Group <<< cust
 
 -- | <p>Contains information about an IAM group, including all of the group's policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
 newtype GroupDetail = GroupDetail 
-  { "Path" :: NullOrUndefined (PathType')
-  , "GroupName" :: NullOrUndefined (GroupNameType')
-  , "GroupId" :: NullOrUndefined (IdType')
-  , "Arn" :: NullOrUndefined (ArnType')
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType')
-  , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
+  { "Path" :: Maybe (PathType')
+  , "GroupName" :: Maybe (GroupNameType')
+  , "GroupId" :: Maybe (IdType')
+  , "Arn" :: Maybe (ArnType')
+  , "CreateDate" :: Maybe (DateType')
+  , "GroupPolicyList" :: Maybe (PolicyDetailListType')
+  , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType')
   }
 derive instance newtypeGroupDetail :: Newtype GroupDetail _
 derive instance repGenericGroupDetail :: Generic GroupDetail _
@@ -2678,12 +2677,12 @@ instance encodeGroupDetail :: Encode GroupDetail where encode = genericEncode op
 
 -- | Constructs GroupDetail from required parameters
 newGroupDetail :: GroupDetail
-newGroupDetail  = GroupDetail { "Arn": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "GroupId": (NullOrUndefined Nothing), "GroupName": (NullOrUndefined Nothing), "GroupPolicyList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newGroupDetail  = GroupDetail { "Arn": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "GroupId": Nothing, "GroupName": Nothing, "GroupPolicyList": Nothing, "Path": Nothing }
 
 -- | Constructs GroupDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGroupDetail' :: ( { "Path" :: NullOrUndefined (PathType') , "GroupName" :: NullOrUndefined (GroupNameType') , "GroupId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> {"Path" :: NullOrUndefined (PathType') , "GroupName" :: NullOrUndefined (GroupNameType') , "GroupId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "GroupPolicyList" :: NullOrUndefined (PolicyDetailListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } ) -> GroupDetail
-newGroupDetail'  customize = (GroupDetail <<< customize) { "Arn": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "GroupId": (NullOrUndefined Nothing), "GroupName": (NullOrUndefined Nothing), "GroupPolicyList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newGroupDetail' :: ( { "Path" :: Maybe (PathType') , "GroupName" :: Maybe (GroupNameType') , "GroupId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "GroupPolicyList" :: Maybe (PolicyDetailListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> {"Path" :: Maybe (PathType') , "GroupName" :: Maybe (GroupNameType') , "GroupId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "GroupPolicyList" :: Maybe (PolicyDetailListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } ) -> GroupDetail
+newGroupDetail'  customize = (GroupDetail <<< customize) { "Arn": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "GroupId": Nothing, "GroupName": Nothing, "GroupPolicyList": Nothing, "Path": Nothing }
 
 
 
@@ -2715,7 +2714,7 @@ newInstanceProfile' _Arn _CreateDate _InstanceProfileId _InstanceProfileName _Pa
 
 -- | <p>The request was rejected because the authentication code was not recognized. The error message describes the specific error.</p>
 newtype InvalidAuthenticationCodeException = InvalidAuthenticationCodeException 
-  { "message" :: NullOrUndefined (InvalidAuthenticationCodeMessage')
+  { "message" :: Maybe (InvalidAuthenticationCodeMessage')
   }
 derive instance newtypeInvalidAuthenticationCodeException :: Newtype InvalidAuthenticationCodeException _
 derive instance repGenericInvalidAuthenticationCodeException :: Generic InvalidAuthenticationCodeException _
@@ -2725,18 +2724,18 @@ instance encodeInvalidAuthenticationCodeException :: Encode InvalidAuthenticatio
 
 -- | Constructs InvalidAuthenticationCodeException from required parameters
 newInvalidAuthenticationCodeException :: InvalidAuthenticationCodeException
-newInvalidAuthenticationCodeException  = InvalidAuthenticationCodeException { "message": (NullOrUndefined Nothing) }
+newInvalidAuthenticationCodeException  = InvalidAuthenticationCodeException { "message": Nothing }
 
 -- | Constructs InvalidAuthenticationCodeException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newInvalidAuthenticationCodeException' :: ( { "message" :: NullOrUndefined (InvalidAuthenticationCodeMessage') } -> {"message" :: NullOrUndefined (InvalidAuthenticationCodeMessage') } ) -> InvalidAuthenticationCodeException
-newInvalidAuthenticationCodeException'  customize = (InvalidAuthenticationCodeException <<< customize) { "message": (NullOrUndefined Nothing) }
+newInvalidAuthenticationCodeException' :: ( { "message" :: Maybe (InvalidAuthenticationCodeMessage') } -> {"message" :: Maybe (InvalidAuthenticationCodeMessage') } ) -> InvalidAuthenticationCodeException
+newInvalidAuthenticationCodeException'  customize = (InvalidAuthenticationCodeException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the certificate is invalid.</p>
 newtype InvalidCertificateException = InvalidCertificateException 
-  { "message" :: NullOrUndefined (InvalidCertificateMessage')
+  { "message" :: Maybe (InvalidCertificateMessage')
   }
 derive instance newtypeInvalidCertificateException :: Newtype InvalidCertificateException _
 derive instance repGenericInvalidCertificateException :: Generic InvalidCertificateException _
@@ -2746,18 +2745,18 @@ instance encodeInvalidCertificateException :: Encode InvalidCertificateException
 
 -- | Constructs InvalidCertificateException from required parameters
 newInvalidCertificateException :: InvalidCertificateException
-newInvalidCertificateException  = InvalidCertificateException { "message": (NullOrUndefined Nothing) }
+newInvalidCertificateException  = InvalidCertificateException { "message": Nothing }
 
 -- | Constructs InvalidCertificateException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newInvalidCertificateException' :: ( { "message" :: NullOrUndefined (InvalidCertificateMessage') } -> {"message" :: NullOrUndefined (InvalidCertificateMessage') } ) -> InvalidCertificateException
-newInvalidCertificateException'  customize = (InvalidCertificateException <<< customize) { "message": (NullOrUndefined Nothing) }
+newInvalidCertificateException' :: ( { "message" :: Maybe (InvalidCertificateMessage') } -> {"message" :: Maybe (InvalidCertificateMessage') } ) -> InvalidCertificateException
+newInvalidCertificateException'  customize = (InvalidCertificateException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because an invalid or out-of-range value was supplied for an input parameter.</p>
 newtype InvalidInputException = InvalidInputException 
-  { "message" :: NullOrUndefined (InvalidInputMessage')
+  { "message" :: Maybe (InvalidInputMessage')
   }
 derive instance newtypeInvalidInputException :: Newtype InvalidInputException _
 derive instance repGenericInvalidInputException :: Generic InvalidInputException _
@@ -2767,18 +2766,18 @@ instance encodeInvalidInputException :: Encode InvalidInputException where encod
 
 -- | Constructs InvalidInputException from required parameters
 newInvalidInputException :: InvalidInputException
-newInvalidInputException  = InvalidInputException { "message": (NullOrUndefined Nothing) }
+newInvalidInputException  = InvalidInputException { "message": Nothing }
 
 -- | Constructs InvalidInputException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newInvalidInputException' :: ( { "message" :: NullOrUndefined (InvalidInputMessage') } -> {"message" :: NullOrUndefined (InvalidInputMessage') } ) -> InvalidInputException
-newInvalidInputException'  customize = (InvalidInputException <<< customize) { "message": (NullOrUndefined Nothing) }
+newInvalidInputException' :: ( { "message" :: Maybe (InvalidInputMessage') } -> {"message" :: Maybe (InvalidInputMessage') } ) -> InvalidInputException
+newInvalidInputException'  customize = (InvalidInputException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the public key is malformed or otherwise invalid.</p>
 newtype InvalidPublicKeyException = InvalidPublicKeyException 
-  { "message" :: NullOrUndefined (InvalidPublicKeyMessage')
+  { "message" :: Maybe (InvalidPublicKeyMessage')
   }
 derive instance newtypeInvalidPublicKeyException :: Newtype InvalidPublicKeyException _
 derive instance repGenericInvalidPublicKeyException :: Generic InvalidPublicKeyException _
@@ -2788,18 +2787,18 @@ instance encodeInvalidPublicKeyException :: Encode InvalidPublicKeyException whe
 
 -- | Constructs InvalidPublicKeyException from required parameters
 newInvalidPublicKeyException :: InvalidPublicKeyException
-newInvalidPublicKeyException  = InvalidPublicKeyException { "message": (NullOrUndefined Nothing) }
+newInvalidPublicKeyException  = InvalidPublicKeyException { "message": Nothing }
 
 -- | Constructs InvalidPublicKeyException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newInvalidPublicKeyException' :: ( { "message" :: NullOrUndefined (InvalidPublicKeyMessage') } -> {"message" :: NullOrUndefined (InvalidPublicKeyMessage') } ) -> InvalidPublicKeyException
-newInvalidPublicKeyException'  customize = (InvalidPublicKeyException <<< customize) { "message": (NullOrUndefined Nothing) }
+newInvalidPublicKeyException' :: ( { "message" :: Maybe (InvalidPublicKeyMessage') } -> {"message" :: Maybe (InvalidPublicKeyMessage') } ) -> InvalidPublicKeyException
+newInvalidPublicKeyException'  customize = (InvalidPublicKeyException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the type of user for the transaction was incorrect.</p>
 newtype InvalidUserTypeException = InvalidUserTypeException 
-  { "message" :: NullOrUndefined (InvalidUserTypeMessage')
+  { "message" :: Maybe (InvalidUserTypeMessage')
   }
 derive instance newtypeInvalidUserTypeException :: Newtype InvalidUserTypeException _
 derive instance repGenericInvalidUserTypeException :: Generic InvalidUserTypeException _
@@ -2809,18 +2808,18 @@ instance encodeInvalidUserTypeException :: Encode InvalidUserTypeException where
 
 -- | Constructs InvalidUserTypeException from required parameters
 newInvalidUserTypeException :: InvalidUserTypeException
-newInvalidUserTypeException  = InvalidUserTypeException { "message": (NullOrUndefined Nothing) }
+newInvalidUserTypeException  = InvalidUserTypeException { "message": Nothing }
 
 -- | Constructs InvalidUserTypeException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newInvalidUserTypeException' :: ( { "message" :: NullOrUndefined (InvalidUserTypeMessage') } -> {"message" :: NullOrUndefined (InvalidUserTypeMessage') } ) -> InvalidUserTypeException
-newInvalidUserTypeException'  customize = (InvalidUserTypeException <<< customize) { "message": (NullOrUndefined Nothing) }
+newInvalidUserTypeException' :: ( { "message" :: Maybe (InvalidUserTypeMessage') } -> {"message" :: Maybe (InvalidUserTypeMessage') } ) -> InvalidUserTypeException
+newInvalidUserTypeException'  customize = (InvalidUserTypeException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the public key certificate and the private key do not match.</p>
 newtype KeyPairMismatchException = KeyPairMismatchException 
-  { "message" :: NullOrUndefined (KeyPairMismatchMessage')
+  { "message" :: Maybe (KeyPairMismatchMessage')
   }
 derive instance newtypeKeyPairMismatchException :: Newtype KeyPairMismatchException _
 derive instance repGenericKeyPairMismatchException :: Generic KeyPairMismatchException _
@@ -2830,18 +2829,18 @@ instance encodeKeyPairMismatchException :: Encode KeyPairMismatchException where
 
 -- | Constructs KeyPairMismatchException from required parameters
 newKeyPairMismatchException :: KeyPairMismatchException
-newKeyPairMismatchException  = KeyPairMismatchException { "message": (NullOrUndefined Nothing) }
+newKeyPairMismatchException  = KeyPairMismatchException { "message": Nothing }
 
 -- | Constructs KeyPairMismatchException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newKeyPairMismatchException' :: ( { "message" :: NullOrUndefined (KeyPairMismatchMessage') } -> {"message" :: NullOrUndefined (KeyPairMismatchMessage') } ) -> KeyPairMismatchException
-newKeyPairMismatchException'  customize = (KeyPairMismatchException <<< customize) { "message": (NullOrUndefined Nothing) }
+newKeyPairMismatchException' :: ( { "message" :: Maybe (KeyPairMismatchMessage') } -> {"message" :: Maybe (KeyPairMismatchMessage') } ) -> KeyPairMismatchException
+newKeyPairMismatchException'  customize = (KeyPairMismatchException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because it attempted to create resources beyond the current AWS account limits. The error message describes the limit exceeded.</p>
 newtype LimitExceededException = LimitExceededException 
-  { "message" :: NullOrUndefined (LimitExceededMessage')
+  { "message" :: Maybe (LimitExceededMessage')
   }
 derive instance newtypeLimitExceededException :: Newtype LimitExceededException _
 derive instance repGenericLimitExceededException :: Generic LimitExceededException _
@@ -2851,12 +2850,12 @@ instance encodeLimitExceededException :: Encode LimitExceededException where enc
 
 -- | Constructs LimitExceededException from required parameters
 newLimitExceededException :: LimitExceededException
-newLimitExceededException  = LimitExceededException { "message": (NullOrUndefined Nothing) }
+newLimitExceededException  = LimitExceededException { "message": Nothing }
 
 -- | Constructs LimitExceededException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newLimitExceededException' :: ( { "message" :: NullOrUndefined (LimitExceededMessage') } -> {"message" :: NullOrUndefined (LimitExceededMessage') } ) -> LimitExceededException
-newLimitExceededException'  customize = (LimitExceededException <<< customize) { "message": (NullOrUndefined Nothing) }
+newLimitExceededException' :: ( { "message" :: Maybe (LimitExceededMessage') } -> {"message" :: Maybe (LimitExceededMessage') } ) -> LimitExceededException
+newLimitExceededException'  customize = (LimitExceededException <<< customize) { "message": Nothing }
 
 
 
@@ -2870,9 +2869,9 @@ instance encodeLineNumber :: Encode LineNumber where encode = genericEncode opti
 
 
 newtype ListAccessKeysRequest = ListAccessKeysRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "UserName" :: Maybe (ExistingUserNameType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListAccessKeysRequest :: Newtype ListAccessKeysRequest _
 derive instance repGenericListAccessKeysRequest :: Generic ListAccessKeysRequest _
@@ -2882,20 +2881,20 @@ instance encodeListAccessKeysRequest :: Encode ListAccessKeysRequest where encod
 
 -- | Constructs ListAccessKeysRequest from required parameters
 newListAccessKeysRequest :: ListAccessKeysRequest
-newListAccessKeysRequest  = ListAccessKeysRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListAccessKeysRequest  = ListAccessKeysRequest { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 -- | Constructs ListAccessKeysRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAccessKeysRequest' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListAccessKeysRequest
-newListAccessKeysRequest'  customize = (ListAccessKeysRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListAccessKeysRequest' :: ( { "UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListAccessKeysRequest
+newListAccessKeysRequest'  customize = (ListAccessKeysRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListAccessKeys</a> request. </p>
 newtype ListAccessKeysResponse = ListAccessKeysResponse 
   { "AccessKeyMetadata" :: (AccessKeyMetadataListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListAccessKeysResponse :: Newtype ListAccessKeysResponse _
 derive instance repGenericListAccessKeysResponse :: Generic ListAccessKeysResponse _
@@ -2905,18 +2904,18 @@ instance encodeListAccessKeysResponse :: Encode ListAccessKeysResponse where enc
 
 -- | Constructs ListAccessKeysResponse from required parameters
 newListAccessKeysResponse :: AccessKeyMetadataListType' -> ListAccessKeysResponse
-newListAccessKeysResponse _AccessKeyMetadata = ListAccessKeysResponse { "AccessKeyMetadata": _AccessKeyMetadata, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAccessKeysResponse _AccessKeyMetadata = ListAccessKeysResponse { "AccessKeyMetadata": _AccessKeyMetadata, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListAccessKeysResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAccessKeysResponse' :: AccessKeyMetadataListType' -> ( { "AccessKeyMetadata" :: (AccessKeyMetadataListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"AccessKeyMetadata" :: (AccessKeyMetadataListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListAccessKeysResponse
-newListAccessKeysResponse' _AccessKeyMetadata customize = (ListAccessKeysResponse <<< customize) { "AccessKeyMetadata": _AccessKeyMetadata, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAccessKeysResponse' :: AccessKeyMetadataListType' -> ( { "AccessKeyMetadata" :: (AccessKeyMetadataListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"AccessKeyMetadata" :: (AccessKeyMetadataListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListAccessKeysResponse
+newListAccessKeysResponse' _AccessKeyMetadata customize = (ListAccessKeysResponse <<< customize) { "AccessKeyMetadata": _AccessKeyMetadata, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListAccountAliasesRequest = ListAccountAliasesRequest 
-  { "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListAccountAliasesRequest :: Newtype ListAccountAliasesRequest _
 derive instance repGenericListAccountAliasesRequest :: Generic ListAccountAliasesRequest _
@@ -2926,20 +2925,20 @@ instance encodeListAccountAliasesRequest :: Encode ListAccountAliasesRequest whe
 
 -- | Constructs ListAccountAliasesRequest from required parameters
 newListAccountAliasesRequest :: ListAccountAliasesRequest
-newListAccountAliasesRequest  = ListAccountAliasesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListAccountAliasesRequest  = ListAccountAliasesRequest { "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListAccountAliasesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAccountAliasesRequest' :: ( { "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListAccountAliasesRequest
-newListAccountAliasesRequest'  customize = (ListAccountAliasesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListAccountAliasesRequest' :: ( { "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListAccountAliasesRequest
+newListAccountAliasesRequest'  customize = (ListAccountAliasesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListAccountAliases</a> request. </p>
 newtype ListAccountAliasesResponse = ListAccountAliasesResponse 
   { "AccountAliases" :: (AccountAliasListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListAccountAliasesResponse :: Newtype ListAccountAliasesResponse _
 derive instance repGenericListAccountAliasesResponse :: Generic ListAccountAliasesResponse _
@@ -2949,20 +2948,20 @@ instance encodeListAccountAliasesResponse :: Encode ListAccountAliasesResponse w
 
 -- | Constructs ListAccountAliasesResponse from required parameters
 newListAccountAliasesResponse :: AccountAliasListType' -> ListAccountAliasesResponse
-newListAccountAliasesResponse _AccountAliases = ListAccountAliasesResponse { "AccountAliases": _AccountAliases, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAccountAliasesResponse _AccountAliases = ListAccountAliasesResponse { "AccountAliases": _AccountAliases, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListAccountAliasesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAccountAliasesResponse' :: AccountAliasListType' -> ( { "AccountAliases" :: (AccountAliasListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"AccountAliases" :: (AccountAliasListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListAccountAliasesResponse
-newListAccountAliasesResponse' _AccountAliases customize = (ListAccountAliasesResponse <<< customize) { "AccountAliases": _AccountAliases, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAccountAliasesResponse' :: AccountAliasListType' -> ( { "AccountAliases" :: (AccountAliasListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"AccountAliases" :: (AccountAliasListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListAccountAliasesResponse
+newListAccountAliasesResponse' _AccountAliases customize = (ListAccountAliasesResponse <<< customize) { "AccountAliases": _AccountAliases, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListAttachedGroupPoliciesRequest = ListAttachedGroupPoliciesRequest 
   { "GroupName" :: (GroupNameType')
-  , "PathPrefix" :: NullOrUndefined (PolicyPathType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "PathPrefix" :: Maybe (PolicyPathType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListAttachedGroupPoliciesRequest :: Newtype ListAttachedGroupPoliciesRequest _
 derive instance repGenericListAttachedGroupPoliciesRequest :: Generic ListAttachedGroupPoliciesRequest _
@@ -2972,20 +2971,20 @@ instance encodeListAttachedGroupPoliciesRequest :: Encode ListAttachedGroupPolic
 
 -- | Constructs ListAttachedGroupPoliciesRequest from required parameters
 newListAttachedGroupPoliciesRequest :: GroupNameType' -> ListAttachedGroupPoliciesRequest
-newListAttachedGroupPoliciesRequest _GroupName = ListAttachedGroupPoliciesRequest { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedGroupPoliciesRequest _GroupName = ListAttachedGroupPoliciesRequest { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListAttachedGroupPoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedGroupPoliciesRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListAttachedGroupPoliciesRequest
-newListAttachedGroupPoliciesRequest' _GroupName customize = (ListAttachedGroupPoliciesRequest <<< customize) { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedGroupPoliciesRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListAttachedGroupPoliciesRequest
+newListAttachedGroupPoliciesRequest' _GroupName customize = (ListAttachedGroupPoliciesRequest <<< customize) { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListAttachedGroupPolicies</a> request. </p>
 newtype ListAttachedGroupPoliciesResponse = ListAttachedGroupPoliciesResponse 
-  { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "AttachedPolicies" :: Maybe (AttachedPoliciesListType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListAttachedGroupPoliciesResponse :: Newtype ListAttachedGroupPoliciesResponse _
 derive instance repGenericListAttachedGroupPoliciesResponse :: Generic ListAttachedGroupPoliciesResponse _
@@ -2995,20 +2994,20 @@ instance encodeListAttachedGroupPoliciesResponse :: Encode ListAttachedGroupPoli
 
 -- | Constructs ListAttachedGroupPoliciesResponse from required parameters
 newListAttachedGroupPoliciesResponse :: ListAttachedGroupPoliciesResponse
-newListAttachedGroupPoliciesResponse  = ListAttachedGroupPoliciesResponse { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedGroupPoliciesResponse  = ListAttachedGroupPoliciesResponse { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListAttachedGroupPoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedGroupPoliciesResponse' :: ( { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListAttachedGroupPoliciesResponse
-newListAttachedGroupPoliciesResponse'  customize = (ListAttachedGroupPoliciesResponse <<< customize) { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedGroupPoliciesResponse' :: ( { "AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListAttachedGroupPoliciesResponse
+newListAttachedGroupPoliciesResponse'  customize = (ListAttachedGroupPoliciesResponse <<< customize) { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListAttachedRolePoliciesRequest = ListAttachedRolePoliciesRequest 
   { "RoleName" :: (RoleNameType')
-  , "PathPrefix" :: NullOrUndefined (PolicyPathType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "PathPrefix" :: Maybe (PolicyPathType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListAttachedRolePoliciesRequest :: Newtype ListAttachedRolePoliciesRequest _
 derive instance repGenericListAttachedRolePoliciesRequest :: Generic ListAttachedRolePoliciesRequest _
@@ -3018,20 +3017,20 @@ instance encodeListAttachedRolePoliciesRequest :: Encode ListAttachedRolePolicie
 
 -- | Constructs ListAttachedRolePoliciesRequest from required parameters
 newListAttachedRolePoliciesRequest :: RoleNameType' -> ListAttachedRolePoliciesRequest
-newListAttachedRolePoliciesRequest _RoleName = ListAttachedRolePoliciesRequest { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedRolePoliciesRequest _RoleName = ListAttachedRolePoliciesRequest { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListAttachedRolePoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedRolePoliciesRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListAttachedRolePoliciesRequest
-newListAttachedRolePoliciesRequest' _RoleName customize = (ListAttachedRolePoliciesRequest <<< customize) { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedRolePoliciesRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListAttachedRolePoliciesRequest
+newListAttachedRolePoliciesRequest' _RoleName customize = (ListAttachedRolePoliciesRequest <<< customize) { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListAttachedRolePolicies</a> request. </p>
 newtype ListAttachedRolePoliciesResponse = ListAttachedRolePoliciesResponse 
-  { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "AttachedPolicies" :: Maybe (AttachedPoliciesListType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListAttachedRolePoliciesResponse :: Newtype ListAttachedRolePoliciesResponse _
 derive instance repGenericListAttachedRolePoliciesResponse :: Generic ListAttachedRolePoliciesResponse _
@@ -3041,20 +3040,20 @@ instance encodeListAttachedRolePoliciesResponse :: Encode ListAttachedRolePolici
 
 -- | Constructs ListAttachedRolePoliciesResponse from required parameters
 newListAttachedRolePoliciesResponse :: ListAttachedRolePoliciesResponse
-newListAttachedRolePoliciesResponse  = ListAttachedRolePoliciesResponse { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedRolePoliciesResponse  = ListAttachedRolePoliciesResponse { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListAttachedRolePoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedRolePoliciesResponse' :: ( { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListAttachedRolePoliciesResponse
-newListAttachedRolePoliciesResponse'  customize = (ListAttachedRolePoliciesResponse <<< customize) { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedRolePoliciesResponse' :: ( { "AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListAttachedRolePoliciesResponse
+newListAttachedRolePoliciesResponse'  customize = (ListAttachedRolePoliciesResponse <<< customize) { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListAttachedUserPoliciesRequest = ListAttachedUserPoliciesRequest 
   { "UserName" :: (UserNameType')
-  , "PathPrefix" :: NullOrUndefined (PolicyPathType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "PathPrefix" :: Maybe (PolicyPathType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListAttachedUserPoliciesRequest :: Newtype ListAttachedUserPoliciesRequest _
 derive instance repGenericListAttachedUserPoliciesRequest :: Generic ListAttachedUserPoliciesRequest _
@@ -3064,20 +3063,20 @@ instance encodeListAttachedUserPoliciesRequest :: Encode ListAttachedUserPolicie
 
 -- | Constructs ListAttachedUserPoliciesRequest from required parameters
 newListAttachedUserPoliciesRequest :: UserNameType' -> ListAttachedUserPoliciesRequest
-newListAttachedUserPoliciesRequest _UserName = ListAttachedUserPoliciesRequest { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedUserPoliciesRequest _UserName = ListAttachedUserPoliciesRequest { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListAttachedUserPoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedUserPoliciesRequest' :: UserNameType' -> ( { "UserName" :: (UserNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: (UserNameType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListAttachedUserPoliciesRequest
-newListAttachedUserPoliciesRequest' _UserName customize = (ListAttachedUserPoliciesRequest <<< customize) { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListAttachedUserPoliciesRequest' :: UserNameType' -> ( { "UserName" :: (UserNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: (UserNameType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListAttachedUserPoliciesRequest
+newListAttachedUserPoliciesRequest' _UserName customize = (ListAttachedUserPoliciesRequest <<< customize) { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListAttachedUserPolicies</a> request. </p>
 newtype ListAttachedUserPoliciesResponse = ListAttachedUserPoliciesResponse 
-  { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "AttachedPolicies" :: Maybe (AttachedPoliciesListType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListAttachedUserPoliciesResponse :: Newtype ListAttachedUserPoliciesResponse _
 derive instance repGenericListAttachedUserPoliciesResponse :: Generic ListAttachedUserPoliciesResponse _
@@ -3087,21 +3086,21 @@ instance encodeListAttachedUserPoliciesResponse :: Encode ListAttachedUserPolici
 
 -- | Constructs ListAttachedUserPoliciesResponse from required parameters
 newListAttachedUserPoliciesResponse :: ListAttachedUserPoliciesResponse
-newListAttachedUserPoliciesResponse  = ListAttachedUserPoliciesResponse { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedUserPoliciesResponse  = ListAttachedUserPoliciesResponse { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListAttachedUserPoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListAttachedUserPoliciesResponse' :: ( { "AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"AttachedPolicies" :: NullOrUndefined (AttachedPoliciesListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListAttachedUserPoliciesResponse
-newListAttachedUserPoliciesResponse'  customize = (ListAttachedUserPoliciesResponse <<< customize) { "AttachedPolicies": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListAttachedUserPoliciesResponse' :: ( { "AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"AttachedPolicies" :: Maybe (AttachedPoliciesListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListAttachedUserPoliciesResponse
+newListAttachedUserPoliciesResponse'  customize = (ListAttachedUserPoliciesResponse <<< customize) { "AttachedPolicies": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListEntitiesForPolicyRequest = ListEntitiesForPolicyRequest 
   { "PolicyArn" :: (ArnType')
-  , "EntityFilter" :: NullOrUndefined (EntityType)
-  , "PathPrefix" :: NullOrUndefined (PathType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "EntityFilter" :: Maybe (EntityType)
+  , "PathPrefix" :: Maybe (PathType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListEntitiesForPolicyRequest :: Newtype ListEntitiesForPolicyRequest _
 derive instance repGenericListEntitiesForPolicyRequest :: Generic ListEntitiesForPolicyRequest _
@@ -3111,22 +3110,22 @@ instance encodeListEntitiesForPolicyRequest :: Encode ListEntitiesForPolicyReque
 
 -- | Constructs ListEntitiesForPolicyRequest from required parameters
 newListEntitiesForPolicyRequest :: ArnType' -> ListEntitiesForPolicyRequest
-newListEntitiesForPolicyRequest _PolicyArn = ListEntitiesForPolicyRequest { "PolicyArn": _PolicyArn, "EntityFilter": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListEntitiesForPolicyRequest _PolicyArn = ListEntitiesForPolicyRequest { "PolicyArn": _PolicyArn, "EntityFilter": Nothing, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListEntitiesForPolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListEntitiesForPolicyRequest' :: ArnType' -> ( { "PolicyArn" :: (ArnType') , "EntityFilter" :: NullOrUndefined (EntityType) , "PathPrefix" :: NullOrUndefined (PathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PolicyArn" :: (ArnType') , "EntityFilter" :: NullOrUndefined (EntityType) , "PathPrefix" :: NullOrUndefined (PathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListEntitiesForPolicyRequest
-newListEntitiesForPolicyRequest' _PolicyArn customize = (ListEntitiesForPolicyRequest <<< customize) { "PolicyArn": _PolicyArn, "EntityFilter": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListEntitiesForPolicyRequest' :: ArnType' -> ( { "PolicyArn" :: (ArnType') , "EntityFilter" :: Maybe (EntityType) , "PathPrefix" :: Maybe (PathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PolicyArn" :: (ArnType') , "EntityFilter" :: Maybe (EntityType) , "PathPrefix" :: Maybe (PathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListEntitiesForPolicyRequest
+newListEntitiesForPolicyRequest' _PolicyArn customize = (ListEntitiesForPolicyRequest <<< customize) { "PolicyArn": _PolicyArn, "EntityFilter": Nothing, "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListEntitiesForPolicy</a> request. </p>
 newtype ListEntitiesForPolicyResponse = ListEntitiesForPolicyResponse 
-  { "PolicyGroups" :: NullOrUndefined (PolicyGroupListType)
-  , "PolicyUsers" :: NullOrUndefined (PolicyUserListType)
-  , "PolicyRoles" :: NullOrUndefined (PolicyRoleListType)
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "PolicyGroups" :: Maybe (PolicyGroupListType)
+  , "PolicyUsers" :: Maybe (PolicyUserListType)
+  , "PolicyRoles" :: Maybe (PolicyRoleListType)
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListEntitiesForPolicyResponse :: Newtype ListEntitiesForPolicyResponse _
 derive instance repGenericListEntitiesForPolicyResponse :: Generic ListEntitiesForPolicyResponse _
@@ -3136,19 +3135,19 @@ instance encodeListEntitiesForPolicyResponse :: Encode ListEntitiesForPolicyResp
 
 -- | Constructs ListEntitiesForPolicyResponse from required parameters
 newListEntitiesForPolicyResponse :: ListEntitiesForPolicyResponse
-newListEntitiesForPolicyResponse  = ListEntitiesForPolicyResponse { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "PolicyGroups": (NullOrUndefined Nothing), "PolicyRoles": (NullOrUndefined Nothing), "PolicyUsers": (NullOrUndefined Nothing) }
+newListEntitiesForPolicyResponse  = ListEntitiesForPolicyResponse { "IsTruncated": Nothing, "Marker": Nothing, "PolicyGroups": Nothing, "PolicyRoles": Nothing, "PolicyUsers": Nothing }
 
 -- | Constructs ListEntitiesForPolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListEntitiesForPolicyResponse' :: ( { "PolicyGroups" :: NullOrUndefined (PolicyGroupListType) , "PolicyUsers" :: NullOrUndefined (PolicyUserListType) , "PolicyRoles" :: NullOrUndefined (PolicyRoleListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicyGroups" :: NullOrUndefined (PolicyGroupListType) , "PolicyUsers" :: NullOrUndefined (PolicyUserListType) , "PolicyRoles" :: NullOrUndefined (PolicyRoleListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListEntitiesForPolicyResponse
-newListEntitiesForPolicyResponse'  customize = (ListEntitiesForPolicyResponse <<< customize) { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "PolicyGroups": (NullOrUndefined Nothing), "PolicyRoles": (NullOrUndefined Nothing), "PolicyUsers": (NullOrUndefined Nothing) }
+newListEntitiesForPolicyResponse' :: ( { "PolicyGroups" :: Maybe (PolicyGroupListType) , "PolicyUsers" :: Maybe (PolicyUserListType) , "PolicyRoles" :: Maybe (PolicyRoleListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"PolicyGroups" :: Maybe (PolicyGroupListType) , "PolicyUsers" :: Maybe (PolicyUserListType) , "PolicyRoles" :: Maybe (PolicyRoleListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListEntitiesForPolicyResponse
+newListEntitiesForPolicyResponse'  customize = (ListEntitiesForPolicyResponse <<< customize) { "IsTruncated": Nothing, "Marker": Nothing, "PolicyGroups": Nothing, "PolicyRoles": Nothing, "PolicyUsers": Nothing }
 
 
 
 newtype ListGroupPoliciesRequest = ListGroupPoliciesRequest 
   { "GroupName" :: (GroupNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListGroupPoliciesRequest :: Newtype ListGroupPoliciesRequest _
 derive instance repGenericListGroupPoliciesRequest :: Generic ListGroupPoliciesRequest _
@@ -3158,20 +3157,20 @@ instance encodeListGroupPoliciesRequest :: Encode ListGroupPoliciesRequest where
 
 -- | Constructs ListGroupPoliciesRequest from required parameters
 newListGroupPoliciesRequest :: GroupNameType' -> ListGroupPoliciesRequest
-newListGroupPoliciesRequest _GroupName = ListGroupPoliciesRequest { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListGroupPoliciesRequest _GroupName = ListGroupPoliciesRequest { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListGroupPoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupPoliciesRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListGroupPoliciesRequest
-newListGroupPoliciesRequest' _GroupName customize = (ListGroupPoliciesRequest <<< customize) { "GroupName": _GroupName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListGroupPoliciesRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"GroupName" :: (GroupNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListGroupPoliciesRequest
+newListGroupPoliciesRequest' _GroupName customize = (ListGroupPoliciesRequest <<< customize) { "GroupName": _GroupName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListGroupPolicies</a> request. </p>
 newtype ListGroupPoliciesResponse = ListGroupPoliciesResponse 
   { "PolicyNames" :: (PolicyNameListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListGroupPoliciesResponse :: Newtype ListGroupPoliciesResponse _
 derive instance repGenericListGroupPoliciesResponse :: Generic ListGroupPoliciesResponse _
@@ -3181,19 +3180,19 @@ instance encodeListGroupPoliciesResponse :: Encode ListGroupPoliciesResponse whe
 
 -- | Constructs ListGroupPoliciesResponse from required parameters
 newListGroupPoliciesResponse :: PolicyNameListType' -> ListGroupPoliciesResponse
-newListGroupPoliciesResponse _PolicyNames = ListGroupPoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupPoliciesResponse _PolicyNames = ListGroupPoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListGroupPoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupPoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListGroupPoliciesResponse
-newListGroupPoliciesResponse' _PolicyNames customize = (ListGroupPoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupPoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListGroupPoliciesResponse
+newListGroupPoliciesResponse' _PolicyNames customize = (ListGroupPoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListGroupsForUserRequest = ListGroupsForUserRequest 
   { "UserName" :: (ExistingUserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListGroupsForUserRequest :: Newtype ListGroupsForUserRequest _
 derive instance repGenericListGroupsForUserRequest :: Generic ListGroupsForUserRequest _
@@ -3203,20 +3202,20 @@ instance encodeListGroupsForUserRequest :: Encode ListGroupsForUserRequest where
 
 -- | Constructs ListGroupsForUserRequest from required parameters
 newListGroupsForUserRequest :: ExistingUserNameType' -> ListGroupsForUserRequest
-newListGroupsForUserRequest _UserName = ListGroupsForUserRequest { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListGroupsForUserRequest _UserName = ListGroupsForUserRequest { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListGroupsForUserRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupsForUserRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListGroupsForUserRequest
-newListGroupsForUserRequest' _UserName customize = (ListGroupsForUserRequest <<< customize) { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListGroupsForUserRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListGroupsForUserRequest
+newListGroupsForUserRequest' _UserName customize = (ListGroupsForUserRequest <<< customize) { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListGroupsForUser</a> request. </p>
 newtype ListGroupsForUserResponse = ListGroupsForUserResponse 
   { "Groups" :: (GroupListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListGroupsForUserResponse :: Newtype ListGroupsForUserResponse _
 derive instance repGenericListGroupsForUserResponse :: Generic ListGroupsForUserResponse _
@@ -3226,19 +3225,19 @@ instance encodeListGroupsForUserResponse :: Encode ListGroupsForUserResponse whe
 
 -- | Constructs ListGroupsForUserResponse from required parameters
 newListGroupsForUserResponse :: GroupListType' -> ListGroupsForUserResponse
-newListGroupsForUserResponse _Groups = ListGroupsForUserResponse { "Groups": _Groups, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupsForUserResponse _Groups = ListGroupsForUserResponse { "Groups": _Groups, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListGroupsForUserResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupsForUserResponse' :: GroupListType' -> ( { "Groups" :: (GroupListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Groups" :: (GroupListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListGroupsForUserResponse
-newListGroupsForUserResponse' _Groups customize = (ListGroupsForUserResponse <<< customize) { "Groups": _Groups, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupsForUserResponse' :: GroupListType' -> ( { "Groups" :: (GroupListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Groups" :: (GroupListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListGroupsForUserResponse
+newListGroupsForUserResponse' _Groups customize = (ListGroupsForUserResponse <<< customize) { "Groups": _Groups, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListGroupsRequest = ListGroupsRequest 
-  { "PathPrefix" :: NullOrUndefined (PathPrefixType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "PathPrefix" :: Maybe (PathPrefixType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListGroupsRequest :: Newtype ListGroupsRequest _
 derive instance repGenericListGroupsRequest :: Generic ListGroupsRequest _
@@ -3248,20 +3247,20 @@ instance encodeListGroupsRequest :: Encode ListGroupsRequest where encode = gene
 
 -- | Constructs ListGroupsRequest from required parameters
 newListGroupsRequest :: ListGroupsRequest
-newListGroupsRequest  = ListGroupsRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListGroupsRequest  = ListGroupsRequest { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListGroupsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupsRequest' :: ( { "PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListGroupsRequest
-newListGroupsRequest'  customize = (ListGroupsRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListGroupsRequest' :: ( { "PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListGroupsRequest
+newListGroupsRequest'  customize = (ListGroupsRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListGroups</a> request. </p>
 newtype ListGroupsResponse = ListGroupsResponse 
   { "Groups" :: (GroupListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListGroupsResponse :: Newtype ListGroupsResponse _
 derive instance repGenericListGroupsResponse :: Generic ListGroupsResponse _
@@ -3271,19 +3270,19 @@ instance encodeListGroupsResponse :: Encode ListGroupsResponse where encode = ge
 
 -- | Constructs ListGroupsResponse from required parameters
 newListGroupsResponse :: GroupListType' -> ListGroupsResponse
-newListGroupsResponse _Groups = ListGroupsResponse { "Groups": _Groups, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupsResponse _Groups = ListGroupsResponse { "Groups": _Groups, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListGroupsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGroupsResponse' :: GroupListType' -> ( { "Groups" :: (GroupListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Groups" :: (GroupListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListGroupsResponse
-newListGroupsResponse' _Groups customize = (ListGroupsResponse <<< customize) { "Groups": _Groups, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListGroupsResponse' :: GroupListType' -> ( { "Groups" :: (GroupListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Groups" :: (GroupListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListGroupsResponse
+newListGroupsResponse' _Groups customize = (ListGroupsResponse <<< customize) { "Groups": _Groups, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListInstanceProfilesForRoleRequest = ListInstanceProfilesForRoleRequest 
   { "RoleName" :: (RoleNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListInstanceProfilesForRoleRequest :: Newtype ListInstanceProfilesForRoleRequest _
 derive instance repGenericListInstanceProfilesForRoleRequest :: Generic ListInstanceProfilesForRoleRequest _
@@ -3293,20 +3292,20 @@ instance encodeListInstanceProfilesForRoleRequest :: Encode ListInstanceProfiles
 
 -- | Constructs ListInstanceProfilesForRoleRequest from required parameters
 newListInstanceProfilesForRoleRequest :: RoleNameType' -> ListInstanceProfilesForRoleRequest
-newListInstanceProfilesForRoleRequest _RoleName = ListInstanceProfilesForRoleRequest { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListInstanceProfilesForRoleRequest _RoleName = ListInstanceProfilesForRoleRequest { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListInstanceProfilesForRoleRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListInstanceProfilesForRoleRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListInstanceProfilesForRoleRequest
-newListInstanceProfilesForRoleRequest' _RoleName customize = (ListInstanceProfilesForRoleRequest <<< customize) { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListInstanceProfilesForRoleRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListInstanceProfilesForRoleRequest
+newListInstanceProfilesForRoleRequest' _RoleName customize = (ListInstanceProfilesForRoleRequest <<< customize) { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListInstanceProfilesForRole</a> request. </p>
 newtype ListInstanceProfilesForRoleResponse = ListInstanceProfilesForRoleResponse 
   { "InstanceProfiles" :: (InstanceProfileListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListInstanceProfilesForRoleResponse :: Newtype ListInstanceProfilesForRoleResponse _
 derive instance repGenericListInstanceProfilesForRoleResponse :: Generic ListInstanceProfilesForRoleResponse _
@@ -3316,19 +3315,19 @@ instance encodeListInstanceProfilesForRoleResponse :: Encode ListInstanceProfile
 
 -- | Constructs ListInstanceProfilesForRoleResponse from required parameters
 newListInstanceProfilesForRoleResponse :: InstanceProfileListType' -> ListInstanceProfilesForRoleResponse
-newListInstanceProfilesForRoleResponse _InstanceProfiles = ListInstanceProfilesForRoleResponse { "InstanceProfiles": _InstanceProfiles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListInstanceProfilesForRoleResponse _InstanceProfiles = ListInstanceProfilesForRoleResponse { "InstanceProfiles": _InstanceProfiles, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListInstanceProfilesForRoleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListInstanceProfilesForRoleResponse' :: InstanceProfileListType' -> ( { "InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListInstanceProfilesForRoleResponse
-newListInstanceProfilesForRoleResponse' _InstanceProfiles customize = (ListInstanceProfilesForRoleResponse <<< customize) { "InstanceProfiles": _InstanceProfiles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListInstanceProfilesForRoleResponse' :: InstanceProfileListType' -> ( { "InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListInstanceProfilesForRoleResponse
+newListInstanceProfilesForRoleResponse' _InstanceProfiles customize = (ListInstanceProfilesForRoleResponse <<< customize) { "InstanceProfiles": _InstanceProfiles, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListInstanceProfilesRequest = ListInstanceProfilesRequest 
-  { "PathPrefix" :: NullOrUndefined (PathPrefixType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "PathPrefix" :: Maybe (PathPrefixType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListInstanceProfilesRequest :: Newtype ListInstanceProfilesRequest _
 derive instance repGenericListInstanceProfilesRequest :: Generic ListInstanceProfilesRequest _
@@ -3338,20 +3337,20 @@ instance encodeListInstanceProfilesRequest :: Encode ListInstanceProfilesRequest
 
 -- | Constructs ListInstanceProfilesRequest from required parameters
 newListInstanceProfilesRequest :: ListInstanceProfilesRequest
-newListInstanceProfilesRequest  = ListInstanceProfilesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListInstanceProfilesRequest  = ListInstanceProfilesRequest { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListInstanceProfilesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListInstanceProfilesRequest' :: ( { "PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListInstanceProfilesRequest
-newListInstanceProfilesRequest'  customize = (ListInstanceProfilesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListInstanceProfilesRequest' :: ( { "PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListInstanceProfilesRequest
+newListInstanceProfilesRequest'  customize = (ListInstanceProfilesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListInstanceProfiles</a> request. </p>
 newtype ListInstanceProfilesResponse = ListInstanceProfilesResponse 
   { "InstanceProfiles" :: (InstanceProfileListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListInstanceProfilesResponse :: Newtype ListInstanceProfilesResponse _
 derive instance repGenericListInstanceProfilesResponse :: Generic ListInstanceProfilesResponse _
@@ -3361,19 +3360,19 @@ instance encodeListInstanceProfilesResponse :: Encode ListInstanceProfilesRespon
 
 -- | Constructs ListInstanceProfilesResponse from required parameters
 newListInstanceProfilesResponse :: InstanceProfileListType' -> ListInstanceProfilesResponse
-newListInstanceProfilesResponse _InstanceProfiles = ListInstanceProfilesResponse { "InstanceProfiles": _InstanceProfiles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListInstanceProfilesResponse _InstanceProfiles = ListInstanceProfilesResponse { "InstanceProfiles": _InstanceProfiles, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListInstanceProfilesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListInstanceProfilesResponse' :: InstanceProfileListType' -> ( { "InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListInstanceProfilesResponse
-newListInstanceProfilesResponse' _InstanceProfiles customize = (ListInstanceProfilesResponse <<< customize) { "InstanceProfiles": _InstanceProfiles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListInstanceProfilesResponse' :: InstanceProfileListType' -> ( { "InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"InstanceProfiles" :: (InstanceProfileListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListInstanceProfilesResponse
+newListInstanceProfilesResponse' _InstanceProfiles customize = (ListInstanceProfilesResponse <<< customize) { "InstanceProfiles": _InstanceProfiles, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListMFADevicesRequest = ListMFADevicesRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "UserName" :: Maybe (ExistingUserNameType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListMFADevicesRequest :: Newtype ListMFADevicesRequest _
 derive instance repGenericListMFADevicesRequest :: Generic ListMFADevicesRequest _
@@ -3383,20 +3382,20 @@ instance encodeListMFADevicesRequest :: Encode ListMFADevicesRequest where encod
 
 -- | Constructs ListMFADevicesRequest from required parameters
 newListMFADevicesRequest :: ListMFADevicesRequest
-newListMFADevicesRequest  = ListMFADevicesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListMFADevicesRequest  = ListMFADevicesRequest { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 -- | Constructs ListMFADevicesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListMFADevicesRequest' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListMFADevicesRequest
-newListMFADevicesRequest'  customize = (ListMFADevicesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListMFADevicesRequest' :: ( { "UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListMFADevicesRequest
+newListMFADevicesRequest'  customize = (ListMFADevicesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListMFADevices</a> request. </p>
 newtype ListMFADevicesResponse = ListMFADevicesResponse 
   { "MFADevices" :: (MfaDeviceListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListMFADevicesResponse :: Newtype ListMFADevicesResponse _
 derive instance repGenericListMFADevicesResponse :: Generic ListMFADevicesResponse _
@@ -3406,12 +3405,12 @@ instance encodeListMFADevicesResponse :: Encode ListMFADevicesResponse where enc
 
 -- | Constructs ListMFADevicesResponse from required parameters
 newListMFADevicesResponse :: MfaDeviceListType' -> ListMFADevicesResponse
-newListMFADevicesResponse _MFADevices = ListMFADevicesResponse { "MFADevices": _MFADevices, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListMFADevicesResponse _MFADevices = ListMFADevicesResponse { "MFADevices": _MFADevices, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListMFADevicesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListMFADevicesResponse' :: MfaDeviceListType' -> ( { "MFADevices" :: (MfaDeviceListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"MFADevices" :: (MfaDeviceListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListMFADevicesResponse
-newListMFADevicesResponse' _MFADevices customize = (ListMFADevicesResponse <<< customize) { "MFADevices": _MFADevices, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListMFADevicesResponse' :: MfaDeviceListType' -> ( { "MFADevices" :: (MfaDeviceListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"MFADevices" :: (MfaDeviceListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListMFADevicesResponse
+newListMFADevicesResponse' _MFADevices customize = (ListMFADevicesResponse <<< customize) { "MFADevices": _MFADevices, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
@@ -3426,7 +3425,7 @@ instance encodeListOpenIDConnectProvidersRequest :: Encode ListOpenIDConnectProv
 
 -- | <p>Contains the response to a successful <a>ListOpenIDConnectProviders</a> request. </p>
 newtype ListOpenIDConnectProvidersResponse = ListOpenIDConnectProvidersResponse 
-  { "OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType)
+  { "OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType)
   }
 derive instance newtypeListOpenIDConnectProvidersResponse :: Newtype ListOpenIDConnectProvidersResponse _
 derive instance repGenericListOpenIDConnectProvidersResponse :: Generic ListOpenIDConnectProvidersResponse _
@@ -3436,21 +3435,21 @@ instance encodeListOpenIDConnectProvidersResponse :: Encode ListOpenIDConnectPro
 
 -- | Constructs ListOpenIDConnectProvidersResponse from required parameters
 newListOpenIDConnectProvidersResponse :: ListOpenIDConnectProvidersResponse
-newListOpenIDConnectProvidersResponse  = ListOpenIDConnectProvidersResponse { "OpenIDConnectProviderList": (NullOrUndefined Nothing) }
+newListOpenIDConnectProvidersResponse  = ListOpenIDConnectProvidersResponse { "OpenIDConnectProviderList": Nothing }
 
 -- | Constructs ListOpenIDConnectProvidersResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListOpenIDConnectProvidersResponse' :: ( { "OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType) } -> {"OpenIDConnectProviderList" :: NullOrUndefined (OpenIDConnectProviderListType) } ) -> ListOpenIDConnectProvidersResponse
-newListOpenIDConnectProvidersResponse'  customize = (ListOpenIDConnectProvidersResponse <<< customize) { "OpenIDConnectProviderList": (NullOrUndefined Nothing) }
+newListOpenIDConnectProvidersResponse' :: ( { "OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType) } -> {"OpenIDConnectProviderList" :: Maybe (OpenIDConnectProviderListType) } ) -> ListOpenIDConnectProvidersResponse
+newListOpenIDConnectProvidersResponse'  customize = (ListOpenIDConnectProvidersResponse <<< customize) { "OpenIDConnectProviderList": Nothing }
 
 
 
 newtype ListPoliciesRequest = ListPoliciesRequest 
-  { "Scope" :: NullOrUndefined (PolicyScopeType')
-  , "OnlyAttached" :: NullOrUndefined (BooleanType')
-  , "PathPrefix" :: NullOrUndefined (PolicyPathType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "Scope" :: Maybe (PolicyScopeType')
+  , "OnlyAttached" :: Maybe (BooleanType')
+  , "PathPrefix" :: Maybe (PolicyPathType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListPoliciesRequest :: Newtype ListPoliciesRequest _
 derive instance repGenericListPoliciesRequest :: Generic ListPoliciesRequest _
@@ -3460,20 +3459,20 @@ instance encodeListPoliciesRequest :: Encode ListPoliciesRequest where encode = 
 
 -- | Constructs ListPoliciesRequest from required parameters
 newListPoliciesRequest :: ListPoliciesRequest
-newListPoliciesRequest  = ListPoliciesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "OnlyAttached": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing), "Scope": (NullOrUndefined Nothing) }
+newListPoliciesRequest  = ListPoliciesRequest { "Marker": Nothing, "MaxItems": Nothing, "OnlyAttached": Nothing, "PathPrefix": Nothing, "Scope": Nothing }
 
 -- | Constructs ListPoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListPoliciesRequest' :: ( { "Scope" :: NullOrUndefined (PolicyScopeType') , "OnlyAttached" :: NullOrUndefined (BooleanType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"Scope" :: NullOrUndefined (PolicyScopeType') , "OnlyAttached" :: NullOrUndefined (BooleanType') , "PathPrefix" :: NullOrUndefined (PolicyPathType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListPoliciesRequest
-newListPoliciesRequest'  customize = (ListPoliciesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "OnlyAttached": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing), "Scope": (NullOrUndefined Nothing) }
+newListPoliciesRequest' :: ( { "Scope" :: Maybe (PolicyScopeType') , "OnlyAttached" :: Maybe (BooleanType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"Scope" :: Maybe (PolicyScopeType') , "OnlyAttached" :: Maybe (BooleanType') , "PathPrefix" :: Maybe (PolicyPathType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListPoliciesRequest
+newListPoliciesRequest'  customize = (ListPoliciesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "OnlyAttached": Nothing, "PathPrefix": Nothing, "Scope": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListPolicies</a> request. </p>
 newtype ListPoliciesResponse = ListPoliciesResponse 
-  { "Policies" :: NullOrUndefined (PolicyListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "Policies" :: Maybe (PolicyListType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListPoliciesResponse :: Newtype ListPoliciesResponse _
 derive instance repGenericListPoliciesResponse :: Generic ListPoliciesResponse _
@@ -3483,19 +3482,19 @@ instance encodeListPoliciesResponse :: Encode ListPoliciesResponse where encode 
 
 -- | Constructs ListPoliciesResponse from required parameters
 newListPoliciesResponse :: ListPoliciesResponse
-newListPoliciesResponse  = ListPoliciesResponse { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Policies": (NullOrUndefined Nothing) }
+newListPoliciesResponse  = ListPoliciesResponse { "IsTruncated": Nothing, "Marker": Nothing, "Policies": Nothing }
 
 -- | Constructs ListPoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListPoliciesResponse' :: ( { "Policies" :: NullOrUndefined (PolicyListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Policies" :: NullOrUndefined (PolicyListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListPoliciesResponse
-newListPoliciesResponse'  customize = (ListPoliciesResponse <<< customize) { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Policies": (NullOrUndefined Nothing) }
+newListPoliciesResponse' :: ( { "Policies" :: Maybe (PolicyListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Policies" :: Maybe (PolicyListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListPoliciesResponse
+newListPoliciesResponse'  customize = (ListPoliciesResponse <<< customize) { "IsTruncated": Nothing, "Marker": Nothing, "Policies": Nothing }
 
 
 
 newtype ListPolicyVersionsRequest = ListPolicyVersionsRequest 
   { "PolicyArn" :: (ArnType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListPolicyVersionsRequest :: Newtype ListPolicyVersionsRequest _
 derive instance repGenericListPolicyVersionsRequest :: Generic ListPolicyVersionsRequest _
@@ -3505,20 +3504,20 @@ instance encodeListPolicyVersionsRequest :: Encode ListPolicyVersionsRequest whe
 
 -- | Constructs ListPolicyVersionsRequest from required parameters
 newListPolicyVersionsRequest :: ArnType' -> ListPolicyVersionsRequest
-newListPolicyVersionsRequest _PolicyArn = ListPolicyVersionsRequest { "PolicyArn": _PolicyArn, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListPolicyVersionsRequest _PolicyArn = ListPolicyVersionsRequest { "PolicyArn": _PolicyArn, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListPolicyVersionsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListPolicyVersionsRequest' :: ArnType' -> ( { "PolicyArn" :: (ArnType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PolicyArn" :: (ArnType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListPolicyVersionsRequest
-newListPolicyVersionsRequest' _PolicyArn customize = (ListPolicyVersionsRequest <<< customize) { "PolicyArn": _PolicyArn, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListPolicyVersionsRequest' :: ArnType' -> ( { "PolicyArn" :: (ArnType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PolicyArn" :: (ArnType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListPolicyVersionsRequest
+newListPolicyVersionsRequest' _PolicyArn customize = (ListPolicyVersionsRequest <<< customize) { "PolicyArn": _PolicyArn, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListPolicyVersions</a> request. </p>
 newtype ListPolicyVersionsResponse = ListPolicyVersionsResponse 
-  { "Versions" :: NullOrUndefined (PolicyDocumentVersionListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "Versions" :: Maybe (PolicyDocumentVersionListType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListPolicyVersionsResponse :: Newtype ListPolicyVersionsResponse _
 derive instance repGenericListPolicyVersionsResponse :: Generic ListPolicyVersionsResponse _
@@ -3528,19 +3527,19 @@ instance encodeListPolicyVersionsResponse :: Encode ListPolicyVersionsResponse w
 
 -- | Constructs ListPolicyVersionsResponse from required parameters
 newListPolicyVersionsResponse :: ListPolicyVersionsResponse
-newListPolicyVersionsResponse  = ListPolicyVersionsResponse { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Versions": (NullOrUndefined Nothing) }
+newListPolicyVersionsResponse  = ListPolicyVersionsResponse { "IsTruncated": Nothing, "Marker": Nothing, "Versions": Nothing }
 
 -- | Constructs ListPolicyVersionsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListPolicyVersionsResponse' :: ( { "Versions" :: NullOrUndefined (PolicyDocumentVersionListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Versions" :: NullOrUndefined (PolicyDocumentVersionListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListPolicyVersionsResponse
-newListPolicyVersionsResponse'  customize = (ListPolicyVersionsResponse <<< customize) { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "Versions": (NullOrUndefined Nothing) }
+newListPolicyVersionsResponse' :: ( { "Versions" :: Maybe (PolicyDocumentVersionListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Versions" :: Maybe (PolicyDocumentVersionListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListPolicyVersionsResponse
+newListPolicyVersionsResponse'  customize = (ListPolicyVersionsResponse <<< customize) { "IsTruncated": Nothing, "Marker": Nothing, "Versions": Nothing }
 
 
 
 newtype ListRolePoliciesRequest = ListRolePoliciesRequest 
   { "RoleName" :: (RoleNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListRolePoliciesRequest :: Newtype ListRolePoliciesRequest _
 derive instance repGenericListRolePoliciesRequest :: Generic ListRolePoliciesRequest _
@@ -3550,20 +3549,20 @@ instance encodeListRolePoliciesRequest :: Encode ListRolePoliciesRequest where e
 
 -- | Constructs ListRolePoliciesRequest from required parameters
 newListRolePoliciesRequest :: RoleNameType' -> ListRolePoliciesRequest
-newListRolePoliciesRequest _RoleName = ListRolePoliciesRequest { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListRolePoliciesRequest _RoleName = ListRolePoliciesRequest { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListRolePoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRolePoliciesRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListRolePoliciesRequest
-newListRolePoliciesRequest' _RoleName customize = (ListRolePoliciesRequest <<< customize) { "RoleName": _RoleName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListRolePoliciesRequest' :: RoleNameType' -> ( { "RoleName" :: (RoleNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"RoleName" :: (RoleNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListRolePoliciesRequest
+newListRolePoliciesRequest' _RoleName customize = (ListRolePoliciesRequest <<< customize) { "RoleName": _RoleName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListRolePolicies</a> request. </p>
 newtype ListRolePoliciesResponse = ListRolePoliciesResponse 
   { "PolicyNames" :: (PolicyNameListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListRolePoliciesResponse :: Newtype ListRolePoliciesResponse _
 derive instance repGenericListRolePoliciesResponse :: Generic ListRolePoliciesResponse _
@@ -3573,19 +3572,19 @@ instance encodeListRolePoliciesResponse :: Encode ListRolePoliciesResponse where
 
 -- | Constructs ListRolePoliciesResponse from required parameters
 newListRolePoliciesResponse :: PolicyNameListType' -> ListRolePoliciesResponse
-newListRolePoliciesResponse _PolicyNames = ListRolePoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListRolePoliciesResponse _PolicyNames = ListRolePoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListRolePoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRolePoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListRolePoliciesResponse
-newListRolePoliciesResponse' _PolicyNames customize = (ListRolePoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListRolePoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListRolePoliciesResponse
+newListRolePoliciesResponse' _PolicyNames customize = (ListRolePoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListRolesRequest = ListRolesRequest 
-  { "PathPrefix" :: NullOrUndefined (PathPrefixType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "PathPrefix" :: Maybe (PathPrefixType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListRolesRequest :: Newtype ListRolesRequest _
 derive instance repGenericListRolesRequest :: Generic ListRolesRequest _
@@ -3595,20 +3594,20 @@ instance encodeListRolesRequest :: Encode ListRolesRequest where encode = generi
 
 -- | Constructs ListRolesRequest from required parameters
 newListRolesRequest :: ListRolesRequest
-newListRolesRequest  = ListRolesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListRolesRequest  = ListRolesRequest { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListRolesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRolesRequest' :: ( { "PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListRolesRequest
-newListRolesRequest'  customize = (ListRolesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListRolesRequest' :: ( { "PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListRolesRequest
+newListRolesRequest'  customize = (ListRolesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListRoles</a> request. </p>
 newtype ListRolesResponse = ListRolesResponse 
   { "Roles" :: (RoleListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListRolesResponse :: Newtype ListRolesResponse _
 derive instance repGenericListRolesResponse :: Generic ListRolesResponse _
@@ -3618,12 +3617,12 @@ instance encodeListRolesResponse :: Encode ListRolesResponse where encode = gene
 
 -- | Constructs ListRolesResponse from required parameters
 newListRolesResponse :: RoleListType' -> ListRolesResponse
-newListRolesResponse _Roles = ListRolesResponse { "Roles": _Roles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListRolesResponse _Roles = ListRolesResponse { "Roles": _Roles, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListRolesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRolesResponse' :: RoleListType' -> ( { "Roles" :: (RoleListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Roles" :: (RoleListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListRolesResponse
-newListRolesResponse' _Roles customize = (ListRolesResponse <<< customize) { "Roles": _Roles, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListRolesResponse' :: RoleListType' -> ( { "Roles" :: (RoleListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Roles" :: (RoleListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListRolesResponse
+newListRolesResponse' _Roles customize = (ListRolesResponse <<< customize) { "Roles": _Roles, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
@@ -3638,7 +3637,7 @@ instance encodeListSAMLProvidersRequest :: Encode ListSAMLProvidersRequest where
 
 -- | <p>Contains the response to a successful <a>ListSAMLProviders</a> request. </p>
 newtype ListSAMLProvidersResponse = ListSAMLProvidersResponse 
-  { "SAMLProviderList" :: NullOrUndefined (SAMLProviderListType)
+  { "SAMLProviderList" :: Maybe (SAMLProviderListType)
   }
 derive instance newtypeListSAMLProvidersResponse :: Newtype ListSAMLProvidersResponse _
 derive instance repGenericListSAMLProvidersResponse :: Generic ListSAMLProvidersResponse _
@@ -3648,19 +3647,19 @@ instance encodeListSAMLProvidersResponse :: Encode ListSAMLProvidersResponse whe
 
 -- | Constructs ListSAMLProvidersResponse from required parameters
 newListSAMLProvidersResponse :: ListSAMLProvidersResponse
-newListSAMLProvidersResponse  = ListSAMLProvidersResponse { "SAMLProviderList": (NullOrUndefined Nothing) }
+newListSAMLProvidersResponse  = ListSAMLProvidersResponse { "SAMLProviderList": Nothing }
 
 -- | Constructs ListSAMLProvidersResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSAMLProvidersResponse' :: ( { "SAMLProviderList" :: NullOrUndefined (SAMLProviderListType) } -> {"SAMLProviderList" :: NullOrUndefined (SAMLProviderListType) } ) -> ListSAMLProvidersResponse
-newListSAMLProvidersResponse'  customize = (ListSAMLProvidersResponse <<< customize) { "SAMLProviderList": (NullOrUndefined Nothing) }
+newListSAMLProvidersResponse' :: ( { "SAMLProviderList" :: Maybe (SAMLProviderListType) } -> {"SAMLProviderList" :: Maybe (SAMLProviderListType) } ) -> ListSAMLProvidersResponse
+newListSAMLProvidersResponse'  customize = (ListSAMLProvidersResponse <<< customize) { "SAMLProviderList": Nothing }
 
 
 
 newtype ListSSHPublicKeysRequest = ListSSHPublicKeysRequest 
-  { "UserName" :: NullOrUndefined (UserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "UserName" :: Maybe (UserNameType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListSSHPublicKeysRequest :: Newtype ListSSHPublicKeysRequest _
 derive instance repGenericListSSHPublicKeysRequest :: Generic ListSSHPublicKeysRequest _
@@ -3670,20 +3669,20 @@ instance encodeListSSHPublicKeysRequest :: Encode ListSSHPublicKeysRequest where
 
 -- | Constructs ListSSHPublicKeysRequest from required parameters
 newListSSHPublicKeysRequest :: ListSSHPublicKeysRequest
-newListSSHPublicKeysRequest  = ListSSHPublicKeysRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListSSHPublicKeysRequest  = ListSSHPublicKeysRequest { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 -- | Constructs ListSSHPublicKeysRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSSHPublicKeysRequest' :: ( { "UserName" :: NullOrUndefined (UserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: NullOrUndefined (UserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListSSHPublicKeysRequest
-newListSSHPublicKeysRequest'  customize = (ListSSHPublicKeysRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListSSHPublicKeysRequest' :: ( { "UserName" :: Maybe (UserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: Maybe (UserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListSSHPublicKeysRequest
+newListSSHPublicKeysRequest'  customize = (ListSSHPublicKeysRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListSSHPublicKeys</a> request.</p>
 newtype ListSSHPublicKeysResponse = ListSSHPublicKeysResponse 
-  { "SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType)
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "SSHPublicKeys" :: Maybe (SSHPublicKeyListType)
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListSSHPublicKeysResponse :: Newtype ListSSHPublicKeysResponse _
 derive instance repGenericListSSHPublicKeysResponse :: Generic ListSSHPublicKeysResponse _
@@ -3693,19 +3692,19 @@ instance encodeListSSHPublicKeysResponse :: Encode ListSSHPublicKeysResponse whe
 
 -- | Constructs ListSSHPublicKeysResponse from required parameters
 newListSSHPublicKeysResponse :: ListSSHPublicKeysResponse
-newListSSHPublicKeysResponse  = ListSSHPublicKeysResponse { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "SSHPublicKeys": (NullOrUndefined Nothing) }
+newListSSHPublicKeysResponse  = ListSSHPublicKeysResponse { "IsTruncated": Nothing, "Marker": Nothing, "SSHPublicKeys": Nothing }
 
 -- | Constructs ListSSHPublicKeysResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSSHPublicKeysResponse' :: ( { "SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"SSHPublicKeys" :: NullOrUndefined (SSHPublicKeyListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListSSHPublicKeysResponse
-newListSSHPublicKeysResponse'  customize = (ListSSHPublicKeysResponse <<< customize) { "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "SSHPublicKeys": (NullOrUndefined Nothing) }
+newListSSHPublicKeysResponse' :: ( { "SSHPublicKeys" :: Maybe (SSHPublicKeyListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"SSHPublicKeys" :: Maybe (SSHPublicKeyListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListSSHPublicKeysResponse
+newListSSHPublicKeysResponse'  customize = (ListSSHPublicKeysResponse <<< customize) { "IsTruncated": Nothing, "Marker": Nothing, "SSHPublicKeys": Nothing }
 
 
 
 newtype ListServerCertificatesRequest = ListServerCertificatesRequest 
-  { "PathPrefix" :: NullOrUndefined (PathPrefixType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "PathPrefix" :: Maybe (PathPrefixType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListServerCertificatesRequest :: Newtype ListServerCertificatesRequest _
 derive instance repGenericListServerCertificatesRequest :: Generic ListServerCertificatesRequest _
@@ -3715,20 +3714,20 @@ instance encodeListServerCertificatesRequest :: Encode ListServerCertificatesReq
 
 -- | Constructs ListServerCertificatesRequest from required parameters
 newListServerCertificatesRequest :: ListServerCertificatesRequest
-newListServerCertificatesRequest  = ListServerCertificatesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListServerCertificatesRequest  = ListServerCertificatesRequest { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListServerCertificatesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListServerCertificatesRequest' :: ( { "PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListServerCertificatesRequest
-newListServerCertificatesRequest'  customize = (ListServerCertificatesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListServerCertificatesRequest' :: ( { "PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListServerCertificatesRequest
+newListServerCertificatesRequest'  customize = (ListServerCertificatesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListServerCertificates</a> request. </p>
 newtype ListServerCertificatesResponse = ListServerCertificatesResponse 
   { "ServerCertificateMetadataList" :: (ServerCertificateMetadataListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListServerCertificatesResponse :: Newtype ListServerCertificatesResponse _
 derive instance repGenericListServerCertificatesResponse :: Generic ListServerCertificatesResponse _
@@ -3738,18 +3737,18 @@ instance encodeListServerCertificatesResponse :: Encode ListServerCertificatesRe
 
 -- | Constructs ListServerCertificatesResponse from required parameters
 newListServerCertificatesResponse :: ServerCertificateMetadataListType' -> ListServerCertificatesResponse
-newListServerCertificatesResponse _ServerCertificateMetadataList = ListServerCertificatesResponse { "ServerCertificateMetadataList": _ServerCertificateMetadataList, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListServerCertificatesResponse _ServerCertificateMetadataList = ListServerCertificatesResponse { "ServerCertificateMetadataList": _ServerCertificateMetadataList, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListServerCertificatesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListServerCertificatesResponse' :: ServerCertificateMetadataListType' -> ( { "ServerCertificateMetadataList" :: (ServerCertificateMetadataListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"ServerCertificateMetadataList" :: (ServerCertificateMetadataListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListServerCertificatesResponse
-newListServerCertificatesResponse' _ServerCertificateMetadataList customize = (ListServerCertificatesResponse <<< customize) { "ServerCertificateMetadataList": _ServerCertificateMetadataList, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListServerCertificatesResponse' :: ServerCertificateMetadataListType' -> ( { "ServerCertificateMetadataList" :: (ServerCertificateMetadataListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"ServerCertificateMetadataList" :: (ServerCertificateMetadataListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListServerCertificatesResponse
+newListServerCertificatesResponse' _ServerCertificateMetadataList customize = (ListServerCertificatesResponse <<< customize) { "ServerCertificateMetadataList": _ServerCertificateMetadataList, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListServiceSpecificCredentialsRequest = ListServiceSpecificCredentialsRequest 
-  { "UserName" :: NullOrUndefined (UserNameType')
-  , "ServiceName" :: NullOrUndefined (ServiceName')
+  { "UserName" :: Maybe (UserNameType')
+  , "ServiceName" :: Maybe (ServiceName')
   }
 derive instance newtypeListServiceSpecificCredentialsRequest :: Newtype ListServiceSpecificCredentialsRequest _
 derive instance repGenericListServiceSpecificCredentialsRequest :: Generic ListServiceSpecificCredentialsRequest _
@@ -3759,17 +3758,17 @@ instance encodeListServiceSpecificCredentialsRequest :: Encode ListServiceSpecif
 
 -- | Constructs ListServiceSpecificCredentialsRequest from required parameters
 newListServiceSpecificCredentialsRequest :: ListServiceSpecificCredentialsRequest
-newListServiceSpecificCredentialsRequest  = ListServiceSpecificCredentialsRequest { "ServiceName": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListServiceSpecificCredentialsRequest  = ListServiceSpecificCredentialsRequest { "ServiceName": Nothing, "UserName": Nothing }
 
 -- | Constructs ListServiceSpecificCredentialsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListServiceSpecificCredentialsRequest' :: ( { "UserName" :: NullOrUndefined (UserNameType') , "ServiceName" :: NullOrUndefined (ServiceName') } -> {"UserName" :: NullOrUndefined (UserNameType') , "ServiceName" :: NullOrUndefined (ServiceName') } ) -> ListServiceSpecificCredentialsRequest
-newListServiceSpecificCredentialsRequest'  customize = (ListServiceSpecificCredentialsRequest <<< customize) { "ServiceName": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListServiceSpecificCredentialsRequest' :: ( { "UserName" :: Maybe (UserNameType') , "ServiceName" :: Maybe (ServiceName') } -> {"UserName" :: Maybe (UserNameType') , "ServiceName" :: Maybe (ServiceName') } ) -> ListServiceSpecificCredentialsRequest
+newListServiceSpecificCredentialsRequest'  customize = (ListServiceSpecificCredentialsRequest <<< customize) { "ServiceName": Nothing, "UserName": Nothing }
 
 
 
 newtype ListServiceSpecificCredentialsResponse = ListServiceSpecificCredentialsResponse 
-  { "ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType)
+  { "ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType)
   }
 derive instance newtypeListServiceSpecificCredentialsResponse :: Newtype ListServiceSpecificCredentialsResponse _
 derive instance repGenericListServiceSpecificCredentialsResponse :: Generic ListServiceSpecificCredentialsResponse _
@@ -3779,19 +3778,19 @@ instance encodeListServiceSpecificCredentialsResponse :: Encode ListServiceSpeci
 
 -- | Constructs ListServiceSpecificCredentialsResponse from required parameters
 newListServiceSpecificCredentialsResponse :: ListServiceSpecificCredentialsResponse
-newListServiceSpecificCredentialsResponse  = ListServiceSpecificCredentialsResponse { "ServiceSpecificCredentials": (NullOrUndefined Nothing) }
+newListServiceSpecificCredentialsResponse  = ListServiceSpecificCredentialsResponse { "ServiceSpecificCredentials": Nothing }
 
 -- | Constructs ListServiceSpecificCredentialsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListServiceSpecificCredentialsResponse' :: ( { "ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType) } -> {"ServiceSpecificCredentials" :: NullOrUndefined (ServiceSpecificCredentialsListType) } ) -> ListServiceSpecificCredentialsResponse
-newListServiceSpecificCredentialsResponse'  customize = (ListServiceSpecificCredentialsResponse <<< customize) { "ServiceSpecificCredentials": (NullOrUndefined Nothing) }
+newListServiceSpecificCredentialsResponse' :: ( { "ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType) } -> {"ServiceSpecificCredentials" :: Maybe (ServiceSpecificCredentialsListType) } ) -> ListServiceSpecificCredentialsResponse
+newListServiceSpecificCredentialsResponse'  customize = (ListServiceSpecificCredentialsResponse <<< customize) { "ServiceSpecificCredentials": Nothing }
 
 
 
 newtype ListSigningCertificatesRequest = ListSigningCertificatesRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "UserName" :: Maybe (ExistingUserNameType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListSigningCertificatesRequest :: Newtype ListSigningCertificatesRequest _
 derive instance repGenericListSigningCertificatesRequest :: Generic ListSigningCertificatesRequest _
@@ -3801,20 +3800,20 @@ instance encodeListSigningCertificatesRequest :: Encode ListSigningCertificatesR
 
 -- | Constructs ListSigningCertificatesRequest from required parameters
 newListSigningCertificatesRequest :: ListSigningCertificatesRequest
-newListSigningCertificatesRequest  = ListSigningCertificatesRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListSigningCertificatesRequest  = ListSigningCertificatesRequest { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 -- | Constructs ListSigningCertificatesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSigningCertificatesRequest' :: ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListSigningCertificatesRequest
-newListSigningCertificatesRequest'  customize = (ListSigningCertificatesRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newListSigningCertificatesRequest' :: ( { "UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListSigningCertificatesRequest
+newListSigningCertificatesRequest'  customize = (ListSigningCertificatesRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "UserName": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListSigningCertificates</a> request. </p>
 newtype ListSigningCertificatesResponse = ListSigningCertificatesResponse 
   { "Certificates" :: (CertificateListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListSigningCertificatesResponse :: Newtype ListSigningCertificatesResponse _
 derive instance repGenericListSigningCertificatesResponse :: Generic ListSigningCertificatesResponse _
@@ -3824,19 +3823,19 @@ instance encodeListSigningCertificatesResponse :: Encode ListSigningCertificates
 
 -- | Constructs ListSigningCertificatesResponse from required parameters
 newListSigningCertificatesResponse :: CertificateListType' -> ListSigningCertificatesResponse
-newListSigningCertificatesResponse _Certificates = ListSigningCertificatesResponse { "Certificates": _Certificates, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListSigningCertificatesResponse _Certificates = ListSigningCertificatesResponse { "Certificates": _Certificates, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListSigningCertificatesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSigningCertificatesResponse' :: CertificateListType' -> ( { "Certificates" :: (CertificateListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Certificates" :: (CertificateListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListSigningCertificatesResponse
-newListSigningCertificatesResponse' _Certificates customize = (ListSigningCertificatesResponse <<< customize) { "Certificates": _Certificates, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListSigningCertificatesResponse' :: CertificateListType' -> ( { "Certificates" :: (CertificateListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Certificates" :: (CertificateListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListSigningCertificatesResponse
+newListSigningCertificatesResponse' _Certificates customize = (ListSigningCertificatesResponse <<< customize) { "Certificates": _Certificates, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListUserPoliciesRequest = ListUserPoliciesRequest 
   { "UserName" :: (ExistingUserNameType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListUserPoliciesRequest :: Newtype ListUserPoliciesRequest _
 derive instance repGenericListUserPoliciesRequest :: Generic ListUserPoliciesRequest _
@@ -3846,20 +3845,20 @@ instance encodeListUserPoliciesRequest :: Encode ListUserPoliciesRequest where e
 
 -- | Constructs ListUserPoliciesRequest from required parameters
 newListUserPoliciesRequest :: ExistingUserNameType' -> ListUserPoliciesRequest
-newListUserPoliciesRequest _UserName = ListUserPoliciesRequest { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListUserPoliciesRequest _UserName = ListUserPoliciesRequest { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListUserPoliciesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListUserPoliciesRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"UserName" :: (ExistingUserNameType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListUserPoliciesRequest
-newListUserPoliciesRequest' _UserName customize = (ListUserPoliciesRequest <<< customize) { "UserName": _UserName, "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListUserPoliciesRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"UserName" :: (ExistingUserNameType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListUserPoliciesRequest
+newListUserPoliciesRequest' _UserName customize = (ListUserPoliciesRequest <<< customize) { "UserName": _UserName, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListUserPolicies</a> request. </p>
 newtype ListUserPoliciesResponse = ListUserPoliciesResponse 
   { "PolicyNames" :: (PolicyNameListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListUserPoliciesResponse :: Newtype ListUserPoliciesResponse _
 derive instance repGenericListUserPoliciesResponse :: Generic ListUserPoliciesResponse _
@@ -3869,19 +3868,19 @@ instance encodeListUserPoliciesResponse :: Encode ListUserPoliciesResponse where
 
 -- | Constructs ListUserPoliciesResponse from required parameters
 newListUserPoliciesResponse :: PolicyNameListType' -> ListUserPoliciesResponse
-newListUserPoliciesResponse _PolicyNames = ListUserPoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListUserPoliciesResponse _PolicyNames = ListUserPoliciesResponse { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListUserPoliciesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListUserPoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListUserPoliciesResponse
-newListUserPoliciesResponse' _PolicyNames customize = (ListUserPoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListUserPoliciesResponse' :: PolicyNameListType' -> ( { "PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"PolicyNames" :: (PolicyNameListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListUserPoliciesResponse
+newListUserPoliciesResponse' _PolicyNames customize = (ListUserPoliciesResponse <<< customize) { "PolicyNames": _PolicyNames, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListUsersRequest = ListUsersRequest 
-  { "PathPrefix" :: NullOrUndefined (PathPrefixType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "PathPrefix" :: Maybe (PathPrefixType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListUsersRequest :: Newtype ListUsersRequest _
 derive instance repGenericListUsersRequest :: Generic ListUsersRequest _
@@ -3891,20 +3890,20 @@ instance encodeListUsersRequest :: Encode ListUsersRequest where encode = generi
 
 -- | Constructs ListUsersRequest from required parameters
 newListUsersRequest :: ListUsersRequest
-newListUsersRequest  = ListUsersRequest { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListUsersRequest  = ListUsersRequest { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 -- | Constructs ListUsersRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListUsersRequest' :: ( { "PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"PathPrefix" :: NullOrUndefined (PathPrefixType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListUsersRequest
-newListUsersRequest'  customize = (ListUsersRequest <<< customize) { "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PathPrefix": (NullOrUndefined Nothing) }
+newListUsersRequest' :: ( { "PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"PathPrefix" :: Maybe (PathPrefixType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListUsersRequest
+newListUsersRequest'  customize = (ListUsersRequest <<< customize) { "Marker": Nothing, "MaxItems": Nothing, "PathPrefix": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListUsers</a> request. </p>
 newtype ListUsersResponse = ListUsersResponse 
   { "Users" :: (UserListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListUsersResponse :: Newtype ListUsersResponse _
 derive instance repGenericListUsersResponse :: Generic ListUsersResponse _
@@ -3914,19 +3913,19 @@ instance encodeListUsersResponse :: Encode ListUsersResponse where encode = gene
 
 -- | Constructs ListUsersResponse from required parameters
 newListUsersResponse :: UserListType' -> ListUsersResponse
-newListUsersResponse _Users = ListUsersResponse { "Users": _Users, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListUsersResponse _Users = ListUsersResponse { "Users": _Users, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListUsersResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListUsersResponse' :: UserListType' -> ( { "Users" :: (UserListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"Users" :: (UserListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListUsersResponse
-newListUsersResponse' _Users customize = (ListUsersResponse <<< customize) { "Users": _Users, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListUsersResponse' :: UserListType' -> ( { "Users" :: (UserListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"Users" :: (UserListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListUsersResponse
+newListUsersResponse' _Users customize = (ListUsersResponse <<< customize) { "Users": _Users, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype ListVirtualMFADevicesRequest = ListVirtualMFADevicesRequest 
-  { "AssignmentStatus" :: NullOrUndefined (AssignmentStatusType')
-  , "Marker" :: NullOrUndefined (MarkerType')
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
+  { "AssignmentStatus" :: Maybe (AssignmentStatusType')
+  , "Marker" :: Maybe (MarkerType')
+  , "MaxItems" :: Maybe (MaxItemsType')
   }
 derive instance newtypeListVirtualMFADevicesRequest :: Newtype ListVirtualMFADevicesRequest _
 derive instance repGenericListVirtualMFADevicesRequest :: Generic ListVirtualMFADevicesRequest _
@@ -3936,20 +3935,20 @@ instance encodeListVirtualMFADevicesRequest :: Encode ListVirtualMFADevicesReque
 
 -- | Constructs ListVirtualMFADevicesRequest from required parameters
 newListVirtualMFADevicesRequest :: ListVirtualMFADevicesRequest
-newListVirtualMFADevicesRequest  = ListVirtualMFADevicesRequest { "AssignmentStatus": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListVirtualMFADevicesRequest  = ListVirtualMFADevicesRequest { "AssignmentStatus": Nothing, "Marker": Nothing, "MaxItems": Nothing }
 
 -- | Constructs ListVirtualMFADevicesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListVirtualMFADevicesRequest' :: ( { "AssignmentStatus" :: NullOrUndefined (AssignmentStatusType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } -> {"AssignmentStatus" :: NullOrUndefined (AssignmentStatusType') , "Marker" :: NullOrUndefined (MarkerType') , "MaxItems" :: NullOrUndefined (MaxItemsType') } ) -> ListVirtualMFADevicesRequest
-newListVirtualMFADevicesRequest'  customize = (ListVirtualMFADevicesRequest <<< customize) { "AssignmentStatus": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing) }
+newListVirtualMFADevicesRequest' :: ( { "AssignmentStatus" :: Maybe (AssignmentStatusType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } -> {"AssignmentStatus" :: Maybe (AssignmentStatusType') , "Marker" :: Maybe (MarkerType') , "MaxItems" :: Maybe (MaxItemsType') } ) -> ListVirtualMFADevicesRequest
+newListVirtualMFADevicesRequest'  customize = (ListVirtualMFADevicesRequest <<< customize) { "AssignmentStatus": Nothing, "Marker": Nothing, "MaxItems": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>ListVirtualMFADevices</a> request. </p>
 newtype ListVirtualMFADevicesResponse = ListVirtualMFADevicesResponse 
   { "VirtualMFADevices" :: (VirtualMFADeviceListType')
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeListVirtualMFADevicesResponse :: Newtype ListVirtualMFADevicesResponse _
 derive instance repGenericListVirtualMFADevicesResponse :: Generic ListVirtualMFADevicesResponse _
@@ -3959,12 +3958,12 @@ instance encodeListVirtualMFADevicesResponse :: Encode ListVirtualMFADevicesResp
 
 -- | Constructs ListVirtualMFADevicesResponse from required parameters
 newListVirtualMFADevicesResponse :: VirtualMFADeviceListType' -> ListVirtualMFADevicesResponse
-newListVirtualMFADevicesResponse _VirtualMFADevices = ListVirtualMFADevicesResponse { "VirtualMFADevices": _VirtualMFADevices, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListVirtualMFADevicesResponse _VirtualMFADevices = ListVirtualMFADevicesResponse { "VirtualMFADevices": _VirtualMFADevices, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs ListVirtualMFADevicesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListVirtualMFADevicesResponse' :: VirtualMFADeviceListType' -> ( { "VirtualMFADevices" :: (VirtualMFADeviceListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"VirtualMFADevices" :: (VirtualMFADeviceListType') , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> ListVirtualMFADevicesResponse
-newListVirtualMFADevicesResponse' _VirtualMFADevices customize = (ListVirtualMFADevicesResponse <<< customize) { "VirtualMFADevices": _VirtualMFADevices, "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newListVirtualMFADevicesResponse' :: VirtualMFADeviceListType' -> ( { "VirtualMFADevices" :: (VirtualMFADeviceListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"VirtualMFADevices" :: (VirtualMFADeviceListType') , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> ListVirtualMFADevicesResponse
+newListVirtualMFADevicesResponse' _VirtualMFADevices customize = (ListVirtualMFADevicesResponse <<< customize) { "VirtualMFADevices": _VirtualMFADevices, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
@@ -3972,7 +3971,7 @@ newListVirtualMFADevicesResponse' _VirtualMFADevices customize = (ListVirtualMFA
 newtype LoginProfile = LoginProfile 
   { "UserName" :: (UserNameType')
   , "CreateDate" :: (DateType')
-  , "PasswordResetRequired" :: NullOrUndefined (BooleanType')
+  , "PasswordResetRequired" :: Maybe (BooleanType')
   }
 derive instance newtypeLoginProfile :: Newtype LoginProfile _
 derive instance repGenericLoginProfile :: Generic LoginProfile _
@@ -3982,12 +3981,12 @@ instance encodeLoginProfile :: Encode LoginProfile where encode = genericEncode 
 
 -- | Constructs LoginProfile from required parameters
 newLoginProfile :: DateType' -> UserNameType' -> LoginProfile
-newLoginProfile _CreateDate _UserName = LoginProfile { "CreateDate": _CreateDate, "UserName": _UserName, "PasswordResetRequired": (NullOrUndefined Nothing) }
+newLoginProfile _CreateDate _UserName = LoginProfile { "CreateDate": _CreateDate, "UserName": _UserName, "PasswordResetRequired": Nothing }
 
 -- | Constructs LoginProfile's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newLoginProfile' :: DateType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "CreateDate" :: (DateType') , "PasswordResetRequired" :: NullOrUndefined (BooleanType') } -> {"UserName" :: (UserNameType') , "CreateDate" :: (DateType') , "PasswordResetRequired" :: NullOrUndefined (BooleanType') } ) -> LoginProfile
-newLoginProfile' _CreateDate _UserName customize = (LoginProfile <<< customize) { "CreateDate": _CreateDate, "UserName": _UserName, "PasswordResetRequired": (NullOrUndefined Nothing) }
+newLoginProfile' :: DateType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "CreateDate" :: (DateType') , "PasswordResetRequired" :: Maybe (BooleanType') } -> {"UserName" :: (UserNameType') , "CreateDate" :: (DateType') , "PasswordResetRequired" :: Maybe (BooleanType') } ) -> LoginProfile
+newLoginProfile' _CreateDate _UserName customize = (LoginProfile <<< customize) { "CreateDate": _CreateDate, "UserName": _UserName, "PasswordResetRequired": Nothing }
 
 
 
@@ -4016,7 +4015,7 @@ newMFADevice' _EnableDate _SerialNumber _UserName customize = (MFADevice <<< cus
 
 -- | <p>The request was rejected because the certificate was malformed or expired. The error message describes the specific error.</p>
 newtype MalformedCertificateException = MalformedCertificateException 
-  { "message" :: NullOrUndefined (MalformedCertificateMessage')
+  { "message" :: Maybe (MalformedCertificateMessage')
   }
 derive instance newtypeMalformedCertificateException :: Newtype MalformedCertificateException _
 derive instance repGenericMalformedCertificateException :: Generic MalformedCertificateException _
@@ -4026,18 +4025,18 @@ instance encodeMalformedCertificateException :: Encode MalformedCertificateExcep
 
 -- | Constructs MalformedCertificateException from required parameters
 newMalformedCertificateException :: MalformedCertificateException
-newMalformedCertificateException  = MalformedCertificateException { "message": (NullOrUndefined Nothing) }
+newMalformedCertificateException  = MalformedCertificateException { "message": Nothing }
 
 -- | Constructs MalformedCertificateException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newMalformedCertificateException' :: ( { "message" :: NullOrUndefined (MalformedCertificateMessage') } -> {"message" :: NullOrUndefined (MalformedCertificateMessage') } ) -> MalformedCertificateException
-newMalformedCertificateException'  customize = (MalformedCertificateException <<< customize) { "message": (NullOrUndefined Nothing) }
+newMalformedCertificateException' :: ( { "message" :: Maybe (MalformedCertificateMessage') } -> {"message" :: Maybe (MalformedCertificateMessage') } ) -> MalformedCertificateException
+newMalformedCertificateException'  customize = (MalformedCertificateException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the policy document was malformed. The error message describes the specific error.</p>
 newtype MalformedPolicyDocumentException = MalformedPolicyDocumentException 
-  { "message" :: NullOrUndefined (MalformedPolicyDocumentMessage')
+  { "message" :: Maybe (MalformedPolicyDocumentMessage')
   }
 derive instance newtypeMalformedPolicyDocumentException :: Newtype MalformedPolicyDocumentException _
 derive instance repGenericMalformedPolicyDocumentException :: Generic MalformedPolicyDocumentException _
@@ -4047,28 +4046,28 @@ instance encodeMalformedPolicyDocumentException :: Encode MalformedPolicyDocumen
 
 -- | Constructs MalformedPolicyDocumentException from required parameters
 newMalformedPolicyDocumentException :: MalformedPolicyDocumentException
-newMalformedPolicyDocumentException  = MalformedPolicyDocumentException { "message": (NullOrUndefined Nothing) }
+newMalformedPolicyDocumentException  = MalformedPolicyDocumentException { "message": Nothing }
 
 -- | Constructs MalformedPolicyDocumentException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newMalformedPolicyDocumentException' :: ( { "message" :: NullOrUndefined (MalformedPolicyDocumentMessage') } -> {"message" :: NullOrUndefined (MalformedPolicyDocumentMessage') } ) -> MalformedPolicyDocumentException
-newMalformedPolicyDocumentException'  customize = (MalformedPolicyDocumentException <<< customize) { "message": (NullOrUndefined Nothing) }
+newMalformedPolicyDocumentException' :: ( { "message" :: Maybe (MalformedPolicyDocumentMessage') } -> {"message" :: Maybe (MalformedPolicyDocumentMessage') } ) -> MalformedPolicyDocumentException
+newMalformedPolicyDocumentException'  customize = (MalformedPolicyDocumentException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>Contains information about a managed policy, including the policy's ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p> <p>For more information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype ManagedPolicyDetail = ManagedPolicyDetail 
-  { "PolicyName" :: NullOrUndefined (PolicyNameType')
-  , "PolicyId" :: NullOrUndefined (IdType')
-  , "Arn" :: NullOrUndefined (ArnType')
-  , "Path" :: NullOrUndefined (PolicyPathType')
-  , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType')
-  , "AttachmentCount" :: NullOrUndefined (AttachmentCountType')
-  , "IsAttachable" :: NullOrUndefined (BooleanType')
-  , "Description" :: NullOrUndefined (PolicyDescriptionType')
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "UpdateDate" :: NullOrUndefined (DateType')
-  , "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType')
+  { "PolicyName" :: Maybe (PolicyNameType')
+  , "PolicyId" :: Maybe (IdType')
+  , "Arn" :: Maybe (ArnType')
+  , "Path" :: Maybe (PolicyPathType')
+  , "DefaultVersionId" :: Maybe (PolicyVersionIdType')
+  , "AttachmentCount" :: Maybe (AttachmentCountType')
+  , "IsAttachable" :: Maybe (BooleanType')
+  , "Description" :: Maybe (PolicyDescriptionType')
+  , "CreateDate" :: Maybe (DateType')
+  , "UpdateDate" :: Maybe (DateType')
+  , "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType')
   }
 derive instance newtypeManagedPolicyDetail :: Newtype ManagedPolicyDetail _
 derive instance repGenericManagedPolicyDetail :: Generic ManagedPolicyDetail _
@@ -4078,12 +4077,12 @@ instance encodeManagedPolicyDetail :: Encode ManagedPolicyDetail where encode = 
 
 -- | Constructs ManagedPolicyDetail from required parameters
 newManagedPolicyDetail :: ManagedPolicyDetail
-newManagedPolicyDetail  = ManagedPolicyDetail { "Arn": (NullOrUndefined Nothing), "AttachmentCount": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "DefaultVersionId": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing), "IsAttachable": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "PolicyId": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing), "PolicyVersionList": (NullOrUndefined Nothing), "UpdateDate": (NullOrUndefined Nothing) }
+newManagedPolicyDetail  = ManagedPolicyDetail { "Arn": Nothing, "AttachmentCount": Nothing, "CreateDate": Nothing, "DefaultVersionId": Nothing, "Description": Nothing, "IsAttachable": Nothing, "Path": Nothing, "PolicyId": Nothing, "PolicyName": Nothing, "PolicyVersionList": Nothing, "UpdateDate": Nothing }
 
 -- | Constructs ManagedPolicyDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newManagedPolicyDetail' :: ( { "PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "Path" :: NullOrUndefined (PolicyPathType') , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType') , "AttachmentCount" :: NullOrUndefined (AttachmentCountType') , "IsAttachable" :: NullOrUndefined (BooleanType') , "Description" :: NullOrUndefined (PolicyDescriptionType') , "CreateDate" :: NullOrUndefined (DateType') , "UpdateDate" :: NullOrUndefined (DateType') , "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType') } -> {"PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "Path" :: NullOrUndefined (PolicyPathType') , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType') , "AttachmentCount" :: NullOrUndefined (AttachmentCountType') , "IsAttachable" :: NullOrUndefined (BooleanType') , "Description" :: NullOrUndefined (PolicyDescriptionType') , "CreateDate" :: NullOrUndefined (DateType') , "UpdateDate" :: NullOrUndefined (DateType') , "PolicyVersionList" :: NullOrUndefined (PolicyDocumentVersionListType') } ) -> ManagedPolicyDetail
-newManagedPolicyDetail'  customize = (ManagedPolicyDetail <<< customize) { "Arn": (NullOrUndefined Nothing), "AttachmentCount": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "DefaultVersionId": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing), "IsAttachable": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "PolicyId": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing), "PolicyVersionList": (NullOrUndefined Nothing), "UpdateDate": (NullOrUndefined Nothing) }
+newManagedPolicyDetail' :: ( { "PolicyName" :: Maybe (PolicyNameType') , "PolicyId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "Path" :: Maybe (PolicyPathType') , "DefaultVersionId" :: Maybe (PolicyVersionIdType') , "AttachmentCount" :: Maybe (AttachmentCountType') , "IsAttachable" :: Maybe (BooleanType') , "Description" :: Maybe (PolicyDescriptionType') , "CreateDate" :: Maybe (DateType') , "UpdateDate" :: Maybe (DateType') , "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType') } -> {"PolicyName" :: Maybe (PolicyNameType') , "PolicyId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "Path" :: Maybe (PolicyPathType') , "DefaultVersionId" :: Maybe (PolicyVersionIdType') , "AttachmentCount" :: Maybe (AttachmentCountType') , "IsAttachable" :: Maybe (BooleanType') , "Description" :: Maybe (PolicyDescriptionType') , "CreateDate" :: Maybe (DateType') , "UpdateDate" :: Maybe (DateType') , "PolicyVersionList" :: Maybe (PolicyDocumentVersionListType') } ) -> ManagedPolicyDetail
+newManagedPolicyDetail'  customize = (ManagedPolicyDetail <<< customize) { "Arn": Nothing, "AttachmentCount": Nothing, "CreateDate": Nothing, "DefaultVersionId": Nothing, "Description": Nothing, "IsAttachable": Nothing, "Path": Nothing, "PolicyId": Nothing, "PolicyName": Nothing, "PolicyVersionList": Nothing, "UpdateDate": Nothing }
 
 
 
@@ -4098,7 +4097,7 @@ instance encodeManagedPolicyDetailListType :: Encode ManagedPolicyDetailListType
 
 -- | <p>The request was rejected because it referenced an entity that does not exist. The error message describes the entity.</p>
 newtype NoSuchEntityException = NoSuchEntityException 
-  { "message" :: NullOrUndefined (NoSuchEntityMessage')
+  { "message" :: Maybe (NoSuchEntityMessage')
   }
 derive instance newtypeNoSuchEntityException :: Newtype NoSuchEntityException _
 derive instance repGenericNoSuchEntityException :: Generic NoSuchEntityException _
@@ -4108,18 +4107,18 @@ instance encodeNoSuchEntityException :: Encode NoSuchEntityException where encod
 
 -- | Constructs NoSuchEntityException from required parameters
 newNoSuchEntityException :: NoSuchEntityException
-newNoSuchEntityException  = NoSuchEntityException { "message": (NullOrUndefined Nothing) }
+newNoSuchEntityException  = NoSuchEntityException { "message": Nothing }
 
 -- | Constructs NoSuchEntityException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newNoSuchEntityException' :: ( { "message" :: NullOrUndefined (NoSuchEntityMessage') } -> {"message" :: NullOrUndefined (NoSuchEntityMessage') } ) -> NoSuchEntityException
-newNoSuchEntityException'  customize = (NoSuchEntityException <<< customize) { "message": (NullOrUndefined Nothing) }
+newNoSuchEntityException' :: ( { "message" :: Maybe (NoSuchEntityMessage') } -> {"message" :: Maybe (NoSuchEntityMessage') } ) -> NoSuchEntityException
+newNoSuchEntityException'  customize = (NoSuchEntityException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.</p>
 newtype OpenIDConnectProviderListEntry = OpenIDConnectProviderListEntry 
-  { "Arn" :: NullOrUndefined (ArnType')
+  { "Arn" :: Maybe (ArnType')
   }
 derive instance newtypeOpenIDConnectProviderListEntry :: Newtype OpenIDConnectProviderListEntry _
 derive instance repGenericOpenIDConnectProviderListEntry :: Generic OpenIDConnectProviderListEntry _
@@ -4129,12 +4128,12 @@ instance encodeOpenIDConnectProviderListEntry :: Encode OpenIDConnectProviderLis
 
 -- | Constructs OpenIDConnectProviderListEntry from required parameters
 newOpenIDConnectProviderListEntry :: OpenIDConnectProviderListEntry
-newOpenIDConnectProviderListEntry  = OpenIDConnectProviderListEntry { "Arn": (NullOrUndefined Nothing) }
+newOpenIDConnectProviderListEntry  = OpenIDConnectProviderListEntry { "Arn": Nothing }
 
 -- | Constructs OpenIDConnectProviderListEntry's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newOpenIDConnectProviderListEntry' :: ( { "Arn" :: NullOrUndefined (ArnType') } -> {"Arn" :: NullOrUndefined (ArnType') } ) -> OpenIDConnectProviderListEntry
-newOpenIDConnectProviderListEntry'  customize = (OpenIDConnectProviderListEntry <<< customize) { "Arn": (NullOrUndefined Nothing) }
+newOpenIDConnectProviderListEntry' :: ( { "Arn" :: Maybe (ArnType') } -> {"Arn" :: Maybe (ArnType') } ) -> OpenIDConnectProviderListEntry
+newOpenIDConnectProviderListEntry'  customize = (OpenIDConnectProviderListEntry <<< customize) { "Arn": Nothing }
 
 
 
@@ -4160,7 +4159,7 @@ instance encodeOpenIDConnectProviderUrlType :: Encode OpenIDConnectProviderUrlTy
 
 -- | <p>Contains information about AWS Organizations's affect on a policy simulation.</p>
 newtype OrganizationsDecisionDetail = OrganizationsDecisionDetail 
-  { "AllowedByOrganizations" :: NullOrUndefined (BooleanType')
+  { "AllowedByOrganizations" :: Maybe (BooleanType')
   }
 derive instance newtypeOrganizationsDecisionDetail :: Newtype OrganizationsDecisionDetail _
 derive instance repGenericOrganizationsDecisionDetail :: Generic OrganizationsDecisionDetail _
@@ -4170,27 +4169,27 @@ instance encodeOrganizationsDecisionDetail :: Encode OrganizationsDecisionDetail
 
 -- | Constructs OrganizationsDecisionDetail from required parameters
 newOrganizationsDecisionDetail :: OrganizationsDecisionDetail
-newOrganizationsDecisionDetail  = OrganizationsDecisionDetail { "AllowedByOrganizations": (NullOrUndefined Nothing) }
+newOrganizationsDecisionDetail  = OrganizationsDecisionDetail { "AllowedByOrganizations": Nothing }
 
 -- | Constructs OrganizationsDecisionDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newOrganizationsDecisionDetail' :: ( { "AllowedByOrganizations" :: NullOrUndefined (BooleanType') } -> {"AllowedByOrganizations" :: NullOrUndefined (BooleanType') } ) -> OrganizationsDecisionDetail
-newOrganizationsDecisionDetail'  customize = (OrganizationsDecisionDetail <<< customize) { "AllowedByOrganizations": (NullOrUndefined Nothing) }
+newOrganizationsDecisionDetail' :: ( { "AllowedByOrganizations" :: Maybe (BooleanType') } -> {"AllowedByOrganizations" :: Maybe (BooleanType') } ) -> OrganizationsDecisionDetail
+newOrganizationsDecisionDetail'  customize = (OrganizationsDecisionDetail <<< customize) { "AllowedByOrganizations": Nothing }
 
 
 
 -- | <p>Contains information about the account password policy.</p> <p> This data type is used as a response element in the <a>GetAccountPasswordPolicy</a> action. </p>
 newtype PasswordPolicy = PasswordPolicy 
-  { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType')
-  , "RequireSymbols" :: NullOrUndefined (BooleanType')
-  , "RequireNumbers" :: NullOrUndefined (BooleanType')
-  , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType')
-  , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType')
-  , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType')
-  , "ExpirePasswords" :: NullOrUndefined (BooleanType')
-  , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType')
-  , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType')
-  , "HardExpiry" :: NullOrUndefined (BooleanObjectType')
+  { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType')
+  , "RequireSymbols" :: Maybe (BooleanType')
+  , "RequireNumbers" :: Maybe (BooleanType')
+  , "RequireUppercaseCharacters" :: Maybe (BooleanType')
+  , "RequireLowercaseCharacters" :: Maybe (BooleanType')
+  , "AllowUsersToChangePassword" :: Maybe (BooleanType')
+  , "ExpirePasswords" :: Maybe (BooleanType')
+  , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType')
+  , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType')
+  , "HardExpiry" :: Maybe (BooleanObjectType')
   }
 derive instance newtypePasswordPolicy :: Newtype PasswordPolicy _
 derive instance repGenericPasswordPolicy :: Generic PasswordPolicy _
@@ -4200,18 +4199,18 @@ instance encodePasswordPolicy :: Encode PasswordPolicy where encode = genericEnc
 
 -- | Constructs PasswordPolicy from required parameters
 newPasswordPolicy :: PasswordPolicy
-newPasswordPolicy  = PasswordPolicy { "AllowUsersToChangePassword": (NullOrUndefined Nothing), "ExpirePasswords": (NullOrUndefined Nothing), "HardExpiry": (NullOrUndefined Nothing), "MaxPasswordAge": (NullOrUndefined Nothing), "MinimumPasswordLength": (NullOrUndefined Nothing), "PasswordReusePrevention": (NullOrUndefined Nothing), "RequireLowercaseCharacters": (NullOrUndefined Nothing), "RequireNumbers": (NullOrUndefined Nothing), "RequireSymbols": (NullOrUndefined Nothing), "RequireUppercaseCharacters": (NullOrUndefined Nothing) }
+newPasswordPolicy  = PasswordPolicy { "AllowUsersToChangePassword": Nothing, "ExpirePasswords": Nothing, "HardExpiry": Nothing, "MaxPasswordAge": Nothing, "MinimumPasswordLength": Nothing, "PasswordReusePrevention": Nothing, "RequireLowercaseCharacters": Nothing, "RequireNumbers": Nothing, "RequireSymbols": Nothing, "RequireUppercaseCharacters": Nothing }
 
 -- | Constructs PasswordPolicy's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPasswordPolicy' :: ( { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType') , "RequireSymbols" :: NullOrUndefined (BooleanType') , "RequireNumbers" :: NullOrUndefined (BooleanType') , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType') , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType') , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType') , "ExpirePasswords" :: NullOrUndefined (BooleanType') , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType') , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType') , "HardExpiry" :: NullOrUndefined (BooleanObjectType') } -> {"MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType') , "RequireSymbols" :: NullOrUndefined (BooleanType') , "RequireNumbers" :: NullOrUndefined (BooleanType') , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType') , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType') , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType') , "ExpirePasswords" :: NullOrUndefined (BooleanType') , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType') , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType') , "HardExpiry" :: NullOrUndefined (BooleanObjectType') } ) -> PasswordPolicy
-newPasswordPolicy'  customize = (PasswordPolicy <<< customize) { "AllowUsersToChangePassword": (NullOrUndefined Nothing), "ExpirePasswords": (NullOrUndefined Nothing), "HardExpiry": (NullOrUndefined Nothing), "MaxPasswordAge": (NullOrUndefined Nothing), "MinimumPasswordLength": (NullOrUndefined Nothing), "PasswordReusePrevention": (NullOrUndefined Nothing), "RequireLowercaseCharacters": (NullOrUndefined Nothing), "RequireNumbers": (NullOrUndefined Nothing), "RequireSymbols": (NullOrUndefined Nothing), "RequireUppercaseCharacters": (NullOrUndefined Nothing) }
+newPasswordPolicy' :: ( { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType') , "RequireSymbols" :: Maybe (BooleanType') , "RequireNumbers" :: Maybe (BooleanType') , "RequireUppercaseCharacters" :: Maybe (BooleanType') , "RequireLowercaseCharacters" :: Maybe (BooleanType') , "AllowUsersToChangePassword" :: Maybe (BooleanType') , "ExpirePasswords" :: Maybe (BooleanType') , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType') , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType') , "HardExpiry" :: Maybe (BooleanObjectType') } -> {"MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType') , "RequireSymbols" :: Maybe (BooleanType') , "RequireNumbers" :: Maybe (BooleanType') , "RequireUppercaseCharacters" :: Maybe (BooleanType') , "RequireLowercaseCharacters" :: Maybe (BooleanType') , "AllowUsersToChangePassword" :: Maybe (BooleanType') , "ExpirePasswords" :: Maybe (BooleanType') , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType') , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType') , "HardExpiry" :: Maybe (BooleanObjectType') } ) -> PasswordPolicy
+newPasswordPolicy'  customize = (PasswordPolicy <<< customize) { "AllowUsersToChangePassword": Nothing, "ExpirePasswords": Nothing, "HardExpiry": Nothing, "MaxPasswordAge": Nothing, "MinimumPasswordLength": Nothing, "PasswordReusePrevention": Nothing, "RequireLowercaseCharacters": Nothing, "RequireNumbers": Nothing, "RequireSymbols": Nothing, "RequireUppercaseCharacters": Nothing }
 
 
 
 -- | <p>The request was rejected because the provided password did not meet the requirements imposed by the account password policy.</p>
 newtype PasswordPolicyViolationException = PasswordPolicyViolationException 
-  { "message" :: NullOrUndefined (PasswordPolicyViolationMessage')
+  { "message" :: Maybe (PasswordPolicyViolationMessage')
   }
 derive instance newtypePasswordPolicyViolationException :: Newtype PasswordPolicyViolationException _
 derive instance repGenericPasswordPolicyViolationException :: Generic PasswordPolicyViolationException _
@@ -4221,27 +4220,27 @@ instance encodePasswordPolicyViolationException :: Encode PasswordPolicyViolatio
 
 -- | Constructs PasswordPolicyViolationException from required parameters
 newPasswordPolicyViolationException :: PasswordPolicyViolationException
-newPasswordPolicyViolationException  = PasswordPolicyViolationException { "message": (NullOrUndefined Nothing) }
+newPasswordPolicyViolationException  = PasswordPolicyViolationException { "message": Nothing }
 
 -- | Constructs PasswordPolicyViolationException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPasswordPolicyViolationException' :: ( { "message" :: NullOrUndefined (PasswordPolicyViolationMessage') } -> {"message" :: NullOrUndefined (PasswordPolicyViolationMessage') } ) -> PasswordPolicyViolationException
-newPasswordPolicyViolationException'  customize = (PasswordPolicyViolationException <<< customize) { "message": (NullOrUndefined Nothing) }
+newPasswordPolicyViolationException' :: ( { "message" :: Maybe (PasswordPolicyViolationMessage') } -> {"message" :: Maybe (PasswordPolicyViolationMessage') } ) -> PasswordPolicyViolationException
+newPasswordPolicyViolationException'  customize = (PasswordPolicyViolationException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>Contains information about a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicy</a>, <a>GetPolicy</a>, and <a>ListPolicies</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype Policy = Policy 
-  { "PolicyName" :: NullOrUndefined (PolicyNameType')
-  , "PolicyId" :: NullOrUndefined (IdType')
-  , "Arn" :: NullOrUndefined (ArnType')
-  , "Path" :: NullOrUndefined (PolicyPathType')
-  , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType')
-  , "AttachmentCount" :: NullOrUndefined (AttachmentCountType')
-  , "IsAttachable" :: NullOrUndefined (BooleanType')
-  , "Description" :: NullOrUndefined (PolicyDescriptionType')
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "UpdateDate" :: NullOrUndefined (DateType')
+  { "PolicyName" :: Maybe (PolicyNameType')
+  , "PolicyId" :: Maybe (IdType')
+  , "Arn" :: Maybe (ArnType')
+  , "Path" :: Maybe (PolicyPathType')
+  , "DefaultVersionId" :: Maybe (PolicyVersionIdType')
+  , "AttachmentCount" :: Maybe (AttachmentCountType')
+  , "IsAttachable" :: Maybe (BooleanType')
+  , "Description" :: Maybe (PolicyDescriptionType')
+  , "CreateDate" :: Maybe (DateType')
+  , "UpdateDate" :: Maybe (DateType')
   }
 derive instance newtypePolicy :: Newtype Policy _
 derive instance repGenericPolicy :: Generic Policy _
@@ -4251,19 +4250,19 @@ instance encodePolicy :: Encode Policy where encode = genericEncode options
 
 -- | Constructs Policy from required parameters
 newPolicy :: Policy
-newPolicy  = Policy { "Arn": (NullOrUndefined Nothing), "AttachmentCount": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "DefaultVersionId": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing), "IsAttachable": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "PolicyId": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing), "UpdateDate": (NullOrUndefined Nothing) }
+newPolicy  = Policy { "Arn": Nothing, "AttachmentCount": Nothing, "CreateDate": Nothing, "DefaultVersionId": Nothing, "Description": Nothing, "IsAttachable": Nothing, "Path": Nothing, "PolicyId": Nothing, "PolicyName": Nothing, "UpdateDate": Nothing }
 
 -- | Constructs Policy's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicy' :: ( { "PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "Path" :: NullOrUndefined (PolicyPathType') , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType') , "AttachmentCount" :: NullOrUndefined (AttachmentCountType') , "IsAttachable" :: NullOrUndefined (BooleanType') , "Description" :: NullOrUndefined (PolicyDescriptionType') , "CreateDate" :: NullOrUndefined (DateType') , "UpdateDate" :: NullOrUndefined (DateType') } -> {"PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "Path" :: NullOrUndefined (PolicyPathType') , "DefaultVersionId" :: NullOrUndefined (PolicyVersionIdType') , "AttachmentCount" :: NullOrUndefined (AttachmentCountType') , "IsAttachable" :: NullOrUndefined (BooleanType') , "Description" :: NullOrUndefined (PolicyDescriptionType') , "CreateDate" :: NullOrUndefined (DateType') , "UpdateDate" :: NullOrUndefined (DateType') } ) -> Policy
-newPolicy'  customize = (Policy <<< customize) { "Arn": (NullOrUndefined Nothing), "AttachmentCount": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "DefaultVersionId": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing), "IsAttachable": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "PolicyId": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing), "UpdateDate": (NullOrUndefined Nothing) }
+newPolicy' :: ( { "PolicyName" :: Maybe (PolicyNameType') , "PolicyId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "Path" :: Maybe (PolicyPathType') , "DefaultVersionId" :: Maybe (PolicyVersionIdType') , "AttachmentCount" :: Maybe (AttachmentCountType') , "IsAttachable" :: Maybe (BooleanType') , "Description" :: Maybe (PolicyDescriptionType') , "CreateDate" :: Maybe (DateType') , "UpdateDate" :: Maybe (DateType') } -> {"PolicyName" :: Maybe (PolicyNameType') , "PolicyId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "Path" :: Maybe (PolicyPathType') , "DefaultVersionId" :: Maybe (PolicyVersionIdType') , "AttachmentCount" :: Maybe (AttachmentCountType') , "IsAttachable" :: Maybe (BooleanType') , "Description" :: Maybe (PolicyDescriptionType') , "CreateDate" :: Maybe (DateType') , "UpdateDate" :: Maybe (DateType') } ) -> Policy
+newPolicy'  customize = (Policy <<< customize) { "Arn": Nothing, "AttachmentCount": Nothing, "CreateDate": Nothing, "DefaultVersionId": Nothing, "Description": Nothing, "IsAttachable": Nothing, "Path": Nothing, "PolicyId": Nothing, "PolicyName": Nothing, "UpdateDate": Nothing }
 
 
 
 -- | <p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
 newtype PolicyDetail = PolicyDetail 
-  { "PolicyName" :: NullOrUndefined (PolicyNameType')
-  , "PolicyDocument" :: NullOrUndefined (PolicyDocumentType')
+  { "PolicyName" :: Maybe (PolicyNameType')
+  , "PolicyDocument" :: Maybe (PolicyDocumentType')
   }
 derive instance newtypePolicyDetail :: Newtype PolicyDetail _
 derive instance repGenericPolicyDetail :: Generic PolicyDetail _
@@ -4273,12 +4272,12 @@ instance encodePolicyDetail :: Encode PolicyDetail where encode = genericEncode 
 
 -- | Constructs PolicyDetail from required parameters
 newPolicyDetail :: PolicyDetail
-newPolicyDetail  = PolicyDetail { "PolicyDocument": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing) }
+newPolicyDetail  = PolicyDetail { "PolicyDocument": Nothing, "PolicyName": Nothing }
 
 -- | Constructs PolicyDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyDetail' :: ( { "PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyDocument" :: NullOrUndefined (PolicyDocumentType') } -> {"PolicyName" :: NullOrUndefined (PolicyNameType') , "PolicyDocument" :: NullOrUndefined (PolicyDocumentType') } ) -> PolicyDetail
-newPolicyDetail'  customize = (PolicyDetail <<< customize) { "PolicyDocument": (NullOrUndefined Nothing), "PolicyName": (NullOrUndefined Nothing) }
+newPolicyDetail' :: ( { "PolicyName" :: Maybe (PolicyNameType') , "PolicyDocument" :: Maybe (PolicyDocumentType') } -> {"PolicyName" :: Maybe (PolicyNameType') , "PolicyDocument" :: Maybe (PolicyDocumentType') } ) -> PolicyDetail
+newPolicyDetail'  customize = (PolicyDetail <<< customize) { "PolicyDocument": Nothing, "PolicyName": Nothing }
 
 
 
@@ -4293,7 +4292,7 @@ instance encodePolicyEvaluationDecisionType :: Encode PolicyEvaluationDecisionTy
 
 -- | <p>The request failed because a provided policy could not be successfully evaluated. An additional detailed message indicates the source of the failure.</p>
 newtype PolicyEvaluationException = PolicyEvaluationException 
-  { "message" :: NullOrUndefined (PolicyEvaluationErrorMessage')
+  { "message" :: Maybe (PolicyEvaluationErrorMessage')
   }
 derive instance newtypePolicyEvaluationException :: Newtype PolicyEvaluationException _
 derive instance repGenericPolicyEvaluationException :: Generic PolicyEvaluationException _
@@ -4303,19 +4302,19 @@ instance encodePolicyEvaluationException :: Encode PolicyEvaluationException whe
 
 -- | Constructs PolicyEvaluationException from required parameters
 newPolicyEvaluationException :: PolicyEvaluationException
-newPolicyEvaluationException  = PolicyEvaluationException { "message": (NullOrUndefined Nothing) }
+newPolicyEvaluationException  = PolicyEvaluationException { "message": Nothing }
 
 -- | Constructs PolicyEvaluationException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyEvaluationException' :: ( { "message" :: NullOrUndefined (PolicyEvaluationErrorMessage') } -> {"message" :: NullOrUndefined (PolicyEvaluationErrorMessage') } ) -> PolicyEvaluationException
-newPolicyEvaluationException'  customize = (PolicyEvaluationException <<< customize) { "message": (NullOrUndefined Nothing) }
+newPolicyEvaluationException' :: ( { "message" :: Maybe (PolicyEvaluationErrorMessage') } -> {"message" :: Maybe (PolicyEvaluationErrorMessage') } ) -> PolicyEvaluationException
+newPolicyEvaluationException'  customize = (PolicyEvaluationException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>Contains information about a group that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype PolicyGroup = PolicyGroup 
-  { "GroupName" :: NullOrUndefined (GroupNameType')
-  , "GroupId" :: NullOrUndefined (IdType')
+  { "GroupName" :: Maybe (GroupNameType')
+  , "GroupId" :: Maybe (IdType')
   }
 derive instance newtypePolicyGroup :: Newtype PolicyGroup _
 derive instance repGenericPolicyGroup :: Generic PolicyGroup _
@@ -4325,12 +4324,12 @@ instance encodePolicyGroup :: Encode PolicyGroup where encode = genericEncode op
 
 -- | Constructs PolicyGroup from required parameters
 newPolicyGroup :: PolicyGroup
-newPolicyGroup  = PolicyGroup { "GroupId": (NullOrUndefined Nothing), "GroupName": (NullOrUndefined Nothing) }
+newPolicyGroup  = PolicyGroup { "GroupId": Nothing, "GroupName": Nothing }
 
 -- | Constructs PolicyGroup's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyGroup' :: ( { "GroupName" :: NullOrUndefined (GroupNameType') , "GroupId" :: NullOrUndefined (IdType') } -> {"GroupName" :: NullOrUndefined (GroupNameType') , "GroupId" :: NullOrUndefined (IdType') } ) -> PolicyGroup
-newPolicyGroup'  customize = (PolicyGroup <<< customize) { "GroupId": (NullOrUndefined Nothing), "GroupName": (NullOrUndefined Nothing) }
+newPolicyGroup' :: ( { "GroupName" :: Maybe (GroupNameType') , "GroupId" :: Maybe (IdType') } -> {"GroupName" :: Maybe (GroupNameType') , "GroupId" :: Maybe (IdType') } ) -> PolicyGroup
+newPolicyGroup'  customize = (PolicyGroup <<< customize) { "GroupId": Nothing, "GroupName": Nothing }
 
 
 
@@ -4354,7 +4353,7 @@ instance encodePolicyIdentifierType :: Encode PolicyIdentifierType where encode 
 
 -- | <p>The request failed because AWS service role policies can only be attached to the service-linked role for that service.</p>
 newtype PolicyNotAttachableException = PolicyNotAttachableException 
-  { "message" :: NullOrUndefined (PolicyNotAttachableMessage')
+  { "message" :: Maybe (PolicyNotAttachableMessage')
   }
 derive instance newtypePolicyNotAttachableException :: Newtype PolicyNotAttachableException _
 derive instance repGenericPolicyNotAttachableException :: Generic PolicyNotAttachableException _
@@ -4364,19 +4363,19 @@ instance encodePolicyNotAttachableException :: Encode PolicyNotAttachableExcepti
 
 -- | Constructs PolicyNotAttachableException from required parameters
 newPolicyNotAttachableException :: PolicyNotAttachableException
-newPolicyNotAttachableException  = PolicyNotAttachableException { "message": (NullOrUndefined Nothing) }
+newPolicyNotAttachableException  = PolicyNotAttachableException { "message": Nothing }
 
 -- | Constructs PolicyNotAttachableException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyNotAttachableException' :: ( { "message" :: NullOrUndefined (PolicyNotAttachableMessage') } -> {"message" :: NullOrUndefined (PolicyNotAttachableMessage') } ) -> PolicyNotAttachableException
-newPolicyNotAttachableException'  customize = (PolicyNotAttachableException <<< customize) { "message": (NullOrUndefined Nothing) }
+newPolicyNotAttachableException' :: ( { "message" :: Maybe (PolicyNotAttachableMessage') } -> {"message" :: Maybe (PolicyNotAttachableMessage') } ) -> PolicyNotAttachableException
+newPolicyNotAttachableException'  customize = (PolicyNotAttachableException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>Contains information about a role that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype PolicyRole = PolicyRole 
-  { "RoleName" :: NullOrUndefined (RoleNameType')
-  , "RoleId" :: NullOrUndefined (IdType')
+  { "RoleName" :: Maybe (RoleNameType')
+  , "RoleId" :: Maybe (IdType')
   }
 derive instance newtypePolicyRole :: Newtype PolicyRole _
 derive instance repGenericPolicyRole :: Generic PolicyRole _
@@ -4386,12 +4385,12 @@ instance encodePolicyRole :: Encode PolicyRole where encode = genericEncode opti
 
 -- | Constructs PolicyRole from required parameters
 newPolicyRole :: PolicyRole
-newPolicyRole  = PolicyRole { "RoleId": (NullOrUndefined Nothing), "RoleName": (NullOrUndefined Nothing) }
+newPolicyRole  = PolicyRole { "RoleId": Nothing, "RoleName": Nothing }
 
 -- | Constructs PolicyRole's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyRole' :: ( { "RoleName" :: NullOrUndefined (RoleNameType') , "RoleId" :: NullOrUndefined (IdType') } -> {"RoleName" :: NullOrUndefined (RoleNameType') , "RoleId" :: NullOrUndefined (IdType') } ) -> PolicyRole
-newPolicyRole'  customize = (PolicyRole <<< customize) { "RoleId": (NullOrUndefined Nothing), "RoleName": (NullOrUndefined Nothing) }
+newPolicyRole' :: ( { "RoleName" :: Maybe (RoleNameType') , "RoleId" :: Maybe (IdType') } -> {"RoleName" :: Maybe (RoleNameType') , "RoleId" :: Maybe (IdType') } ) -> PolicyRole
+newPolicyRole'  customize = (PolicyRole <<< customize) { "RoleId": Nothing, "RoleName": Nothing }
 
 
 
@@ -4415,8 +4414,8 @@ instance encodePolicySourceType :: Encode PolicySourceType where encode = generi
 
 -- | <p>Contains information about a user that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> action. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype PolicyUser = PolicyUser 
-  { "UserName" :: NullOrUndefined (UserNameType')
-  , "UserId" :: NullOrUndefined (IdType')
+  { "UserName" :: Maybe (UserNameType')
+  , "UserId" :: Maybe (IdType')
   }
 derive instance newtypePolicyUser :: Newtype PolicyUser _
 derive instance repGenericPolicyUser :: Generic PolicyUser _
@@ -4426,12 +4425,12 @@ instance encodePolicyUser :: Encode PolicyUser where encode = genericEncode opti
 
 -- | Constructs PolicyUser from required parameters
 newPolicyUser :: PolicyUser
-newPolicyUser  = PolicyUser { "UserId": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newPolicyUser  = PolicyUser { "UserId": Nothing, "UserName": Nothing }
 
 -- | Constructs PolicyUser's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyUser' :: ( { "UserName" :: NullOrUndefined (UserNameType') , "UserId" :: NullOrUndefined (IdType') } -> {"UserName" :: NullOrUndefined (UserNameType') , "UserId" :: NullOrUndefined (IdType') } ) -> PolicyUser
-newPolicyUser'  customize = (PolicyUser <<< customize) { "UserId": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing) }
+newPolicyUser' :: ( { "UserName" :: Maybe (UserNameType') , "UserId" :: Maybe (IdType') } -> {"UserName" :: Maybe (UserNameType') , "UserId" :: Maybe (IdType') } ) -> PolicyUser
+newPolicyUser'  customize = (PolicyUser <<< customize) { "UserId": Nothing, "UserName": Nothing }
 
 
 
@@ -4446,10 +4445,10 @@ instance encodePolicyUserListType :: Encode PolicyUserListType where encode = ge
 
 -- | <p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>
 newtype PolicyVersion = PolicyVersion 
-  { "Document" :: NullOrUndefined (PolicyDocumentType')
-  , "VersionId" :: NullOrUndefined (PolicyVersionIdType')
-  , "IsDefaultVersion" :: NullOrUndefined (BooleanType')
-  , "CreateDate" :: NullOrUndefined (DateType')
+  { "Document" :: Maybe (PolicyDocumentType')
+  , "VersionId" :: Maybe (PolicyVersionIdType')
+  , "IsDefaultVersion" :: Maybe (BooleanType')
+  , "CreateDate" :: Maybe (DateType')
   }
 derive instance newtypePolicyVersion :: Newtype PolicyVersion _
 derive instance repGenericPolicyVersion :: Generic PolicyVersion _
@@ -4459,19 +4458,19 @@ instance encodePolicyVersion :: Encode PolicyVersion where encode = genericEncod
 
 -- | Constructs PolicyVersion from required parameters
 newPolicyVersion :: PolicyVersion
-newPolicyVersion  = PolicyVersion { "CreateDate": (NullOrUndefined Nothing), "Document": (NullOrUndefined Nothing), "IsDefaultVersion": (NullOrUndefined Nothing), "VersionId": (NullOrUndefined Nothing) }
+newPolicyVersion  = PolicyVersion { "CreateDate": Nothing, "Document": Nothing, "IsDefaultVersion": Nothing, "VersionId": Nothing }
 
 -- | Constructs PolicyVersion's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPolicyVersion' :: ( { "Document" :: NullOrUndefined (PolicyDocumentType') , "VersionId" :: NullOrUndefined (PolicyVersionIdType') , "IsDefaultVersion" :: NullOrUndefined (BooleanType') , "CreateDate" :: NullOrUndefined (DateType') } -> {"Document" :: NullOrUndefined (PolicyDocumentType') , "VersionId" :: NullOrUndefined (PolicyVersionIdType') , "IsDefaultVersion" :: NullOrUndefined (BooleanType') , "CreateDate" :: NullOrUndefined (DateType') } ) -> PolicyVersion
-newPolicyVersion'  customize = (PolicyVersion <<< customize) { "CreateDate": (NullOrUndefined Nothing), "Document": (NullOrUndefined Nothing), "IsDefaultVersion": (NullOrUndefined Nothing), "VersionId": (NullOrUndefined Nothing) }
+newPolicyVersion' :: ( { "Document" :: Maybe (PolicyDocumentType') , "VersionId" :: Maybe (PolicyVersionIdType') , "IsDefaultVersion" :: Maybe (BooleanType') , "CreateDate" :: Maybe (DateType') } -> {"Document" :: Maybe (PolicyDocumentType') , "VersionId" :: Maybe (PolicyVersionIdType') , "IsDefaultVersion" :: Maybe (BooleanType') , "CreateDate" :: Maybe (DateType') } ) -> PolicyVersion
+newPolicyVersion'  customize = (PolicyVersion <<< customize) { "CreateDate": Nothing, "Document": Nothing, "IsDefaultVersion": Nothing, "VersionId": Nothing }
 
 
 
 -- | <p>Contains the row and column of a location of a <code>Statement</code> element in a policy document.</p> <p>This data type is used as a member of the <code> <a>Statement</a> </code> type.</p>
 newtype Position = Position 
-  { "Line" :: NullOrUndefined (LineNumber)
-  , "Column" :: NullOrUndefined (ColumnNumber)
+  { "Line" :: Maybe (LineNumber)
+  , "Column" :: Maybe (ColumnNumber)
   }
 derive instance newtypePosition :: Newtype Position _
 derive instance repGenericPosition :: Generic Position _
@@ -4481,12 +4480,12 @@ instance encodePosition :: Encode Position where encode = genericEncode options
 
 -- | Constructs Position from required parameters
 newPosition :: Position
-newPosition  = Position { "Column": (NullOrUndefined Nothing), "Line": (NullOrUndefined Nothing) }
+newPosition  = Position { "Column": Nothing, "Line": Nothing }
 
 -- | Constructs Position's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newPosition' :: ( { "Line" :: NullOrUndefined (LineNumber) , "Column" :: NullOrUndefined (ColumnNumber) } -> {"Line" :: NullOrUndefined (LineNumber) , "Column" :: NullOrUndefined (ColumnNumber) } ) -> Position
-newPosition'  customize = (Position <<< customize) { "Column": (NullOrUndefined Nothing), "Line": (NullOrUndefined Nothing) }
+newPosition' :: ( { "Line" :: Maybe (LineNumber) , "Column" :: Maybe (ColumnNumber) } -> {"Line" :: Maybe (LineNumber) , "Column" :: Maybe (ColumnNumber) } ) -> Position
+newPosition'  customize = (Position <<< customize) { "Column": Nothing, "Line": Nothing }
 
 
 
@@ -4674,7 +4673,7 @@ instance encodeReportStateType :: Encode ReportStateType where encode = genericE
 
 
 newtype ResetServiceSpecificCredentialRequest = ResetServiceSpecificCredentialRequest 
-  { "UserName" :: NullOrUndefined (UserNameType')
+  { "UserName" :: Maybe (UserNameType')
   , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId')
   }
 derive instance newtypeResetServiceSpecificCredentialRequest :: Newtype ResetServiceSpecificCredentialRequest _
@@ -4685,17 +4684,17 @@ instance encodeResetServiceSpecificCredentialRequest :: Encode ResetServiceSpeci
 
 -- | Constructs ResetServiceSpecificCredentialRequest from required parameters
 newResetServiceSpecificCredentialRequest :: ServiceSpecificCredentialId' -> ResetServiceSpecificCredentialRequest
-newResetServiceSpecificCredentialRequest _ServiceSpecificCredentialId = ResetServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": (NullOrUndefined Nothing) }
+newResetServiceSpecificCredentialRequest _ServiceSpecificCredentialId = ResetServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": Nothing }
 
 -- | Constructs ResetServiceSpecificCredentialRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newResetServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ( { "UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } -> {"UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } ) -> ResetServiceSpecificCredentialRequest
-newResetServiceSpecificCredentialRequest' _ServiceSpecificCredentialId customize = (ResetServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": (NullOrUndefined Nothing) }
+newResetServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> ( { "UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } -> {"UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') } ) -> ResetServiceSpecificCredentialRequest
+newResetServiceSpecificCredentialRequest' _ServiceSpecificCredentialId customize = (ResetServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "UserName": Nothing }
 
 
 
 newtype ResetServiceSpecificCredentialResponse = ResetServiceSpecificCredentialResponse 
-  { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential)
+  { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential)
   }
 derive instance newtypeResetServiceSpecificCredentialResponse :: Newtype ResetServiceSpecificCredentialResponse _
 derive instance repGenericResetServiceSpecificCredentialResponse :: Generic ResetServiceSpecificCredentialResponse _
@@ -4705,12 +4704,12 @@ instance encodeResetServiceSpecificCredentialResponse :: Encode ResetServiceSpec
 
 -- | Constructs ResetServiceSpecificCredentialResponse from required parameters
 newResetServiceSpecificCredentialResponse :: ResetServiceSpecificCredentialResponse
-newResetServiceSpecificCredentialResponse  = ResetServiceSpecificCredentialResponse { "ServiceSpecificCredential": (NullOrUndefined Nothing) }
+newResetServiceSpecificCredentialResponse  = ResetServiceSpecificCredentialResponse { "ServiceSpecificCredential": Nothing }
 
 -- | Constructs ResetServiceSpecificCredentialResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newResetServiceSpecificCredentialResponse' :: ( { "ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } -> {"ServiceSpecificCredential" :: NullOrUndefined (ServiceSpecificCredential) } ) -> ResetServiceSpecificCredentialResponse
-newResetServiceSpecificCredentialResponse'  customize = (ResetServiceSpecificCredentialResponse <<< customize) { "ServiceSpecificCredential": (NullOrUndefined Nothing) }
+newResetServiceSpecificCredentialResponse' :: ( { "ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } -> {"ServiceSpecificCredential" :: Maybe (ServiceSpecificCredential) } ) -> ResetServiceSpecificCredentialResponse
+newResetServiceSpecificCredentialResponse'  customize = (ResetServiceSpecificCredentialResponse <<< customize) { "ServiceSpecificCredential": Nothing }
 
 
 
@@ -4745,9 +4744,9 @@ instance encodeResourceNameType :: Encode ResourceNameType where encode = generi
 newtype ResourceSpecificResult = ResourceSpecificResult 
   { "EvalResourceName" :: (ResourceNameType)
   , "EvalResourceDecision" :: (PolicyEvaluationDecisionType)
-  , "MatchedStatements" :: NullOrUndefined (StatementListType)
-  , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType)
-  , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType)
+  , "MatchedStatements" :: Maybe (StatementListType)
+  , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType)
+  , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType)
   }
 derive instance newtypeResourceSpecificResult :: Newtype ResourceSpecificResult _
 derive instance repGenericResourceSpecificResult :: Generic ResourceSpecificResult _
@@ -4757,12 +4756,12 @@ instance encodeResourceSpecificResult :: Encode ResourceSpecificResult where enc
 
 -- | Constructs ResourceSpecificResult from required parameters
 newResourceSpecificResult :: PolicyEvaluationDecisionType -> ResourceNameType -> ResourceSpecificResult
-newResourceSpecificResult _EvalResourceDecision _EvalResourceName = ResourceSpecificResult { "EvalResourceDecision": _EvalResourceDecision, "EvalResourceName": _EvalResourceName, "EvalDecisionDetails": (NullOrUndefined Nothing), "MatchedStatements": (NullOrUndefined Nothing), "MissingContextValues": (NullOrUndefined Nothing) }
+newResourceSpecificResult _EvalResourceDecision _EvalResourceName = ResourceSpecificResult { "EvalResourceDecision": _EvalResourceDecision, "EvalResourceName": _EvalResourceName, "EvalDecisionDetails": Nothing, "MatchedStatements": Nothing, "MissingContextValues": Nothing }
 
 -- | Constructs ResourceSpecificResult's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newResourceSpecificResult' :: PolicyEvaluationDecisionType -> ResourceNameType -> ( { "EvalResourceName" :: (ResourceNameType) , "EvalResourceDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: NullOrUndefined (StatementListType) , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType) , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) } -> {"EvalResourceName" :: (ResourceNameType) , "EvalResourceDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: NullOrUndefined (StatementListType) , "MissingContextValues" :: NullOrUndefined (ContextKeyNamesResultListType) , "EvalDecisionDetails" :: NullOrUndefined (EvalDecisionDetailsType) } ) -> ResourceSpecificResult
-newResourceSpecificResult' _EvalResourceDecision _EvalResourceName customize = (ResourceSpecificResult <<< customize) { "EvalResourceDecision": _EvalResourceDecision, "EvalResourceName": _EvalResourceName, "EvalDecisionDetails": (NullOrUndefined Nothing), "MatchedStatements": (NullOrUndefined Nothing), "MissingContextValues": (NullOrUndefined Nothing) }
+newResourceSpecificResult' :: PolicyEvaluationDecisionType -> ResourceNameType -> ( { "EvalResourceName" :: (ResourceNameType) , "EvalResourceDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: Maybe (StatementListType) , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType) , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) } -> {"EvalResourceName" :: (ResourceNameType) , "EvalResourceDecision" :: (PolicyEvaluationDecisionType) , "MatchedStatements" :: Maybe (StatementListType) , "MissingContextValues" :: Maybe (ContextKeyNamesResultListType) , "EvalDecisionDetails" :: Maybe (EvalDecisionDetailsType) } ) -> ResourceSpecificResult
+newResourceSpecificResult' _EvalResourceDecision _EvalResourceName customize = (ResourceSpecificResult <<< customize) { "EvalResourceDecision": _EvalResourceDecision, "EvalResourceName": _EvalResourceName, "EvalDecisionDetails": Nothing, "MatchedStatements": Nothing, "MissingContextValues": Nothing }
 
 
 
@@ -4805,8 +4804,8 @@ newtype Role = Role
   , "RoleId" :: (IdType')
   , "Arn" :: (ArnType')
   , "CreateDate" :: (DateType')
-  , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType')
-  , "Description" :: NullOrUndefined (RoleDescriptionType')
+  , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType')
+  , "Description" :: Maybe (RoleDescriptionType')
   }
 derive instance newtypeRole :: Newtype Role _
 derive instance repGenericRole :: Generic Role _
@@ -4816,26 +4815,26 @@ instance encodeRole :: Encode Role where encode = genericEncode options
 
 -- | Constructs Role from required parameters
 newRole :: ArnType' -> DateType' -> PathType' -> IdType' -> RoleNameType' -> Role
-newRole _Arn _CreateDate _Path _RoleId _RoleName = Role { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "RoleId": _RoleId, "RoleName": _RoleName, "AssumeRolePolicyDocument": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing) }
+newRole _Arn _CreateDate _Path _RoleId _RoleName = Role { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "RoleId": _RoleId, "RoleName": _RoleName, "AssumeRolePolicyDocument": Nothing, "Description": Nothing }
 
 -- | Constructs Role's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRole' :: ArnType' -> DateType' -> PathType' -> IdType' -> RoleNameType' -> ( { "Path" :: (PathType') , "RoleName" :: (RoleNameType') , "RoleId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType') , "Description" :: NullOrUndefined (RoleDescriptionType') } -> {"Path" :: (PathType') , "RoleName" :: (RoleNameType') , "RoleId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType') , "Description" :: NullOrUndefined (RoleDescriptionType') } ) -> Role
-newRole' _Arn _CreateDate _Path _RoleId _RoleName customize = (Role <<< customize) { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "RoleId": _RoleId, "RoleName": _RoleName, "AssumeRolePolicyDocument": (NullOrUndefined Nothing), "Description": (NullOrUndefined Nothing) }
+newRole' :: ArnType' -> DateType' -> PathType' -> IdType' -> RoleNameType' -> ( { "Path" :: (PathType') , "RoleName" :: (RoleNameType') , "RoleId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType') , "Description" :: Maybe (RoleDescriptionType') } -> {"Path" :: (PathType') , "RoleName" :: (RoleNameType') , "RoleId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType') , "Description" :: Maybe (RoleDescriptionType') } ) -> Role
+newRole' _Arn _CreateDate _Path _RoleId _RoleName customize = (Role <<< customize) { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "RoleId": _RoleId, "RoleName": _RoleName, "AssumeRolePolicyDocument": Nothing, "Description": Nothing }
 
 
 
 -- | <p>Contains information about an IAM role, including all of the role's policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
 newtype RoleDetail = RoleDetail 
-  { "Path" :: NullOrUndefined (PathType')
-  , "RoleName" :: NullOrUndefined (RoleNameType')
-  , "RoleId" :: NullOrUndefined (IdType')
-  , "Arn" :: NullOrUndefined (ArnType')
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType')
-  , "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType')
-  , "RolePolicyList" :: NullOrUndefined (PolicyDetailListType')
-  , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
+  { "Path" :: Maybe (PathType')
+  , "RoleName" :: Maybe (RoleNameType')
+  , "RoleId" :: Maybe (IdType')
+  , "Arn" :: Maybe (ArnType')
+  , "CreateDate" :: Maybe (DateType')
+  , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType')
+  , "InstanceProfileList" :: Maybe (InstanceProfileListType')
+  , "RolePolicyList" :: Maybe (PolicyDetailListType')
+  , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType')
   }
 derive instance newtypeRoleDetail :: Newtype RoleDetail _
 derive instance repGenericRoleDetail :: Generic RoleDetail _
@@ -4845,12 +4844,12 @@ instance encodeRoleDetail :: Encode RoleDetail where encode = genericEncode opti
 
 -- | Constructs RoleDetail from required parameters
 newRoleDetail :: RoleDetail
-newRoleDetail  = RoleDetail { "Arn": (NullOrUndefined Nothing), "AssumeRolePolicyDocument": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "InstanceProfileList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "RoleId": (NullOrUndefined Nothing), "RoleName": (NullOrUndefined Nothing), "RolePolicyList": (NullOrUndefined Nothing) }
+newRoleDetail  = RoleDetail { "Arn": Nothing, "AssumeRolePolicyDocument": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "InstanceProfileList": Nothing, "Path": Nothing, "RoleId": Nothing, "RoleName": Nothing, "RolePolicyList": Nothing }
 
 -- | Constructs RoleDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRoleDetail' :: ( { "Path" :: NullOrUndefined (PathType') , "RoleName" :: NullOrUndefined (RoleNameType') , "RoleId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType') , "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType') , "RolePolicyList" :: NullOrUndefined (PolicyDetailListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> {"Path" :: NullOrUndefined (PathType') , "RoleName" :: NullOrUndefined (RoleNameType') , "RoleId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "AssumeRolePolicyDocument" :: NullOrUndefined (PolicyDocumentType') , "InstanceProfileList" :: NullOrUndefined (InstanceProfileListType') , "RolePolicyList" :: NullOrUndefined (PolicyDetailListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } ) -> RoleDetail
-newRoleDetail'  customize = (RoleDetail <<< customize) { "Arn": (NullOrUndefined Nothing), "AssumeRolePolicyDocument": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "InstanceProfileList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "RoleId": (NullOrUndefined Nothing), "RoleName": (NullOrUndefined Nothing), "RolePolicyList": (NullOrUndefined Nothing) }
+newRoleDetail' :: ( { "Path" :: Maybe (PathType') , "RoleName" :: Maybe (RoleNameType') , "RoleId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType') , "InstanceProfileList" :: Maybe (InstanceProfileListType') , "RolePolicyList" :: Maybe (PolicyDetailListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> {"Path" :: Maybe (PathType') , "RoleName" :: Maybe (RoleNameType') , "RoleId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "AssumeRolePolicyDocument" :: Maybe (PolicyDocumentType') , "InstanceProfileList" :: Maybe (InstanceProfileListType') , "RolePolicyList" :: Maybe (PolicyDetailListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } ) -> RoleDetail
+newRoleDetail'  customize = (RoleDetail <<< customize) { "Arn": Nothing, "AssumeRolePolicyDocument": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "InstanceProfileList": Nothing, "Path": Nothing, "RoleId": Nothing, "RoleName": Nothing, "RolePolicyList": Nothing }
 
 
 
@@ -4865,8 +4864,8 @@ instance encodeRoleUsageListType :: Encode RoleUsageListType where encode = gene
 
 -- | <p>An object that contains details about how a service-linked role is used.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
 newtype RoleUsageType = RoleUsageType 
-  { "Region" :: NullOrUndefined (RegionNameType)
-  , "Resources" :: NullOrUndefined (ArnListType)
+  { "Region" :: Maybe (RegionNameType)
+  , "Resources" :: Maybe (ArnListType)
   }
 derive instance newtypeRoleUsageType :: Newtype RoleUsageType _
 derive instance repGenericRoleUsageType :: Generic RoleUsageType _
@@ -4876,12 +4875,12 @@ instance encodeRoleUsageType :: Encode RoleUsageType where encode = genericEncod
 
 -- | Constructs RoleUsageType from required parameters
 newRoleUsageType :: RoleUsageType
-newRoleUsageType  = RoleUsageType { "Region": (NullOrUndefined Nothing), "Resources": (NullOrUndefined Nothing) }
+newRoleUsageType  = RoleUsageType { "Region": Nothing, "Resources": Nothing }
 
 -- | Constructs RoleUsageType's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRoleUsageType' :: ( { "Region" :: NullOrUndefined (RegionNameType) , "Resources" :: NullOrUndefined (ArnListType) } -> {"Region" :: NullOrUndefined (RegionNameType) , "Resources" :: NullOrUndefined (ArnListType) } ) -> RoleUsageType
-newRoleUsageType'  customize = (RoleUsageType <<< customize) { "Region": (NullOrUndefined Nothing), "Resources": (NullOrUndefined Nothing) }
+newRoleUsageType' :: ( { "Region" :: Maybe (RegionNameType) , "Resources" :: Maybe (ArnListType) } -> {"Region" :: Maybe (RegionNameType) , "Resources" :: Maybe (ArnListType) } ) -> RoleUsageType
+newRoleUsageType'  customize = (RoleUsageType <<< customize) { "Region": Nothing, "Resources": Nothing }
 
 
 
@@ -4896,9 +4895,9 @@ instance encodeSAMLMetadataDocumentType :: Encode SAMLMetadataDocumentType where
 
 -- | <p>Contains the list of SAML providers for this account.</p>
 newtype SAMLProviderListEntry = SAMLProviderListEntry 
-  { "Arn" :: NullOrUndefined (ArnType')
-  , "ValidUntil" :: NullOrUndefined (DateType')
-  , "CreateDate" :: NullOrUndefined (DateType')
+  { "Arn" :: Maybe (ArnType')
+  , "ValidUntil" :: Maybe (DateType')
+  , "CreateDate" :: Maybe (DateType')
   }
 derive instance newtypeSAMLProviderListEntry :: Newtype SAMLProviderListEntry _
 derive instance repGenericSAMLProviderListEntry :: Generic SAMLProviderListEntry _
@@ -4908,12 +4907,12 @@ instance encodeSAMLProviderListEntry :: Encode SAMLProviderListEntry where encod
 
 -- | Constructs SAMLProviderListEntry from required parameters
 newSAMLProviderListEntry :: SAMLProviderListEntry
-newSAMLProviderListEntry  = SAMLProviderListEntry { "Arn": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "ValidUntil": (NullOrUndefined Nothing) }
+newSAMLProviderListEntry  = SAMLProviderListEntry { "Arn": Nothing, "CreateDate": Nothing, "ValidUntil": Nothing }
 
 -- | Constructs SAMLProviderListEntry's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSAMLProviderListEntry' :: ( { "Arn" :: NullOrUndefined (ArnType') , "ValidUntil" :: NullOrUndefined (DateType') , "CreateDate" :: NullOrUndefined (DateType') } -> {"Arn" :: NullOrUndefined (ArnType') , "ValidUntil" :: NullOrUndefined (DateType') , "CreateDate" :: NullOrUndefined (DateType') } ) -> SAMLProviderListEntry
-newSAMLProviderListEntry'  customize = (SAMLProviderListEntry <<< customize) { "Arn": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "ValidUntil": (NullOrUndefined Nothing) }
+newSAMLProviderListEntry' :: ( { "Arn" :: Maybe (ArnType') , "ValidUntil" :: Maybe (DateType') , "CreateDate" :: Maybe (DateType') } -> {"Arn" :: Maybe (ArnType') , "ValidUntil" :: Maybe (DateType') , "CreateDate" :: Maybe (DateType') } ) -> SAMLProviderListEntry
+newSAMLProviderListEntry'  customize = (SAMLProviderListEntry <<< customize) { "Arn": Nothing, "CreateDate": Nothing, "ValidUntil": Nothing }
 
 
 
@@ -4942,7 +4941,7 @@ newtype SSHPublicKey = SSHPublicKey
   , "Fingerprint" :: (PublicKeyFingerprintType')
   , "SSHPublicKeyBody" :: (PublicKeyMaterialType')
   , "Status" :: (StatusType')
-  , "UploadDate" :: NullOrUndefined (DateType')
+  , "UploadDate" :: Maybe (DateType')
   }
 derive instance newtypeSSHPublicKey :: Newtype SSHPublicKey _
 derive instance repGenericSSHPublicKey :: Generic SSHPublicKey _
@@ -4952,12 +4951,12 @@ instance encodeSSHPublicKey :: Encode SSHPublicKey where encode = genericEncode 
 
 -- | Constructs SSHPublicKey from required parameters
 newSSHPublicKey :: PublicKeyFingerprintType' -> PublicKeyMaterialType' -> PublicKeyIdType' -> StatusType' -> UserNameType' -> SSHPublicKey
-newSSHPublicKey _Fingerprint _SSHPublicKeyBody _SSHPublicKeyId _Status _UserName = SSHPublicKey { "Fingerprint": _Fingerprint, "SSHPublicKeyBody": _SSHPublicKeyBody, "SSHPublicKeyId": _SSHPublicKeyId, "Status": _Status, "UserName": _UserName, "UploadDate": (NullOrUndefined Nothing) }
+newSSHPublicKey _Fingerprint _SSHPublicKeyBody _SSHPublicKeyId _Status _UserName = SSHPublicKey { "Fingerprint": _Fingerprint, "SSHPublicKeyBody": _SSHPublicKeyBody, "SSHPublicKeyId": _SSHPublicKeyId, "Status": _Status, "UserName": _UserName, "UploadDate": Nothing }
 
 -- | Constructs SSHPublicKey's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSSHPublicKey' :: PublicKeyFingerprintType' -> PublicKeyMaterialType' -> PublicKeyIdType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "SSHPublicKeyId" :: (PublicKeyIdType') , "Fingerprint" :: (PublicKeyFingerprintType') , "SSHPublicKeyBody" :: (PublicKeyMaterialType') , "Status" :: (StatusType') , "UploadDate" :: NullOrUndefined (DateType') } -> {"UserName" :: (UserNameType') , "SSHPublicKeyId" :: (PublicKeyIdType') , "Fingerprint" :: (PublicKeyFingerprintType') , "SSHPublicKeyBody" :: (PublicKeyMaterialType') , "Status" :: (StatusType') , "UploadDate" :: NullOrUndefined (DateType') } ) -> SSHPublicKey
-newSSHPublicKey' _Fingerprint _SSHPublicKeyBody _SSHPublicKeyId _Status _UserName customize = (SSHPublicKey <<< customize) { "Fingerprint": _Fingerprint, "SSHPublicKeyBody": _SSHPublicKeyBody, "SSHPublicKeyId": _SSHPublicKeyId, "Status": _Status, "UserName": _UserName, "UploadDate": (NullOrUndefined Nothing) }
+newSSHPublicKey' :: PublicKeyFingerprintType' -> PublicKeyMaterialType' -> PublicKeyIdType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "SSHPublicKeyId" :: (PublicKeyIdType') , "Fingerprint" :: (PublicKeyFingerprintType') , "SSHPublicKeyBody" :: (PublicKeyMaterialType') , "Status" :: (StatusType') , "UploadDate" :: Maybe (DateType') } -> {"UserName" :: (UserNameType') , "SSHPublicKeyId" :: (PublicKeyIdType') , "Fingerprint" :: (PublicKeyFingerprintType') , "SSHPublicKeyBody" :: (PublicKeyMaterialType') , "Status" :: (StatusType') , "UploadDate" :: Maybe (DateType') } ) -> SSHPublicKey
+newSSHPublicKey' _Fingerprint _SSHPublicKeyBody _SSHPublicKeyId _Status _UserName customize = (SSHPublicKey <<< customize) { "Fingerprint": _Fingerprint, "SSHPublicKeyBody": _SSHPublicKeyBody, "SSHPublicKeyId": _SSHPublicKeyId, "Status": _Status, "UserName": _UserName, "UploadDate": Nothing }
 
 
 
@@ -4998,7 +4997,7 @@ newSSHPublicKeyMetadata' _SSHPublicKeyId _Status _UploadDate _UserName customize
 newtype ServerCertificate = ServerCertificate 
   { "ServerCertificateMetadata" :: (ServerCertificateMetadata)
   , "CertificateBody" :: (CertificateBodyType')
-  , "CertificateChain" :: NullOrUndefined (CertificateChainType')
+  , "CertificateChain" :: Maybe (CertificateChainType')
   }
 derive instance newtypeServerCertificate :: Newtype ServerCertificate _
 derive instance repGenericServerCertificate :: Generic ServerCertificate _
@@ -5008,12 +5007,12 @@ instance encodeServerCertificate :: Encode ServerCertificate where encode = gene
 
 -- | Constructs ServerCertificate from required parameters
 newServerCertificate :: CertificateBodyType' -> ServerCertificateMetadata -> ServerCertificate
-newServerCertificate _CertificateBody _ServerCertificateMetadata = ServerCertificate { "CertificateBody": _CertificateBody, "ServerCertificateMetadata": _ServerCertificateMetadata, "CertificateChain": (NullOrUndefined Nothing) }
+newServerCertificate _CertificateBody _ServerCertificateMetadata = ServerCertificate { "CertificateBody": _CertificateBody, "ServerCertificateMetadata": _ServerCertificateMetadata, "CertificateChain": Nothing }
 
 -- | Constructs ServerCertificate's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newServerCertificate' :: CertificateBodyType' -> ServerCertificateMetadata -> ( { "ServerCertificateMetadata" :: (ServerCertificateMetadata) , "CertificateBody" :: (CertificateBodyType') , "CertificateChain" :: NullOrUndefined (CertificateChainType') } -> {"ServerCertificateMetadata" :: (ServerCertificateMetadata) , "CertificateBody" :: (CertificateBodyType') , "CertificateChain" :: NullOrUndefined (CertificateChainType') } ) -> ServerCertificate
-newServerCertificate' _CertificateBody _ServerCertificateMetadata customize = (ServerCertificate <<< customize) { "CertificateBody": _CertificateBody, "ServerCertificateMetadata": _ServerCertificateMetadata, "CertificateChain": (NullOrUndefined Nothing) }
+newServerCertificate' :: CertificateBodyType' -> ServerCertificateMetadata -> ( { "ServerCertificateMetadata" :: (ServerCertificateMetadata) , "CertificateBody" :: (CertificateBodyType') , "CertificateChain" :: Maybe (CertificateChainType') } -> {"ServerCertificateMetadata" :: (ServerCertificateMetadata) , "CertificateBody" :: (CertificateBodyType') , "CertificateChain" :: Maybe (CertificateChainType') } ) -> ServerCertificate
+newServerCertificate' _CertificateBody _ServerCertificateMetadata customize = (ServerCertificate <<< customize) { "CertificateBody": _CertificateBody, "ServerCertificateMetadata": _ServerCertificateMetadata, "CertificateChain": Nothing }
 
 
 
@@ -5023,8 +5022,8 @@ newtype ServerCertificateMetadata = ServerCertificateMetadata
   , "ServerCertificateName" :: (ServerCertificateNameType')
   , "ServerCertificateId" :: (IdType')
   , "Arn" :: (ArnType')
-  , "UploadDate" :: NullOrUndefined (DateType')
-  , "Expiration" :: NullOrUndefined (DateType')
+  , "UploadDate" :: Maybe (DateType')
+  , "Expiration" :: Maybe (DateType')
   }
 derive instance newtypeServerCertificateMetadata :: Newtype ServerCertificateMetadata _
 derive instance repGenericServerCertificateMetadata :: Generic ServerCertificateMetadata _
@@ -5034,18 +5033,18 @@ instance encodeServerCertificateMetadata :: Encode ServerCertificateMetadata whe
 
 -- | Constructs ServerCertificateMetadata from required parameters
 newServerCertificateMetadata :: ArnType' -> PathType' -> IdType' -> ServerCertificateNameType' -> ServerCertificateMetadata
-newServerCertificateMetadata _Arn _Path _ServerCertificateId _ServerCertificateName = ServerCertificateMetadata { "Arn": _Arn, "Path": _Path, "ServerCertificateId": _ServerCertificateId, "ServerCertificateName": _ServerCertificateName, "Expiration": (NullOrUndefined Nothing), "UploadDate": (NullOrUndefined Nothing) }
+newServerCertificateMetadata _Arn _Path _ServerCertificateId _ServerCertificateName = ServerCertificateMetadata { "Arn": _Arn, "Path": _Path, "ServerCertificateId": _ServerCertificateId, "ServerCertificateName": _ServerCertificateName, "Expiration": Nothing, "UploadDate": Nothing }
 
 -- | Constructs ServerCertificateMetadata's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newServerCertificateMetadata' :: ArnType' -> PathType' -> IdType' -> ServerCertificateNameType' -> ( { "Path" :: (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "ServerCertificateId" :: (IdType') , "Arn" :: (ArnType') , "UploadDate" :: NullOrUndefined (DateType') , "Expiration" :: NullOrUndefined (DateType') } -> {"Path" :: (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "ServerCertificateId" :: (IdType') , "Arn" :: (ArnType') , "UploadDate" :: NullOrUndefined (DateType') , "Expiration" :: NullOrUndefined (DateType') } ) -> ServerCertificateMetadata
-newServerCertificateMetadata' _Arn _Path _ServerCertificateId _ServerCertificateName customize = (ServerCertificateMetadata <<< customize) { "Arn": _Arn, "Path": _Path, "ServerCertificateId": _ServerCertificateId, "ServerCertificateName": _ServerCertificateName, "Expiration": (NullOrUndefined Nothing), "UploadDate": (NullOrUndefined Nothing) }
+newServerCertificateMetadata' :: ArnType' -> PathType' -> IdType' -> ServerCertificateNameType' -> ( { "Path" :: (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "ServerCertificateId" :: (IdType') , "Arn" :: (ArnType') , "UploadDate" :: Maybe (DateType') , "Expiration" :: Maybe (DateType') } -> {"Path" :: (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "ServerCertificateId" :: (IdType') , "Arn" :: (ArnType') , "UploadDate" :: Maybe (DateType') , "Expiration" :: Maybe (DateType') } ) -> ServerCertificateMetadata
+newServerCertificateMetadata' _Arn _Path _ServerCertificateId _ServerCertificateName customize = (ServerCertificateMetadata <<< customize) { "Arn": _Arn, "Path": _Path, "ServerCertificateId": _ServerCertificateId, "ServerCertificateName": _ServerCertificateName, "Expiration": Nothing, "UploadDate": Nothing }
 
 
 
 -- | <p>The request processing has failed because of an unknown error, exception or failure.</p>
 newtype ServiceFailureException = ServiceFailureException 
-  { "message" :: NullOrUndefined (ServiceFailureExceptionMessage')
+  { "message" :: Maybe (ServiceFailureExceptionMessage')
   }
 derive instance newtypeServiceFailureException :: Newtype ServiceFailureException _
 derive instance repGenericServiceFailureException :: Generic ServiceFailureException _
@@ -5055,18 +5054,18 @@ instance encodeServiceFailureException :: Encode ServiceFailureException where e
 
 -- | Constructs ServiceFailureException from required parameters
 newServiceFailureException :: ServiceFailureException
-newServiceFailureException  = ServiceFailureException { "message": (NullOrUndefined Nothing) }
+newServiceFailureException  = ServiceFailureException { "message": Nothing }
 
 -- | Constructs ServiceFailureException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newServiceFailureException' :: ( { "message" :: NullOrUndefined (ServiceFailureExceptionMessage') } -> {"message" :: NullOrUndefined (ServiceFailureExceptionMessage') } ) -> ServiceFailureException
-newServiceFailureException'  customize = (ServiceFailureException <<< customize) { "message": (NullOrUndefined Nothing) }
+newServiceFailureException' :: ( { "message" :: Maybe (ServiceFailureExceptionMessage') } -> {"message" :: Maybe (ServiceFailureExceptionMessage') } ) -> ServiceFailureException
+newServiceFailureException'  customize = (ServiceFailureException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The specified service does not support service-specific credentials.</p>
 newtype ServiceNotSupportedException = ServiceNotSupportedException 
-  { "message" :: NullOrUndefined (ServiceNotSupportedMessage')
+  { "message" :: Maybe (ServiceNotSupportedMessage')
   }
 derive instance newtypeServiceNotSupportedException :: Newtype ServiceNotSupportedException _
 derive instance repGenericServiceNotSupportedException :: Generic ServiceNotSupportedException _
@@ -5076,12 +5075,12 @@ instance encodeServiceNotSupportedException :: Encode ServiceNotSupportedExcepti
 
 -- | Constructs ServiceNotSupportedException from required parameters
 newServiceNotSupportedException :: ServiceNotSupportedException
-newServiceNotSupportedException  = ServiceNotSupportedException { "message": (NullOrUndefined Nothing) }
+newServiceNotSupportedException  = ServiceNotSupportedException { "message": Nothing }
 
 -- | Constructs ServiceNotSupportedException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newServiceNotSupportedException' :: ( { "message" :: NullOrUndefined (ServiceNotSupportedMessage') } -> {"message" :: NullOrUndefined (ServiceNotSupportedMessage') } ) -> ServiceNotSupportedException
-newServiceNotSupportedException'  customize = (ServiceNotSupportedException <<< customize) { "message": (NullOrUndefined Nothing) }
+newServiceNotSupportedException' :: ( { "message" :: Maybe (ServiceNotSupportedMessage') } -> {"message" :: Maybe (ServiceNotSupportedMessage') } ) -> ServiceNotSupportedException
+newServiceNotSupportedException'  customize = (ServiceNotSupportedException <<< customize) { "message": Nothing }
 
 
 
@@ -5174,7 +5173,7 @@ newtype SigningCertificate = SigningCertificate
   , "CertificateId" :: (CertificateIdType')
   , "CertificateBody" :: (CertificateBodyType')
   , "Status" :: (StatusType')
-  , "UploadDate" :: NullOrUndefined (DateType')
+  , "UploadDate" :: Maybe (DateType')
   }
 derive instance newtypeSigningCertificate :: Newtype SigningCertificate _
 derive instance repGenericSigningCertificate :: Generic SigningCertificate _
@@ -5184,26 +5183,26 @@ instance encodeSigningCertificate :: Encode SigningCertificate where encode = ge
 
 -- | Constructs SigningCertificate from required parameters
 newSigningCertificate :: CertificateBodyType' -> CertificateIdType' -> StatusType' -> UserNameType' -> SigningCertificate
-newSigningCertificate _CertificateBody _CertificateId _Status _UserName = SigningCertificate { "CertificateBody": _CertificateBody, "CertificateId": _CertificateId, "Status": _Status, "UserName": _UserName, "UploadDate": (NullOrUndefined Nothing) }
+newSigningCertificate _CertificateBody _CertificateId _Status _UserName = SigningCertificate { "CertificateBody": _CertificateBody, "CertificateId": _CertificateId, "Status": _Status, "UserName": _UserName, "UploadDate": Nothing }
 
 -- | Constructs SigningCertificate's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSigningCertificate' :: CertificateBodyType' -> CertificateIdType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "CertificateId" :: (CertificateIdType') , "CertificateBody" :: (CertificateBodyType') , "Status" :: (StatusType') , "UploadDate" :: NullOrUndefined (DateType') } -> {"UserName" :: (UserNameType') , "CertificateId" :: (CertificateIdType') , "CertificateBody" :: (CertificateBodyType') , "Status" :: (StatusType') , "UploadDate" :: NullOrUndefined (DateType') } ) -> SigningCertificate
-newSigningCertificate' _CertificateBody _CertificateId _Status _UserName customize = (SigningCertificate <<< customize) { "CertificateBody": _CertificateBody, "CertificateId": _CertificateId, "Status": _Status, "UserName": _UserName, "UploadDate": (NullOrUndefined Nothing) }
+newSigningCertificate' :: CertificateBodyType' -> CertificateIdType' -> StatusType' -> UserNameType' -> ( { "UserName" :: (UserNameType') , "CertificateId" :: (CertificateIdType') , "CertificateBody" :: (CertificateBodyType') , "Status" :: (StatusType') , "UploadDate" :: Maybe (DateType') } -> {"UserName" :: (UserNameType') , "CertificateId" :: (CertificateIdType') , "CertificateBody" :: (CertificateBodyType') , "Status" :: (StatusType') , "UploadDate" :: Maybe (DateType') } ) -> SigningCertificate
+newSigningCertificate' _CertificateBody _CertificateId _Status _UserName customize = (SigningCertificate <<< customize) { "CertificateBody": _CertificateBody, "CertificateId": _CertificateId, "Status": _Status, "UserName": _UserName, "UploadDate": Nothing }
 
 
 
 newtype SimulateCustomPolicyRequest = SimulateCustomPolicyRequest 
   { "PolicyInputList" :: (SimulationPolicyListType)
   , "ActionNames" :: (ActionNameListType)
-  , "ResourceArns" :: NullOrUndefined (ResourceNameListType)
-  , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType')
-  , "ResourceOwner" :: NullOrUndefined (ResourceNameType)
-  , "CallerArn" :: NullOrUndefined (ResourceNameType)
-  , "ContextEntries" :: NullOrUndefined (ContextEntryListType)
-  , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType)
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "ResourceArns" :: Maybe (ResourceNameListType)
+  , "ResourcePolicy" :: Maybe (PolicyDocumentType')
+  , "ResourceOwner" :: Maybe (ResourceNameType)
+  , "CallerArn" :: Maybe (ResourceNameType)
+  , "ContextEntries" :: Maybe (ContextEntryListType)
+  , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType)
+  , "MaxItems" :: Maybe (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeSimulateCustomPolicyRequest :: Newtype SimulateCustomPolicyRequest _
 derive instance repGenericSimulateCustomPolicyRequest :: Generic SimulateCustomPolicyRequest _
@@ -5213,20 +5212,20 @@ instance encodeSimulateCustomPolicyRequest :: Encode SimulateCustomPolicyRequest
 
 -- | Constructs SimulateCustomPolicyRequest from required parameters
 newSimulateCustomPolicyRequest :: ActionNameListType -> SimulationPolicyListType -> SimulateCustomPolicyRequest
-newSimulateCustomPolicyRequest _ActionNames _PolicyInputList = SimulateCustomPolicyRequest { "ActionNames": _ActionNames, "PolicyInputList": _PolicyInputList, "CallerArn": (NullOrUndefined Nothing), "ContextEntries": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "ResourceArns": (NullOrUndefined Nothing), "ResourceHandlingOption": (NullOrUndefined Nothing), "ResourceOwner": (NullOrUndefined Nothing), "ResourcePolicy": (NullOrUndefined Nothing) }
+newSimulateCustomPolicyRequest _ActionNames _PolicyInputList = SimulateCustomPolicyRequest { "ActionNames": _ActionNames, "PolicyInputList": _PolicyInputList, "CallerArn": Nothing, "ContextEntries": Nothing, "Marker": Nothing, "MaxItems": Nothing, "ResourceArns": Nothing, "ResourceHandlingOption": Nothing, "ResourceOwner": Nothing, "ResourcePolicy": Nothing }
 
 -- | Constructs SimulateCustomPolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSimulateCustomPolicyRequest' :: ActionNameListType -> SimulationPolicyListType -> ( { "PolicyInputList" :: (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: NullOrUndefined (ResourceNameListType) , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType') , "ResourceOwner" :: NullOrUndefined (ResourceNameType) , "CallerArn" :: NullOrUndefined (ResourceNameType) , "ContextEntries" :: NullOrUndefined (ContextEntryListType) , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType) , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicyInputList" :: (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: NullOrUndefined (ResourceNameListType) , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType') , "ResourceOwner" :: NullOrUndefined (ResourceNameType) , "CallerArn" :: NullOrUndefined (ResourceNameType) , "ContextEntries" :: NullOrUndefined (ContextEntryListType) , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType) , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> SimulateCustomPolicyRequest
-newSimulateCustomPolicyRequest' _ActionNames _PolicyInputList customize = (SimulateCustomPolicyRequest <<< customize) { "ActionNames": _ActionNames, "PolicyInputList": _PolicyInputList, "CallerArn": (NullOrUndefined Nothing), "ContextEntries": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "ResourceArns": (NullOrUndefined Nothing), "ResourceHandlingOption": (NullOrUndefined Nothing), "ResourceOwner": (NullOrUndefined Nothing), "ResourcePolicy": (NullOrUndefined Nothing) }
+newSimulateCustomPolicyRequest' :: ActionNameListType -> SimulationPolicyListType -> ( { "PolicyInputList" :: (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: Maybe (ResourceNameListType) , "ResourcePolicy" :: Maybe (PolicyDocumentType') , "ResourceOwner" :: Maybe (ResourceNameType) , "CallerArn" :: Maybe (ResourceNameType) , "ContextEntries" :: Maybe (ContextEntryListType) , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType) , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } -> {"PolicyInputList" :: (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: Maybe (ResourceNameListType) , "ResourcePolicy" :: Maybe (PolicyDocumentType') , "ResourceOwner" :: Maybe (ResourceNameType) , "CallerArn" :: Maybe (ResourceNameType) , "ContextEntries" :: Maybe (ContextEntryListType) , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType) , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } ) -> SimulateCustomPolicyRequest
+newSimulateCustomPolicyRequest' _ActionNames _PolicyInputList customize = (SimulateCustomPolicyRequest <<< customize) { "ActionNames": _ActionNames, "PolicyInputList": _PolicyInputList, "CallerArn": Nothing, "ContextEntries": Nothing, "Marker": Nothing, "MaxItems": Nothing, "ResourceArns": Nothing, "ResourceHandlingOption": Nothing, "ResourceOwner": Nothing, "ResourcePolicy": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>SimulatePrincipalPolicy</a> or <a>SimulateCustomPolicy</a> request.</p>
 newtype SimulatePolicyResponse = SimulatePolicyResponse 
-  { "EvaluationResults" :: NullOrUndefined (EvaluationResultsListType)
-  , "IsTruncated" :: NullOrUndefined (BooleanType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  { "EvaluationResults" :: Maybe (EvaluationResultsListType)
+  , "IsTruncated" :: Maybe (BooleanType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeSimulatePolicyResponse :: Newtype SimulatePolicyResponse _
 derive instance repGenericSimulatePolicyResponse :: Generic SimulatePolicyResponse _
@@ -5236,27 +5235,27 @@ instance encodeSimulatePolicyResponse :: Encode SimulatePolicyResponse where enc
 
 -- | Constructs SimulatePolicyResponse from required parameters
 newSimulatePolicyResponse :: SimulatePolicyResponse
-newSimulatePolicyResponse  = SimulatePolicyResponse { "EvaluationResults": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newSimulatePolicyResponse  = SimulatePolicyResponse { "EvaluationResults": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 -- | Constructs SimulatePolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSimulatePolicyResponse' :: ( { "EvaluationResults" :: NullOrUndefined (EvaluationResultsListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"EvaluationResults" :: NullOrUndefined (EvaluationResultsListType) , "IsTruncated" :: NullOrUndefined (BooleanType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> SimulatePolicyResponse
-newSimulatePolicyResponse'  customize = (SimulatePolicyResponse <<< customize) { "EvaluationResults": (NullOrUndefined Nothing), "IsTruncated": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing) }
+newSimulatePolicyResponse' :: ( { "EvaluationResults" :: Maybe (EvaluationResultsListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } -> {"EvaluationResults" :: Maybe (EvaluationResultsListType) , "IsTruncated" :: Maybe (BooleanType') , "Marker" :: Maybe (MarkerType') } ) -> SimulatePolicyResponse
+newSimulatePolicyResponse'  customize = (SimulatePolicyResponse <<< customize) { "EvaluationResults": Nothing, "IsTruncated": Nothing, "Marker": Nothing }
 
 
 
 newtype SimulatePrincipalPolicyRequest = SimulatePrincipalPolicyRequest 
   { "PolicySourceArn" :: (ArnType')
-  , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType)
+  , "PolicyInputList" :: Maybe (SimulationPolicyListType)
   , "ActionNames" :: (ActionNameListType)
-  , "ResourceArns" :: NullOrUndefined (ResourceNameListType)
-  , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType')
-  , "ResourceOwner" :: NullOrUndefined (ResourceNameType)
-  , "CallerArn" :: NullOrUndefined (ResourceNameType)
-  , "ContextEntries" :: NullOrUndefined (ContextEntryListType)
-  , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType)
-  , "MaxItems" :: NullOrUndefined (MaxItemsType')
-  , "Marker" :: NullOrUndefined (MarkerType')
+  , "ResourceArns" :: Maybe (ResourceNameListType)
+  , "ResourcePolicy" :: Maybe (PolicyDocumentType')
+  , "ResourceOwner" :: Maybe (ResourceNameType)
+  , "CallerArn" :: Maybe (ResourceNameType)
+  , "ContextEntries" :: Maybe (ContextEntryListType)
+  , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType)
+  , "MaxItems" :: Maybe (MaxItemsType')
+  , "Marker" :: Maybe (MarkerType')
   }
 derive instance newtypeSimulatePrincipalPolicyRequest :: Newtype SimulatePrincipalPolicyRequest _
 derive instance repGenericSimulatePrincipalPolicyRequest :: Generic SimulatePrincipalPolicyRequest _
@@ -5266,12 +5265,12 @@ instance encodeSimulatePrincipalPolicyRequest :: Encode SimulatePrincipalPolicyR
 
 -- | Constructs SimulatePrincipalPolicyRequest from required parameters
 newSimulatePrincipalPolicyRequest :: ActionNameListType -> ArnType' -> SimulatePrincipalPolicyRequest
-newSimulatePrincipalPolicyRequest _ActionNames _PolicySourceArn = SimulatePrincipalPolicyRequest { "ActionNames": _ActionNames, "PolicySourceArn": _PolicySourceArn, "CallerArn": (NullOrUndefined Nothing), "ContextEntries": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PolicyInputList": (NullOrUndefined Nothing), "ResourceArns": (NullOrUndefined Nothing), "ResourceHandlingOption": (NullOrUndefined Nothing), "ResourceOwner": (NullOrUndefined Nothing), "ResourcePolicy": (NullOrUndefined Nothing) }
+newSimulatePrincipalPolicyRequest _ActionNames _PolicySourceArn = SimulatePrincipalPolicyRequest { "ActionNames": _ActionNames, "PolicySourceArn": _PolicySourceArn, "CallerArn": Nothing, "ContextEntries": Nothing, "Marker": Nothing, "MaxItems": Nothing, "PolicyInputList": Nothing, "ResourceArns": Nothing, "ResourceHandlingOption": Nothing, "ResourceOwner": Nothing, "ResourcePolicy": Nothing }
 
 -- | Constructs SimulatePrincipalPolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSimulatePrincipalPolicyRequest' :: ActionNameListType -> ArnType' -> ( { "PolicySourceArn" :: (ArnType') , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: NullOrUndefined (ResourceNameListType) , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType') , "ResourceOwner" :: NullOrUndefined (ResourceNameType) , "CallerArn" :: NullOrUndefined (ResourceNameType) , "ContextEntries" :: NullOrUndefined (ContextEntryListType) , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType) , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } -> {"PolicySourceArn" :: (ArnType') , "PolicyInputList" :: NullOrUndefined (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: NullOrUndefined (ResourceNameListType) , "ResourcePolicy" :: NullOrUndefined (PolicyDocumentType') , "ResourceOwner" :: NullOrUndefined (ResourceNameType) , "CallerArn" :: NullOrUndefined (ResourceNameType) , "ContextEntries" :: NullOrUndefined (ContextEntryListType) , "ResourceHandlingOption" :: NullOrUndefined (ResourceHandlingOptionType) , "MaxItems" :: NullOrUndefined (MaxItemsType') , "Marker" :: NullOrUndefined (MarkerType') } ) -> SimulatePrincipalPolicyRequest
-newSimulatePrincipalPolicyRequest' _ActionNames _PolicySourceArn customize = (SimulatePrincipalPolicyRequest <<< customize) { "ActionNames": _ActionNames, "PolicySourceArn": _PolicySourceArn, "CallerArn": (NullOrUndefined Nothing), "ContextEntries": (NullOrUndefined Nothing), "Marker": (NullOrUndefined Nothing), "MaxItems": (NullOrUndefined Nothing), "PolicyInputList": (NullOrUndefined Nothing), "ResourceArns": (NullOrUndefined Nothing), "ResourceHandlingOption": (NullOrUndefined Nothing), "ResourceOwner": (NullOrUndefined Nothing), "ResourcePolicy": (NullOrUndefined Nothing) }
+newSimulatePrincipalPolicyRequest' :: ActionNameListType -> ArnType' -> ( { "PolicySourceArn" :: (ArnType') , "PolicyInputList" :: Maybe (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: Maybe (ResourceNameListType) , "ResourcePolicy" :: Maybe (PolicyDocumentType') , "ResourceOwner" :: Maybe (ResourceNameType) , "CallerArn" :: Maybe (ResourceNameType) , "ContextEntries" :: Maybe (ContextEntryListType) , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType) , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } -> {"PolicySourceArn" :: (ArnType') , "PolicyInputList" :: Maybe (SimulationPolicyListType) , "ActionNames" :: (ActionNameListType) , "ResourceArns" :: Maybe (ResourceNameListType) , "ResourcePolicy" :: Maybe (PolicyDocumentType') , "ResourceOwner" :: Maybe (ResourceNameType) , "CallerArn" :: Maybe (ResourceNameType) , "ContextEntries" :: Maybe (ContextEntryListType) , "ResourceHandlingOption" :: Maybe (ResourceHandlingOptionType) , "MaxItems" :: Maybe (MaxItemsType') , "Marker" :: Maybe (MarkerType') } ) -> SimulatePrincipalPolicyRequest
+newSimulatePrincipalPolicyRequest' _ActionNames _PolicySourceArn customize = (SimulatePrincipalPolicyRequest <<< customize) { "ActionNames": _ActionNames, "PolicySourceArn": _PolicySourceArn, "CallerArn": Nothing, "ContextEntries": Nothing, "Marker": Nothing, "MaxItems": Nothing, "PolicyInputList": Nothing, "ResourceArns": Nothing, "ResourceHandlingOption": Nothing, "ResourceOwner": Nothing, "ResourcePolicy": Nothing }
 
 
 
@@ -5286,10 +5285,10 @@ instance encodeSimulationPolicyListType :: Encode SimulationPolicyListType where
 
 -- | <p>Contains a reference to a <code>Statement</code> element in a policy document that determines the result of the simulation.</p> <p>This data type is used by the <code>MatchedStatements</code> member of the <code> <a>EvaluationResult</a> </code> type.</p>
 newtype Statement = Statement 
-  { "SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType)
-  , "SourcePolicyType" :: NullOrUndefined (PolicySourceType)
-  , "StartPosition" :: NullOrUndefined (Position)
-  , "EndPosition" :: NullOrUndefined (Position)
+  { "SourcePolicyId" :: Maybe (PolicyIdentifierType)
+  , "SourcePolicyType" :: Maybe (PolicySourceType)
+  , "StartPosition" :: Maybe (Position)
+  , "EndPosition" :: Maybe (Position)
   }
 derive instance newtypeStatement :: Newtype Statement _
 derive instance repGenericStatement :: Generic Statement _
@@ -5299,12 +5298,12 @@ instance encodeStatement :: Encode Statement where encode = genericEncode option
 
 -- | Constructs Statement from required parameters
 newStatement :: Statement
-newStatement  = Statement { "EndPosition": (NullOrUndefined Nothing), "SourcePolicyId": (NullOrUndefined Nothing), "SourcePolicyType": (NullOrUndefined Nothing), "StartPosition": (NullOrUndefined Nothing) }
+newStatement  = Statement { "EndPosition": Nothing, "SourcePolicyId": Nothing, "SourcePolicyType": Nothing, "StartPosition": Nothing }
 
 -- | Constructs Statement's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newStatement' :: ( { "SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType) , "SourcePolicyType" :: NullOrUndefined (PolicySourceType) , "StartPosition" :: NullOrUndefined (Position) , "EndPosition" :: NullOrUndefined (Position) } -> {"SourcePolicyId" :: NullOrUndefined (PolicyIdentifierType) , "SourcePolicyType" :: NullOrUndefined (PolicySourceType) , "StartPosition" :: NullOrUndefined (Position) , "EndPosition" :: NullOrUndefined (Position) } ) -> Statement
-newStatement'  customize = (Statement <<< customize) { "EndPosition": (NullOrUndefined Nothing), "SourcePolicyId": (NullOrUndefined Nothing), "SourcePolicyType": (NullOrUndefined Nothing), "StartPosition": (NullOrUndefined Nothing) }
+newStatement' :: ( { "SourcePolicyId" :: Maybe (PolicyIdentifierType) , "SourcePolicyType" :: Maybe (PolicySourceType) , "StartPosition" :: Maybe (Position) , "EndPosition" :: Maybe (Position) } -> {"SourcePolicyId" :: Maybe (PolicyIdentifierType) , "SourcePolicyType" :: Maybe (PolicySourceType) , "StartPosition" :: Maybe (Position) , "EndPosition" :: Maybe (Position) } ) -> Statement
+newStatement'  customize = (Statement <<< customize) { "EndPosition": Nothing, "SourcePolicyId": Nothing, "SourcePolicyType": Nothing, "StartPosition": Nothing }
 
 
 
@@ -5319,7 +5318,7 @@ instance encodeStatementListType :: Encode StatementListType where encode = gene
 
 -- | <p>The request was rejected because only the service that depends on the service-linked role can modify or delete the role on your behalf. The error message includes the name of the service that depends on this service-linked role. You must request the change through that service.</p>
 newtype UnmodifiableEntityException = UnmodifiableEntityException 
-  { "message" :: NullOrUndefined (UnmodifiableEntityMessage')
+  { "message" :: Maybe (UnmodifiableEntityMessage')
   }
 derive instance newtypeUnmodifiableEntityException :: Newtype UnmodifiableEntityException _
 derive instance repGenericUnmodifiableEntityException :: Generic UnmodifiableEntityException _
@@ -5329,18 +5328,18 @@ instance encodeUnmodifiableEntityException :: Encode UnmodifiableEntityException
 
 -- | Constructs UnmodifiableEntityException from required parameters
 newUnmodifiableEntityException :: UnmodifiableEntityException
-newUnmodifiableEntityException  = UnmodifiableEntityException { "message": (NullOrUndefined Nothing) }
+newUnmodifiableEntityException  = UnmodifiableEntityException { "message": Nothing }
 
 -- | Constructs UnmodifiableEntityException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUnmodifiableEntityException' :: ( { "message" :: NullOrUndefined (UnmodifiableEntityMessage') } -> {"message" :: NullOrUndefined (UnmodifiableEntityMessage') } ) -> UnmodifiableEntityException
-newUnmodifiableEntityException'  customize = (UnmodifiableEntityException <<< customize) { "message": (NullOrUndefined Nothing) }
+newUnmodifiableEntityException' :: ( { "message" :: Maybe (UnmodifiableEntityMessage') } -> {"message" :: Maybe (UnmodifiableEntityMessage') } ) -> UnmodifiableEntityException
+newUnmodifiableEntityException'  customize = (UnmodifiableEntityException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The request was rejected because the public key encoding format is unsupported or unrecognized.</p>
 newtype UnrecognizedPublicKeyEncodingException = UnrecognizedPublicKeyEncodingException 
-  { "message" :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage')
+  { "message" :: Maybe (UnrecognizedPublicKeyEncodingMessage')
   }
 derive instance newtypeUnrecognizedPublicKeyEncodingException :: Newtype UnrecognizedPublicKeyEncodingException _
 derive instance repGenericUnrecognizedPublicKeyEncodingException :: Generic UnrecognizedPublicKeyEncodingException _
@@ -5350,17 +5349,17 @@ instance encodeUnrecognizedPublicKeyEncodingException :: Encode UnrecognizedPubl
 
 -- | Constructs UnrecognizedPublicKeyEncodingException from required parameters
 newUnrecognizedPublicKeyEncodingException :: UnrecognizedPublicKeyEncodingException
-newUnrecognizedPublicKeyEncodingException  = UnrecognizedPublicKeyEncodingException { "message": (NullOrUndefined Nothing) }
+newUnrecognizedPublicKeyEncodingException  = UnrecognizedPublicKeyEncodingException { "message": Nothing }
 
 -- | Constructs UnrecognizedPublicKeyEncodingException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUnrecognizedPublicKeyEncodingException' :: ( { "message" :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage') } -> {"message" :: NullOrUndefined (UnrecognizedPublicKeyEncodingMessage') } ) -> UnrecognizedPublicKeyEncodingException
-newUnrecognizedPublicKeyEncodingException'  customize = (UnrecognizedPublicKeyEncodingException <<< customize) { "message": (NullOrUndefined Nothing) }
+newUnrecognizedPublicKeyEncodingException' :: ( { "message" :: Maybe (UnrecognizedPublicKeyEncodingMessage') } -> {"message" :: Maybe (UnrecognizedPublicKeyEncodingMessage') } ) -> UnrecognizedPublicKeyEncodingException
+newUnrecognizedPublicKeyEncodingException'  customize = (UnrecognizedPublicKeyEncodingException <<< customize) { "message": Nothing }
 
 
 
 newtype UpdateAccessKeyRequest = UpdateAccessKeyRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   , "AccessKeyId" :: (AccessKeyIdType')
   , "Status" :: (StatusType')
   }
@@ -5372,25 +5371,25 @@ instance encodeUpdateAccessKeyRequest :: Encode UpdateAccessKeyRequest where enc
 
 -- | Constructs UpdateAccessKeyRequest from required parameters
 newUpdateAccessKeyRequest :: AccessKeyIdType' -> StatusType' -> UpdateAccessKeyRequest
-newUpdateAccessKeyRequest _AccessKeyId _Status = UpdateAccessKeyRequest { "AccessKeyId": _AccessKeyId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateAccessKeyRequest _AccessKeyId _Status = UpdateAccessKeyRequest { "AccessKeyId": _AccessKeyId, "Status": _Status, "UserName": Nothing }
 
 -- | Constructs UpdateAccessKeyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateAccessKeyRequest' :: AccessKeyIdType' -> StatusType' -> ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') } ) -> UpdateAccessKeyRequest
-newUpdateAccessKeyRequest' _AccessKeyId _Status customize = (UpdateAccessKeyRequest <<< customize) { "AccessKeyId": _AccessKeyId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateAccessKeyRequest' :: AccessKeyIdType' -> StatusType' -> ( { "UserName" :: Maybe (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "AccessKeyId" :: (AccessKeyIdType') , "Status" :: (StatusType') } ) -> UpdateAccessKeyRequest
+newUpdateAccessKeyRequest' _AccessKeyId _Status customize = (UpdateAccessKeyRequest <<< customize) { "AccessKeyId": _AccessKeyId, "Status": _Status, "UserName": Nothing }
 
 
 
 newtype UpdateAccountPasswordPolicyRequest = UpdateAccountPasswordPolicyRequest 
-  { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType')
-  , "RequireSymbols" :: NullOrUndefined (BooleanType')
-  , "RequireNumbers" :: NullOrUndefined (BooleanType')
-  , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType')
-  , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType')
-  , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType')
-  , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType')
-  , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType')
-  , "HardExpiry" :: NullOrUndefined (BooleanObjectType')
+  { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType')
+  , "RequireSymbols" :: Maybe (BooleanType')
+  , "RequireNumbers" :: Maybe (BooleanType')
+  , "RequireUppercaseCharacters" :: Maybe (BooleanType')
+  , "RequireLowercaseCharacters" :: Maybe (BooleanType')
+  , "AllowUsersToChangePassword" :: Maybe (BooleanType')
+  , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType')
+  , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType')
+  , "HardExpiry" :: Maybe (BooleanObjectType')
   }
 derive instance newtypeUpdateAccountPasswordPolicyRequest :: Newtype UpdateAccountPasswordPolicyRequest _
 derive instance repGenericUpdateAccountPasswordPolicyRequest :: Generic UpdateAccountPasswordPolicyRequest _
@@ -5400,12 +5399,12 @@ instance encodeUpdateAccountPasswordPolicyRequest :: Encode UpdateAccountPasswor
 
 -- | Constructs UpdateAccountPasswordPolicyRequest from required parameters
 newUpdateAccountPasswordPolicyRequest :: UpdateAccountPasswordPolicyRequest
-newUpdateAccountPasswordPolicyRequest  = UpdateAccountPasswordPolicyRequest { "AllowUsersToChangePassword": (NullOrUndefined Nothing), "HardExpiry": (NullOrUndefined Nothing), "MaxPasswordAge": (NullOrUndefined Nothing), "MinimumPasswordLength": (NullOrUndefined Nothing), "PasswordReusePrevention": (NullOrUndefined Nothing), "RequireLowercaseCharacters": (NullOrUndefined Nothing), "RequireNumbers": (NullOrUndefined Nothing), "RequireSymbols": (NullOrUndefined Nothing), "RequireUppercaseCharacters": (NullOrUndefined Nothing) }
+newUpdateAccountPasswordPolicyRequest  = UpdateAccountPasswordPolicyRequest { "AllowUsersToChangePassword": Nothing, "HardExpiry": Nothing, "MaxPasswordAge": Nothing, "MinimumPasswordLength": Nothing, "PasswordReusePrevention": Nothing, "RequireLowercaseCharacters": Nothing, "RequireNumbers": Nothing, "RequireSymbols": Nothing, "RequireUppercaseCharacters": Nothing }
 
 -- | Constructs UpdateAccountPasswordPolicyRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateAccountPasswordPolicyRequest' :: ( { "MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType') , "RequireSymbols" :: NullOrUndefined (BooleanType') , "RequireNumbers" :: NullOrUndefined (BooleanType') , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType') , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType') , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType') , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType') , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType') , "HardExpiry" :: NullOrUndefined (BooleanObjectType') } -> {"MinimumPasswordLength" :: NullOrUndefined (MinimumPasswordLengthType') , "RequireSymbols" :: NullOrUndefined (BooleanType') , "RequireNumbers" :: NullOrUndefined (BooleanType') , "RequireUppercaseCharacters" :: NullOrUndefined (BooleanType') , "RequireLowercaseCharacters" :: NullOrUndefined (BooleanType') , "AllowUsersToChangePassword" :: NullOrUndefined (BooleanType') , "MaxPasswordAge" :: NullOrUndefined (MaxPasswordAgeType') , "PasswordReusePrevention" :: NullOrUndefined (PasswordReusePreventionType') , "HardExpiry" :: NullOrUndefined (BooleanObjectType') } ) -> UpdateAccountPasswordPolicyRequest
-newUpdateAccountPasswordPolicyRequest'  customize = (UpdateAccountPasswordPolicyRequest <<< customize) { "AllowUsersToChangePassword": (NullOrUndefined Nothing), "HardExpiry": (NullOrUndefined Nothing), "MaxPasswordAge": (NullOrUndefined Nothing), "MinimumPasswordLength": (NullOrUndefined Nothing), "PasswordReusePrevention": (NullOrUndefined Nothing), "RequireLowercaseCharacters": (NullOrUndefined Nothing), "RequireNumbers": (NullOrUndefined Nothing), "RequireSymbols": (NullOrUndefined Nothing), "RequireUppercaseCharacters": (NullOrUndefined Nothing) }
+newUpdateAccountPasswordPolicyRequest' :: ( { "MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType') , "RequireSymbols" :: Maybe (BooleanType') , "RequireNumbers" :: Maybe (BooleanType') , "RequireUppercaseCharacters" :: Maybe (BooleanType') , "RequireLowercaseCharacters" :: Maybe (BooleanType') , "AllowUsersToChangePassword" :: Maybe (BooleanType') , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType') , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType') , "HardExpiry" :: Maybe (BooleanObjectType') } -> {"MinimumPasswordLength" :: Maybe (MinimumPasswordLengthType') , "RequireSymbols" :: Maybe (BooleanType') , "RequireNumbers" :: Maybe (BooleanType') , "RequireUppercaseCharacters" :: Maybe (BooleanType') , "RequireLowercaseCharacters" :: Maybe (BooleanType') , "AllowUsersToChangePassword" :: Maybe (BooleanType') , "MaxPasswordAge" :: Maybe (MaxPasswordAgeType') , "PasswordReusePrevention" :: Maybe (PasswordReusePreventionType') , "HardExpiry" :: Maybe (BooleanObjectType') } ) -> UpdateAccountPasswordPolicyRequest
+newUpdateAccountPasswordPolicyRequest'  customize = (UpdateAccountPasswordPolicyRequest <<< customize) { "AllowUsersToChangePassword": Nothing, "HardExpiry": Nothing, "MaxPasswordAge": Nothing, "MinimumPasswordLength": Nothing, "PasswordReusePrevention": Nothing, "RequireLowercaseCharacters": Nothing, "RequireNumbers": Nothing, "RequireSymbols": Nothing, "RequireUppercaseCharacters": Nothing }
 
 
 
@@ -5432,8 +5431,8 @@ newUpdateAssumeRolePolicyRequest' _PolicyDocument _RoleName customize = (UpdateA
 
 newtype UpdateGroupRequest = UpdateGroupRequest 
   { "GroupName" :: (GroupNameType')
-  , "NewPath" :: NullOrUndefined (PathType')
-  , "NewGroupName" :: NullOrUndefined (GroupNameType')
+  , "NewPath" :: Maybe (PathType')
+  , "NewGroupName" :: Maybe (GroupNameType')
   }
 derive instance newtypeUpdateGroupRequest :: Newtype UpdateGroupRequest _
 derive instance repGenericUpdateGroupRequest :: Generic UpdateGroupRequest _
@@ -5443,19 +5442,19 @@ instance encodeUpdateGroupRequest :: Encode UpdateGroupRequest where encode = ge
 
 -- | Constructs UpdateGroupRequest from required parameters
 newUpdateGroupRequest :: GroupNameType' -> UpdateGroupRequest
-newUpdateGroupRequest _GroupName = UpdateGroupRequest { "GroupName": _GroupName, "NewGroupName": (NullOrUndefined Nothing), "NewPath": (NullOrUndefined Nothing) }
+newUpdateGroupRequest _GroupName = UpdateGroupRequest { "GroupName": _GroupName, "NewGroupName": Nothing, "NewPath": Nothing }
 
 -- | Constructs UpdateGroupRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateGroupRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewGroupName" :: NullOrUndefined (GroupNameType') } -> {"GroupName" :: (GroupNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewGroupName" :: NullOrUndefined (GroupNameType') } ) -> UpdateGroupRequest
-newUpdateGroupRequest' _GroupName customize = (UpdateGroupRequest <<< customize) { "GroupName": _GroupName, "NewGroupName": (NullOrUndefined Nothing), "NewPath": (NullOrUndefined Nothing) }
+newUpdateGroupRequest' :: GroupNameType' -> ( { "GroupName" :: (GroupNameType') , "NewPath" :: Maybe (PathType') , "NewGroupName" :: Maybe (GroupNameType') } -> {"GroupName" :: (GroupNameType') , "NewPath" :: Maybe (PathType') , "NewGroupName" :: Maybe (GroupNameType') } ) -> UpdateGroupRequest
+newUpdateGroupRequest' _GroupName customize = (UpdateGroupRequest <<< customize) { "GroupName": _GroupName, "NewGroupName": Nothing, "NewPath": Nothing }
 
 
 
 newtype UpdateLoginProfileRequest = UpdateLoginProfileRequest 
   { "UserName" :: (UserNameType')
-  , "Password" :: NullOrUndefined (PasswordType')
-  , "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType')
+  , "Password" :: Maybe (PasswordType')
+  , "PasswordResetRequired" :: Maybe (BooleanObjectType')
   }
 derive instance newtypeUpdateLoginProfileRequest :: Newtype UpdateLoginProfileRequest _
 derive instance repGenericUpdateLoginProfileRequest :: Generic UpdateLoginProfileRequest _
@@ -5465,12 +5464,12 @@ instance encodeUpdateLoginProfileRequest :: Encode UpdateLoginProfileRequest whe
 
 -- | Constructs UpdateLoginProfileRequest from required parameters
 newUpdateLoginProfileRequest :: UserNameType' -> UpdateLoginProfileRequest
-newUpdateLoginProfileRequest _UserName = UpdateLoginProfileRequest { "UserName": _UserName, "Password": (NullOrUndefined Nothing), "PasswordResetRequired": (NullOrUndefined Nothing) }
+newUpdateLoginProfileRequest _UserName = UpdateLoginProfileRequest { "UserName": _UserName, "Password": Nothing, "PasswordResetRequired": Nothing }
 
 -- | Constructs UpdateLoginProfileRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateLoginProfileRequest' :: UserNameType' -> ( { "UserName" :: (UserNameType') , "Password" :: NullOrUndefined (PasswordType') , "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType') } -> {"UserName" :: (UserNameType') , "Password" :: NullOrUndefined (PasswordType') , "PasswordResetRequired" :: NullOrUndefined (BooleanObjectType') } ) -> UpdateLoginProfileRequest
-newUpdateLoginProfileRequest' _UserName customize = (UpdateLoginProfileRequest <<< customize) { "UserName": _UserName, "Password": (NullOrUndefined Nothing), "PasswordResetRequired": (NullOrUndefined Nothing) }
+newUpdateLoginProfileRequest' :: UserNameType' -> ( { "UserName" :: (UserNameType') , "Password" :: Maybe (PasswordType') , "PasswordResetRequired" :: Maybe (BooleanObjectType') } -> {"UserName" :: (UserNameType') , "Password" :: Maybe (PasswordType') , "PasswordResetRequired" :: Maybe (BooleanObjectType') } ) -> UpdateLoginProfileRequest
+newUpdateLoginProfileRequest' _UserName customize = (UpdateLoginProfileRequest <<< customize) { "UserName": _UserName, "Password": Nothing, "PasswordResetRequired": Nothing }
 
 
 
@@ -5517,7 +5516,7 @@ newUpdateRoleDescriptionRequest' _Description _RoleName customize = (UpdateRoleD
 
 
 newtype UpdateRoleDescriptionResponse = UpdateRoleDescriptionResponse 
-  { "Role" :: NullOrUndefined (Role)
+  { "Role" :: Maybe (Role)
   }
 derive instance newtypeUpdateRoleDescriptionResponse :: Newtype UpdateRoleDescriptionResponse _
 derive instance repGenericUpdateRoleDescriptionResponse :: Generic UpdateRoleDescriptionResponse _
@@ -5527,12 +5526,12 @@ instance encodeUpdateRoleDescriptionResponse :: Encode UpdateRoleDescriptionResp
 
 -- | Constructs UpdateRoleDescriptionResponse from required parameters
 newUpdateRoleDescriptionResponse :: UpdateRoleDescriptionResponse
-newUpdateRoleDescriptionResponse  = UpdateRoleDescriptionResponse { "Role": (NullOrUndefined Nothing) }
+newUpdateRoleDescriptionResponse  = UpdateRoleDescriptionResponse { "Role": Nothing }
 
 -- | Constructs UpdateRoleDescriptionResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRoleDescriptionResponse' :: ( { "Role" :: NullOrUndefined (Role) } -> {"Role" :: NullOrUndefined (Role) } ) -> UpdateRoleDescriptionResponse
-newUpdateRoleDescriptionResponse'  customize = (UpdateRoleDescriptionResponse <<< customize) { "Role": (NullOrUndefined Nothing) }
+newUpdateRoleDescriptionResponse' :: ( { "Role" :: Maybe (Role) } -> {"Role" :: Maybe (Role) } ) -> UpdateRoleDescriptionResponse
+newUpdateRoleDescriptionResponse'  customize = (UpdateRoleDescriptionResponse <<< customize) { "Role": Nothing }
 
 
 
@@ -5559,7 +5558,7 @@ newUpdateSAMLProviderRequest' _SAMLMetadataDocument _SAMLProviderArn customize =
 
 -- | <p>Contains the response to a successful <a>UpdateSAMLProvider</a> request. </p>
 newtype UpdateSAMLProviderResponse = UpdateSAMLProviderResponse 
-  { "SAMLProviderArn" :: NullOrUndefined (ArnType')
+  { "SAMLProviderArn" :: Maybe (ArnType')
   }
 derive instance newtypeUpdateSAMLProviderResponse :: Newtype UpdateSAMLProviderResponse _
 derive instance repGenericUpdateSAMLProviderResponse :: Generic UpdateSAMLProviderResponse _
@@ -5569,12 +5568,12 @@ instance encodeUpdateSAMLProviderResponse :: Encode UpdateSAMLProviderResponse w
 
 -- | Constructs UpdateSAMLProviderResponse from required parameters
 newUpdateSAMLProviderResponse :: UpdateSAMLProviderResponse
-newUpdateSAMLProviderResponse  = UpdateSAMLProviderResponse { "SAMLProviderArn": (NullOrUndefined Nothing) }
+newUpdateSAMLProviderResponse  = UpdateSAMLProviderResponse { "SAMLProviderArn": Nothing }
 
 -- | Constructs UpdateSAMLProviderResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateSAMLProviderResponse' :: ( { "SAMLProviderArn" :: NullOrUndefined (ArnType') } -> {"SAMLProviderArn" :: NullOrUndefined (ArnType') } ) -> UpdateSAMLProviderResponse
-newUpdateSAMLProviderResponse'  customize = (UpdateSAMLProviderResponse <<< customize) { "SAMLProviderArn": (NullOrUndefined Nothing) }
+newUpdateSAMLProviderResponse' :: ( { "SAMLProviderArn" :: Maybe (ArnType') } -> {"SAMLProviderArn" :: Maybe (ArnType') } ) -> UpdateSAMLProviderResponse
+newUpdateSAMLProviderResponse'  customize = (UpdateSAMLProviderResponse <<< customize) { "SAMLProviderArn": Nothing }
 
 
 
@@ -5602,8 +5601,8 @@ newUpdateSSHPublicKeyRequest' _SSHPublicKeyId _Status _UserName customize = (Upd
 
 newtype UpdateServerCertificateRequest = UpdateServerCertificateRequest 
   { "ServerCertificateName" :: (ServerCertificateNameType')
-  , "NewPath" :: NullOrUndefined (PathType')
-  , "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType')
+  , "NewPath" :: Maybe (PathType')
+  , "NewServerCertificateName" :: Maybe (ServerCertificateNameType')
   }
 derive instance newtypeUpdateServerCertificateRequest :: Newtype UpdateServerCertificateRequest _
 derive instance repGenericUpdateServerCertificateRequest :: Generic UpdateServerCertificateRequest _
@@ -5613,17 +5612,17 @@ instance encodeUpdateServerCertificateRequest :: Encode UpdateServerCertificateR
 
 -- | Constructs UpdateServerCertificateRequest from required parameters
 newUpdateServerCertificateRequest :: ServerCertificateNameType' -> UpdateServerCertificateRequest
-newUpdateServerCertificateRequest _ServerCertificateName = UpdateServerCertificateRequest { "ServerCertificateName": _ServerCertificateName, "NewPath": (NullOrUndefined Nothing), "NewServerCertificateName": (NullOrUndefined Nothing) }
+newUpdateServerCertificateRequest _ServerCertificateName = UpdateServerCertificateRequest { "ServerCertificateName": _ServerCertificateName, "NewPath": Nothing, "NewServerCertificateName": Nothing }
 
 -- | Constructs UpdateServerCertificateRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateServerCertificateRequest' :: ServerCertificateNameType' -> ( { "ServerCertificateName" :: (ServerCertificateNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType') } -> {"ServerCertificateName" :: (ServerCertificateNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewServerCertificateName" :: NullOrUndefined (ServerCertificateNameType') } ) -> UpdateServerCertificateRequest
-newUpdateServerCertificateRequest' _ServerCertificateName customize = (UpdateServerCertificateRequest <<< customize) { "ServerCertificateName": _ServerCertificateName, "NewPath": (NullOrUndefined Nothing), "NewServerCertificateName": (NullOrUndefined Nothing) }
+newUpdateServerCertificateRequest' :: ServerCertificateNameType' -> ( { "ServerCertificateName" :: (ServerCertificateNameType') , "NewPath" :: Maybe (PathType') , "NewServerCertificateName" :: Maybe (ServerCertificateNameType') } -> {"ServerCertificateName" :: (ServerCertificateNameType') , "NewPath" :: Maybe (PathType') , "NewServerCertificateName" :: Maybe (ServerCertificateNameType') } ) -> UpdateServerCertificateRequest
+newUpdateServerCertificateRequest' _ServerCertificateName customize = (UpdateServerCertificateRequest <<< customize) { "ServerCertificateName": _ServerCertificateName, "NewPath": Nothing, "NewServerCertificateName": Nothing }
 
 
 
 newtype UpdateServiceSpecificCredentialRequest = UpdateServiceSpecificCredentialRequest 
-  { "UserName" :: NullOrUndefined (UserNameType')
+  { "UserName" :: Maybe (UserNameType')
   , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId')
   , "Status" :: (StatusType')
   }
@@ -5635,17 +5634,17 @@ instance encodeUpdateServiceSpecificCredentialRequest :: Encode UpdateServiceSpe
 
 -- | Constructs UpdateServiceSpecificCredentialRequest from required parameters
 newUpdateServiceSpecificCredentialRequest :: ServiceSpecificCredentialId' -> StatusType' -> UpdateServiceSpecificCredentialRequest
-newUpdateServiceSpecificCredentialRequest _ServiceSpecificCredentialId _Status = UpdateServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateServiceSpecificCredentialRequest _ServiceSpecificCredentialId _Status = UpdateServiceSpecificCredentialRequest { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "Status": _Status, "UserName": Nothing }
 
 -- | Constructs UpdateServiceSpecificCredentialRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> StatusType' -> ( { "UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') , "Status" :: (StatusType') } -> {"UserName" :: NullOrUndefined (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') , "Status" :: (StatusType') } ) -> UpdateServiceSpecificCredentialRequest
-newUpdateServiceSpecificCredentialRequest' _ServiceSpecificCredentialId _Status customize = (UpdateServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateServiceSpecificCredentialRequest' :: ServiceSpecificCredentialId' -> StatusType' -> ( { "UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') , "Status" :: (StatusType') } -> {"UserName" :: Maybe (UserNameType') , "ServiceSpecificCredentialId" :: (ServiceSpecificCredentialId') , "Status" :: (StatusType') } ) -> UpdateServiceSpecificCredentialRequest
+newUpdateServiceSpecificCredentialRequest' _ServiceSpecificCredentialId _Status customize = (UpdateServiceSpecificCredentialRequest <<< customize) { "ServiceSpecificCredentialId": _ServiceSpecificCredentialId, "Status": _Status, "UserName": Nothing }
 
 
 
 newtype UpdateSigningCertificateRequest = UpdateSigningCertificateRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   , "CertificateId" :: (CertificateIdType')
   , "Status" :: (StatusType')
   }
@@ -5657,19 +5656,19 @@ instance encodeUpdateSigningCertificateRequest :: Encode UpdateSigningCertificat
 
 -- | Constructs UpdateSigningCertificateRequest from required parameters
 newUpdateSigningCertificateRequest :: CertificateIdType' -> StatusType' -> UpdateSigningCertificateRequest
-newUpdateSigningCertificateRequest _CertificateId _Status = UpdateSigningCertificateRequest { "CertificateId": _CertificateId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateSigningCertificateRequest _CertificateId _Status = UpdateSigningCertificateRequest { "CertificateId": _CertificateId, "Status": _Status, "UserName": Nothing }
 
 -- | Constructs UpdateSigningCertificateRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateSigningCertificateRequest' :: CertificateIdType' -> StatusType' -> ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') , "Status" :: (StatusType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') , "Status" :: (StatusType') } ) -> UpdateSigningCertificateRequest
-newUpdateSigningCertificateRequest' _CertificateId _Status customize = (UpdateSigningCertificateRequest <<< customize) { "CertificateId": _CertificateId, "Status": _Status, "UserName": (NullOrUndefined Nothing) }
+newUpdateSigningCertificateRequest' :: CertificateIdType' -> StatusType' -> ( { "UserName" :: Maybe (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') , "Status" :: (StatusType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "CertificateId" :: (CertificateIdType') , "Status" :: (StatusType') } ) -> UpdateSigningCertificateRequest
+newUpdateSigningCertificateRequest' _CertificateId _Status customize = (UpdateSigningCertificateRequest <<< customize) { "CertificateId": _CertificateId, "Status": _Status, "UserName": Nothing }
 
 
 
 newtype UpdateUserRequest = UpdateUserRequest 
   { "UserName" :: (ExistingUserNameType')
-  , "NewPath" :: NullOrUndefined (PathType')
-  , "NewUserName" :: NullOrUndefined (UserNameType')
+  , "NewPath" :: Maybe (PathType')
+  , "NewUserName" :: Maybe (UserNameType')
   }
 derive instance newtypeUpdateUserRequest :: Newtype UpdateUserRequest _
 derive instance repGenericUpdateUserRequest :: Generic UpdateUserRequest _
@@ -5679,12 +5678,12 @@ instance encodeUpdateUserRequest :: Encode UpdateUserRequest where encode = gene
 
 -- | Constructs UpdateUserRequest from required parameters
 newUpdateUserRequest :: ExistingUserNameType' -> UpdateUserRequest
-newUpdateUserRequest _UserName = UpdateUserRequest { "UserName": _UserName, "NewPath": (NullOrUndefined Nothing), "NewUserName": (NullOrUndefined Nothing) }
+newUpdateUserRequest _UserName = UpdateUserRequest { "UserName": _UserName, "NewPath": Nothing, "NewUserName": Nothing }
 
 -- | Constructs UpdateUserRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateUserRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewUserName" :: NullOrUndefined (UserNameType') } -> {"UserName" :: (ExistingUserNameType') , "NewPath" :: NullOrUndefined (PathType') , "NewUserName" :: NullOrUndefined (UserNameType') } ) -> UpdateUserRequest
-newUpdateUserRequest' _UserName customize = (UpdateUserRequest <<< customize) { "UserName": _UserName, "NewPath": (NullOrUndefined Nothing), "NewUserName": (NullOrUndefined Nothing) }
+newUpdateUserRequest' :: ExistingUserNameType' -> ( { "UserName" :: (ExistingUserNameType') , "NewPath" :: Maybe (PathType') , "NewUserName" :: Maybe (UserNameType') } -> {"UserName" :: (ExistingUserNameType') , "NewPath" :: Maybe (PathType') , "NewUserName" :: Maybe (UserNameType') } ) -> UpdateUserRequest
+newUpdateUserRequest' _UserName customize = (UpdateUserRequest <<< customize) { "UserName": _UserName, "NewPath": Nothing, "NewUserName": Nothing }
 
 
 
@@ -5711,7 +5710,7 @@ newUploadSSHPublicKeyRequest' _SSHPublicKeyBody _UserName customize = (UploadSSH
 
 -- | <p>Contains the response to a successful <a>UploadSSHPublicKey</a> request.</p>
 newtype UploadSSHPublicKeyResponse = UploadSSHPublicKeyResponse 
-  { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey)
+  { "SSHPublicKey" :: Maybe (SSHPublicKey)
   }
 derive instance newtypeUploadSSHPublicKeyResponse :: Newtype UploadSSHPublicKeyResponse _
 derive instance repGenericUploadSSHPublicKeyResponse :: Generic UploadSSHPublicKeyResponse _
@@ -5721,21 +5720,21 @@ instance encodeUploadSSHPublicKeyResponse :: Encode UploadSSHPublicKeyResponse w
 
 -- | Constructs UploadSSHPublicKeyResponse from required parameters
 newUploadSSHPublicKeyResponse :: UploadSSHPublicKeyResponse
-newUploadSSHPublicKeyResponse  = UploadSSHPublicKeyResponse { "SSHPublicKey": (NullOrUndefined Nothing) }
+newUploadSSHPublicKeyResponse  = UploadSSHPublicKeyResponse { "SSHPublicKey": Nothing }
 
 -- | Constructs UploadSSHPublicKeyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUploadSSHPublicKeyResponse' :: ( { "SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } -> {"SSHPublicKey" :: NullOrUndefined (SSHPublicKey) } ) -> UploadSSHPublicKeyResponse
-newUploadSSHPublicKeyResponse'  customize = (UploadSSHPublicKeyResponse <<< customize) { "SSHPublicKey": (NullOrUndefined Nothing) }
+newUploadSSHPublicKeyResponse' :: ( { "SSHPublicKey" :: Maybe (SSHPublicKey) } -> {"SSHPublicKey" :: Maybe (SSHPublicKey) } ) -> UploadSSHPublicKeyResponse
+newUploadSSHPublicKeyResponse'  customize = (UploadSSHPublicKeyResponse <<< customize) { "SSHPublicKey": Nothing }
 
 
 
 newtype UploadServerCertificateRequest = UploadServerCertificateRequest 
-  { "Path" :: NullOrUndefined (PathType')
+  { "Path" :: Maybe (PathType')
   , "ServerCertificateName" :: (ServerCertificateNameType')
   , "CertificateBody" :: (CertificateBodyType')
   , "PrivateKey" :: (PrivateKeyType')
-  , "CertificateChain" :: NullOrUndefined (CertificateChainType')
+  , "CertificateChain" :: Maybe (CertificateChainType')
   }
 derive instance newtypeUploadServerCertificateRequest :: Newtype UploadServerCertificateRequest _
 derive instance repGenericUploadServerCertificateRequest :: Generic UploadServerCertificateRequest _
@@ -5745,18 +5744,18 @@ instance encodeUploadServerCertificateRequest :: Encode UploadServerCertificateR
 
 -- | Constructs UploadServerCertificateRequest from required parameters
 newUploadServerCertificateRequest :: CertificateBodyType' -> PrivateKeyType' -> ServerCertificateNameType' -> UploadServerCertificateRequest
-newUploadServerCertificateRequest _CertificateBody _PrivateKey _ServerCertificateName = UploadServerCertificateRequest { "CertificateBody": _CertificateBody, "PrivateKey": _PrivateKey, "ServerCertificateName": _ServerCertificateName, "CertificateChain": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newUploadServerCertificateRequest _CertificateBody _PrivateKey _ServerCertificateName = UploadServerCertificateRequest { "CertificateBody": _CertificateBody, "PrivateKey": _PrivateKey, "ServerCertificateName": _ServerCertificateName, "CertificateChain": Nothing, "Path": Nothing }
 
 -- | Constructs UploadServerCertificateRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUploadServerCertificateRequest' :: CertificateBodyType' -> PrivateKeyType' -> ServerCertificateNameType' -> ( { "Path" :: NullOrUndefined (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "CertificateBody" :: (CertificateBodyType') , "PrivateKey" :: (PrivateKeyType') , "CertificateChain" :: NullOrUndefined (CertificateChainType') } -> {"Path" :: NullOrUndefined (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "CertificateBody" :: (CertificateBodyType') , "PrivateKey" :: (PrivateKeyType') , "CertificateChain" :: NullOrUndefined (CertificateChainType') } ) -> UploadServerCertificateRequest
-newUploadServerCertificateRequest' _CertificateBody _PrivateKey _ServerCertificateName customize = (UploadServerCertificateRequest <<< customize) { "CertificateBody": _CertificateBody, "PrivateKey": _PrivateKey, "ServerCertificateName": _ServerCertificateName, "CertificateChain": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing) }
+newUploadServerCertificateRequest' :: CertificateBodyType' -> PrivateKeyType' -> ServerCertificateNameType' -> ( { "Path" :: Maybe (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "CertificateBody" :: (CertificateBodyType') , "PrivateKey" :: (PrivateKeyType') , "CertificateChain" :: Maybe (CertificateChainType') } -> {"Path" :: Maybe (PathType') , "ServerCertificateName" :: (ServerCertificateNameType') , "CertificateBody" :: (CertificateBodyType') , "PrivateKey" :: (PrivateKeyType') , "CertificateChain" :: Maybe (CertificateChainType') } ) -> UploadServerCertificateRequest
+newUploadServerCertificateRequest' _CertificateBody _PrivateKey _ServerCertificateName customize = (UploadServerCertificateRequest <<< customize) { "CertificateBody": _CertificateBody, "PrivateKey": _PrivateKey, "ServerCertificateName": _ServerCertificateName, "CertificateChain": Nothing, "Path": Nothing }
 
 
 
 -- | <p>Contains the response to a successful <a>UploadServerCertificate</a> request. </p>
 newtype UploadServerCertificateResponse = UploadServerCertificateResponse 
-  { "ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata)
+  { "ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata)
   }
 derive instance newtypeUploadServerCertificateResponse :: Newtype UploadServerCertificateResponse _
 derive instance repGenericUploadServerCertificateResponse :: Generic UploadServerCertificateResponse _
@@ -5766,17 +5765,17 @@ instance encodeUploadServerCertificateResponse :: Encode UploadServerCertificate
 
 -- | Constructs UploadServerCertificateResponse from required parameters
 newUploadServerCertificateResponse :: UploadServerCertificateResponse
-newUploadServerCertificateResponse  = UploadServerCertificateResponse { "ServerCertificateMetadata": (NullOrUndefined Nothing) }
+newUploadServerCertificateResponse  = UploadServerCertificateResponse { "ServerCertificateMetadata": Nothing }
 
 -- | Constructs UploadServerCertificateResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUploadServerCertificateResponse' :: ( { "ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata) } -> {"ServerCertificateMetadata" :: NullOrUndefined (ServerCertificateMetadata) } ) -> UploadServerCertificateResponse
-newUploadServerCertificateResponse'  customize = (UploadServerCertificateResponse <<< customize) { "ServerCertificateMetadata": (NullOrUndefined Nothing) }
+newUploadServerCertificateResponse' :: ( { "ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata) } -> {"ServerCertificateMetadata" :: Maybe (ServerCertificateMetadata) } ) -> UploadServerCertificateResponse
+newUploadServerCertificateResponse'  customize = (UploadServerCertificateResponse <<< customize) { "ServerCertificateMetadata": Nothing }
 
 
 
 newtype UploadSigningCertificateRequest = UploadSigningCertificateRequest 
-  { "UserName" :: NullOrUndefined (ExistingUserNameType')
+  { "UserName" :: Maybe (ExistingUserNameType')
   , "CertificateBody" :: (CertificateBodyType')
   }
 derive instance newtypeUploadSigningCertificateRequest :: Newtype UploadSigningCertificateRequest _
@@ -5787,12 +5786,12 @@ instance encodeUploadSigningCertificateRequest :: Encode UploadSigningCertificat
 
 -- | Constructs UploadSigningCertificateRequest from required parameters
 newUploadSigningCertificateRequest :: CertificateBodyType' -> UploadSigningCertificateRequest
-newUploadSigningCertificateRequest _CertificateBody = UploadSigningCertificateRequest { "CertificateBody": _CertificateBody, "UserName": (NullOrUndefined Nothing) }
+newUploadSigningCertificateRequest _CertificateBody = UploadSigningCertificateRequest { "CertificateBody": _CertificateBody, "UserName": Nothing }
 
 -- | Constructs UploadSigningCertificateRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUploadSigningCertificateRequest' :: CertificateBodyType' -> ( { "UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateBody" :: (CertificateBodyType') } -> {"UserName" :: NullOrUndefined (ExistingUserNameType') , "CertificateBody" :: (CertificateBodyType') } ) -> UploadSigningCertificateRequest
-newUploadSigningCertificateRequest' _CertificateBody customize = (UploadSigningCertificateRequest <<< customize) { "CertificateBody": _CertificateBody, "UserName": (NullOrUndefined Nothing) }
+newUploadSigningCertificateRequest' :: CertificateBodyType' -> ( { "UserName" :: Maybe (ExistingUserNameType') , "CertificateBody" :: (CertificateBodyType') } -> {"UserName" :: Maybe (ExistingUserNameType') , "CertificateBody" :: (CertificateBodyType') } ) -> UploadSigningCertificateRequest
+newUploadSigningCertificateRequest' _CertificateBody customize = (UploadSigningCertificateRequest <<< customize) { "CertificateBody": _CertificateBody, "UserName": Nothing }
 
 
 
@@ -5824,7 +5823,7 @@ newtype User = User
   , "UserId" :: (IdType')
   , "Arn" :: (ArnType')
   , "CreateDate" :: (DateType')
-  , "PasswordLastUsed" :: NullOrUndefined (DateType')
+  , "PasswordLastUsed" :: Maybe (DateType')
   }
 derive instance newtypeUser :: Newtype User _
 derive instance repGenericUser :: Generic User _
@@ -5834,25 +5833,25 @@ instance encodeUser :: Encode User where encode = genericEncode options
 
 -- | Constructs User from required parameters
 newUser :: ArnType' -> DateType' -> PathType' -> IdType' -> UserNameType' -> User
-newUser _Arn _CreateDate _Path _UserId _UserName = User { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "UserId": _UserId, "UserName": _UserName, "PasswordLastUsed": (NullOrUndefined Nothing) }
+newUser _Arn _CreateDate _Path _UserId _UserName = User { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "UserId": _UserId, "UserName": _UserName, "PasswordLastUsed": Nothing }
 
 -- | Constructs User's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUser' :: ArnType' -> DateType' -> PathType' -> IdType' -> UserNameType' -> ( { "Path" :: (PathType') , "UserName" :: (UserNameType') , "UserId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "PasswordLastUsed" :: NullOrUndefined (DateType') } -> {"Path" :: (PathType') , "UserName" :: (UserNameType') , "UserId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "PasswordLastUsed" :: NullOrUndefined (DateType') } ) -> User
-newUser' _Arn _CreateDate _Path _UserId _UserName customize = (User <<< customize) { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "UserId": _UserId, "UserName": _UserName, "PasswordLastUsed": (NullOrUndefined Nothing) }
+newUser' :: ArnType' -> DateType' -> PathType' -> IdType' -> UserNameType' -> ( { "Path" :: (PathType') , "UserName" :: (UserNameType') , "UserId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "PasswordLastUsed" :: Maybe (DateType') } -> {"Path" :: (PathType') , "UserName" :: (UserNameType') , "UserId" :: (IdType') , "Arn" :: (ArnType') , "CreateDate" :: (DateType') , "PasswordLastUsed" :: Maybe (DateType') } ) -> User
+newUser' _Arn _CreateDate _Path _UserId _UserName customize = (User <<< customize) { "Arn": _Arn, "CreateDate": _CreateDate, "Path": _Path, "UserId": _UserId, "UserName": _UserName, "PasswordLastUsed": Nothing }
 
 
 
 -- | <p>Contains information about an IAM user, including all the user's policies and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>
 newtype UserDetail = UserDetail 
-  { "Path" :: NullOrUndefined (PathType')
-  , "UserName" :: NullOrUndefined (UserNameType')
-  , "UserId" :: NullOrUndefined (IdType')
-  , "Arn" :: NullOrUndefined (ArnType')
-  , "CreateDate" :: NullOrUndefined (DateType')
-  , "UserPolicyList" :: NullOrUndefined (PolicyDetailListType')
-  , "GroupList" :: NullOrUndefined (GroupNameListType')
-  , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType')
+  { "Path" :: Maybe (PathType')
+  , "UserName" :: Maybe (UserNameType')
+  , "UserId" :: Maybe (IdType')
+  , "Arn" :: Maybe (ArnType')
+  , "CreateDate" :: Maybe (DateType')
+  , "UserPolicyList" :: Maybe (PolicyDetailListType')
+  , "GroupList" :: Maybe (GroupNameListType')
+  , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType')
   }
 derive instance newtypeUserDetail :: Newtype UserDetail _
 derive instance repGenericUserDetail :: Generic UserDetail _
@@ -5862,22 +5861,22 @@ instance encodeUserDetail :: Encode UserDetail where encode = genericEncode opti
 
 -- | Constructs UserDetail from required parameters
 newUserDetail :: UserDetail
-newUserDetail  = UserDetail { "Arn": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "GroupList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "UserId": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing), "UserPolicyList": (NullOrUndefined Nothing) }
+newUserDetail  = UserDetail { "Arn": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "GroupList": Nothing, "Path": Nothing, "UserId": Nothing, "UserName": Nothing, "UserPolicyList": Nothing }
 
 -- | Constructs UserDetail's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUserDetail' :: ( { "Path" :: NullOrUndefined (PathType') , "UserName" :: NullOrUndefined (UserNameType') , "UserId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "UserPolicyList" :: NullOrUndefined (PolicyDetailListType') , "GroupList" :: NullOrUndefined (GroupNameListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } -> {"Path" :: NullOrUndefined (PathType') , "UserName" :: NullOrUndefined (UserNameType') , "UserId" :: NullOrUndefined (IdType') , "Arn" :: NullOrUndefined (ArnType') , "CreateDate" :: NullOrUndefined (DateType') , "UserPolicyList" :: NullOrUndefined (PolicyDetailListType') , "GroupList" :: NullOrUndefined (GroupNameListType') , "AttachedManagedPolicies" :: NullOrUndefined (AttachedPoliciesListType') } ) -> UserDetail
-newUserDetail'  customize = (UserDetail <<< customize) { "Arn": (NullOrUndefined Nothing), "AttachedManagedPolicies": (NullOrUndefined Nothing), "CreateDate": (NullOrUndefined Nothing), "GroupList": (NullOrUndefined Nothing), "Path": (NullOrUndefined Nothing), "UserId": (NullOrUndefined Nothing), "UserName": (NullOrUndefined Nothing), "UserPolicyList": (NullOrUndefined Nothing) }
+newUserDetail' :: ( { "Path" :: Maybe (PathType') , "UserName" :: Maybe (UserNameType') , "UserId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "UserPolicyList" :: Maybe (PolicyDetailListType') , "GroupList" :: Maybe (GroupNameListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } -> {"Path" :: Maybe (PathType') , "UserName" :: Maybe (UserNameType') , "UserId" :: Maybe (IdType') , "Arn" :: Maybe (ArnType') , "CreateDate" :: Maybe (DateType') , "UserPolicyList" :: Maybe (PolicyDetailListType') , "GroupList" :: Maybe (GroupNameListType') , "AttachedManagedPolicies" :: Maybe (AttachedPoliciesListType') } ) -> UserDetail
+newUserDetail'  customize = (UserDetail <<< customize) { "Arn": Nothing, "AttachedManagedPolicies": Nothing, "CreateDate": Nothing, "GroupList": Nothing, "Path": Nothing, "UserId": Nothing, "UserName": Nothing, "UserPolicyList": Nothing }
 
 
 
 -- | <p>Contains information about a virtual MFA device.</p>
 newtype VirtualMFADevice = VirtualMFADevice 
   { "SerialNumber" :: (SerialNumberType')
-  , "Base32StringSeed" :: NullOrUndefined (BootstrapDatum)
-  , "QRCodePNG" :: NullOrUndefined (BootstrapDatum)
-  , "User" :: NullOrUndefined (User)
-  , "EnableDate" :: NullOrUndefined (DateType')
+  , "Base32StringSeed" :: Maybe (BootstrapDatum)
+  , "QRCodePNG" :: Maybe (BootstrapDatum)
+  , "User" :: Maybe (User)
+  , "EnableDate" :: Maybe (DateType')
   }
 derive instance newtypeVirtualMFADevice :: Newtype VirtualMFADevice _
 derive instance repGenericVirtualMFADevice :: Generic VirtualMFADevice _
@@ -5887,12 +5886,12 @@ instance encodeVirtualMFADevice :: Encode VirtualMFADevice where encode = generi
 
 -- | Constructs VirtualMFADevice from required parameters
 newVirtualMFADevice :: SerialNumberType' -> VirtualMFADevice
-newVirtualMFADevice _SerialNumber = VirtualMFADevice { "SerialNumber": _SerialNumber, "Base32StringSeed": (NullOrUndefined Nothing), "EnableDate": (NullOrUndefined Nothing), "QRCodePNG": (NullOrUndefined Nothing), "User": (NullOrUndefined Nothing) }
+newVirtualMFADevice _SerialNumber = VirtualMFADevice { "SerialNumber": _SerialNumber, "Base32StringSeed": Nothing, "EnableDate": Nothing, "QRCodePNG": Nothing, "User": Nothing }
 
 -- | Constructs VirtualMFADevice's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newVirtualMFADevice' :: SerialNumberType' -> ( { "SerialNumber" :: (SerialNumberType') , "Base32StringSeed" :: NullOrUndefined (BootstrapDatum) , "QRCodePNG" :: NullOrUndefined (BootstrapDatum) , "User" :: NullOrUndefined (User) , "EnableDate" :: NullOrUndefined (DateType') } -> {"SerialNumber" :: (SerialNumberType') , "Base32StringSeed" :: NullOrUndefined (BootstrapDatum) , "QRCodePNG" :: NullOrUndefined (BootstrapDatum) , "User" :: NullOrUndefined (User) , "EnableDate" :: NullOrUndefined (DateType') } ) -> VirtualMFADevice
-newVirtualMFADevice' _SerialNumber customize = (VirtualMFADevice <<< customize) { "SerialNumber": _SerialNumber, "Base32StringSeed": (NullOrUndefined Nothing), "EnableDate": (NullOrUndefined Nothing), "QRCodePNG": (NullOrUndefined Nothing), "User": (NullOrUndefined Nothing) }
+newVirtualMFADevice' :: SerialNumberType' -> ( { "SerialNumber" :: (SerialNumberType') , "Base32StringSeed" :: Maybe (BootstrapDatum) , "QRCodePNG" :: Maybe (BootstrapDatum) , "User" :: Maybe (User) , "EnableDate" :: Maybe (DateType') } -> {"SerialNumber" :: (SerialNumberType') , "Base32StringSeed" :: Maybe (BootstrapDatum) , "QRCodePNG" :: Maybe (BootstrapDatum) , "User" :: Maybe (User) , "EnableDate" :: Maybe (DateType') } ) -> VirtualMFADevice
+newVirtualMFADevice' _SerialNumber customize = (VirtualMFADevice <<< customize) { "SerialNumber": _SerialNumber, "Base32StringSeed": Nothing, "EnableDate": Nothing, "QRCodePNG": Nothing, "User": Nothing }
 
 
 
